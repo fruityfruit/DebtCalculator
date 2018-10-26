@@ -1,4 +1,4 @@
-### DebtCalculator - Getting Started
+## DebtCalculator - Getting Started
 
 Follow the steps here to install Node.js and Express
 
@@ -13,3 +13,9 @@ Run the app using this command
 $ node server.js
 
 Go to http://localhost:3000/ to see it in action!
+
+### Style Guide
+
+We will be using the Google JavaScript style guide.
+
+(https://google.github.io/styleguide/jsguide.html)
