@@ -29,7 +29,10 @@ To install Bower, make sure you have Node.js and just run this command in the di
 npm install -g bower
 ```
 ## Running a Test
-
+Initialize npm in the directory:
+```
+npm init
+```
 Once everything is installed, make sure you run this command in the directory so the program will use express:
 ```
 $ npm install express --save
