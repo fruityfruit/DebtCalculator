@@ -12,11 +12,11 @@ You will need: MongoDB, Express.js, Angular, Node.js
 
 Follow these steps to install Node.js
 
-https://expressjs.com/en/starter/installing.html
+https://nodejs.org/en/
 
 Follow these steps to install Express
 
-https://nodejs.org/en/
+https://expressjs.com/en/starter/installing.html
 
 Follow these steps to install MongoDB
 
