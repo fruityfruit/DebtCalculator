@@ -2,9 +2,11 @@
 
 ## Getting Started
 
+Note that the current project directory is 'mean-app'. Extraneous files in the home directory will be deleted soon.
+
 ### Prerequisites
 
-You will need: MongoDB, Express.js, Angular, Node.js, and Bower
+You will need: MongoDB, Express.js, Angular, Node.js
 
 ### Installation
 
@@ -24,10 +26,6 @@ Follow these steps to install Angular and the Angular CLI
 
 https://angular.io/guide/quickstart
 
-To install Bower, make sure you have Node.js and just run this command in the directory:
-```
-npm install -g bower
-```
 ## Running a Test
 Initialize npm in the directory:
 ```
@@ -35,13 +33,17 @@ npm init
 ```
 Once everything is installed, make sure you run this command in the directory so the program will use express:
 ```
-$ npm install express --save
+$ npm install --save express body-parser
 ```
-Run the app using this command
+Add axios to use http requests:
 ```
-$ node server.js
+npm install --save axios
 ```
-Go to http://localhost:8080/ to see it in action!
+Run the app using this command:
+```
+$ npm run build
+```
+Go to http://localhost:3000/ to see it in action!
 
 ## Style Guide
 
@@ -53,4 +55,4 @@ We will be using the Google JavaScript style guide.
 
 This tutorial created the skeleton of the site.
 
-https://scotch.io/tutorials/setting-up-a-mean-stack-single-page-application
+(https://scotch.io/tutorials/mean-app-with-angular-2-and-the-angular-cli)
