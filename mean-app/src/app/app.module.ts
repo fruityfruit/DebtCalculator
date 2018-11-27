@@ -6,6 +6,11 @@ import { HttpClientModule }    from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostsService } from './posts.service';
+import { OpportunityComponent } from './opportunity/opportunity.component';
+import { PersonalComponent } from './personal/personal.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ResultsComponent } from './results/results.component';
+import { InfoComponent } from './info/info.component';
 
 // Define the routes
 const ROUTES = [
@@ -23,7 +28,12 @@ const ROUTES = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent
+    PostsComponent,
+    OpportunityComponent,
+    PersonalComponent,
+    NavbarComponent,
+    ResultsComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
