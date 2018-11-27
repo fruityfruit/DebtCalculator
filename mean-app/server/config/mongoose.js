@@ -10,5 +10,9 @@ module.exports = function(config) {
   });
   db.once('open', function callback() {
     console.log("Mongo working!");
+    var userModel = require('./../../app/models/user.js');
+    var a = new userModel({username:'b', password:'c'});
+    console.log(a.username);
+    a.save();
   });
 }
