@@ -24,14 +24,9 @@ router.get('/posts', (req, res) => {
     });
 });
 
-// Test
-router.get('/dlandrum', (req, res) => {
-  res.send('dlandrum test');
-});
-
 // Catch all other routes and return the index file
 router.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/mean-app/index.html'));
+  res.sendFile(path.join(__dirname, '../../dist/mean-app/index.html'));
 });
 
 module.exports = router;

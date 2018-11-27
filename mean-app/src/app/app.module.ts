@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { PostsComponent } from './posts/posts.component';
-import { PostsService } from './posts.service';
+// import { PostsComponent } from './posts/posts.component';
+// import { PostsService } from './posts.service';
 import { OpportunityComponent } from './opportunity/opportunity.component';
 import { PersonalComponent } from './personal/personal.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -14,21 +14,42 @@ import { InfoComponent } from './info/info.component';
 
 // Define the routes
 const ROUTES = [
+  // {
+  //   path: '',
+  //   redirectTo: 'opportunity',
+  //   pathMatch: 'full'
+  // },
+  // {
+  //   path: 'posts',
+  //   component: PostsComponent
+  // },
   {
-    path: '',
-    redirectTo: 'posts',
-    pathMatch: 'full'
+    path: 'info',
+    component: InfoComponent
   },
   {
-    path: 'posts',
-    component: PostsComponent
+    path: 'opportunity',
+    component: OpportunityComponent
+  },
+  {
+    path: 'personal',
+    component: PersonalComponent
+  },
+  {
+    path: 'results',
+    component: ResultsComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'opportunity',
+    pathMatch: 'full'
   }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent,
+    // PostsComponent,
     OpportunityComponent,
     PersonalComponent,
     NavbarComponent,
@@ -41,7 +62,7 @@ const ROUTES = [
     HttpClientModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [PostsService], // Add the posts service
+  // providers: [PostsService], // Add the posts service
   bootstrap: [AppComponent]
 })
 export class AppModule { }
