@@ -1,3 +1,87 @@
+<h1 align="left">Opportunity Comparison</h1>
+<form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <div class="form-group">
+      <div class = "col-sm-5">
+        <label>
+          Type of Opportunity:
+        </label>
+        <div class="custom-control custom-radio">
+          <input type="radio" formControlName="type" id="customRadio1" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio1">Job</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" formControlName="type" id="customRadio2" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio2">Graduate School</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class = "col-sm-5">
+        <label>
+          Opportunity Name:
+          <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name">
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class = "col-sm-5">
+        <label>
+          City:
+          <input type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in">
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class = "col-sm-5">
+        <label>
+          Opportunity Income:
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class = "col-sm-5">
+        <label>
+          Opportunity Debt:
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class = "col-sm-5">
+        <label>
+          Would this opportunity require you to move your primary residence?:
+        </label>
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="model">
+          <label ngbButtonLabel class="btn btn-primary">
+            <input ngbButton type="radio" formControlName="move" value="Yes"> Yes
+          </label>
+          <label ngbButtonLabel class="btn btn-primary">
+            <input ngbButton type="radio" formControlName="move" value="No"> No
+          </label>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
+  </fieldset>
+</form>
+
 <p>
-  opportunity works!
+  Form Status: {{ profileForm.status }}
 </p>

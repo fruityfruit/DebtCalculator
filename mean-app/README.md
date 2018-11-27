@@ -29,7 +29,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## For our project
 
 Install bootstrap: `npm install bootstrap`
+
 Install bootswatch: `npm install bootswatch`
+
 Install ng-bootstrap: `npm install --save @ng-bootstrap/ng-bootstrap`
 
 Run `ng serve --open`

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -11,6 +11,8 @@ import { PersonalComponent } from './personal/personal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ResultsComponent } from './results/results.component';
 import { InfoComponent } from './info/info.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Define the routes
 const ROUTES = [
@@ -59,7 +61,9 @@ const ROUTES = [
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   // providers: [PostsService], // Add the posts service
