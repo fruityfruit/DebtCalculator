@@ -1,41 +1,26 @@
-// Get dependencies
+// Dependencies
 const express = require('express');
-const path = require('path');
+const mongoose = require('mongoose');
 const http = require('http');
-const bodyParser = require('body-parser');
 
-// Get our API routes
-const api = require('./server/routes/api');
+// Configure environment
+const env = 'development';
+const config = require('./server/config/config.js')[env]; // config exports an array, we are indexing the [env] element
 
-const app = express();
+// Create an instance of express
+var app = express();
 
-// Parsers for POST data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// Configure modules
+require('./server/config/express.js')(app, config); // Configure express
+require('./server/config/mongoose.js')(config); // Configure mongoose
+require('./server/config/routes.js')(app); // Configure routes
 
-// Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist/mean-app')));
+// Connect database TODO feels unnecessary
+// mongoose.connect(config.db);
+// var db = mongoose.connection;
 
-// Set our api routes
-app.use('/api', api);
-
-// Catch all other routes and return the index file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/mean-app/index.html'));
-});
-
-/**
- * Get port from environment and store in Express.
- */
-const port = process.env.PORT || '3000';
-app.set('port', port);
-
-/**
- * Create HTTP server.
- */
+// Create HTTP server
 const server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
-server.listen(port, () => console.log(`API running on localhost:${port}`));
+// Listen on the port specified in config
+server.listen(config.port, () => console.log(`API running on localhost:${config.port}`));

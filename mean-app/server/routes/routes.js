@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 
 // declare axios for making http requests
@@ -21,6 +22,16 @@ router.get('/posts', (req, res) => {
     .catch(error => {
       res.status(500).send(error)
     });
+});
+
+// Test
+router.get('/dlandrum', (req, res) => {
+  res.send('dlandrum test');
+});
+
+// Catch all other routes and return the index file
+router.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/mean-app/index.html'));
 });
 
 module.exports = router;
