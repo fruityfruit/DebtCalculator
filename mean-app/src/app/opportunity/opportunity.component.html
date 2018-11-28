@@ -1,9 +1,8 @@
-<h1 align="left">Opportunity Comparison</h1>
 <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <fieldset>
+    <legend>Opportunity Comparison</legend>
     <div class="form-group">
-      <div class = "col-sm-5">
-        <label>
+        <label class="col-sm-2 col-form-label">
           Type of Opportunity:
         </label>
         <div class="custom-control custom-radio">
@@ -14,19 +13,16 @@
           <input type="radio" formControlName="type" id="customRadio2" name="customRadio" class="custom-control-input">
           <label class="custom-control-label" for="customRadio2">Graduate School</label>
         </div>
-      </div>
     </div>
 
     <div class="form-group">
-      <div class = "col-sm-5">
         <label>
           Opportunity Name:
           <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name">
         </label>
-      </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
       <div class = "col-sm-5">
         <label>
           City:
@@ -35,7 +31,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
       <div class = "col-sm-5">
         <label>
           Opportunity Income:
@@ -49,7 +45,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
       <div class = "col-sm-5">
         <label>
           Opportunity Debt:
@@ -63,7 +59,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
       <div class = "col-sm-5">
         <label>
           Would this opportunity require you to move your primary residence?:
