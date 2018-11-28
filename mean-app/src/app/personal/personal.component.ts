@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-personal',
@@ -7,7 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalComponent implements OnInit {
 
-  constructor() { }
+  profileForm = this.fb.group({
+    income: [''],
+    debt: [''],
+    interest: [''],
+    payments: [''],
+    dependents: [''],
+    rent: [''],
+    spending: [''],
+    pets: [''],
+    smoking: [''],
+    drinking: [''],
+  });
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }
