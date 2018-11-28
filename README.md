@@ -2,8 +2,6 @@
 
 ## Getting Started
 
-Note that the current project directory is 'mean-app'. Extraneous files in the home directory will be deleted soon.
-
 ### Prerequisites
 
 You will need: MongoDB, Express.js, Angular, Node.js
@@ -26,24 +24,53 @@ Follow these steps to install Angular and the Angular CLI
 
 https://angular.io/guide/quickstart
 
-## Running a Test
-Initialize npm in the directory:
+## Running our project
+
+First, make sure that MongoDB is running on your computer.
+
+Then, navigate to the directory "mean-app" and run:
 ```
-npm init
+npm install
 ```
-Once everything is installed, make sure you run this command in the directory so the program will use express:
+Once this has finished, run the following to start the express server:
 ```
-$ npm install --save express body-parser
+npm start
 ```
-Add axios to use http requests:
+Now, in a separate terminal window, navigate to the directory "mean-app/client" and run:
 ```
-npm install --save axios
+npm install
 ```
-Run the app using this command:
+Once this has finished, run the following to start an Angular dev server:
 ```
-$ npm run build
+npm start
 ```
-Go to http://localhost:3000/ to see it in action!
+Now you can go to http://localhost:4200/ to see it in action!
+
+## Developing with Angular
+
+### Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+### Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+### Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+### Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+### Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+### Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Style Guide
 
@@ -57,47 +84,6 @@ This tutorial created the skeleton of the site.
 
 (https://scotch.io/tutorials/mean-app-with-angular-2-and-the-angular-cli)
 
+This github example helped us understand how to create log-in capabilities.
 
-
-
-
-
-
-
-# MeanApp
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.6.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## For our project
-
-Install bootstrap: `npm install bootstrap`
-
-Install bootswatch: `npm install bootswatch`
-
-Install ng-bootstrap: `npm install --save @ng-bootstrap/ng-bootstrap`
-
-Run `ng serve --open`
+(https://github.com/sitepoint-editors/MEAN-stack-authentication)
