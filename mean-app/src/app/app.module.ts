@@ -13,7 +13,47 @@ import { ResultsComponent } from './results/results.component';
 import { InfoComponent } from './info/info.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { SigninComponent } from './signin/signin.component';
+//import { AppRoutingModule } from './app-routing.module';
+
+// Define the routes
+const ROUTES = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'signin',
+    component: SigninComponent
+  },
+  {
+    path: 'info',
+    component: InfoComponent
+  },
+  {
+    path: 'opportunity',
+    component: OpportunityComponent
+  },
+  {
+    path: 'personal',
+    component: PersonalComponent
+  },
+  {
+    path: 'results',
+    component: ResultsComponent
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
+];
 
 
 @NgModule({
@@ -24,7 +64,10 @@ import { AppRoutingModule } from './app-routing.module';
     PersonalComponent,
     NavbarComponent,
     ResultsComponent,
-    InfoComponent
+    InfoComponent,
+    HomeComponent,
+    RegisterComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -32,8 +75,8 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    AppRoutingModule,
-    //RouterModule.forRoot(ROUTES) // Add routes to the app
+    //AppRoutingModule,
+    RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   // providers: [PostsService], // Add the posts service
   bootstrap: [AppComponent]
