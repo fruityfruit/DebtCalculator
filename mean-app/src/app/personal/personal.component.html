@@ -1,3 +1,141 @@
-<p>
-  personal works!
-</p>
+<form class="ex1" [formGroup]="profileForm">
+  <fieldset>
+    <legend>Personal Page</legend>
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
+          Current Income:
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" formControlName="income" placeholder="Current income">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
+          Current Debt:
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" formControlName="debt" placeholder="Current debt">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
+          Current Interest:
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">%</span>
+          </div>
+          <input type="text" class="form-control" formControlName="interest" placeholder="Debt interest as percent">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
+          Current Monthly Payment:
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" formControlName="payments" placeholder="Current monthly payment">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label class= "col-form-label">
+          Number of Dependents:
+          <input required type="text" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents">
+        </label>
+        </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
+          Current Rent Payment:
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" formControlName="rent" placeholder="Current rent, if any">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
+          Current Spending:
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="text" class="form-control" formControlName="spending" placeholder="Current spending monthly">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label class= "col-form-label">
+          Number of pets:
+          <input required type="text" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any">
+        </label>
+        </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
+          Do you smoke?
+        </label>
+          <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form1" formControlName="smoking">
+          <label ngbButtonLabel class="btn btn-primary">
+            <input ngbButton type="radio" formControlName="smoke" value="Yes"> Yes
+          </label>
+          <label ngbButtonLabel class="btn btn-primary">
+            <input ngbButton type="radio" formControlName="smoke" value="No"> No
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
+          Do you drink?
+        </label>
+          <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form2" formControlName="drinking">
+          <label ngbButtonLabel class="btn btn-primary">
+            <input ngbButton type="radio" formControlName="drink" value="Yes"> Yes
+          </label>
+          <label ngbButtonLabel class="btn btn-primary">
+            <input ngbButton type="radio" formControlName="drink" value="No"> No
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </fieldset>
+</form>
