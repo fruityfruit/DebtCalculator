@@ -13,40 +13,8 @@ import { ResultsComponent } from './results/results.component';
 import { InfoComponent } from './info/info.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './app-routing.module';
 
-// Define the routes
-const ROUTES = [
-  // {
-  //   path: '',
-  //   redirectTo: 'opportunity',
-  //   pathMatch: 'full'
-  // },
-  // {
-  //   path: 'posts',
-  //   component: PostsComponent
-  // },
-  {
-    path: 'info',
-    component: InfoComponent
-  },
-  {
-    path: 'opportunity',
-    component: OpportunityComponent
-  },
-  {
-    path: 'personal',
-    component: PersonalComponent
-  },
-  {
-    path: 'results',
-    component: ResultsComponent
-  },
-  {
-    path: '**',
-    redirectTo: 'opportunity',
-    pathMatch: 'full'
-  }
-];
 
 @NgModule({
   declarations: [
@@ -64,7 +32,8 @@ const ROUTES = [
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    RouterModule.forRoot(ROUTES) // Add routes to the app
+    AppRoutingModule,
+    //RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   // providers: [PostsService], // Add the posts service
   bootstrap: [AppComponent]
