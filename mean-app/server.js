@@ -1,6 +1,6 @@
 // Dependencies
 const express = require('express');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 const http = require('http');
 
 // Configure environment
@@ -13,6 +13,7 @@ var app = express();
 // Configure modules
 require('./server/config/express.js')(app, config); // Configure express
 require('./server/config/mongoose.js')(config); // Configure mongoose
+require('./server/models/user.js'); //create the User schema in mongoose before using it in a route
 require('./server/config/routes.js')(app); // Configure routes
 
 // Connect database TODO feels unnecessary
@@ -20,7 +21,9 @@ require('./server/config/routes.js')(app); // Configure routes
 // var db = mongoose.connection;
 
 // Create HTTP server
-const server = http.createServer(app);
+//const server = http.createServer(app);
 
 // Listen on the port specified in config
-server.listen(config.port, () => console.log(`API running on localhost:${config.port}`));
+//server.listen(config.port, () => console.log(`API running on localhost:${config.port}`));
+
+module.exports = app;
