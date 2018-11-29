@@ -47,12 +47,12 @@ const ROUTES = [
   {
     path: 'results',
     component: ResultsComponent
-  },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
   }
+  // {
+  //   path: '',
+  //   redirectTo: '',
+  //   pathMatch: 'full'
+  // }
 ];
 
 

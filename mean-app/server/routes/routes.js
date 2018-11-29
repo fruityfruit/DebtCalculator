@@ -25,7 +25,7 @@ const router = express.Router();
 //});
 
 // Controllers
-//var ctrlProfile = require('../controllers/profile');
+var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
 
 // Post request for registering
@@ -34,7 +34,7 @@ router.post('/register', ctrlAuth.register);
 // Post request for logging in
 router.post('/login', ctrlAuth.login);
 
-//router.get('/profile', crtlProfile.profileRead);
+router.get('/dlandrum', ctrlProfile.dlandrum);
 
 
 // Catch all other routes and return the index file

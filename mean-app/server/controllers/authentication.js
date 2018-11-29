@@ -9,7 +9,7 @@ module.exports.register = function(req, res) {
   //   });
   //   return;
   // }
-
+  console.log("in the register method");
   var user = new User();
 
   user.username = req.body.username;

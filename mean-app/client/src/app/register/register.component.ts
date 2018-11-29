@@ -27,4 +27,14 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  dlandrum() {
+    console.log(this.credentials);
+    this.auth.dlandrum().subscribe(() => {
+      this.router.navigateByUrl('/');
+    }, (err) => {
+      console.error(err);
+      //this.router.navigateByUrl('/opportunity');
+    });
+  }
+
 }
