@@ -20,21 +20,21 @@ export class RegisterComponent implements OnInit {
   register() {
     console.log(this.credentials);
     this.auth.register(this.credentials).subscribe(() => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/opportunity');
     }, (err) => {
       console.error(err);
-      //this.router.navigateByUrl('/opportunity');
+      this.router.navigateByUrl('/profile');
     });
   }
 
-  dlandrum() {
-    console.log(this.credentials);
-    this.auth.dlandrum().subscribe(() => {
-      this.router.navigateByUrl('/');
-    }, (err) => {
-      console.error(err);
-      //this.router.navigateByUrl('/opportunity');
-    });
-  }
+  // dlandrum() {
+  //   console.log(this.credentials);
+  //   this.auth.dlandrum().subscribe(() => {
+  //     this.router.navigateByUrl('/');
+  //   }, (err) => {
+  //     console.error(err);
+  //     //this.router.navigateByUrl('/opportunity');
+  //   });
+  // }
 
 }

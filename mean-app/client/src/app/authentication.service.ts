@@ -22,7 +22,7 @@ export class AuthenticationService {
     } else {
       base = this.http.get(`/api/${type}`);
     }
-    console.log(base);
+    console.log("base" + base);
     return base;
   }
 

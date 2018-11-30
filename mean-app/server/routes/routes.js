@@ -34,7 +34,7 @@ router.post('/register', ctrlAuth.register);
 // Post request for logging in
 router.post('/login', ctrlAuth.login);
 
-router.get('/dlandrum', ctrlProfile.dlandrum);
+//router.get('/dlandrum', ctrlProfile.dlandrum);
 
 
 // Catch all other routes and return the index file
