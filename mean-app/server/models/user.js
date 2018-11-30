@@ -1,12 +1,24 @@
 // grab the things we need
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 
 // create a schema
-var userSchema = new Schema({
+var userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  salt: {
+    type: String,
+    required: true
+  },
+  hash: {
+    type: String,
+    required: true
+  },
   name: String,
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
   admin: Boolean,
   location: String,
   meta: {
@@ -17,14 +29,14 @@ var userSchema = new Schema({
   updated_at: Date
 });
 
-// custom method to add string to end of name
-// you can create more important methods like name validations or formatting
-// you can also do queries and find similar users
-userSchema.methods.dudify = function() {
-  // add some stuff to the users name
-  this.name = this.name + '-dude';
+userSchema.methods.setPassword = function(password){
+  this.salt = crypto.randomBytes(16).toString('hex');
+  this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+};
 
-  return this.name;
+userSchema.methods.validPassword = function(password) {
+  var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+  return this.hash === hash;
 };
 
 // create the mongoose model User for the rest of the app to see

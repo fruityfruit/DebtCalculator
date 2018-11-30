@@ -10,7 +10,7 @@ var ctrlAuth = require('../controllers/authentication');
 router.post('/register', ctrlAuth.register);
 
 // Post request for logging in
-router.post('/login', ctrlAuth.login);
+router.post('/signin', ctrlAuth.signin);
 
 // Catch all other routes and return the index file
 router.get('*', (req, res) => {

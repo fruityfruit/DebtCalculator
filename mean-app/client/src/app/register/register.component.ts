@@ -21,7 +21,11 @@ export class RegisterComponent implements OnInit {
     this.auth.register(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/');
     }, (err) => {
-      console.error(err);
+      if(err.error.code === 11000) {
+        console.log("trying to pop up window"); //TODO
+      } else {
+        this.router.navigateByUrl('/');
+      }
     });
   }
 

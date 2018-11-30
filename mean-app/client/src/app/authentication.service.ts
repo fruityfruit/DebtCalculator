@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload) {
+  private request(method: 'post'|'get', type: 'signin'|'register'|'profile', user?: TokenPayload) {
     let base;
 
     if (method === 'post') {
@@ -27,6 +27,10 @@ export class AuthenticationService {
 
   public register(user: TokenPayload) {
     return this.request('post', 'register', user);
+  }
+
+  public signin(user: TokenPayload) {
+    return this.request('post', 'signin', user);
   }
 
 }
