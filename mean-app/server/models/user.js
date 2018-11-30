@@ -27,10 +27,5 @@ userSchema.methods.dudify = function() {
   return this.name;
 };
 
-// the schema is useless so far
-// we need to create a model using it
-//var User = mongoose.model('User', userSchema);
-
-// make this available to our users in our Node applications
-//module.exports = User;
+// create the mongoose model User for the rest of the app to see
 mongoose.model('User', userSchema);

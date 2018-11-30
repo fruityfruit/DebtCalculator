@@ -18,23 +18,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit() { }
 
   register() {
-    console.log(this.credentials);
     this.auth.register(this.credentials).subscribe(() => {
-      this.router.navigateByUrl('/opportunity');
+      this.router.navigateByUrl('/');
     }, (err) => {
       console.error(err);
-      this.router.navigateByUrl('/profile');
     });
   }
-
-  // dlandrum() {
-  //   console.log(this.credentials);
-  //   this.auth.dlandrum().subscribe(() => {
-  //     this.router.navigateByUrl('/');
-  //   }, (err) => {
-  //     console.error(err);
-  //     //this.router.navigateByUrl('/opportunity');
-  //   });
-  // }
 
 }

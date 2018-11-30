@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile'|'dlandrum', user?: TokenPayload) {
+  private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload) {
     let base;
 
     if (method === 'post') {
@@ -22,16 +22,11 @@ export class AuthenticationService {
     } else {
       base = this.http.get(`/api/${type}`);
     }
-    console.log("base" + base);
     return base;
   }
 
   public register(user: TokenPayload) {
     return this.request('post', 'register', user);
-  }
-
-  public dlandrum() {
-    return this.request('get', 'dlandrum');
   }
 
 }
