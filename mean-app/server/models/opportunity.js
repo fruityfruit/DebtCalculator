@@ -3,30 +3,15 @@ var mongoose = require('mongoose');
 
 // create a schema
 var opportunitySchema = new mongoose.Schema({
-  type: {
-      type: String,
-      required: true
-  },
-  oppName: {
-    type: String,
-    required: true
-  },
-  cityName: {
-    type: String,
-    required: true
-  },
-  oppCost: {
-    type: String,
-    required: true
-  },
-  oppDebt: {
-    type: String,
-    required: true
-  },
-  move: {
-    type: String,
-    required: true
-  }
+  type: String,
+  oppName: String,
+  cityName: String,
+  oppCost: String,
+  oppDebt: String,
+  move: String
+},
+{
+    collection: 'opportunity'
 });
 // create the mongoose model Form for the rest of the app to see
 mongoose.model('Form', opportunitySchema);

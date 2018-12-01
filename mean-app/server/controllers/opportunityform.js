@@ -9,12 +9,11 @@ module.exports.saveForm = function(req, res) {
   form.oppCost = req.body.oppCost; // set oppCost
   form.oppDebt = req.body.oppDebt; // set oppDebt
   form.move = req.body.move;
-  form.save(function(err) { // save opportunity to database
-    if (!err) { // everything is good
-      res.status(200).json({
-      });
-    } else { // everything is not good
-      res.status(400).json(err); // return the error
-    }
+  form.save()// save opportunity to database
+  .then(form => {
+    res.status(200).json({'form': 'form added successfully'});
+  })
+  .catch(err => {
+  res.status(400).send("unable to save to database");
   });
 };
