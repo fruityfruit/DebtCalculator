@@ -9,7 +9,7 @@ module.exports.saveForm = function(req, res) {
   form.oppCost = req.body.oppCost; // set oppCost
   form.oppDebt = req.body.oppDebt; // set oppDebt
   form.move = req.body.move;
-  form.save(function(err) { // save user to database
+  form.save(function(err) { // save opportunity to database
     if (!err) { // everything is good
       res.status(200).json({
       });
