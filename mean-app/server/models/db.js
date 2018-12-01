@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 // Configuring mongoose
 var dbURI = 'mongodb://localhost/debtDB';
 if (process.env.NODE_ENV === 'production') {
-  dbURI = process.env.MONGOLAB_URI;
+  dbURI = process.env.MONGOLAB_URI; // TODO figure out what this is
 }
 mongoose.connect(dbURI);
 

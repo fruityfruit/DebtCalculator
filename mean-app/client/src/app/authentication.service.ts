@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 
 export interface TokenPayload {
   password: string;
@@ -12,7 +11,7 @@ export interface TokenPayload {
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   private request(method: 'post'|'get', type: 'signin'|'register'|'profile', user?: TokenPayload) {
     let base;

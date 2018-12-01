@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     this.auth.register(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/');
     }, (err) => {
-      if(err.error.code === 11000) {
+      if(err.error.code === 11000) { //Mongo error code that means duplicate key constraint violation
         console.log("trying to pop up window"); //TODO
       } else {
         this.router.navigateByUrl('/');
