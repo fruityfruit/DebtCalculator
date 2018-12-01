@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
 import { AuthenticationService } from './authentication.service';
+import { OpportunityformService } from './opportunityform.service';
 
 // Define the routes
 const ROUTES = [
@@ -75,7 +76,8 @@ const ROUTES = [
     NgbModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [AuthenticationService], // Add the Authentication service
+  providers: [AuthenticationService,// Add the Authentication service
+              OpportunityformService], // Add the Opportunityform service
   bootstrap: [AppComponent]
 })
 export class AppModule { }

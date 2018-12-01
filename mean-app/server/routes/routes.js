@@ -5,12 +5,14 @@ const router = express.Router();
 // Controllers
 var ctrlProfile = require('../controllers/profile'); //not currently in use
 var ctrlAuth = require('../controllers/authentication'); //file where the actual guts of the POST requests are handled
-
+var ctrlOpp = require('../controllers/opportunityform')
 // Post request for registering
 router.post('/register', ctrlAuth.register);
 
 // Post request for logging in
 router.post('/signin', ctrlAuth.signin);
+
+router.post('/opportunity', ctrlOpp.saveForm);
 
 // Catch all other routes and return the index file
 router.get('*', (req, res) => {
