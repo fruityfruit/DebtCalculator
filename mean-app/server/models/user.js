@@ -1,4 +1,4 @@
-// grab the things we need
+// Dependencies
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
@@ -30,16 +30,19 @@ var userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.setPassword = function(password){
+  //sets the password salt and hash in the database, keeping the actual password secure
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
 
 userSchema.methods.validPassword = function(password) {
+  //returns whether the given password matches the salt and hash stored in the database
   var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
   return this.hash === hash;
 };
 
 userSchema.methods.generateToken = function() {
+  //returns a validated "token" to keep track of whether the user is logged in
   var expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
 

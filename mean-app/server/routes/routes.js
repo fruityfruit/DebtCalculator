@@ -3,8 +3,8 @@ const path = require('path');
 const router = express.Router();
 
 // Controllers
-var ctrlProfile = require('../controllers/profile');
-var ctrlAuth = require('../controllers/authentication');
+var ctrlProfile = require('../controllers/profile'); //not currently in use
+var ctrlAuth = require('../controllers/authentication'); //file where the actual guts of the POST requests are handled
 
 // Post request for registering
 router.post('/register', ctrlAuth.register);
