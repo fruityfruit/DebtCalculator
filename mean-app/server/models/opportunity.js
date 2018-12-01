@@ -27,6 +27,6 @@ var opportunitySchema = new mongoose.Schema({
     type: String,
     required: true
   }
-);
+});
 // create the mongoose model User for the rest of the app to see
-mongoose.model('Form', userSchema);
+mongoose.model('Form', opportunitySchema);

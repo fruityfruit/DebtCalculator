@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 // Bring in the database
 require('./server/models/db');
+require('./server/models/opportunity');
 
 // Bring in the routes for the API
 var routesApi = require('./server/routes/routes');
