@@ -19,12 +19,12 @@ export class OpportunityComponent implements OnInit {
   }
 
   profileForm = this.fb.group({
-    type: [''],
+    type: ['', Validators.required],
     oppName: ['', Validators.required],
-    cityName: [''],
-    oppCost: [''],
-    oppDebt: [''],
-    move: [''],
+    cityName: ['', Validators.required],
+    oppCost: ['', Validators.required],
+    oppDebt: ['', Validators.required],
+    move: ['', Validators.required],
   });
 
   addOpportunity(){
