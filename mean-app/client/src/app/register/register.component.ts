@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigateByUrl('/');
     }, (err) => {
       if(err.error.code === 11000) { //Mongo error code that means duplicate key constraint violation
-        console.log("trying to pop up window"); //TODO
+        window.alert("Sorry, that username has already been taken. Please try another!");
       } else {
         this.router.navigateByUrl('/');
       }

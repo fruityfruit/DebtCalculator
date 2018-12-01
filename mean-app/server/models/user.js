@@ -39,5 +39,16 @@ userSchema.methods.validPassword = function(password) {
   return this.hash === hash;
 };
 
+userSchema.methods.generateToken = function() {
+  var expiry = new Date();
+  expiry.setDate(expiry.getDate() + 7);
+
+  return jwt.sign({
+    _id: this._id,
+    username: this.username,
+    exp: parseInt(expiry.getTime() / 1000),
+  }, "MY_SECRET"); // TODO DO NOT KEEP YOUR SECRET IN THE CODE!
+};
+
 // create the mongoose model User for the rest of the app to see
 mongoose.model('User', userSchema);

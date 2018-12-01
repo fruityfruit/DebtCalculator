@@ -21,7 +21,13 @@
         <a class="nav-link" href="#"  routerLink="/info" routerLinkActive="active">How it Works</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/signin" routerLinkActive="active">TBD</a>
+        <a class="nav-link" href="#" routerLink="/signin" routerLinkActive="active">Sign In</a>
+      </li>
+      <li class="nav-item">
+        <!-- a class="nav-link" href="#" routerLink="/signin" routerLinkActive="active">Sign Out</a -->
+        <form (submit)="signout()">
+          <button type="submit">Sign Out</button>
+        </form>
       </li>
     </ul>
   </div>

@@ -22,7 +22,7 @@ export class SigninComponent implements OnInit {
       this.router.navigateByUrl('/');
     }, (err) => {
       if(err.error.message === "Username or password incorrect") {
-        console.log("trying to pop up window"); //TODO
+        window.alert(err.error.message);
       } else {
         this.router.navigateByUrl('/');
       }

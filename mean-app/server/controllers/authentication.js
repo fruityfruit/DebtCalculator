@@ -10,12 +10,11 @@ module.exports.register = function(req, res) {
   user.setPassword(req.body.password);
 
   user.save(function(err) {
-    // var token;
-    // token = user.generateJwt();
+    var token;
+    token = user.generateToken();
     if (!err) {
-      res.status(200);
-      res.json({
-        "token" : 'dummy token'
+      res.status(200).json({
+        "token" : token
       });
     } else {
       res.status(400).json(err);
@@ -54,8 +53,10 @@ module.exports.signin = function(req, res) {
         "message": 'Username or password incorrect'
       });
     } else {
+      var token;
+      token = user.generateToken();
       res.status(200).json({
-        "username": user.username
+        "token": token
       });
     }
   });
