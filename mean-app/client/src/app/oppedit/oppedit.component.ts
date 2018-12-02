@@ -40,6 +40,7 @@ export class OppeditComponent implements OnInit {
       oppDebt: ['', Validators.required],
       move: ['', Validators.required],
     });
+  //  profileForm.oppName.setValue(this.)
   }
 
   updateOpportunity(){

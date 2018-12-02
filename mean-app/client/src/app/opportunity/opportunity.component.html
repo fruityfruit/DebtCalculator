@@ -40,7 +40,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input required type="text" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
+          <input required type="number" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input required type="text" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt">
+          <input required type="number" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt">
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
     <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
   </fieldset>
 </form>
-
+<p>&nbsp;</p>
 <table class="table table-hover">
 <thead>
   <tr>
