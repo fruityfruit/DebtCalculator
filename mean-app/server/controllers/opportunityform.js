@@ -55,4 +55,13 @@ module.exports.updateForm = function(req, res) {
       });
    }
   });
-}
+};
+
+module.exports.deleteForm = function(req,res) {
+    Form.findByIdAndRemove({_id: req.params.id}, function(err, opportunity) {
+    if(err)
+      res.json(err);
+    else
+      res.json('Successfully deleted');
+    });
+};

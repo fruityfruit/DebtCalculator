@@ -56,4 +56,8 @@ export class OpportunityformService {
       .subscribe(res => console.log('Done'));
   }
 
+  deleteOpportunity(id) {
+      return this.http.get(`/api/opportunity/delete/${id}`);
+  }
+
 }

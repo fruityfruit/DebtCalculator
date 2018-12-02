@@ -51,6 +51,17 @@ export class OpportunityComponent implements OnInit {
   }
   constructor(private fb: FormBuilder, private os: OpportunityformService) {  }
 
+  deleteOpportunity(id) {
+      this.os.deleteOpportunity(id).subscribe(res => {
+        console.log('Deleted');
+      });
+
+      this.os.getOpportunities()
+        .subscribe((data: Opportunity[]) => {
+          this.opportunities = data;
+        });
+    }
+
   ngOnInit() {
     this.os.getOpportunities()
       .subscribe((data: Opportunity[]) => {

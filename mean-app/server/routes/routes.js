@@ -20,6 +20,7 @@ router.get('/opportunity/:id', ctrlOpp.editForm);
 
 router.post('/opportunity/:id', ctrlOpp.updateForm);
 
+router.get('/opportunity/delete/:id', ctrlOpp.deleteForm);
 
 // Catch all other routes and return the index file
 /*router.get('*', (req, res) => {

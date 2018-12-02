@@ -78,18 +78,6 @@
   </fieldset>
 </form>
 
-<p>
-  Form Status: {{ profileForm.status }}
-</p>
-
-<p>
-  Form Status: {{ profileForm.value.oppCost }}
-</p>
-
-<p>
-  Form Status: {{ formdata.form_oppCost }}
-</p>
-
 <table class="table table-hover">
 <thead>
   <tr>
@@ -99,7 +87,8 @@
     <th scope="col">Cost</th>
     <th scope="col">Debt</th>
     <th scope="col">Relocate</th>
-    <th scope="col">Action</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
   </tr>
 </thead>
 <tbody>
@@ -111,6 +100,7 @@
         <td>{{ opportunity.oppDebt }}</td>
         <td>{{ opportunity.move }}</td>
         <td><a [routerLink]="[opportunity._id]" class="btn btn-secondary">Edit</a></td>
+        <td><a (click) = "deleteOpportunity(opportunity._id)" class="btn btn-danger">Delete</a></td>
     </tr>
 </tbody>
 </table>
