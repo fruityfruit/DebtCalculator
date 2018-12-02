@@ -11,7 +11,7 @@ router.post('/register', ctrlAuth.register);
 
 // Post request for logging in
 router.post('/signin', ctrlAuth.signin);
-
+//Opportunity controller's posts and gets
 router.post('/opportunity', ctrlOpp.saveForm);
 
 router.get('/opportunity', ctrlOpp.getForms);
