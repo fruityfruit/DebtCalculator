@@ -47,5 +47,5 @@ process.on('SIGTERM', function() {
 });
 
 // Bring in schemas and models
-require('./user');
 require('./opportunity');
+require('./user');

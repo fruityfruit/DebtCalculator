@@ -7,4 +7,6 @@ export default class Opportunity {
   oppCost: string;
   oppDebt: string;
   move: string;
+  _id: string;
+  user: string;
 }

@@ -3,6 +3,7 @@ var User = mongoose.model('User'); //User schema from ../models/user.js
 
 module.exports.register = function(req, res) {
   var user = new User();
+  user._id = new mongoose.Types.ObjectId();
   user.username = req.body.username; // set username
   user.setPassword(req.body.password); // set password
   user.save(function(err) { // save user to database
@@ -10,8 +11,9 @@ module.exports.register = function(req, res) {
     token = user.generateToken();
     if (!err) { // everything is good
       res.status(200).json({
-        "token" : token
-      }); // return the token
+        "token" : token,
+        "username" : req.body.username
+      }); // return the token and username
     } else { // everything is not good
       res.status(400).json(err); // return the error
     }
@@ -30,8 +32,9 @@ module.exports.signin = function(req, res) {
       var token;
       token = user.generateToken();
       res.status(200).json({
-        "token": token
-      }); //return the token
+        "token": token,
+        "username" : req.body.username
+      }); //return the token and username
     }
   });
 
