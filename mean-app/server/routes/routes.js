@@ -16,6 +16,10 @@ router.post('/opportunity', ctrlOpp.saveForm);
 
 router.get('/opportunity', ctrlOpp.getForms);
 
+router.get('/opportunity/:id', ctrlOpp.editForm);
+
+router.post('/opportunity/:id', ctrlOpp.updateForm);
+
 
 // Catch all other routes and return the index file
 /*router.get('*', (req, res) => {

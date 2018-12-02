@@ -35,7 +35,7 @@ export class OpportunityComponent implements OnInit {
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
+    console.log(this.profileForm.value);
     this.formdata.form_type = this.profileForm.value.type;
     this.formdata.form_oppName = this.profileForm.value.oppName;
     this.formdata.form_cityName = this.profileForm.value.cityName;
@@ -43,6 +43,11 @@ export class OpportunityComponent implements OnInit {
     this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
     this.formdata.form_move = this.profileForm.value.move;
     this.addOpportunity();
+    this.os.getOpportunities()
+      .subscribe((data: Opportunity[]) => {
+        this.opportunities = data;
+      });
+    console.log(this.opportunities);
   }
   constructor(private fb: FormBuilder, private os: OpportunityformService) {  }
 

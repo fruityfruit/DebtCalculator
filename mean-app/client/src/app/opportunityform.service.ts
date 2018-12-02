@@ -36,4 +36,24 @@ export class OpportunityformService {
   getOpportunities() {
       return this.http.get(`/api/opportunity`);
     }
+
+  editOpportunity(id) {
+      return this.http.get(`/api/opportunity/${id}`);
+  }
+
+  updateOpportunity(form: TokenPayload, id) {
+
+    const obj = {
+      type: form.form_type,
+      oppName: form.form_oppName,
+      cityName: form.form_cityName,
+      oppCost: form.form_oppCost,
+      oppDebt: form.form_oppDebt,
+      move: form.form_move,
+      };
+      console.log(obj);
+      this.http.post(`/api/opportunity/${id}`, obj)
+      .subscribe(res => console.log('Done'));
+  }
+
 }

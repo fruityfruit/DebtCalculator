@@ -99,6 +99,7 @@
     <th scope="col">Cost</th>
     <th scope="col">Debt</th>
     <th scope="col">Relocate</th>
+    <th scope="col">Action</th>
   </tr>
 </thead>
 <tbody>
@@ -109,6 +110,7 @@
         <td>{{ opportunity.oppCost }}</td>
         <td>{{ opportunity.oppDebt }}</td>
         <td>{{ opportunity.move }}</td>
+        <td><a [routerLink]="[opportunity._id]" class="btn btn-secondary">Edit</a></td>
     </tr>
 </tbody>
 </table>
