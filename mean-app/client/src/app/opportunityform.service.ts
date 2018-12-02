@@ -33,4 +33,7 @@ export class OpportunityformService {
     .subscribe(res => console.log('Done'));
   }
 
+  getOpportunities() {
+      return this.http.get(`/api/opportunity`);
+    }
 }

@@ -17,3 +17,14 @@ module.exports.saveForm = function(req, res) {
   res.status(400).send("unable to save to database");
   });
 };
+
+module.exports.getForms = function(req, res) {
+  Form.find(function (err, opportunity){
+      if(err){
+        console.log(err);
+      }
+      else {
+        res.json(opportunity);
+      }
+    });
+  };

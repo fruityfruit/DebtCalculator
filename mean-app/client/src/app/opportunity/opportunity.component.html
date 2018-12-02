@@ -89,3 +89,26 @@
 <p>
   Form Status: {{ formdata.form_oppCost }}
 </p>
+
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Type</th>
+    <th scope="col">City</th>
+    <th scope="col">Cost</th>
+    <th scope="col">Debt</th>
+    <th scope="col">Relocate</th>
+  </tr>
+</thead>
+<tbody>
+    <tr class="table-info" *ngFor="let opportunity of opportunities">
+        <th scope="row">{{ opportunity.oppName }}</th>
+        <td>{{ opportunity.type }}</td>
+        <td>{{ opportunity.cityName }}</td>
+        <td>{{ opportunity.oppCost }}</td>
+        <td>{{ opportunity.oppDebt }}</td>
+        <td>{{ opportunity.move }}</td>
+    </tr>
+</tbody>
+</table>

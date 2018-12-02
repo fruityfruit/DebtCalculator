@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OpportunityformService, TokenPayload } from '../opportunityform.service';
+import Opportunity from '../Opportunity';
 
 @Component({
   selector: 'app-opportunity',
@@ -8,6 +9,7 @@ import { OpportunityformService, TokenPayload } from '../opportunityform.service
   styleUrls: ['./opportunity.component.css']
 })
 export class OpportunityComponent implements OnInit {
+  opportunities: Opportunity[];
   //types = ['Graduate School', 'Job'];
   formdata: TokenPayload = {
     form_type: '',
@@ -45,6 +47,11 @@ export class OpportunityComponent implements OnInit {
   constructor(private fb: FormBuilder, private os: OpportunityformService) {  }
 
   ngOnInit() {
+    this.os.getOpportunities()
+      .subscribe((data: Opportunity[]) => {
+        this.opportunities = data;
+      });
+      console.log(this.opportunities);
   }
 
 }

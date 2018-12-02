@@ -5,7 +5,7 @@ const router = express.Router();
 // Controllers
 var ctrlProfile = require('../controllers/profile'); //not currently in use
 var ctrlAuth = require('../controllers/authentication'); //file where the actual guts of the POST requests are handled
-var ctrlOpp = require('../controllers/opportunityform')
+var ctrlOpp = require('../controllers/opportunityform');
 // Post request for registering
 router.post('/register', ctrlAuth.register);
 
@@ -14,9 +14,12 @@ router.post('/signin', ctrlAuth.signin);
 
 router.post('/opportunity', ctrlOpp.saveForm);
 
+router.get('/opportunity', ctrlOpp.getForms);
+
+
 // Catch all other routes and return the index file
-router.get('*', (req, res) => {
+/*router.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../dist/mean-app/index.html'));
-});
+});*/
 
 module.exports = router;
