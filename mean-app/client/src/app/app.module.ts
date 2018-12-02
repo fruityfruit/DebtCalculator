@@ -16,6 +16,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
 import { AuthenticationService } from './authentication.service';
+import { OpportunityformService } from './opportunityform.service';
+import { OppeditComponent } from './oppedit/oppedit.component';
 
 // Define the routes
 const ROUTES = [
@@ -38,6 +40,10 @@ const ROUTES = [
   {
     path: 'opportunity',
     component: OpportunityComponent
+  },
+  {
+    path: 'opportunity/:id',
+    component: OppeditComponent
   },
   {
     path: 'personal',
@@ -65,7 +71,8 @@ const ROUTES = [
     InfoComponent,
     HomeComponent,
     RegisterComponent,
-    SigninComponent
+    SigninComponent,
+    OppeditComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,8 @@ const ROUTES = [
     NgbModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [AuthenticationService], // Add the Authentication service
+  providers: [AuthenticationService,// Add the Authentication service
+              OpportunityformService], // Add the Opportunityform service
   bootstrap: [AppComponent]
 })
 export class AppModule { }

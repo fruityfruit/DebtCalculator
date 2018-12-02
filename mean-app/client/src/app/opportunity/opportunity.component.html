@@ -6,11 +6,11 @@
           Type of Opportunity:
         </label>
         <div class="custom-control custom-radio">
-          <input type="radio" formControlName="type" id="customRadio1" name="customRadio" class="custom-control-input">
+          <input required type="radio" formControlName="type" id="customRadio1" value="job" name="type" class="custom-control-input">
           <label class="custom-control-label" for="customRadio1">Job</label>
         </div>
         <div class="custom-control custom-radio">
-          <input type="radio" formControlName="type" id="customRadio2" name="customRadio" class="custom-control-input">
+          <input required type="radio" formControlName="type" id="customRadio2" value="grad_school" name="type" class="custom-control-input">
           <label class="custom-control-label" for="customRadio2">Graduate School</label>
         </div>
     </div>
@@ -26,7 +26,7 @@
       <div class = "col-sm-5">
         <label>
           City:
-          <input type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in">
+          <input required type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in">
         </label>
       </div>
     </div>
@@ -40,7 +40,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input type="text" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
+          <input required type="number" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input type="text" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt">
+          <input required type="number" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt">
         </div>
       </div>
     </div>
@@ -64,12 +64,12 @@
         <label>
           Would this opportunity require you to move your primary residence?:
         </label>
-          <div class="btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="model">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="move">
           <label ngbButtonLabel class="btn btn-primary">
-            <input ngbButton type="radio" formControlName="move" value="Yes"> Yes
+            <input required ngbButton type="radio" formControlName="move" value="Yes"> Yes
           </label>
           <label ngbButtonLabel class="btn btn-primary">
-            <input ngbButton type="radio" formControlName="move" value="No"> No
+            <input required ngbButton type="radio" formControlName="move" value="No"> No
           </label>
         </div>
       </div>
@@ -77,7 +77,30 @@
     <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
   </fieldset>
 </form>
-
-<p>
-  Form Status: {{ profileForm.status }}
-</p>
+<p>&nbsp;</p>
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Type</th>
+    <th scope="col">City</th>
+    <th scope="col">Cost</th>
+    <th scope="col">Debt</th>
+    <th scope="col">Relocate</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+  </tr>
+</thead>
+<tbody>
+    <tr class="table-info" *ngFor="let opportunity of opportunities">
+        <th scope="row">{{ opportunity.oppName }}</th>
+        <td>{{ opportunity.type }}</td>
+        <td>{{ opportunity.cityName }}</td>
+        <td>{{ opportunity.oppCost }}</td>
+        <td>{{ opportunity.oppDebt }}</td>
+        <td>{{ opportunity.move }}</td>
+        <td><a [routerLink]="[opportunity._id]" class="btn btn-secondary">Edit</a></td>
+        <td><a (click) = "deleteOpportunity(opportunity._id)" class="btn btn-danger">Delete</a></td>
+    </tr>
+</tbody>
+</table>
