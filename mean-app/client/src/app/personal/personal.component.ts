@@ -9,16 +9,16 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class PersonalComponent implements OnInit {
 
   profileForm = this.fb.group({
-    income: [''],
-    debt: [''],
-    interest: [''],
-    payments: [''],
-    dependents: [''],
-    rent: [''],
-    spending: [''],
-    pets: [''],
-    smoking: [''],
-    drinking: [''],
+    income: ['', Validators.required],
+    debt: ['', Validators.required],
+    interest: ['', Validators.required],
+    payments: ['', Validators.required],
+    dependents: ['', Validators.required],
+    rent: ['', Validators.required],
+    spending: ['', Validators.required],
+    pets: ['', Validators.required],
+    smoking: ['', Validators.required],
+    drinking: ['', Validators.required],
   });
 
   constructor(private fb: FormBuilder) { }
