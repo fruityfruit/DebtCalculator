@@ -30,14 +30,11 @@ export class OpportunityformService {
       move: form.form_move,
       user: form.form_user
     };
-    this.http.post(`/api/opportunity`, obj).subscribe(res => console.log('Done'));
+    return this.http.post(`/api/opportunity`, obj); //.subscribe(res => console.log('Done'));
   }
 
   getOpportunities(user) {
-      var retval = this.http.get(`/api/opportunity/${user}`);
-      console.log("retval");
-      console.log(retval);
-      return retval;
+      return this.http.get(`/api/opportunity/${user}`);
     }
 
   editOpportunity(id) {
@@ -56,8 +53,7 @@ export class OpportunityformService {
       //user: form.form_user
       };
       console.log(obj);
-      this.http.post(`/api/edit/${id}`, obj)
-      .subscribe(res => console.log('Done'));
+      return this.http.post(`/api/edit/${id}`, obj); //.subscribe(res => console.log('Done'));
   }
 
   deleteOpportunity(user, id) {

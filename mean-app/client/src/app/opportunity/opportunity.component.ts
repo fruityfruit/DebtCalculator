@@ -31,10 +31,6 @@ export class OpportunityComponent implements OnInit {
     move: ['', Validators.required],
   });
 
-  addOpportunity(){
-    this.os.addOpportunity(this.formdata);
-  }
-
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log(this.profileForm.value);
@@ -45,15 +41,14 @@ export class OpportunityComponent implements OnInit {
     this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
     this.formdata.form_move = this.profileForm.value.move;
     this.formdata.form_user = this.authService.getUsername();
-    this.addOpportunity();
-    this.os.getOpportunities(this.authService.getUsername())
-      .subscribe((data: Opportunity[]) => {
-        //console.log("in subscription");
-      //  console.log(data);
-        //console.log(data.opportunities);
+    this.os.addOpportunity(this.formdata).subscribe(() => {
+      this.os.getOpportunities(this.authService.getUsername()).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];
-        console.log("Data passed:", this.opportunities);
+        //console.log("Data passed:", this.opportunities);
       });
+    }, (err) => {
+      console.log(err);
+    });
   }
   constructor(private fb: FormBuilder, private os: OpportunityformService,
     private authService: AuthenticationService) {  }

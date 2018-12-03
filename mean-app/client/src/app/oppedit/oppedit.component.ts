@@ -49,8 +49,11 @@ export class OppeditComponent implements OnInit {
 
   updateOpportunity(){
     this.route.params.subscribe(params => {
-      this.os.updateOpportunity(this.formdata, params['id']);
-      this.router.navigate(['opportunity']);
+      this.os.updateOpportunity(this.formdata, params['id']).subscribe(() => {
+        this.router.navigate(['opportunity']);
+      }, (err) => {
+        console.log(err);
+      });
     });
   }
 
@@ -67,8 +70,8 @@ export class OppeditComponent implements OnInit {
   }
 
   ngOnInit() {
-        this.route.params.subscribe(params => {
-        this.os.editOpportunity(params['id']).subscribe(res => {
+    this.route.params.subscribe(params => {
+      this.os.editOpportunity(params['id']).subscribe(res => {
         this.opportunity = res;
         console.log("ngOnInit now");
       });
