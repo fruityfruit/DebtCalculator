@@ -31,6 +31,7 @@ export class OppeditComponent implements OnInit {
     private authService: AuthenticationService)
     {
       this.createForm();
+      console.log("form created now");
     }
 
 
@@ -66,9 +67,10 @@ export class OppeditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-        this.os.editOpportunity(params['id']).subscribe(res => {
-          this.opportunity = res;
+  //    this.route.params.subscribe(params => {
+  //    this.os.editOpportunity(params['id']).subscribe(res => {
+  //    this.opportunity = res;
+          console.log("ngOnInit now");
       });
     });
   }

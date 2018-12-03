@@ -53,6 +53,7 @@ module.exports.editForm = function(req, res) {
     Form.findById(id, function (err, opportunity){
         res.json(opportunity);
     });
+    console.log("editForm done now");
   };
 
 module.exports.updateForm = function(req, res) {
