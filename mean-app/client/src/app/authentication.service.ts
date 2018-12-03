@@ -68,6 +68,7 @@ export class AuthenticationService {
     this.token = '';
     this.username = '';
     window.localStorage.removeItem('debt-calc-token');
+    window.localStorage.removeItem('debt-calc-username');
   }
 
   public isSignedIn() {
@@ -83,7 +84,7 @@ export class AuthenticationService {
     } else if (this.username !== '') {
       return this.username;
     } else {
-      return 'NO USER';
+      return null;
     }
   }
 

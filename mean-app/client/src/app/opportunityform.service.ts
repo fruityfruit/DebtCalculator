@@ -34,11 +34,11 @@ export class OpportunityformService {
   }
 
   getOpportunities(user) {
-      return this.http.get(`/api/opportunity/${user}`);
-    }
+    return this.http.get(`/api/opportunity/${user}`);
+  }
 
   editOpportunity(id) {
-      return this.http.get(`/api/edit/${id}`);
+    return this.http.get(`/api/edit/${id}`);
   }
 
   updateOpportunity(form: TokenPayload, id) { //Take in the data to update
