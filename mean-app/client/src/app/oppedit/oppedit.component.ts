@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OpportunityformService, TokenPayload } from '../opportunityform.service';
+import { AuthenticationService } from '../authentication.service';
 //import Opportunity from '../Opportunity';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -19,15 +20,18 @@ export class OppeditComponent implements OnInit {
     form_cityName: '',
     form_oppCost: '',
     form_oppDebt: '',
-    form_move: ''
+    form_move: '',
+    form_user: ''
   }
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private os: OpportunityformService,
-    private fb: FormBuilder)
+    private fb: FormBuilder,
+    private authService: AuthenticationService)
     {
       this.createForm();
+      console.log("form created now");
     }
 
 
@@ -58,13 +62,15 @@ export class OppeditComponent implements OnInit {
     this.formdata.form_oppCost = this.profileForm.value.oppCost;
     this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
     this.formdata.form_move = this.profileForm.value.move;
+    //this.formdata.form_user = this.authService.getUsername();
     this.updateOpportunity();
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+        this.route.params.subscribe(params => {
         this.os.editOpportunity(params['id']).subscribe(res => {
-          this.opportunity = res;
+        this.opportunity = res;
+        console.log("ngOnInit now");
       });
     });
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OpportunityformService, TokenPayload } from '../opportunityform.service';
+import { AuthenticationService } from '../authentication.service';
 import Opportunity from '../Opportunity';
 
 @Component({
@@ -17,7 +18,8 @@ export class OpportunityComponent implements OnInit {
     form_cityName: '',
     form_oppCost: '',
     form_oppDebt: '',
-    form_move: ''
+    form_move: '',
+    form_user: ''
   }
 
   profileForm = this.fb.group({
@@ -42,30 +44,35 @@ export class OpportunityComponent implements OnInit {
     this.formdata.form_oppCost = this.profileForm.value.oppCost;
     this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
     this.formdata.form_move = this.profileForm.value.move;
+    this.formdata.form_user = this.authService.getUsername();
     this.addOpportunity();
-    this.os.getOpportunities()
+    this.os.getOpportunities(this.authService.getUsername())
       .subscribe((data: Opportunity[]) => {
-        this.opportunities = data;
+        //console.log("in subscription");
+      //  console.log(data);
+        //console.log(data.opportunities);
+        this.opportunities = data['opportunities'];
+        console.log("Data passed:", this.opportunities);
       });
-    console.log(this.opportunities);
   }
-  constructor(private fb: FormBuilder, private os: OpportunityformService) {  }
+  constructor(private fb: FormBuilder, private os: OpportunityformService,
+    private authService: AuthenticationService) {  }
 
   deleteOpportunity(id) {
-      this.os.deleteOpportunity(id).subscribe(res => {
+      this.os.deleteOpportunity(this.authService.getUsername(), id).subscribe(res => {
         console.log('Deleted');
       });
 
-      this.os.getOpportunities()
+      this.os.getOpportunities(this.authService.getUsername())
         .subscribe((data: Opportunity[]) => {
-          this.opportunities = data;
+          this.opportunities = data['opportunities'];
         });
     }
 
   ngOnInit() {
-    this.os.getOpportunities()
+    this.os.getOpportunities(this.authService.getUsername())
       .subscribe((data: Opportunity[]) => {
-        this.opportunities = data;
+        this.opportunities = data['opportunities'];
       });
       console.log(this.opportunities);
   }

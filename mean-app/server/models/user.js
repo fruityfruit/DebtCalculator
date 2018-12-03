@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 
 // create a schema
 var userSchema = new mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   username: {
     type: String,
     required: true,
@@ -18,18 +19,16 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  name: String,
-  admin: Boolean,
-  location: String,
-  meta: {
-    age: Number,
-    website: String
-  },
-  created_at: Date,
-  updated_at: Date
+  opportunities: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Form'
+  }]
+},
+{
+    collection: 'users'
 });
 
-userSchema.methods.setPassword = function(password){
+userSchema.methods.setPassword = function(password) {
   //sets the password salt and hash in the database, keeping the actual password secure
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');

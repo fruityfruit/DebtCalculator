@@ -14,13 +14,13 @@ router.post('/signin', ctrlAuth.signin);
 //Opportunity controller's posts and gets
 router.post('/opportunity', ctrlOpp.saveForm);
 
-router.get('/opportunity', ctrlOpp.getForms);
+router.get('/opportunity/:user', ctrlOpp.getForms);
 
-router.get('/opportunity/:id', ctrlOpp.editForm);
+router.get('/edit/:id', ctrlOpp.editForm);
 
-router.post('/opportunity/:id', ctrlOpp.updateForm);
+router.post('/edit/:id', ctrlOpp.updateForm);
 
-router.get('/opportunity/delete/:id', ctrlOpp.deleteForm);
+router.get('/opportunity/delete/:user/:id', ctrlOpp.deleteForm);
 
 // Catch all other routes and return the index file
 /*router.get('*', (req, res) => {

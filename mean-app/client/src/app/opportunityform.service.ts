@@ -9,17 +9,18 @@ export interface TokenPayload { //Used in opportunity.component.ts and oppedit.c
   form_oppCost: string;
   form_oppDebt: string;
   form_move: string;
+  form_user: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class OpportunityformService {
-
   constructor(private http: HttpClient) { } //Uses httpclient to make post/get requests
 //Look in the routes.js file to see the corresponding urls where requests are made
   addOpportunity(form: TokenPayload) //parameter is the form when called in other files
   {
+    console.log("in addOpportunity in opform service");
     const obj = { //convert to an object
       type: form.form_type,
       oppName: form.form_oppName,
@@ -27,18 +28,20 @@ export class OpportunityformService {
       oppCost: form.form_oppCost,
       oppDebt: form.form_oppDebt,
       move: form.form_move,
+      user: form.form_user
     };
-    console.log(obj);
-    this.http.post(`/api/opportunity`, obj) //make a post request and send the object
-    .subscribe(res => console.log('Done'));
+    this.http.post(`/api/opportunity`, obj).subscribe(res => console.log('Done'));
   }
 
-  getOpportunities() {
-      return this.http.get(`/api/opportunity`); //get opportunity from this page
+  getOpportunities(user) {
+      var retval = this.http.get(`/api/opportunity/${user}`);
+      console.log("retval");
+      console.log(retval);
+      return retval;
     }
 
   editOpportunity(id) {
-      return this.http.get(`/api/opportunity/${id}`); //get opportunity to edit by id
+      return this.http.get(`/api/edit/${id}`);
   }
 
   updateOpportunity(form: TokenPayload, id) { //Take in the data to update
@@ -49,15 +52,16 @@ export class OpportunityformService {
       cityName: form.form_cityName,
       oppCost: form.form_oppCost,
       oppDebt: form.form_oppDebt,
-      move: form.form_move,
+      move: form.form_move
+      //user: form.form_user
       };
       console.log(obj);
-      this.http.post(`/api/opportunity/${id}`, obj) //post request, send object
+      this.http.post(`/api/edit/${id}`, obj)
       .subscribe(res => console.log('Done'));
   }
 
-  deleteOpportunity(id) {
-      return this.http.get(`/api/opportunity/delete/${id}`); //delete opportunity by id
+  deleteOpportunity(user, id) {
+      return this.http.get(`/api/opportunity/delete/${user}/${id}`);
   }
 
 }
