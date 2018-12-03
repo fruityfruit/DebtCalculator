@@ -10,7 +10,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input type="text" class="form-control" formControlName="income" placeholder="Current income">
+          <input required type="number" class="form-control" formControlName="income" placeholder="Current income">
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input type="text" class="form-control" formControlName="debt" placeholder="Current debt">
+          <input required type="number" class="form-control" formControlName="debt" placeholder="Current debt">
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">%</span>
           </div>
-          <input type="text" class="form-control" formControlName="interest" placeholder="Debt interest as percent">
+          <input required type="number" class="form-control" formControlName="interest" placeholder="Debt interest as percent">
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input type="text" class="form-control" formControlName="payments" placeholder="Current monthly payment">
+          <input required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment">
         </div>
       </div>
     </div>
@@ -61,7 +61,7 @@
       <div class = "col-sm-5">
         <label class= "col-form-label">
           Number of Dependents:
-          <input required type="text" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents">
+          <input required type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents">
         </label>
         </div>
     </div>
@@ -75,7 +75,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input type="text" class="form-control" formControlName="rent" placeholder="Current rent, if any">
+          <input required type="number" class="form-control" formControlName="rent" placeholder="Current rent, if any">
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
           </div>
-          <input type="text" class="form-control" formControlName="spending" placeholder="Current spending monthly">
+          <input required type="number" class="form-control" formControlName="spending" placeholder="Current spending monthly">
         </div>
       </div>
     </div>
@@ -98,7 +98,7 @@
       <div class = "col-sm-5">
         <label class= "col-form-label">
           Number of pets:
-          <input required type="text" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any">
+          <input required type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any">
         </label>
         </div>
     </div>
@@ -110,10 +110,10 @@
         </label>
           <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form1" formControlName="smoking">
           <label ngbButtonLabel class="btn btn-primary">
-            <input ngbButton type="radio" formControlName="smoke" value="Yes"> Yes
+            <input required ngbButton type="radio" formControlName="smoking" value="Yes"> Yes
           </label>
           <label ngbButtonLabel class="btn btn-primary">
-            <input ngbButton type="radio" formControlName="smoke" value="No"> No
+            <input required ngbButton type="radio" formControlName="smoking" value="No"> No
           </label>
         </div>
       </div>
@@ -126,16 +126,16 @@
         </label>
           <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form2" formControlName="drinking">
           <label ngbButtonLabel class="btn btn-primary">
-            <input ngbButton type="radio" formControlName="drink" value="Yes"> Yes
+            <input required ngbButton type="radio" formControlName="drinking" value="Yes"> Yes
           </label>
           <label ngbButtonLabel class="btn btn-primary">
-            <input ngbButton type="radio" formControlName="drink" value="No"> No
+            <input required ngbButton type="radio" formControlName="drinking" value="No"> No
           </label>
         </div>
       </div>
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
   </fieldset>
 </form>
