@@ -1,4 +1,4 @@
-// opportunity.ts
+// opportunity.ts - this class just stores data for an opportunity instance
 
 export default class Opportunity {
   type: string;

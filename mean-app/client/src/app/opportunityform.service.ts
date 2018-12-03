@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
-export interface TokenPayload {
+//opportunityform.service is responsible for connecting frontend with the backend
+export interface TokenPayload { //Used in opportunity.component.ts and oppedit.component.ts
   form_type: string;
   form_oppName: string;
   form_cityName: string;
@@ -16,12 +16,12 @@ export interface TokenPayload {
   providedIn: 'root'
 })
 export class OpportunityformService {
-
-  constructor(private http: HttpClient) { }
-
-  addOpportunity(form: TokenPayload) {
+  constructor(private http: HttpClient) { } //Uses httpclient to make post/get requests
+//Look in the routes.js file to see the corresponding urls where requests are made
+  addOpportunity(form: TokenPayload) //parameter is the form when called in other files
+  {
     console.log("in addOpportunity in opform service");
-    const obj = {
+    const obj = { //convert to an object
       type: form.form_type,
       oppName: form.form_oppName,
       cityName: form.form_cityName,
@@ -30,7 +30,6 @@ export class OpportunityformService {
       move: form.form_move,
       user: form.form_user
     };
-    //console.log(obj);
     this.http.post(`/api/opportunity`, obj).subscribe(res => console.log('Done'));
   }
 
@@ -45,8 +44,8 @@ export class OpportunityformService {
       return this.http.get(`/api/edit/${id}`);
   }
 
-  updateOpportunity(form: TokenPayload, id) {
-
+  updateOpportunity(form: TokenPayload, id) { //Take in the data to update
+// and the id of the opportunity to update
     const obj = {
       type: form.form_type,
       oppName: form.form_oppName,

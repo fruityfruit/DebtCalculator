@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Form = mongoose.model('Form'); //Form schema from ../models/opportunity.js
 var User = mongoose.model('User'); //User schema from ../models/user.js
-
+// This file is responsible for the opportunity form request/respond functions
 module.exports.saveForm = function(req, res) {
   var form = new Form();
   form._id = new mongoose.Types.ObjectId();
@@ -28,7 +28,7 @@ module.exports.saveForm = function(req, res) {
     }
   });
 };
-
+//This function searches for an opportunity in the database
 module.exports.getForms = function(req, res) {
   console.log("in get forms");
   console.log(req.params.user);
@@ -47,7 +47,7 @@ module.exports.getForms = function(req, res) {
       }
     });
   };
-
+  //This function edits an opportunity by ID in the database
 module.exports.editForm = function(req, res) {
     let id = req.params.id;
     Form.findById(id, function (err, opportunity){
@@ -55,7 +55,7 @@ module.exports.editForm = function(req, res) {
     });
     console.log("editForm done now");
   };
-
+  //This function updates an opportunity by ID in the database
 module.exports.updateForm = function(req, res) {
     Form.findById(req.params.id, function(err, opportunity) {
     if (!opportunity)
