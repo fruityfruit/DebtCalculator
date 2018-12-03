@@ -48,11 +48,11 @@ export class OpportunityComponent implements OnInit {
     this.addOpportunity();
     this.os.getOpportunities(this.authService.getUsername())
       .subscribe((data: Opportunity[]) => {
-        console.log("in subscription");
-        console.log(data);
-        console.log(data.opportunities);
-        this.opportunities = data.opportunities;
-        console.log(this.opportunities);
+        //console.log("in subscription");
+      //  console.log(data);
+        //console.log(data.opportunities);
+        this.opportunities = data['opportunities'];
+        console.log("Data passed:", this.opportunities);
       });
   }
   constructor(private fb: FormBuilder, private os: OpportunityformService,
@@ -65,14 +65,14 @@ export class OpportunityComponent implements OnInit {
 
       this.os.getOpportunities(this.authService.getUsername())
         .subscribe((data: Opportunity[]) => {
-          this.opportunities = data;
+          this.opportunities = data['opportunities'];
         });
     }
 
   ngOnInit() {
     this.os.getOpportunities(this.authService.getUsername())
       .subscribe((data: Opportunity[]) => {
-        this.opportunities = data.opportunites;
+        this.opportunities = data['opportunities'];
       });
       console.log(this.opportunities);
   }
