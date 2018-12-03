@@ -42,7 +42,7 @@ const ROUTES = [
     component: OpportunityComponent
   },
   {
-    path: 'opportunity/:id',
+    path: 'edit/:id',
     component: OppeditComponent
   },
   {

@@ -42,7 +42,7 @@ export class OpportunityformService {
     }
 
   editOpportunity(id) {
-      return this.http.get(`/api/opportunity/${id}`);
+      return this.http.get(`/api/edit/${id}`);
   }
 
   updateOpportunity(form: TokenPayload, id) {
@@ -57,7 +57,7 @@ export class OpportunityformService {
       //user: form.form_user
       };
       console.log(obj);
-      this.http.post(`/api/opportunity/${id}`, obj)
+      this.http.post(`/api/edit/${id}`, obj)
       .subscribe(res => console.log('Done'));
   }
 

@@ -16,9 +16,9 @@ router.post('/opportunity', ctrlOpp.saveForm);
 
 router.get('/opportunity/:user', ctrlOpp.getForms);
 
-router.get('/opportunity/:id', ctrlOpp.editForm);
+router.get('/edit/:id', ctrlOpp.editForm);
 
-router.post('/opportunity/:id', ctrlOpp.updateForm);
+router.post('/edit/:id', ctrlOpp.updateForm);
 
 router.get('/opportunity/delete/:user/:id', ctrlOpp.deleteForm);
 
