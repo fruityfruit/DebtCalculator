@@ -1,44 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import * as CanvasJS from './canvasjs.min';
+import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
-import { OpportunityformService, TokenPayload } from '../opportunityform.service';
-import { MathService } from '../math.service';
+import { AuthenticationService } from '../authentication.service';
+//import { OpportunityformService, TokenPayload } from '../opportunityform.service';
+import { ResultService } from '../result.service';
+import { Router } from '@angular/router';
+import Opportunity from '../Opportunity';
+
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
+
 export class ResultsComponent implements OnInit {
-  constructor(private http: HttpClient) { }
-  sumDebt(){
-    return this.http.get(`/api/results`);
+  username: string;
+  opportunities: Opportunity[];
+  zillowAverage: string;
+  constructor(private authService: AuthenticationService,
+              private resultService: ResultService,
+              private router: Router) { }
+  generateCharts() {
+    this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
+      this.opportunities = data['opportunities'];
+      //TODO display charts here
+      console.log(this.opportunities);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+  displayZillowData() {
+    this.resultService.getZillowData(this.username).subscribe((data: string) => { //TODO not a string
+      this.zillowAverage = data['average'];
+    }, (err) => {
+      console.log(err);
+    });
   }
   ngOnInit() {
-    this.sumDebt();
-	let chart = new CanvasJS.Chart("chartContainer", {
-		theme: "light2",
-		animationEnabled: true,
-		exportEnabled: true,
-		title:{
-			text: "Test Opportunity"
-		},
-		data: [{
-			type: "pie",
-			showInLegend: true,
-			toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
-			indexLabel: "{name} - #percent%",
-			dataPoints: [
-				{ y: 450, name: "Food" },
-				{ y: 120, name: "Insurance" },
-				{ y: 300, name: "Traveling" },
-				{ y: 800, name: "Housing" },
-				{ y: 150, name: "Education" },
-				{ y: 150, name: "Shopping"},
-				{ y: 250, name: "Others" }
-			]
-		}]
-	});
-
-	chart.render();
+    this.username = this.authService.getUsername();
+    if (this.username === null) {
+      window.alert("You are not logged in.");
+      this.router.navigateByUrl('/');
+    } else {
+      this.generateCharts();
+      this.displayZillowData();
     }
+  }
 }
