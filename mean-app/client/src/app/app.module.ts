@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
 import { AuthenticationService } from './authentication.service';
 import { OpportunityformService } from './opportunityform.service';
+import { ResultService } from './result.service';
 import { OppeditComponent } from './oppedit/oppedit.component';
 
 // Define the routes
@@ -83,6 +84,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   providers: [AuthenticationService,// Add the Authentication service
+              ResultService, // Add the Result service
               OpportunityformService], // Add the Opportunityform service
   bootstrap: [AppComponent]
 })
