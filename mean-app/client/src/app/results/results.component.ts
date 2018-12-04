@@ -17,14 +17,53 @@ export class ResultsComponent implements OnInit {
   username: string;
   opportunities: Opportunity[];
   zillowAverage: string;
+  debtChart = [];
+  salaryChart = [];
   constructor(private authService: AuthenticationService,
               private resultService: ResultService,
               private router: Router) { }
   generateCharts() {
     this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
       this.opportunities = data['opportunities'];
-      //TODO display charts here
-      console.log(this.opportunities);
+      //console.log(this.opportunities);
+      this.debtChart = new Chart('canvas0', {
+        type: 'bar',
+        data: {
+          labels: ["0", "1", "2"],
+          datasets: [{
+            label: "Debt Chart",
+            data: [21, 22, 23]
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+      this.salaryChart = new Chart('canvas1', {
+        type: 'bar',
+        data: {
+          labels: ["0", "1", "2"],
+          datasets: [{
+            label: "Salary Chart",
+            data: [21, 22, 23]
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
     }, (err) => {
       console.log(err);
     });

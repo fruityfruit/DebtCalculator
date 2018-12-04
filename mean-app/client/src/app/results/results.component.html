@@ -1,5 +1,9 @@
-<div class="row">
-  <div class="column">
-    The average home price in this area is {{ zillowAverage }}.
-  </div>
+<div *ngIf="debtChart">
+  <canvas id="canvas0">{{ debtChart }}</canvas>
 </div>
+<div *ngIf="salaryChart">
+  <canvas id="canvas1">{{ salaryChart }}</canvas>
+</div>
+<p>
+  The average home price in this area is {{ zillowAverage }}.
+</p>
