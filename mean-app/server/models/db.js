@@ -1,4 +1,3 @@
-// Dependencies
 const mongoose = require('mongoose');
 
 // Configuring mongoose

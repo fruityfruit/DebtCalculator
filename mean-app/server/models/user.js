@@ -1,9 +1,7 @@
-// Dependencies
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
-// create a schema
 var userSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   username: {
@@ -19,39 +17,19 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  income: {
-    type: Number
-  },
-  debt: {
-    type: Number
-  },
-  interest: {
-    type: Number
-  },
-  payments: {
-    type: Number
-  },
-  dependents: {
-    type: Number
-  },
-  rent: {
-    type: Number
-  },
-  spending: {
-    type: Number
-  },
-  pets: {
-    type: Number
-  },
-  smoking: {
-    type: Boolean
-  },
-  drinking: {
-    type: Boolean
-  },
+  income: Number,
+  debt: Number,
+  interest: Number,
+  payments: Number,
+  dependents: Number,
+  rent: Number,
+  spending: Number,
+  pets: Number,
+  smoking: Boolean,
+  drinking: Boolean,
   opportunities: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Form'
+    ref: 'Opportunity'
   }]
 },
 {
@@ -59,7 +37,7 @@ var userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.setPassword = function(password) {
-  //sets the password salt and hash in the database, keeping the actual password secure
+  //sets the password salt and hash in the database, not saving the actual password
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
