@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from './canvasjs.min';
-
+import { HttpClient } from '@angular/common/http';
+import { OpportunityformService, TokenPayload } from '../opportunityform.service';
+import { MathService } from '../math.service';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
-
+  constructor(private http: HttpClient) { }
+  sumDebt(){
+    return this.http.get(`/api/results`);
+  }
   ngOnInit() {
+    this.sumDebt();
 	let chart = new CanvasJS.Chart("chartContainer", {
 		theme: "light2",
 		animationEnabled: true,
