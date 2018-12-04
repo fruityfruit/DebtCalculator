@@ -85,7 +85,7 @@ export class PersonalComponent implements OnInit {
       this.auth.getProfile(username).subscribe(res => {
         this.currProfile = res;
         console.log("got data ngOnint");
-      };
+      });
     }
   }
 
