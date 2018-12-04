@@ -24,3 +24,15 @@ module.exports.updateProfile = function(req, res) {
       }
     });
 };
+
+module.exports.getProfile = function(req, res){
+  User.findOne({username: req.params.user}, function(err, user){
+    if (err || !user) {
+      res.status(400).send("unable get user");
+    }
+    else
+    {
+      res.json(user);
+    }
+  });
+};

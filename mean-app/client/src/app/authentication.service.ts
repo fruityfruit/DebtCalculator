@@ -119,4 +119,8 @@ export class AuthenticationService {
       };
       return this.http.post(`/api/personal`, obj);
   }
+
+  public getProfile(user) {
+    return this.http.get(`/api/personal/${user}`);
+  }
 }

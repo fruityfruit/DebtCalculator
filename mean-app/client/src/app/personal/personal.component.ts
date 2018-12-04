@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class PersonalComponent implements OnInit {
 
+  currProfile: any = {};
+
   profileForm = this.fb.group({
     income: ['', Validators.required],
     debt: ['', Validators.required],
@@ -59,6 +61,7 @@ export class PersonalComponent implements OnInit {
       this.formdata.username = user;
       console.log(this.formdata);
       console.log(user);
+      //TODO: also asynchronicity issues here most likely
       this.auth.updateProfile(this.formdata).subscribe(() => {
           this.router.navigate(['opportunity']);
         }, (err) => {
@@ -66,12 +69,11 @@ export class PersonalComponent implements OnInit {
         });
     }
 }
-//#type [(ngModel)] = "formdata.income"
   constructor(private fb: FormBuilder,
   private router: Router,
   private auth: AuthenticationService) { }
 
-  ngOnInit() {
+  ngOnInit() { //TODO: Fix syncing issues with get/post
     var username = this.auth.getUsername();
     if (username === null) {
       window.alert("You are not logged in.");
@@ -80,6 +82,10 @@ export class PersonalComponent implements OnInit {
     else
     {
       console.log("Logged in as: ", username);
+      this.auth.getProfile(username).subscribe(res => {
+        this.currProfile = res;
+        console.log("got data ngOnint");
+      };
     }
   }
 
