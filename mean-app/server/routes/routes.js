@@ -3,37 +3,31 @@ const path = require('path');
 const router = express.Router();
 
 // Controllers
-var ctrlProfile = require('../controllers/profile'); //not currently in use
-var ctrlAuth = require('../controllers/authentication'); //file where the actual guts of the POST requests are handled
-var ctrlOpp = require('../controllers/opportunityform');
-var ctrlResult = require('../controllers/result');
-// Post request for registering
+var ctrlAuth = require('../controllers/authentication'); //authentication
+var ctrlOpp = require('../controllers/opportunity'); //opportunity page
+var ctrlProfile = require('../controllers/profile'); //profile page
+var ctrlResult = require('../controllers/result'); //results page
+
 router.post('/register', ctrlAuth.register);
 
-// Post request for logging in
 router.post('/signin', ctrlAuth.signin);
-//Opportunity controller's posts and gets
-router.post('/opportunity', ctrlOpp.saveForm);
 
-router.get('/opportunity/:user', ctrlOpp.getForms);
+router.get('/opportunity/:user', ctrlOpp.getOpps);
 
-router.get('/edit/:id', ctrlOpp.editForm);
+router.get('/edit/:id', ctrlOpp.editOpp);
 
-router.post('/edit/:id', ctrlOpp.updateForm);
+router.get('/opportunity/delete/:user/:id', ctrlOpp.deleteOpp);
 
-router.get('/opportunity/delete/:user/:id', ctrlOpp.deleteForm);
+router.post('/opportunity', ctrlOpp.saveOpp);
 
-router.post('/personal', ctrlProfile.updateProfile);
+router.post('/edit/:id', ctrlOpp.updateOpp);
 
 router.get('/personal/:user', ctrlProfile.getProfile);
+
+router.post('/personal', ctrlProfile.updateProfile);
 
 router.get('/zillow/:user', ctrlResult.getZillow);
 
 router.get('/charts/:user', ctrlResult.getCharts)
-
-// Catch all other routes and return the index file
-/*router.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../dist/mean-app/index.html'));
-});*/
 
 module.exports = router;
