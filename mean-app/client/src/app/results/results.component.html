@@ -1,1 +1,9 @@
-<div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+<div *ngIf="debtChart">
+  <canvas id="canvas0">{{ debtChart }}</canvas>
+</div>
+<div *ngIf="salaryChart">
+  <canvas id="canvas1">{{ salaryChart }}</canvas>
+</div>
+<p>
+  The average home price in this area is {{ zillowAverage }}.
+</p>

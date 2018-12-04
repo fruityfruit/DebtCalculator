@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./opportunity.component.css']
 })
 export class OpportunityComponent implements OnInit {
+  username: string;
   opportunities: Opportunity[];
   //types = ['Graduate School', 'Job'];
   formdata: TokenPayload = {
@@ -33,55 +34,42 @@ export class OpportunityComponent implements OnInit {
   });
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    var username = this.authService.getUsername();
-    if (username === null) {
-      window.alert("You are not logged in.");
-      this.router.navigateByUrl('/');
-    } else {
-      //console.log(this.profileForm.value);
-      this.formdata.form_type = this.profileForm.value.type;
-      this.formdata.form_oppName = this.profileForm.value.oppName;
-      this.formdata.form_cityName = this.profileForm.value.cityName;
-      this.formdata.form_oppCost = this.profileForm.value.oppCost;
-      this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
-      this.formdata.form_move = this.profileForm.value.move;
-      this.formdata.form_user = this.authService.getUsername();
-      this.os.addOpportunity(this.formdata).subscribe(() => {
-        this.os.getOpportunities(this.authService.getUsername()).subscribe((data: Opportunity[]) => {
-          this.opportunities = data['opportunities'];
-          //console.log("Data passed:", this.opportunities);
-        });
-      }, (err) => {
-        console.log(err);
+    //console.log(this.profileForm.value);
+    this.formdata.form_type = this.profileForm.value.type;
+    this.formdata.form_oppName = this.profileForm.value.oppName;
+    this.formdata.form_cityName = this.profileForm.value.cityName;
+    this.formdata.form_oppCost = this.profileForm.value.oppCost;
+    this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
+    this.formdata.form_move = this.profileForm.value.move;
+    this.formdata.form_user = this.username;
+    this.os.addOpportunity(this.formdata).subscribe(() => {
+      this.os.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
+        this.opportunities = data['opportunities'];
+        //console.log("Data passed:", this.opportunities);
       });
-    }
+    }, (err) => {
+      console.log(err);
+    });
   }
   constructor(private fb: FormBuilder, private os: OpportunityformService,
     private authService: AuthenticationService,
     private router: Router) {  }
 
   deleteOpportunity(id) {
-    var username = this.authService.getUsername();
-    if (username === null) {
-      window.alert("You are not logged in.");
-      this.router.navigateByUrl('/');
-    } else {
-      this.os.deleteOpportunity(this.authService.getUsername(), id).subscribe(res => {
-        this.os.getOpportunities(this.authService.getUsername()).subscribe((data: Opportunity[]) => {
-          this.opportunities = data['opportunities'];
-        });
+    this.os.deleteOpportunity(this.username, id).subscribe(res => {
+      this.os.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
+        this.opportunities = data['opportunities'];
       });
-    }
+    });
   }
 
   ngOnInit() {
-    var username = this.authService.getUsername();
-    if (username === null) {
+    this.username = this.authService.getUsername();
+    if (this.username === null) {
       window.alert("You are not logged in.");
       this.router.navigateByUrl('/');
     } else {
-      this.os.getOpportunities(this.authService.getUsername()).subscribe((data: Opportunity[]) => {
+      this.os.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
           this.opportunities = data['opportunities'];
       });
       //console.log(this.opportunities);

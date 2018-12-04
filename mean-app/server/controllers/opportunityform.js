@@ -30,8 +30,8 @@ module.exports.saveForm = function(req, res) {
 };
 //This function searches for an opportunity in the database
 module.exports.getForms = function(req, res) {
-  console.log("in get forms");
-  console.log(req.params.user);
+  // console.log("in get forms");
+  // console.log(req.params.user);
   User.
     findOne({username: req.params.user}).
     populate('opportunities').
@@ -41,8 +41,8 @@ module.exports.getForms = function(req, res) {
         if (err) res.send(err);
         else res.send("user not found");
       } else {
-        console.log("opportunities");
-        console.log(user.opportunities);
+        // console.log("opportunities");
+        // console.log(user.opportunities);
         res.status(200).json({'opportunities': user.opportunities});
       }
     });
@@ -53,7 +53,7 @@ module.exports.editForm = function(req, res) {
     Form.findById(id, function (err, opportunity){
         res.json(opportunity);
     });
-    console.log("editForm done now");
+    // console.log("editForm done now");
   };
   //This function updates an opportunity by ID in the database
 module.exports.updateForm = function(req, res) {
@@ -90,12 +90,12 @@ module.exports.deleteForm = function(req,res) {
     //
     //   }
     // })
-    console.log(req.params.id);
+    // console.log(req.params.id);
     User.findOneAndUpdate({username: req.params.user}, {$pull: {opportunities: req.params.id}}, function(err, user) {
       if (err || !user) {
         res.status(400).send("unable to save to database");
       } else {
-        console.log(user);
+        // console.log(user);
       }
     });
     Form.findByIdAndRemove({_id: req.params.id}, function(err, opportunity) {

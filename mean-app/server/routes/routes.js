@@ -6,6 +6,7 @@ const router = express.Router();
 var ctrlProfile = require('../controllers/profile'); //not currently in use
 var ctrlAuth = require('../controllers/authentication'); //file where the actual guts of the POST requests are handled
 var ctrlOpp = require('../controllers/opportunityform');
+var ctrlResult = require('../controllers/result');
 // Post request for registering
 router.post('/register', ctrlAuth.register);
 
@@ -25,6 +26,10 @@ router.get('/opportunity/delete/:user/:id', ctrlOpp.deleteForm);
 router.post('/personal', ctrlProfile.updateProfile);
 
 router.get('/personal/:user', ctrlProfile.getProfile);
+
+router.get('/zillow/:user', ctrlResult.getZillow);
+
+router.get('/charts/:user', ctrlResult.getCharts)
 
 // Catch all other routes and return the index file
 /*router.get('*', (req, res) => {
