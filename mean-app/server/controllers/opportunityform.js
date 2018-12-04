@@ -8,6 +8,7 @@ module.exports.saveForm = function(req, res) {
   form.type = req.body.type; // set type
   form.oppName = req.body.oppName; // set oppName
   form.cityName = req.body.cityName; // set cityName
+  form.stateName = req.body.stateName; // set stateName
   form.oppCost = req.body.oppCost; // set oppCost
   form.oppDebt = req.body.oppDebt; // set oppDebt
   form.move = req.body.move;

@@ -6,6 +6,7 @@ export interface TokenPayload { //Used in opportunity.component.ts and oppedit.c
   form_type: string;
   form_oppName: string;
   form_cityName: string;
+  form_stateName: string;
   form_oppCost: string;
   form_oppDebt: string;
   form_move: string;
@@ -25,6 +26,7 @@ export class OpportunityformService {
       type: form.form_type,
       oppName: form.form_oppName,
       cityName: form.form_cityName,
+      stateName: form.form_stateName,
       oppCost: form.form_oppCost,
       oppDebt: form.form_oppDebt,
       move: form.form_move,
@@ -47,6 +49,7 @@ export class OpportunityformService {
       type: form.form_type,
       oppName: form.form_oppName,
       cityName: form.form_cityName,
+      stateName: form.form_stateName,
       oppCost: form.form_oppCost,
       oppDebt: form.form_oppDebt,
       move: form.form_move

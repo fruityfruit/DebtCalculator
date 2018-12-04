@@ -34,6 +34,15 @@
     <div class="form-group row">
       <div class = "col-sm-5">
         <label>
+          State:
+          <input required type="text" class="form-control" size="55" formControlName="stateName" placeholder="State the opportunity is in">
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class = "col-sm-5">
+        <label>
           Opportunity Income:
         </label>
         <div class="input-group mb-3">
@@ -74,7 +83,14 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
+      </div>
+      <div class="col">
+        <a class="nav-link" href="#" routerLink="/results" routerLinkActive="active"><button type="button" class="btn btn-primary">See Results</button></a>
+      </div>
+    </div>
   </fieldset>
 </form>
 <p>&nbsp;</p>
@@ -84,6 +100,7 @@
     <th scope="col">Name</th>
     <th scope="col">Type</th>
     <th scope="col">City</th>
+    <th scope="col">State</th>
     <th scope="col">Cost</th>
     <th scope="col">Debt</th>
     <th scope="col">Relocate</th>
@@ -96,6 +113,7 @@
         <th scope="row">{{ opportunity.oppName }}</th>
         <td>{{ opportunity.type }}</td>
         <td>{{ opportunity.cityName }}</td>
+        <td>{{ opportunity.stateName }}</td>
         <td>{{ opportunity.oppCost }}</td>
         <td>{{ opportunity.oppDebt }}</td>
         <td>{{ opportunity.move }}</td>

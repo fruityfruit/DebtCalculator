@@ -6,7 +6,7 @@ var opportunitySchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   type: String,
   oppName: String,
-//    stateName: String, //TODO this needs to be added for zillow to work
+  stateName: String, //TODO this needs to be added for zillow to work
   cityName: String,
   oppCost: String,
   oppDebt: String,

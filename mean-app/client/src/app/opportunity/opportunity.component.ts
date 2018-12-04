@@ -18,6 +18,7 @@ export class OpportunityComponent implements OnInit {
     form_type: '',
     form_oppName: '',
     form_cityName: '',
+    form_stateName: '',
     form_oppCost: '',
     form_oppDebt: '',
     form_move: '',
@@ -28,6 +29,7 @@ export class OpportunityComponent implements OnInit {
     type: ['', Validators.required],
     oppName: ['', Validators.required],
     cityName: ['', Validators.required],
+    stateName: ['', Validators.required],
     oppCost: ['', Validators.required],
     oppDebt: ['', Validators.required],
     move: ['', Validators.required],
@@ -38,6 +40,7 @@ export class OpportunityComponent implements OnInit {
     this.formdata.form_type = this.profileForm.value.type;
     this.formdata.form_oppName = this.profileForm.value.oppName;
     this.formdata.form_cityName = this.profileForm.value.cityName;
+    this.formdata.form_stateName = this.profileForm.value.stateName;
     this.formdata.form_oppCost = this.profileForm.value.oppCost;
     this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
     this.formdata.form_move = this.profileForm.value.move;

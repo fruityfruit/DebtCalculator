@@ -21,7 +21,7 @@ module.exports.getZillow = function(req , res) {
         var zillowOutput = [];
         user.opportunities.forEach(function(item, index) {
           var parameters = {
-            //state: item.state,
+            state: item.stateName,
             city: item.cityName
             //index: index
           };
@@ -33,7 +33,7 @@ module.exports.getZillow = function(req , res) {
           // });
         });
         // TODO logic to turn zillowOutput into an average home price
-        res.status(200).json({'average': 300000}); 
+        res.status(200).json({'average': 300000});
       }
     });
 };
