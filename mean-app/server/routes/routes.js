@@ -22,6 +22,8 @@ router.post('/edit/:id', ctrlOpp.updateForm);
 
 router.get('/opportunity/delete/:user/:id', ctrlOpp.deleteForm);
 
+router.post('/personal', ctrlProfile.updateProfile);
+
 // Catch all other routes and return the index file
 /*router.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../dist/mean-app/index.html'));

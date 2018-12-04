@@ -7,6 +7,21 @@ export interface TokenPayload {
   username: string;
 }
 
+export interface Profile {
+  username: string;
+  income: number;
+  debt: number;
+  interest: number;
+  payments: number;
+  dependents: number;
+  rent: number;
+  spending: number;
+  pets: number;
+  smoking: boolean;
+  drinking: boolean;
+}
+
+
 interface TokenResponse {
   token: string;
   username: string;
@@ -88,4 +103,20 @@ export class AuthenticationService {
     }
   }
 
+  public updateProfile(form: Profile) {
+    const obj = {
+      username: form.username,
+      income: form.income,
+      debt: form.debt,
+      interest: form.interest,
+      payments: form.payments,
+      dependents: form.dependents,
+      rent: form.rent,
+      spending: form.spending,
+      pets: form.pets,
+      smoking: form.smoking,
+      drinking: form.drinking
+      };
+      return this.http.post(`/api/personal`, obj);
+  }
 }

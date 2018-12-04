@@ -19,6 +19,36 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  income: {
+    type: Number
+  },
+  debt: {
+    type: Number
+  },
+  interest: {
+    type: Number
+  },
+  payments: {
+    type: Number
+  },
+  dependents: {
+    type: Number
+  },
+  rent: {
+    type: Number
+  },
+  spending: {
+    type: Number
+  },
+  pets: {
+    type: Number
+  },
+  smoking: {
+    type: Boolean
+  },
+  drinking: {
+    type: Boolean
+  },
   opportunities: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Form'

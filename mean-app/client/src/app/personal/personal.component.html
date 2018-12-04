@@ -1,4 +1,4 @@
-<form class="ex1" [formGroup]="profileForm">
+<form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <fieldset>
     <legend>Personal Page</legend>
     <div class="form-group row">
@@ -110,10 +110,10 @@
         </label>
           <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form1" formControlName="smoking">
           <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="smoking" value="Yes"> Yes
+            <input required ngbButton type="radio" formControlName="smoking" value=true> Yes
           </label>
           <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="smoking" value="No"> No
+            <input required ngbButton type="radio" formControlName="smoking" value=false> No
           </label>
         </div>
       </div>
@@ -126,10 +126,10 @@
         </label>
           <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form2" formControlName="drinking">
           <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="drinking" value="Yes"> Yes
+            <input required ngbButton type="radio" formControlName="drinking" value=true> Yes
           </label>
           <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="drinking" value="No"> No
+            <input required ngbButton type="radio" formControlName="drinking" value=false> No
           </label>
         </div>
       </div>
