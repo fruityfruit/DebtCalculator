@@ -23,6 +23,10 @@ router.post('/edit/:id', ctrlOpp.updateForm);
 
 router.get('/opportunity/delete/:user/:id', ctrlOpp.deleteForm);
 
+router.post('/personal', ctrlProfile.updateProfile);
+
+router.get('/personal/:user', ctrlProfile.getProfile);
+
 router.get('/zillow/:user', ctrlResult.getZillow);
 
 router.get('/charts/:user', ctrlResult.getCharts)
