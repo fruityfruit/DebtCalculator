@@ -25,7 +25,12 @@ export class ResultsComponent implements OnInit {
   generateCharts() {
     this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
       this.opportunities = data['opportunities'];
+      // To get a better idea of what this.opportunities looks like so that you can better access its elements,
+      // uncomment the line below and then open up the developer tools on your browser and look in the console.
       //console.log(this.opportunities);
+      
+      // To make this a meaningful graph, the data.labels and the data.datasets.data fields will need to be populated
+      // using information stored in this.opportunities.
       this.debtChart = new Chart('canvas0', {
         type: 'bar',
         data: {
@@ -45,6 +50,9 @@ export class ResultsComponent implements OnInit {
           }
         }
       });
+
+      // To make this a meaningful graph, the data.labels and the data.datasets.data fields will need to be populated
+      // using information stored in this.opportunities.
       this.salaryChart = new Chart('canvas1', {
         type: 'bar',
         data: {
