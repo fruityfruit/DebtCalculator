@@ -78,9 +78,7 @@ export class PersonalComponent implements OnInit {
     if (username === null) {
       window.alert("You are not logged in.");
       this.router.navigateByUrl('/');
-    }
-    else
-    {
+    } else {
       console.log("Logged in as: ", username);
       this.auth.getProfile(username).subscribe(res => {
         this.currProfile = res;

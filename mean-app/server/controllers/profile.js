@@ -18,9 +18,8 @@ module.exports.updateProfile = function(req, res) {
         user.smoking = req.body.smoking;
         user.drinking = req.body.drinking;
         user.save().then(user => {
-          res.json('Update complete');
+          res.status(200).json({'user' : 'user updated successfully'});
         })
-        res.status(200).json({'user' : 'user updated successfully'});
       }
     });
 };
@@ -29,10 +28,8 @@ module.exports.getProfile = function(req, res){
   User.findOne({username: req.params.user}, function(err, user){
     if (err || !user) {
       res.status(400).send("unable get user");
-    }
-    else
-    {
-      res.json(user);
+    } else {
+      res.status(200).json(user);
     }
   });
 };
