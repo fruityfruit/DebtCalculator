@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OpportunityService, Opportunity } from '../opportunity.service';
 import { AuthenticationService } from '../authentication.service';
-//import Opportunity from '../Opportunity';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
 export class OpportunityComponent implements OnInit {
   username: string;
   opportunities: Opportunity[];
-  profileForm: FormGroup;
   formdata: Opportunity = {
     type: '',
     oppName: '',
@@ -25,19 +23,18 @@ export class OpportunityComponent implements OnInit {
     _id: '',
     user: ''
   }
+  profileForm = this.builder.group({
+    type: ['', Validators.required],
+    oppName: ['', Validators.required],
+    cityName: ['', Validators.required],
+    stateName: ['', Validators.required],
+    oppCost: ['', Validators.required],
+    oppDebt: ['', Validators.required],
+    move: ['', Validators.required],
+  });
 
   constructor(private builder: FormBuilder, private oppService: OpportunityService,
-    private authService: AuthenticationService, private router: Router) {
-    this.profileForm = this.builder.group({
-      type: ['', Validators.required],
-      oppName: ['', Validators.required],
-      cityName: ['', Validators.required],
-      stateName: ['', Validators.required],
-      oppCost: ['', Validators.required],
-      oppDebt: ['', Validators.required],
-      move: ['', Validators.required],
-    });
-  }
+    private authService: AuthenticationService, private router: Router) { }
 
   onSubmit() {
     this.formdata.type = this.profileForm.value.type;
@@ -51,9 +48,11 @@ export class OpportunityComponent implements OnInit {
     this.oppService.addOpportunity(this.formdata).subscribe(() => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];
+        this.profileForm.reset();
       });
     }, (err) => {
       console.log(err);
+      this.profileForm.reset();
     });
   }
 
