@@ -72,7 +72,7 @@ export class OpportunityComponent implements OnInit {
       this.router.navigateByUrl('/');
     } else {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
-          this.opportunities = data['opportunities'];
+        this.opportunities = data['opportunities'];
       });
     }
   }

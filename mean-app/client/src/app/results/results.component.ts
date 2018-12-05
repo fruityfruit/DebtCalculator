@@ -3,7 +3,7 @@ import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
 import { OpportunityService, Opportunity } from '../opportunity.service';
-import { ResultService } from '../result.service';
+import { ResultService, ResultSet } from '../result.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,12 +14,13 @@ import { Router } from '@angular/router';
 
 export class ResultsComponent implements OnInit {
   username: string;
-  zillowAverage: number;
+  results: ResultSet[] = [];
   debtChart = [];
   salaryChart = [];
 
   constructor(private authService: AuthenticationService,
               private resultService: ResultService,
+              private oppService: OpportunityService,
               private router: Router) { }
 
   private generateCharts() {
@@ -79,11 +80,37 @@ export class ResultsComponent implements OnInit {
     });
   }
 
+  private getOpportunityZillow(oppName: string, city: string, id: string) {
+      this.resultService.getZillowData(id).subscribe((data) => {
+        if (data['average'] > 0) {
+          var result: ResultSet = {
+            oppName: oppName,
+            city: city,
+            zillowData: data['average']
+          };
+          this.results.push(result);
+        }
+      }, (err) => {
+        console.log(err);
+      });
+  }
+
   private displayZillowData() {
-    this.resultService.getZillowData(this.username).subscribe((data) => {
-      this.zillowAverage = data['average'];
-    }, (err) => {
-      console.log(err);
+    this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
+      var names = [];
+      var cities = [];
+      var ids = [];
+      var counter = 0;
+      data['opportunities'].forEach(function(item, index) {
+        names.push(item.oppName);
+        cities.push(item.cityName);
+        ids.push(item._id);
+        counter = counter + 1;
+      });
+      var i;
+      for (i = 0; i < counter; i++) {
+        this.getOpportunityZillow(names[i], cities[i], ids[i]);
+      }
     });
   }
 
@@ -97,5 +124,5 @@ export class ResultsComponent implements OnInit {
       this.displayZillowData();
     }
   }
-  
+
 }

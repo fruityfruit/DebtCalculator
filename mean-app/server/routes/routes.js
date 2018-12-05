@@ -26,7 +26,7 @@ router.get('/personal/:user', ctrlProfile.getProfile);
 
 router.post('/personal', ctrlProfile.updateProfile);
 
-router.get('/zillow/:user', ctrlResult.getZillow);
+router.get('/zillow/:id', ctrlResult.getZillow);
 
 router.get('/charts/:user', ctrlResult.getCharts)
 

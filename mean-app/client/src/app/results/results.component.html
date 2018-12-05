@@ -4,6 +4,20 @@
 <div *ngIf="salaryChart">
   <canvas id="canvas1">{{ salaryChart }}</canvas>
 </div>
-<p>
-  The average home price in this area is {{ zillowAverage }}.
-</p>
+<p>&nbsp;</p>
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th scope="col">Opportunity Name</th>
+    <th scope="col">Opportunity City</th>
+    <th scope="col">Zillow estimate of the average home price in the area</th>
+  </tr>
+</thead>
+<tbody>
+    <tr class="table-info" *ngFor="let result of results">
+        <th scope="row">{{ result.oppName }}</th>
+        <td>{{ result.city }}</td>
+        <td>{{ result.zillowData }}</td>
+    </tr>
+</tbody>
+</table>
