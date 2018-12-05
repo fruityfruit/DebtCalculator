@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 export interface ResultSet {
   oppName: string;
   city: string;
-  zillowData: number;
+  zillowData: string;
 }
 
 @Injectable({

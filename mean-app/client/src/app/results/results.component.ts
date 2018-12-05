@@ -91,7 +91,12 @@ export class ResultsComponent implements OnInit {
           this.results.push(result);
         }
       }, (err) => {
-        console.log(err);
+        var result: ResultSet = {
+          oppName: oppName,
+          city: city,
+          zillowData: 'Zillow does not have estimate data for this city.'
+        };
+        this.results.push(result);
       });
   }
 
