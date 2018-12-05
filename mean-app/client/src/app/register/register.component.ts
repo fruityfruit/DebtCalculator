@@ -15,8 +15,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(private auth: AuthenticationService, private router: Router) { }
 
-  ngOnInit() { }
-
   register() {
     this.auth.register(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/');
@@ -28,5 +26,7 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
+
+  ngOnInit() { }
 
 }

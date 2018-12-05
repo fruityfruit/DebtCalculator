@@ -15,10 +15,10 @@ import { InfoComponent } from './info/info.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
-import { AuthenticationService } from './authentication.service';
-import { OpportunityformService } from './opportunityform.service';
-import { ResultService } from './result.service';
 import { OppeditComponent } from './oppedit/oppedit.component';
+import { AuthenticationService } from './authentication.service';
+import { OpportunityService } from './opportunity.service';
+import { ResultService } from './result.service';
 
 // Define the routes
 const ROUTES = [
@@ -85,7 +85,7 @@ const ROUTES = [
   ],
   providers: [AuthenticationService,// Add the Authentication service
               ResultService, // Add the Result service
-              OpportunityformService], // Add the Opportunityform service
+              OpportunityService], // Add the Opportunity service
   bootstrap: [AppComponent]
 })
 export class AppModule { }
