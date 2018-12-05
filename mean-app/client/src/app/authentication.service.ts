@@ -47,14 +47,9 @@ export class AuthenticationService {
     this.username = username;
   }
 
-  private request(method: 'post'|'get', type: 'signin'|'register'|'profile', user?: TokenPayload) {
-    let base;
-
-    if (method === 'post') {
-      base = this.http.post(`/api/${type}`, user);
-    } else {
-      base = this.http.get(`/api/${type}`);
-    }
+  // this method makes and handles the post requests required to login and logout a user
+  private post(type: 'signin'|'register', user: TokenPayload) {
+    var base = this.http.post(`/api/${type}`, user);
     const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
@@ -66,16 +61,15 @@ export class AuthenticationService {
         return data;
       })
     );
-
     return request;
   }
 
   public register(user: TokenPayload) {
-    return this.request('post', 'register', user);
+    return this.post('register', user);
   }
 
   public signin(user: TokenPayload) {
-    return this.request('post', 'signin', user);
+    return this.post('signin', user);
   }
 
   public signout() {
