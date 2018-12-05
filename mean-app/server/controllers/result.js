@@ -14,8 +14,8 @@ module.exports.getZillow = function(req , res) {
       var zillow = new Zillow("X1-ZWz1gs7bfxtszv_axb7v"); // TODO this zwsid should not be listed in the code
       var parameters = {
         childtype: 'neighborhood',
-        state: opp.stateName,
-        city: opp.cityName
+        state: opp.stateName.toLowerCase(),
+        city: opp.cityName.toLowerCase()
       }
       zillow.get('GetRegionChildren', parameters)
         .then(function(results) {
