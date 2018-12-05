@@ -7,11 +7,11 @@ import { HttpClient } from '@angular/common/http';
 export class ResultService {
   constructor(private http: HttpClient) { }
 
-  getZillowData(user) {
+  public getZillowData(user: string) {
     return this.http.get(`/api/zillow/${user}`);
   }
 
-  getChartsData(user) {
+  public getChartsData(user: string) {
     return this.http.get(`/api/charts/${user}`);
   }
 }

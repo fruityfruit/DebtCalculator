@@ -21,7 +21,6 @@ export interface Profile {
   drinking: boolean;
 }
 
-
 interface TokenResponse {
   token: string;
   username: string;
@@ -86,13 +85,6 @@ export class AuthenticationService {
     window.localStorage.removeItem('debt-calc-username');
   }
 
-  public isSignedIn() {
-    if (window.localStorage.getItem('debt-calc-token')) {
-      return true;
-    }
-    return false;
-  }
-
   public getUsername() {
     if (window.localStorage.getItem('debt-calc-username')) {
       return window.localStorage.getItem('debt-calc-username');
@@ -116,8 +108,8 @@ export class AuthenticationService {
       pets: form.pets,
       smoking: form.smoking,
       drinking: form.drinking
-      };
-      return this.http.post(`/api/personal`, obj);
+    };
+    return this.http.post(`/api/personal`, obj);
   }
 
   public getProfile(user) {

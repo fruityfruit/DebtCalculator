@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { OpportunityformService, TokenPayload } from '../opportunityform.service';
-//import Opportunity from '../Opportunity';
+import { OpportunityService, Opportunity } from '../opportunity.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -9,47 +8,40 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './oppedit.component.html',
   styleUrls: ['./oppedit.component.css']
 })
-export class OppeditComponent implements OnInit {
 
+export class OppeditComponent implements OnInit {
   opportunity: any = {};
   profileForm: FormGroup;
-  formdata: TokenPayload = {
-    form_type: '',
-    form_oppName: '',
-    form_cityName: '',
-    form_stateName: '',
-    form_oppCost: '',
-    form_oppDebt: '',
-    form_move: '',
-    form_user: ''
+  formdata: Opportunity = {
+    type: '',
+    oppName: '',
+    cityName: '',
+    stateName: '',
+    oppCost: '',
+    oppDebt: '',
+    move: '',
+    _id: '',
+    user: ''
   }
 
-  constructor(private route: ActivatedRoute,
+  constructor(private activatedRouter: ActivatedRoute,
     private router: Router,
-    private os: OpportunityformService,
-    private fb: FormBuilder)
-    {
-      this.createForm();
-      console.log("form created now");
+    private oppService: OpportunityService,
+    private builder: FormBuilder) {
+      this.profileForm = this.builder.group({
+        type: ['', Validators.required],
+        oppName: ['', Validators.required],
+        cityName: ['', Validators.required],
+        stateName: ['', Validators.required],
+        oppCost: ['', Validators.required],
+        oppDebt: ['', Validators.required],
+        move: ['', Validators.required],
+      });
     }
 
-
-  createForm() {
-    this.profileForm = this.fb.group({
-      type: ['', Validators.required],
-      oppName: ['', Validators.required],
-      cityName: ['', Validators.required],
-      stateName: ['', Validators.required],
-      oppCost: ['', Validators.required],
-      oppDebt: ['', Validators.required],
-      move: ['', Validators.required],
-    });
-  //  profileForm.oppName.setValue(this.)
-  }
-
-  updateOpportunity(){
-    this.route.params.subscribe(params => {
-      this.os.updateOpportunity(this.formdata, params['id']).subscribe(() => {
+  private updateOpportunity() {
+    this.activatedRouter.params.subscribe(params => {
+      this.oppService.updateOpportunity(this.formdata, params['id']).subscribe(() => {
         this.router.navigate(['opportunity']);
       }, (err) => {
         console.log(err);
@@ -57,23 +49,21 @@ export class OppeditComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log(this.profileForm.value);
-    this.formdata.form_type = this.profileForm.value.type;
-    this.formdata.form_oppName = this.profileForm.value.oppName;
-    this.formdata.form_cityName = this.profileForm.value.cityName;
-    this.formdata.form_stateName = this.profileForm.value.stateName;
-    this.formdata.form_oppCost = this.profileForm.value.oppCost;
-    this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
-    this.formdata.form_move = this.profileForm.value.move;
+  public onSubmit() {
+    this.formdata.type = this.profileForm.value.type;
+    this.formdata.oppName = this.profileForm.value.oppName;
+    this.formdata.cityName = this.profileForm.value.cityName;
+    this.formdata.stateName = this.profileForm.value.stateName;
+    this.formdata.oppCost = this.profileForm.value.oppCost;
+    this.formdata.oppDebt = this.profileForm.value.oppDebt;
+    this.formdata.move = this.profileForm.value.move;
     this.updateOpportunity();
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.os.editOpportunity(params['id']).subscribe(res => {
+    this.activatedRouter.params.subscribe(params => {
+      this.oppService.editOpportunity(params['id']).subscribe(res => {
         this.opportunity = res;
-        console.log("ngOnInit now");
       });
     });
   }

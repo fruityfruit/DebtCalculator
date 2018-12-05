@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { OpportunityformService, TokenPayload } from '../opportunityform.service';
+import { OpportunityService, Opportunity } from '../opportunity.service';
 import { AuthenticationService } from '../authentication.service';
-import Opportunity from '../Opportunity';
+//import Opportunity from '../Opportunity';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,54 +13,53 @@ import { Router } from '@angular/router';
 export class OpportunityComponent implements OnInit {
   username: string;
   opportunities: Opportunity[];
-  //types = ['Graduate School', 'Job'];
-  formdata: TokenPayload = {
-    form_type: '',
-    form_oppName: '',
-    form_cityName: '',
-    form_stateName: '',
-    form_oppCost: '',
-    form_oppDebt: '',
-    form_move: '',
-    form_user: ''
+  profileForm: FormGroup;
+  formdata: Opportunity = {
+    type: '',
+    oppName: '',
+    cityName: '',
+    stateName: '',
+    oppCost: '',
+    oppDebt: '',
+    move: '',
+    _id: '',
+    user: ''
   }
 
-  profileForm = this.fb.group({
-    type: ['', Validators.required],
-    oppName: ['', Validators.required],
-    cityName: ['', Validators.required],
-    stateName: ['', Validators.required],
-    oppCost: ['', Validators.required],
-    oppDebt: ['', Validators.required],
-    move: ['', Validators.required],
-  });
+  constructor(private builder: FormBuilder, private oppService: OpportunityService,
+    private authService: AuthenticationService, private router: Router) {
+    this.profileForm = this.builder.group({
+      type: ['', Validators.required],
+      oppName: ['', Validators.required],
+      cityName: ['', Validators.required],
+      stateName: ['', Validators.required],
+      oppCost: ['', Validators.required],
+      oppDebt: ['', Validators.required],
+      move: ['', Validators.required],
+    });
+  }
 
   onSubmit() {
-    //console.log(this.profileForm.value);
-    this.formdata.form_type = this.profileForm.value.type;
-    this.formdata.form_oppName = this.profileForm.value.oppName;
-    this.formdata.form_cityName = this.profileForm.value.cityName;
-    this.formdata.form_stateName = this.profileForm.value.stateName;
-    this.formdata.form_oppCost = this.profileForm.value.oppCost;
-    this.formdata.form_oppDebt = this.profileForm.value.oppDebt;
-    this.formdata.form_move = this.profileForm.value.move;
-    this.formdata.form_user = this.username;
-    this.os.addOpportunity(this.formdata).subscribe(() => {
-      this.os.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
+    this.formdata.type = this.profileForm.value.type;
+    this.formdata.oppName = this.profileForm.value.oppName;
+    this.formdata.cityName = this.profileForm.value.cityName;
+    this.formdata.stateName = this.profileForm.value.stateName;
+    this.formdata.oppCost = this.profileForm.value.oppCost;
+    this.formdata.oppDebt = this.profileForm.value.oppDebt;
+    this.formdata.move = this.profileForm.value.move;
+    this.formdata.user = this.username;
+    this.oppService.addOpportunity(this.formdata).subscribe(() => {
+      this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];
-        //console.log("Data passed:", this.opportunities);
       });
     }, (err) => {
       console.log(err);
     });
   }
-  constructor(private fb: FormBuilder, private os: OpportunityformService,
-    private authService: AuthenticationService,
-    private router: Router) {  }
 
-  deleteOpportunity(id) {
-    this.os.deleteOpportunity(this.username, id).subscribe(res => {
-      this.os.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
+  deleteOpportunity(id: string) {
+    this.oppService.deleteOpportunity(this.username, id).subscribe(res => {
+      this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];
       });
     });
@@ -72,12 +71,9 @@ export class OpportunityComponent implements OnInit {
       window.alert("You are not logged in.");
       this.router.navigateByUrl('/');
     } else {
-      this.os.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
+      this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
           this.opportunities = data['opportunities'];
       });
-      //console.log(this.opportunities);
     }
-
   }
-
 }

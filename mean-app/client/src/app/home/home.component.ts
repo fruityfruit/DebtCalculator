@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +7,8 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private auth: AuthenticationService) { }
+  constructor() { }
 
   ngOnInit() { }
-
-  isSignedIn() {
-    return this.auth.isSignedIn();
-  }
 
 }

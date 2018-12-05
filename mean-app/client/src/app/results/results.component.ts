@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
-//import { OpportunityformService, TokenPayload } from '../opportunityform.service';
+import { Opportunity } from '../opportunity.service';
 import { ResultService } from '../result.service';
 import { Router } from '@angular/router';
-import Opportunity from '../Opportunity';
+//import Opportunity from '../Opportunity';
 
 @Component({
   selector: 'app-results',
@@ -19,16 +19,18 @@ export class ResultsComponent implements OnInit {
   zillowAverage: string;
   debtChart = [];
   salaryChart = [];
+
   constructor(private authService: AuthenticationService,
               private resultService: ResultService,
               private router: Router) { }
-  generateCharts() {
+
+  private generateCharts() {
     this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
       this.opportunities = data['opportunities'];
       // To get a better idea of what this.opportunities looks like so that you can better access its elements,
       // uncomment the line below and then open up the developer tools on your browser and look in the console.
       //console.log(this.opportunities);
-      
+
       // To make this a meaningful graph, the data.labels and the data.datasets.data fields will need to be populated
       // using information stored in this.opportunities.
       this.debtChart = new Chart('canvas0', {
@@ -76,13 +78,15 @@ export class ResultsComponent implements OnInit {
       console.log(err);
     });
   }
-  displayZillowData() {
+
+  private displayZillowData() {
     this.resultService.getZillowData(this.username).subscribe((data: string) => { //TODO not a string
       this.zillowAverage = data['average'];
     }, (err) => {
       console.log(err);
     });
   }
+
   ngOnInit() {
     this.username = this.authService.getUsername();
     if (this.username === null) {

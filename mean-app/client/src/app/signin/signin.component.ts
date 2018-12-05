@@ -15,9 +15,7 @@ export class SigninComponent implements OnInit {
 
   constructor(private auth: AuthenticationService, private router: Router) { }
 
-  ngOnInit() { }
-
-  signin() {
+  public signin() {
     this.auth.signin(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/');
     }, (err) => {
@@ -28,5 +26,7 @@ export class SigninComponent implements OnInit {
       }
     });
   }
+
+  ngOnInit() { }
 
 }
