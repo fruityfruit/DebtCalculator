@@ -8,6 +8,7 @@
 ## Angular ##
 # compiled output
 /dist
+/client/dist
 /tmp
 # /app/**/*.js # Commented intentionally
 # /app/**/*.js.map # Commented intentionally
