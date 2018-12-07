@@ -46,6 +46,18 @@ npm start
 ```
 Now you can go to http://localhost:4200/ to see it in action!
 
+## Deploying our project
+
+To deploy our project on Google Cloud Platform, we opened a Cloud Shell session, cloned our repo, ran:
+```
+export NODE_ENV='production'
+```
+And then ran:
+```
+gcloud app deploy
+```
+When our app is live, it can be seen in production at https://debt-calculator-csce-490.appspot.com/.
+
 ## Developing with Angular
 
 ### Development server
