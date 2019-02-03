@@ -70,6 +70,10 @@ Press the Play or Play All icons in the top middle of the Selenium screen to run
 
 To run our backend unit tests, navigate to the "mean-app" directory in a terminal window and type:
 ```
+npm install
+```
+Then
+```
 npm test
 ```
 
