@@ -56,7 +56,9 @@ So far, we are using the following testing frameworks:
 
 ### Behavioral testing with Cypress
 
-To run our behavioral tests, navigate to the "mean-app" directory of our project in a terminal window and type:
+To run our behavioral tests, first run a local instance of our project using the steps described above. 
+
+Then, navigate to the "mean-app" directory of our project in a new terminal window and type:
 ```
 npm install
 ```
