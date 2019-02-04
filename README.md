@@ -28,7 +28,11 @@ https://angular.io/guide/quickstart
 
 First, make sure that MongoDB is running on your computer.
 
-Then, navigate to the directory "mean-app" and run:
+Then, clone this repository.
+
+Then, in a terminal window, navigate to the directory of your clone of our project, named "DebtCalculator".
+
+Next, navigate to the directory "mean-app" and run:
 ```
 npm install
 ```
@@ -50,19 +54,27 @@ Now you can go to http://localhost:4200/ to see it in action!
 
 So far, we are using the following testing frameworks:
 
-### Behavioral testing with Cypress
+### Behavioral testing with Selenium
 
-To run our Behavioral tests, navigate to the "mean-app" directory in a terminal window and type:
-```
-npm install
-```
-Then
-```
-node_modules/.bin/cypress run --spec cypress/integration/behavior_test.js
-```
+To run our behavioral tests, you will need the Selenium IDE, which is a browser extension that can be downloaded here:
+
+https://www.seleniumhq.org/selenium-ide/
+
+Once you have downloaded the IDE, run our project using the instructions listed above.
+
+Then, click on the Selenium IDE browser icon (on Chrome, it will be at the top right corner of your window), which opens a Selenium pop-up window. 
+
+Select "Open an existing project".
+
+Now, navigate to where you have cloned our Github repo, navigate to the "mean-app" folder, then "test", then "selenium", and open any of the files with the extension ".side". Your path should end with "DebtCalculator/mean-app/test/selenium/\*.side".
+
+Press the Play or Play All icons in the top middle of the Selenium screen to run the behavioral test or tests in the file that you have selected.
+
 ### Backend unit testing with Mocha
 
-To run our backend unit tests, navigate to the "mean-app" directory in a terminal window and type:
+In a terminal window, navigate to the directory of your clone of our project, named "DebtCalculator".
+
+Next, navigate to the directory "mean-app" and run:
 ```
 npm install
 ```
