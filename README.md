@@ -56,7 +56,7 @@ So far, we are using the following testing frameworks:
 
 ### Behavioral testing with Cypress
 
-To run our Behavioral tests, navigate to the "mean-app" directory of our project in a terminal window and type:
+To run our behavioral tests, navigate to the "mean-app" directory of our project in a terminal window and type:
 ```
 npm install
 ```
@@ -64,6 +64,7 @@ Then
 ```
 node_modules/.bin/cypress run --spec cypress/integration/behavior_test.js
 ```
+
 ### Backend unit testing with Mocha
 
 To run our backend unit tests, navigate to the "mean-app" directory of our project in a terminal window and type:
