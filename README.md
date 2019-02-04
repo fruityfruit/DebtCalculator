@@ -28,7 +28,11 @@ https://angular.io/guide/quickstart
 
 First, make sure that MongoDB is running on your computer.
 
-Then, navigate to the directory "mean-app" and run:
+Then, clone this repository.
+
+Then, in a terminal window, navigate to the directory of your clone of our project, named "DebtCalculator".
+
+Next, navigate to the directory "mean-app" and run:
 ```
 npm install
 ```
@@ -52,7 +56,7 @@ So far, we are using the following testing frameworks:
 
 ### Behavioral testing with Cypress
 
-To run our Behavioral tests, navigate to the "mean-app" directory in a terminal window and type:
+To run our Behavioral tests, navigate to the "mean-app" directory of our project in a terminal window and type:
 ```
 npm install
 ```
@@ -62,7 +66,7 @@ node_modules/.bin/cypress run --spec cypress/integration/behavior_test.js
 ```
 ### Backend unit testing with Mocha
 
-To run our backend unit tests, navigate to the "mean-app" directory in a terminal window and type:
+To run our backend unit tests, navigate to the "mean-app" directory of our project in a terminal window and type:
 ```
 npm install
 ```
