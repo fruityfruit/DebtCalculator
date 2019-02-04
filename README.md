@@ -64,8 +64,9 @@ npm install
 ```
 Then
 ```
-node_modules/.bin/cypress run --spec cypress/integration/behavior_test.js
+node_modules/.bin/cypress open
 ```
+This will open the Cypress Test Runner. Select the behavior_test.js file to run the test. 
 
 ### Backend unit testing with Mocha
 
