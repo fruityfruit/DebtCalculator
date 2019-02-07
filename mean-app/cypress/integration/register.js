@@ -7,6 +7,4 @@ describe('Login Test',function (){
     cy.get('.form-control').last().type('TestPassword')
     cy.contains('Register!').click()
   })
-
-  
 })
