@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService, Profile } from '../authentication.service';
 import { OpportunityService, Opportunity } from '../opportunity.service';
 import { ResultService, ResultSet } from '../result.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,21 @@ export class ResultsComponent implements OnInit {
   results: ResultSet[] = [];
   debtChart = [];
   salaryChart = [];
+  debtProjection=[];
+  someProfile: Profile;
+  actualProfile: Profile = {
+    username: "",
+    income: 0,
+    debt: 0,
+    interest: 0,
+    payments: 0,
+    dependents: 0,
+    rent: 0,
+    spending: 0,
+    pets: 0,
+    smoking: false,
+    drinking: true
+  };
 
   constructor(private authService: AuthenticationService,
               private resultService: ResultService,
@@ -24,6 +39,49 @@ export class ResultsComponent implements OnInit {
               private router: Router) { }
 
   private generateCharts() {
+    //this gives you authservice back in data as a profile type, shows correctly in console
+    this.authService.getProfile(this.username).subscribe((data: Profile) => {
+    //  console.log(data);
+      var intrestRate = data.interest;
+      var principle= data.debt;
+      //assume yearly intrerest
+    //  var debtFiveYears= principle*(1+intrestRate*5);
+      var points=[];
+      var labels=[];
+    //  console.log(debtFiveYears);
+      var num = 0;
+      while(num<=10){
+        labels.push(num);
+        points.push(principle*(1+intrestRate*num/100));
+        num=num+1;
+      }
+      //console.log(points);
+
+      this.debtProjection = new Chart('canvas3', {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Debt Projection Over 10 Years",
+            data: points,
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+      //this.actualProfile.interest= data.interest;
+      //console.log(this.actualProfile.interest);
+    });
+    //gives back username but not the actualprofile income
+
+
     this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
       var opportunities = data['opportunities'];
       var oppNames = [];
@@ -40,7 +98,7 @@ export class ResultsComponent implements OnInit {
         data: {
           labels: oppNames,
           datasets: [{
-            label: "Debt Chart",
+            label: "Debt From Opportunities Chart",
             data: oppDebts,
           }]
         },
