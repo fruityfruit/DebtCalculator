@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import * as Rx from 'rxjs';
 
 export interface TokenPayload {
   password: string;
@@ -32,6 +33,7 @@ interface TokenResponse {
 export class AuthenticationService {
   private token: string;
   private username: string;
+  public invokeEvent: Rx.Subject<any> = new Rx.Subject();
 
   constructor(private http: HttpClient) {
     this.username = '';
@@ -108,5 +110,9 @@ export class AuthenticationService {
 
   public getProfile(user) {
     return this.http.get(`/api/personal/${user}`);
+  }
+
+  public callUpdateLink() {
+    this.invokeEvent.next("UpdateLink");
   }
 }

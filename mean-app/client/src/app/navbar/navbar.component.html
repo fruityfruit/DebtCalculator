@@ -18,12 +18,7 @@
         <a class="nav-link" href="#"  routerLink="/info" routerLinkActive="active">How it Works</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/signin" routerLinkActive="active">Sign In</a>
-      </li>
-      <li class="nav-item">
-        <form (submit)="signout()">
-          <button type="submit" class="btn btn-primary">Sign Out</button>
-        </form>
+        <a class="nav-link" id="toggle-link" href="#" routerLink="/{{this.routerLinkText}}" routerLinkActive="active">{{this.loggedInText}}</a>
       </li>
     </ul>
   </div>

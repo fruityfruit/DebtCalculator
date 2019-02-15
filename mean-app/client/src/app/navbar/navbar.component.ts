@@ -8,15 +8,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  username: string;
+  loggedInText: string;
+  routerLinkText: string;
+  constructor(private auth: AuthenticationService, private router: Router) {
+    this.auth.invokeEvent.subscribe(value => {
+      if(value === "UpdateLink") {
+        this.updateLink();
+      }
+      else {
+        console.log("heard an event but didn't call updateLink in navbar");
+        console.log(value);
+      }
+    })
+  }
 
-  constructor(private auth: AuthenticationService, private router: Router) { }
+  public updateLink() {
+    this.username = this.auth.getUsername();
+    if (this.username !== null) {
+      this.loggedInText = "Account";
+      this.routerLinkText = "account";
+    }
+    else {
+      this.loggedInText = "Sign In";
+      this.routerLinkText = "signin";
+    }
+  }
 
-  ngOnInit() { }
-
-  signout() {
-    this.auth.signout();
-    window.alert("You have been signed out.");
-    this.router.navigateByUrl('/');
+  ngOnInit() {
+    this.updateLink();
   }
 
 }

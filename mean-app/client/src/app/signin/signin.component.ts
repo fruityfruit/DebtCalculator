@@ -17,6 +17,7 @@ export class SigninComponent implements OnInit {
 
   public signin() {
     this.auth.signin(this.credentials).subscribe(() => {
+      this.auth.callUpdateLink();
       this.router.navigateByUrl('/');
     }, (err) => {
       if(err.error.message === "Username or password incorrect") {

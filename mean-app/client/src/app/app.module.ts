@@ -19,6 +19,7 @@ import { OppeditComponent } from './oppedit/oppedit.component';
 import { AuthenticationService } from './authentication.service';
 import { OpportunityService } from './opportunity.service';
 import { ResultService } from './result.service';
+import { AccountComponent } from './account/account.component';
 
 // Define the routes
 const ROUTES = [
@@ -55,6 +56,10 @@ const ROUTES = [
     component: ResultsComponent
   },
   {
+    path: 'account',
+    component: AccountComponent
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
@@ -73,7 +78,8 @@ const ROUTES = [
     HomeComponent,
     RegisterComponent,
     SigninComponent,
-    OppeditComponent
+    OppeditComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
