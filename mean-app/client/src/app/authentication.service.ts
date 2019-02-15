@@ -22,6 +22,18 @@ export interface Profile {
   drinking: boolean;
 }
 
+export interface PasswordPayload {
+  username: string;
+  oldPassword: string;
+  newPassword: string;
+}
+
+export interface UsernamePayload {
+  oldUsername: string;
+  newUsername: string;
+  password: string;
+}
+
 interface TokenResponse {
   token: string;
   username: string;
@@ -33,7 +45,7 @@ interface TokenResponse {
 export class AuthenticationService {
   private token: string;
   private username: string;
-  public invokeEvent: Rx.Subject<any> = new Rx.Subject();
+  public invokeEvent: Rx.Subject<any> = new Rx.Subject(); //used to update the navbar
 
   constructor(private http: HttpClient) {
     this.username = '';
@@ -50,7 +62,7 @@ export class AuthenticationService {
   }
 
   // this method makes and handles the post requests required to login and logout a user
-  private post(type: 'signin'|'register', user: TokenPayload) {
+  private post(type: 'signin'|'register'|'username'|'password', user) {
     var base = this.http.post(`/api/${type}`, user);
     const request = base.pipe(
       map((data: TokenResponse) => {
@@ -72,6 +84,18 @@ export class AuthenticationService {
 
   public signin(user: TokenPayload) {
     return this.post('signin', user);
+  }
+
+  public changeUsername(user: UsernamePayload) {
+    return this.post('username', user);
+  }
+
+  public changePassword(user: PasswordPayload) {
+    return this.post('password', user);
+  }
+
+  public deleteProfile(user: TokenPayload) {
+    return this.http.post(`/api/delete`, user);
   }
 
   public signout() {
@@ -112,6 +136,7 @@ export class AuthenticationService {
     return this.http.get(`/api/personal/${user}`);
   }
 
+  // this method calls the "updateLink" method in the navbar component
   public callUpdateLink() {
     this.invokeEvent.next("UpdateLink");
   }

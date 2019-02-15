@@ -17,10 +17,10 @@ export class SigninComponent implements OnInit {
 
   public signin() {
     this.auth.signin(this.credentials).subscribe(() => {
-      this.auth.callUpdateLink();
+      this.auth.callUpdateLink(); //updates the navbar
       this.router.navigateByUrl('/');
     }, (err) => {
-      if(err.error.message === "Username or password incorrect") {
+      if (err.error && err.error.message && err.error.message === "Username or password incorrect") {
         window.alert(err.error.message);
       } else {
         this.router.navigateByUrl('/');

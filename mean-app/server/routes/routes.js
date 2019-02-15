@@ -28,6 +28,12 @@ router.post('/personal', ctrlProfile.updateProfile);
 
 router.get('/zillow/:id', ctrlResult.getZillow);
 
-router.get('/charts/:user', ctrlResult.getCharts)
+router.get('/charts/:user', ctrlResult.getCharts);
+
+router.post('/username', ctrlAuth.updateUsername);
+
+router.post('/password', ctrlAuth.updatePassword);
+
+router.post('/delete', ctrlAuth.deleteUser);
 
 module.exports = router;

@@ -12,17 +12,15 @@ export class NavbarComponent implements OnInit {
   loggedInText: string;
   routerLinkText: string;
   constructor(private auth: AuthenticationService, private router: Router) {
+    //listens for the auth service to tell it to update the navbar
     this.auth.invokeEvent.subscribe(value => {
-      if(value === "UpdateLink") {
+      if (value === "UpdateLink") {
         this.updateLink();
       }
-      else {
-        console.log("heard an event but didn't call updateLink in navbar");
-        console.log(value);
-      }
-    })
+    });
   }
 
+  //updates the navbar depending on whether the user is logged in or out
   public updateLink() {
     this.username = this.auth.getUsername();
     if (this.username !== null) {
