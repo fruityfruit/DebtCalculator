@@ -67,8 +67,8 @@ export class OpportunityComponent implements OnInit {
   ngOnInit() {
     this.username = this.authService.getUsername();
     if (this.username === null) {
-      window.alert("You are not logged in.");
-      this.router.navigateByUrl('/');
+      window.alert("Please fill out the Personal page before accessing this page.");
+      this.router.navigateByUrl('/personal');
     } else {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];

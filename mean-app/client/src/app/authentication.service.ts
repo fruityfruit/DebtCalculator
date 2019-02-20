@@ -108,10 +108,16 @@ export class AuthenticationService {
   public getUsername() {
     if (window.localStorage.getItem('debt-calc-username')) {
       return window.localStorage.getItem('debt-calc-username');
-    } else if (this.username !== '') {
-      return this.username;
     } else {
       return null;
+    }
+  }
+
+  public isLoggedIn() {
+    if (window.localStorage.getItem('debt-calc-token')) {
+      return true;
+    } else {
+      return false;
     }
   }
 

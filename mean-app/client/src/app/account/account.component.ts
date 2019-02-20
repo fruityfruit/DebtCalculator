@@ -35,6 +35,7 @@ export class AccountComponent implements OnInit {
       this.updateUsername.newUsername = '';
       this.updateUsername.password = '';
       window.alert("Username successfully updated");
+      this.auth.callUpdateLink();
     }, (err) => {
       if (err.error && err.error.code && err.error.code === 11000) { //Mongo error code that means duplicate key constraint violation
         window.alert("Sorry, that username has already been taken. Please try another!");
@@ -93,6 +94,10 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.auth.isLoggedIn()) {
+      window.alert("Please sign in before accessing this page.");
+      this.router.navigateByUrl('/signin');
+    }
   }
 
 }

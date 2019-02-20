@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthenticationService, Profile } from '../authentication.service';
+import { AuthenticationService, Profile, TokenPayload } from '../authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,6 +24,10 @@ export class PersonalComponent implements OnInit {
     pets: 0,
     smoking: false,
     drinking: true
+  };
+  credentials: TokenPayload = {
+    username: '',
+    password: ''
   };
 
   constructor(private builder: FormBuilder, private router: Router,
@@ -53,24 +57,36 @@ export class PersonalComponent implements OnInit {
     this.formdata.pets = this.profileForm.value.pets;
     this.formdata.smoking = this.profileForm.value.smoking;
     this.formdata.drinking = this.profileForm.value.drinking;
-    this.formdata.username = this.username;
-    this.auth.updateProfile(this.formdata).subscribe(() => {
-      this.router.navigate(['opportunity']);
-    }, (err) => {
-      console.log(err);
-    });
+    if (this.username === null) {
+      this.auth.register(this.credentials).subscribe(() => {
+        this.username = this.auth.getUsername();
+        this.formdata.username = this.username;
+        this.auth.updateProfile(this.formdata).subscribe(() => {
+          this.router.navigate(['opportunity']);
+        }, (err) => {
+          console.log(err);
+        });
+      }, (err) => {
+        console.log(err);
+      });
+    }
+    else {
+      this.formdata.username = this.username;
+      this.auth.updateProfile(this.formdata).subscribe(() => {
+        this.router.navigate(['opportunity']);
+      }, (err) => {
+        console.log(err);
+      });
+    }
   }
 
   ngOnInit() {
     this.username = this.auth.getUsername();
-    if (this.username === null) {
-      window.alert("You are not logged in.");
-      this.router.navigateByUrl('/');
-    } else {
+    if (this.username !== null) {
       this.auth.getProfile(this.username).subscribe(res => {
         this.currProfile = res;
       });
-    }
+    }  
   }
 
 }

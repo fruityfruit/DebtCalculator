@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
-import { AuthenticationService, Profile } from '../authentication.service';
+import { AuthenticationService, Profile, PasswordPayload, UsernamePayload} from '../authentication.service';
 import { OpportunityService, Opportunity } from '../opportunity.service';
 import { ResultService, ResultSet } from '../result.service';
 import { Router } from '@angular/router';
@@ -32,15 +32,17 @@ export class ResultsComponent implements OnInit {
     smoking: false,
     drinking: true
   };
+  newUsername: string;
+  newPassword: string;
 
-  constructor(private authService: AuthenticationService,
+  constructor(private auth: AuthenticationService,
               private resultService: ResultService,
               private oppService: OpportunityService,
               private router: Router) { }
 
   private generateCharts() {
-    //this gives you authservice back in data as a profile type, shows correctly in console
-    this.authService.getProfile(this.username).subscribe((data: Profile) => {
+    //this gives you auth back in data as a profile type, shows correctly in console
+    this.auth.getProfile(this.username).subscribe((data: Profile) => {
     //  console.log(data);
       var intrestRate = data.interest;
       var principle= data.debt;
@@ -177,11 +179,43 @@ export class ResultsComponent implements OnInit {
     });
   }
 
+  register() {
+    if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
+      window.alert("Sorry, that username has already been taken. Please try another!");
+    } else {
+      var updateUsername: UsernamePayload = {
+        oldUsername: this.username,
+        newUsername: this.newUsername,
+        password: ''
+      }
+      var updatePassword: PasswordPayload = {
+        username: this.newUsername,
+        oldPassword: '',
+        newPassword: this.newPassword
+      }
+      this.auth.changeUsername(updateUsername).subscribe(() => {
+        this.auth.changePassword(updatePassword).subscribe(() => {
+          window.alert("Registered!");
+          this.auth.callUpdateLink();
+        }, (err) => {
+          console.log(err);
+        });
+      }, (err) => {
+        if (err.error.code === 11000) {
+          window.alert("Sorry, that username has already been taken. Please try another!");
+        } else {
+          console.log(err);
+          this.router.navigateByUrl('/');
+        }
+      });
+    }
+  }
+
   ngOnInit() {
-    this.username = this.authService.getUsername();
+    this.username = this.auth.getUsername();
     if (this.username === null) {
-      window.alert("You are not logged in.");
-      this.router.navigateByUrl('/');
+      window.alert("Please fill out the Personal page before accessing this page.");
+      this.router.navigateByUrl('/personal');
     } else {
       this.generateCharts();
       this.displayZillowData();

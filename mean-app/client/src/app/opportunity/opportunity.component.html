@@ -1,176 +1,176 @@
-<form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-    <legend>Opportunity Comparison</legend>
-    <div class="form-group">
-        <label class="col-sm-2 col-form-label">
-          Type of Opportunity:
-        </label>
-        <div class="custom-control custom-radio">
-          <input required type="radio" formControlName="type" id="customRadio1" value="job" name="type" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio1">Job</label>
-        </div>
-        <div class="custom-control custom-radio">
-          <input required type="radio" formControlName="type" id="customRadio2" value="grad_school" name="type" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio2">Graduate School</label>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>
-          Opportunity Name:
-          <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name">
-        </label>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          City:
-          <input required type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in">
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>State:</label>
-        <select required class="form-control" formControlName="stateName">
-    			<option value="">Select an option</option>
-    			<option value="AK">Alaska</option>
-    			<option value="AL">Alabama</option>
-    			<option value="AR">Arkansas</option>
-    			<option value="AZ">Arizona</option>
-    			<option value="CA">California</option>
-    			<option value="CO">Colorado</option>
-    			<option value="CT">Connecticut</option>
-    			<option value="DC">District of Columbia</option>
-    			<option value="DE">Delaware</option>
-    			<option value="FL">Florida</option>
-    			<option value="GA">Georgia</option>
-    			<option value="HI">Hawaii</option>
-    			<option value="IA">Iowa</option>
-    			<option value="ID">Idaho</option>
-    			<option value="IL">Illinois</option>
-    			<option value="IN">Indiana</option>
-    			<option value="KS">Kansas</option>
-    			<option value="KY">Kentucky</option>
-    			<option value="LA">Louisiana</option>
-    			<option value="MA">Massachusetts</option>
-    			<option value="MD">Maryland</option>
-    			<option value="ME">Maine</option>
-    			<option value="MI">Michigan</option>
-    			<option value="MN">Minnesota</option>
-    			<option value="MO">Missouri</option>
-    			<option value="MS">Mississippi</option>
-    			<option value="MT">Montana</option>
-    			<option value="NC">North Carolina</option>
-    			<option value="ND">North Dakota</option>
-    			<option value="NE">Nebraska</option>
-    			<option value="NH">New Hampshire</option>
-    			<option value="NJ">New Jersey</option>
-    			<option value="NM">New Mexico</option>
-    			<option value="NV">Nevada</option>
-    			<option value="NY">New York</option>
-    			<option value="OH">Ohio</option>
-    			<option value="OK">Oklahoma</option>
-    			<option value="OR">Oregon</option>
-    			<option value="PA">Pennsylvania</option>
-    			<option value="PR">Puerto Rico</option>
-    			<option value="RI">Rhode Island</option>
-    			<option value="SC">South Carolina</option>
-    			<option value="SD">South Dakota</option>
-    			<option value="TN">Tennessee</option>
-    			<option value="TX">Texas</option>
-    			<option value="UT">Utah</option>
-    			<option value="VA">Virginia</option>
-    			<option value="VT">Vermont</option>
-    			<option value="WA">Washington</option>
-    			<option value="WI">Wisconsin</option>
-    			<option value="WV">West Virginia</option>
-    			<option value="WY">Wyoming</option>
-	      </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Opportunity Income:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <legend>Opportunity Comparison</legend>
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">
+              Type of Opportunity:
+            </label>
+            <div class="custom-control custom-radio">
+              <input required type="radio" formControlName="type" id="customRadio1" value="job" name="type" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio1">Job</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input required type="radio" formControlName="type" id="customRadio2" value="grad_school" name="type" class="custom-control-input">
+              <label class="custom-control-label" for="customRadio2">Graduate School</label>
+            </div>
           </div>
-          <input required type="number" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Opportunity Debt:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+          <div class="form-group">
+            <label>
+              Opportunity Name:
+              <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name">
+            </label>
           </div>
-          <input required type="number" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt">
-        </div>
-      </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                City:
+                <input required type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in">
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>State:</label>
+              <select required class="form-control" formControlName="stateName">
+                <option value="">Select an option</option>
+                <option value="AK">Alaska</option>
+                <option value="AL">Alabama</option>
+                <option value="AR">Arkansas</option>
+                <option value="AZ">Arizona</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DC">District of Columbia</option>
+                <option value="DE">Delaware</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="IA">Iowa</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MD">Maryland</option>
+                <option value="ME">Maine</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MO">Missouri</option>
+                <option value="MS">Mississippi</option>
+                <option value="MT">Montana</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="NE">Nebraska</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NV">Nevada</option>
+                <option value="NY">New York</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="PR">Puerto Rico</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VA">Virginia</option>
+                <option value="VT">Vermont</option>
+                <option value="WA">Washington</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WV">West Virginia</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Opportunity Income:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Opportunity Debt:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Would this opportunity require you to move your primary residence?:
+              </label>
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="move">
+                <label ngbButtonLabel class="btn btn-primary">
+                  <input required ngbButton type="radio" formControlName="move" value="Yes"> Yes
+                </label>
+                <label ngbButtonLabel class="btn btn-primary">
+                  <input required ngbButton type="radio" formControlName="move" value="No"> No
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
+            </div>
+            <div class="col">
+              <a class="nav-link" href="#" routerLink="/results" routerLinkActive="active"><button type="button" class="btn btn-primary">See Results</button></a>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <p>&nbsp;</p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Debt</th>
+            <th scope="col">Relocate</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-info" *ngFor="let opportunity of opportunities">
+            <th scope="row">{{ opportunity.oppName }}</th>
+            <td>{{ opportunity.type }}</td>
+            <td>{{ opportunity.cityName }}</td>
+            <td>{{ opportunity.stateName }}</td>
+            <td>{{ opportunity.oppCost }}</td>
+            <td>{{ opportunity.oppDebt }}</td>
+            <td>{{ opportunity.move }}</td>
+            <td><a [routerLink]="['/edit',opportunity._id]" class="btn btn-secondary">Edit</a></td>
+            <td><a (click) = "deleteOpportunity(opportunity._id)" class="btn btn-danger">Delete</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Would this opportunity require you to move your primary residence?:
-        </label>
-          <div class="btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="move">
-          <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="move" value="Yes"> Yes
-          </label>
-          <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="move" value="No"> No
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
-      </div>
-      <div class="col">
-        <a class="nav-link" href="#" routerLink="/results" routerLinkActive="active"><button type="button" class="btn btn-primary">See Results</button></a>
-      </div>
-    </div>
-  </fieldset>
-</form>
-<p>&nbsp;</p>
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th scope="col">Name</th>
-    <th scope="col">Type</th>
-    <th scope="col">City</th>
-    <th scope="col">State</th>
-    <th scope="col">Cost</th>
-    <th scope="col">Debt</th>
-    <th scope="col">Relocate</th>
-    <th scope="col">Edit</th>
-    <th scope="col">Delete</th>
-  </tr>
-</thead>
-<tbody>
-    <tr class="table-info" *ngFor="let opportunity of opportunities">
-        <th scope="row">{{ opportunity.oppName }}</th>
-        <td>{{ opportunity.type }}</td>
-        <td>{{ opportunity.cityName }}</td>
-        <td>{{ opportunity.stateName }}</td>
-        <td>{{ opportunity.oppCost }}</td>
-        <td>{{ opportunity.oppDebt }}</td>
-        <td>{{ opportunity.move }}</td>
-        <td><a [routerLink]="['/edit',opportunity._id]" class="btn btn-secondary">Edit</a></td>
-        <td><a (click) = "deleteOpportunity(opportunity._id)" class="btn btn-danger">Delete</a></td>
-    </tr>
-</tbody>
-</table>
+  </div>
+</div>

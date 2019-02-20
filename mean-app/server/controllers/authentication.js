@@ -5,21 +5,61 @@ var User = mongoose.model('User'); //User schema from ../models/user.js
 module.exports.register = function(req, res) {
   var user = new User();
   user._id = new mongoose.Types.ObjectId();
-  user.username = req.body.username;
-  user.setPassword(req.body.password);
-  //save user to database
-  user.save()
-    .then(user => {
-      var token;
-      token = user.generateToken();
-      res.status(200).json({
-        "token" : token,
-        "username" : user.username
-      });
-    })
-    .catch(err => {
-      res.status(400).json(err);
+  user.creation = Date.now();
+  if (req.body.username === '') {
+    //find the next available dummy username in the system
+    const dummyString = 'dlcptwfcmc'; //the initials of the five members of this team
+    User.find({ username: /dlcptwfcmc/i }, 'username', function (err, usernames) { //finds all users with non-permanent usernames
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        var breakLoop = false;
+        var number = 0;
+        while (!breakLoop) {
+          breakLoop = true;
+          for (var username in usernames) {
+            if (usernames[username].username === (dummyString + "_" + number)) {
+              breakLoop = false;
+              break;
+            }
+          }
+          if (breakLoop) {
+            user.username = dummyString + "_" + number;
+            break;
+          } else {
+            number = number + 1;
+          }
+        }
+      }
+      user.setPassword(req.body.password);
+      //save user to database
+      user.save()
+        .then(user => {
+          res.status(200).json({ //do not send a token, so the user is not really signed in
+            "username" : user.username
+          });
+        })
+        .catch(err => {
+          res.status(400).json(err);
+        });
     });
+  } else {
+    user.username = req.body.username;
+    user.setPassword(req.body.password);
+    //save user to database
+    user.save()
+      .then(user => {
+        var token;
+        token = user.generateToken();
+        res.status(200).json({
+          "token" : token,
+          "username" : user.username
+        });
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  }
 };
 
 //logs in a user that has already registered

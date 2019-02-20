@@ -1,153 +1,148 @@
-<form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-    <legend>Personal Page</legend>
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Current Income:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <legend>Personal Page</legend>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Current Income:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="income" placeholder="Current income"
+                #income [(ngModel)] = "currProfile.income">
+              </div>
+            </div>
           </div>
-          <input required type="number" class="form-control" formControlName="income" placeholder="Current income"
-          #income [(ngModel)] = "currProfile.income">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Current Debt:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Current Debt:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="debt" placeholder="Current debt"
+                #debt [(ngModel)] = "currProfile.debt">
+              </div>
+            </div>
           </div>
-          <input required type="number" class="form-control" formControlName="debt" placeholder="Current debt"
-          #debt [(ngModel)] = "currProfile.debt">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Current Interest:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">%</span>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Current Interest:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">%</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="interest" placeholder="Debt interest as percent"
+                #interest [(ngModel)] = "currProfile.interest">
+              </div>
+            </div>
           </div>
-          <input required type="number" class="form-control" formControlName="interest" placeholder="Debt interest as percent"
-          #interest [(ngModel)] = "currProfile.interest">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Current Monthly Payment:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Current Monthly Payment:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment"
+                #payments [(ngModel)] = "currProfile.payments">
+              </div>
+            </div>
           </div>
-          <input required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment"
-          #payments [(ngModel)] = "currProfile.payments">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label class= "col-form-label">
-          Number of Dependents:
-          <input required type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents"
-          #dependents [(ngModel)] = "currProfile.dependents">
-        </label>
-        </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Current Rent Payment:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label class= "col-form-label">
+                Number of Dependents:
+                <input required type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents"
+                #dependents [(ngModel)] = "currProfile.dependents">
+              </label>
+            </div>
           </div>
-          <input required type="number" class="form-control" formControlName="rent" placeholder="Current rent, if any"
-          #rent [(ngModel)] = "currProfile.rent">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Current Spending:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Current Rent Payment:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="rent" placeholder="Current rent, if any"
+                #rent [(ngModel)] = "currProfile.rent">
+              </div>
+            </div>
           </div>
-          <input required type="number" class="form-control" formControlName="spending" placeholder="Current spending monthly"
-          #spending [(ngModel)] = "currProfile.spending">
-        </div>
-      </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Current Spending:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="spending" placeholder="Current spending monthly"
+                #spending [(ngModel)] = "currProfile.spending">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label class= "col-form-label">
+                Number of pets:
+                <input required type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any"
+                #pets [(ngModel)] = "currProfile.pets">
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Do you smoke?
+              </label>
+              <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form1" formControlName="smoking">
+                <label ngbButtonLabel class="btn btn-primary">
+                  <input required ngbButton type="radio" formControlName="smoking" value=true
+                  #smoking [(ngModel)] = "currProfile.smoking"> Yes
+                </label>
+                <label ngbButtonLabel class="btn btn-primary">
+                  <input required ngbButton type="radio" formControlName="smoking" value=false
+                  #smoking [(ngModel)] = "currProfile.smoking"> No
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Do you drink?
+              </label>
+              <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form2" formControlName="drinking">
+                <label ngbButtonLabel class="btn btn-primary">
+                  <input required ngbButton type="radio" formControlName="drinking" value=true
+                  #drinking [(ngModel)] = "currProfile.drinking"> Yes
+                </label>
+                <label ngbButtonLabel class="btn btn-primary">
+                  <input required ngbButton type="radio" formControlName="drinking" value=false
+                  #drinking [(ngModel)] = "currProfile.drinking"> No
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
+        </fieldset>
+      </form>
     </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label class= "col-form-label">
-          Number of pets:
-          <input required type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any"
-          #pets [(ngModel)] = "currProfile.pets">
-        </label>
-        </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Do you smoke?
-        </label>
-          <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form1" formControlName="smoking">
-          <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="smoking" value=true
-            #smoking [(ngModel)] = "currProfile.smoking"> Yes
-          </label>
-          <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="smoking" value=false
-            #smoking [(ngModel)] = "currProfile.smoking"> No
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Do you drink?
-        </label>
-          <div class="btn-group btn-group-toggle offset-md-1" ngbRadioGroup name="form2" formControlName="drinking">
-          <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="drinking" value=true
-            #drinking [(ngModel)] = "currProfile.drinking"> Yes
-          </label>
-          <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="drinking" value=false
-            #drinking [(ngModel)] = "currProfile.drinking"> No
-          </label>
-        </div>
-      </div>
-    </div>
-
-
-    <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
-  </fieldset>
-</form>
+  </div>
+</div>

@@ -23,8 +23,9 @@ export class NavbarComponent implements OnInit {
   //updates the navbar depending on whether the user is logged in or out
   public updateLink() {
     this.username = this.auth.getUsername();
-    if (this.username !== null) {
-      this.loggedInText = "Account";
+    var isLoggedIn = this.auth.isLoggedIn();
+    if (isLoggedIn && this.username !== null) {
+      this.loggedInText = "Hi, "+this.username;
       this.routerLinkText = "account";
     }
     else {
@@ -35,6 +36,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.updateLink();
+    window.addEventListener("unload", function(event) {
+      console.log("unload event listener heard");
+      this.auth.signout();
+    }.bind(this));
   }
 
 }

@@ -1,97 +1,97 @@
-<form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-    <legend>Opportunity Comparison</legend>
-    <div class="form-group">
-        <label class="col-sm-2 col-form-label">
-          Type of Opportunity:
-        </label>
-        <div class="custom-control custom-radio">
-          <input required type="radio" formControlName="type" id="customRadio1" value="job" name="type" class="custom-control-input"
-          #type [(ngModel)] = "opportunity.type">
-          <label class="custom-control-label" for="customRadio1">Job</label>
-        </div>
-        <div class="custom-control custom-radio">
-          <input required type="radio" formControlName="type" id="customRadio2" value="grad_school" name="type" class="custom-control-input"
-          #type [(ngModel)] = "opportunity.type">
-          <label class="custom-control-label" for="customRadio2">Graduate School</label>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>
-          Opportunity Name:
-          <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name"
-          #oppName [(ngModel)] = "opportunity.oppName">
-        </label>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          City:
-          <input required type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in"
-          #cityName [(ngModel)] = "opportunity.cityName">
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          State:
-          <input required type="text" class="form-control" size="55" formControlName="stateName" placeholder="State the opportunity is in"
-          #stateName [(ngModel)] = "opportunity.stateName">
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Opportunity Income:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <legend>Opportunity Comparison</legend>
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">
+              Type of Opportunity:
+            </label>
+            <div class="custom-control custom-radio">
+              <input required type="radio" formControlName="type" id="customRadio1" value="job" name="type" class="custom-control-input"
+              #type [(ngModel)] = "opportunity.type">
+              <label class="custom-control-label" for="customRadio1">Job</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input required type="radio" formControlName="type" id="customRadio2" value="grad_school" name="type" class="custom-control-input"
+              #type [(ngModel)] = "opportunity.type">
+              <label class="custom-control-label" for="customRadio2">Graduate School</label>
+            </div>
           </div>
-          <input required type="number" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income"
-          #oppCost [(ngModel)] = "opportunity.oppCost">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Opportunity Debt:
-        </label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+          <div class="form-group">
+            <label>
+              Opportunity Name:
+              <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name"
+              #oppName [(ngModel)] = "opportunity.oppName">
+            </label>
           </div>
-          <input required type="number" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt"
-          #oppDebt [(ngModel)] = "opportunity.oppDebt">
-        </div>
-      </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                City:
+                <input required type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in"
+                #cityName [(ngModel)] = "opportunity.cityName">
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                State:
+                <input required type="text" class="form-control" size="55" formControlName="stateName" placeholder="State the opportunity is in"
+                #stateName [(ngModel)] = "opportunity.stateName">
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Opportunity Income:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income"
+                #oppCost [(ngModel)] = "opportunity.oppCost">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Opportunity Debt:
+              </label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input required type="number" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt"
+                #oppDebt [(ngModel)] = "opportunity.oppDebt">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class = "col-sm-5">
+              <label>
+                Would this opportunity require you to move your primary residence?:
+              </label>
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="move">
+                <label ngbButtonLabel class="btn btn-primary">
+                  <input required ngbButton type="radio" formControlName="move" value="Yes"
+                  #move [(ngModel)] = "opportunity.move"> Yes
+                </label>
+                <label ngbButtonLabel class="btn btn-primary">
+                  <input required ngbButton type="radio" formControlName="move" value="No"
+                  #move [(ngModel)] = "opportunity.move"> No
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Update</button>
+        </fieldset>
+      </form>
     </div>
-
-    <div class="form-group row">
-      <div class = "col-sm-5">
-        <label>
-          Would this opportunity require you to move your primary residence?:
-        </label>
-          <div class="btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="move">
-          <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="move" value="Yes"
-            #move [(ngModel)] = "opportunity.move"> Yes
-          </label>
-          <label ngbButtonLabel class="btn btn-primary">
-            <input required ngbButton type="radio" formControlName="move" value="No"
-            #move [(ngModel)] = "opportunity.move"> No
-          </label>
-        </div>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Update</button>
-  </fieldset>
-</form>
+  </div>
+</div>

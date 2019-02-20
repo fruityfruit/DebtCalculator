@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken');
 
 var userSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  creation: Number,
   username: {
     type: String,
     required: true,

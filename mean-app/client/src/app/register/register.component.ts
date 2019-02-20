@@ -16,16 +16,22 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthenticationService, private router: Router) { }
 
   register() {
-    this.auth.register(this.credentials).subscribe(() => {
-      this.auth.callUpdateLink();
-      this.router.navigateByUrl('/');
-    }, (err) => {
-      if(err.error.code === 11000) { //Mongo error code that means duplicate key constraint violation
-        window.alert("Sorry, that username has already been taken. Please try another!");
-      } else {
+    if (this.credentials.username === '' || this.credentials.username.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
+      window.alert("Sorry, that username has already been taken. Please try another!");
+    } else {
+      this.auth.register(this.credentials).subscribe(() => {
+        this.auth.callUpdateLink();
+        window.alert("Registered!");
         this.router.navigateByUrl('/');
-      }
-    });
+      }, (err) => {
+        if (err.error.code === 11000) { //Mongo error code that means duplicate key constraint violation
+          window.alert("Sorry, that username has already been taken. Please try another!");
+        } else {
+          console.log(err);
+          this.router.navigateByUrl('/');
+        }
+      });
+    }
   }
 
   ngOnInit() { }
