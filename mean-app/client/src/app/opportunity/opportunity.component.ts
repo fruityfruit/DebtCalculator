@@ -21,7 +21,8 @@ export class OpportunityComponent implements OnInit {
     oppDebt: '',
     move: '',
     _id: '',
-    user: ''
+    user: '',
+    code: ''
   }
   profileForm = this.builder.group({
     type: ['', Validators.required],
@@ -31,6 +32,7 @@ export class OpportunityComponent implements OnInit {
     oppCost: ['', Validators.required],
     oppDebt: ['', Validators.required],
     move: ['', Validators.required],
+    code: ['', Validators.required]
   });
 
   constructor(private builder: FormBuilder, private oppService: OpportunityService,
@@ -44,6 +46,7 @@ export class OpportunityComponent implements OnInit {
     this.formdata.oppCost = this.profileForm.value.oppCost;
     this.formdata.oppDebt = this.profileForm.value.oppDebt;
     this.formdata.move = this.profileForm.value.move;
+    this.formdata.code = this.profileForm.value.code;
     this.formdata.user = this.username;
     this.oppService.addOpportunity(this.formdata).subscribe(() => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {

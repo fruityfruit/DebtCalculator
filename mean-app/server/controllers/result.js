@@ -1,7 +1,10 @@
 var Zillow = require('node-zillow');
 var mongoose = require('mongoose');
+var Bls2 = require('bls2');
 var User = mongoose.model('User'); //User schema from ../models/user.js
 var Opportunity = mongoose.model('Opportunity'); //Opportunity schema from ../models/opportunity.js
+const ZILLOW_KEY = "X1-ZWz1gs7bfxtszv_axb7v";
+const BLS_KEY = "d5e5ce2edc924a42be0c6c858df8ad53";
 
 //gets the Zillow data that we want using the Zillow API call
 module.exports.getZillow = function(req , res) {
@@ -11,7 +14,7 @@ module.exports.getZillow = function(req , res) {
     } else if (!opp) {
       res.status(400).send("unable to find the opportunity");
     } else {
-      var zillow = new Zillow("X1-ZWz1gs7bfxtszv_axb7v"); // TODO this zwsid should not be listed in the code
+      var zillow = new Zillow(ZILLOW_KEY);
       var parameters = {
         childtype: 'neighborhood',
         state: opp.stateName.toLowerCase(),
@@ -40,6 +43,41 @@ module.exports.getZillow = function(req , res) {
     }
   });
 };
+
+//gets the BLS data that we want using the BLS API call
+module.exports.getBLS = function(req, res) {
+  var bls = new Bls2(BLS_KEY);
+  var options = {
+    'seriesid': [],
+    'startyear': '2018',
+    'endyear': '2018',
+    'catalog': false,
+    'calculations': false,
+    'annualaverage': true
+  };
+  var query;
+  for (code in req.body) {
+    query = 'CUUR'+req.body[code]+'SA0';
+    options.seriesid.push(query);
+    console.log(query);
+  }
+  query = 'CUUR0000SA0';
+  options.seriesid.push(query);
+  bls.fetch(options).then(function(response) {
+    var retVal = [];
+    for (entry in options.seriesid) {
+      try {
+        console.log(response.Results.series[entry]);
+        retVal.push(response.Results.series[entry].seriesID+": "+response.Results.series[entry].data[0].value);
+      } catch(err) {
+      }
+    }
+    res.status(200).json(retVal);
+  }).catch(function(err) {
+    console.log(err);
+    res.status(400).send(err);
+  });
+}
 
 //gets the chart data that we want to use on the Results page
 module.exports.getCharts = function(req, res) {

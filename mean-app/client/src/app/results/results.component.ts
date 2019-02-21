@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 
 export class ResultsComponent implements OnInit {
   username: string;
-  results: ResultSet[] = [];
+  zillowResults: ResultSet[] = [];
   debtChart = [];
   salaryChart = [];
   debtProjection=[];
@@ -148,7 +148,7 @@ export class ResultsComponent implements OnInit {
             city: city,
             zillowData: data['average']
           };
-          this.results.push(result);
+          this.zillowResults.push(result);
         }
       }, (err) => {
         var result: ResultSet = {
@@ -156,7 +156,7 @@ export class ResultsComponent implements OnInit {
           city: city,
           zillowData: 'Zillow does not have estimate data for this city.'
         };
-        this.results.push(result);
+        this.zillowResults.push(result);
       });
   }
 
@@ -179,7 +179,7 @@ export class ResultsComponent implements OnInit {
     });
   }
 
-  register() {
+  private register() {
     if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
       window.alert("Sorry, that username has already been taken. Please try another!");
     } else {
@@ -211,6 +211,23 @@ export class ResultsComponent implements OnInit {
     }
   }
 
+  private displayBLSData() {
+    this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
+      var codes = [];
+      var names = [];
+      data['opportunities'].forEach(function(item, index) {
+        names.push(item.oppName);
+        codes.push(item.code);
+        console.log(item.code);
+      });
+      this.resultService.getBLSData(codes).subscribe((data) => {
+        console.log(data);
+      }, (err) => {
+        console.log(err);
+      });
+    });
+  }
+
   ngOnInit() {
     this.username = this.auth.getUsername();
     if (this.username === null) {
@@ -219,6 +236,7 @@ export class ResultsComponent implements OnInit {
     } else {
       this.generateCharts();
       this.displayZillowData();
+      this.displayBLSData();
     }
   }
 

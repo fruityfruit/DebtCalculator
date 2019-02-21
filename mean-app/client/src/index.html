@@ -8,6 +8,237 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $("#state_dropdown").change(function() {
+				var $dropdown = $(this);
+				$.getJSON("assets/jsondata/data.json", function(data, err) { //path may have to change for deployment
+					var key = $dropdown.val();
+					var texts = [];
+          var vals = [];
+					switch(key) {
+						case 'AK':
+							texts = data.akText.split(",");
+              vals = data.akVals.split(",");
+							break;
+						case 'AL':
+              texts = data.alText.split(",");
+              vals = data.alVals.split(",");
+							break;
+            case 'AR':
+              texts = data.arText.split(",");
+              vals = data.arVals.split(",");
+              break;
+            case 'AZ':
+              texts = data.azText.split(",");
+              vals = data.azVals.split(",");
+              break;
+            case 'CA':
+              texts = data.caText.split(",");
+              vals = data.caVals.split(",");
+              break;
+            case 'CO':
+              texts = data.coText.split(",");
+              vals = data.coVals.split(",");
+              break;
+            case 'CT':
+              texts = data.ctText.split(",");
+              vals = data.ctVals.split(",");
+              break;
+            case 'DC':
+              texts = data.dcText.split(",");
+              vals = data.dcVals.split(",");
+              break;
+            case 'DE':
+              texts = data.deText.split(",");
+              vals = data.deVals.split(",");
+              break;
+            case 'FL':
+              texts = data.flText.split(",");
+              vals = data.flVals.split(",");
+              break;
+            case 'GA':
+              texts = data.gaText.split(",");
+              vals = data.gaVals.split(",");
+              break;
+            case 'HI':
+              texts = data.hiText.split(",");
+              vals = data.hiVals.split(",");
+              break;
+            case 'IA':
+              texts = data.iaText.split(",");
+              vals = data.iaVals.split(",");
+              break;
+            case 'ID':
+              texts = data.idText.split(",");
+              vals = data.idVals.split(",");
+              break;
+            case 'IL':
+              texts = data.ilText.split(",");
+              vals = data.ilVals.split(",");
+              break;
+            case 'IN':
+              texts = data.inText.split(",");
+              vals = data.inVals.split(",");
+              break;
+            case 'KS':
+              texts = data.ksText.split(",");
+              vals = data.ksVals.split(",");
+              break;
+            case 'KY':
+              texts = data.kyText.split(",");
+              vals = data.kyVals.split(",");
+              break;
+            case 'LA':
+              texts = data.laText.split(",");
+              vals = data.laVals.split(",");
+              break;
+            case 'MA':
+              texts = data.maText.split(",");
+              vals = data.maVals.split(",");
+              break;
+            case 'MD':
+              texts = data.mdText.split(",");
+              vals = data.mdVals.split(",");
+              break;
+            case 'ME':
+              texts = data.meText.split(",");
+              vals = data.meVals.split(",");
+              break;
+            case 'MI':
+              texts = data.miText.split(",");
+              vals = data.miVals.split(",");
+              break;
+            case 'MN':
+              texts = data.mnText.split(",");
+              vals = data.mnVals.split(",");
+              break;
+            case 'MO':
+              texts = data.moText.split(",");
+              vals = data.moVals.split(",");
+              break;
+            case 'MS':
+              texts = data.msText.split(",");
+              vals = data.msVals.split(",");
+              break;
+            case 'MT':
+              texts = data.mtText.split(",");
+              vals = data.mtVals.split(",");
+              break;
+            case 'NC':
+              texts = data.ncText.split(",");
+              vals = data.ncVals.split(",");
+              break;
+            case 'ND':
+              texts = data.ndText.split(",");
+              vals = data.ndVals.split(",");
+              break;
+            case 'NE':
+              texts = data.neText.split(",");
+              vals = data.neVals.split(",");
+              break;
+            case 'NH':
+              texts = data.nhText.split(",");
+              vals = data.nhVals.split(",");
+              break;
+            case 'NJ':
+              texts = data.njText.split(",");
+              vals = data.njVals.split(",");
+              break;
+            case 'NM':
+              texts = data.nmText.split(",");
+              vals = data.nmVals.split(",");
+              break;
+            case 'NV':
+              texts = data.nvText.split(",");
+              vals = data.nvVals.split(",");
+              break;
+            case 'NY':
+              texts = data.nyText.split(",");
+              vals = data.nyVals.split(",");
+              break;
+            case 'OH':
+              texts = data.ohText.split(",");
+              vals = data.ohVals.split(",");
+              break;
+            case 'OK':
+              texts = data.okText.split(",");
+              vals = data.okVals.split(",");
+              break;
+            case 'OR':
+              texts = data.orText.split(",");
+              vals = data.orVals.split(",");
+              break;
+            case 'PA':
+              texts = data.paText.split(",");
+              vals = data.paVals.split(",");
+              break;
+            case 'PR':
+              texts = data.prText.split(",");
+              vals = data.prVals.split(",");
+              break;
+            case 'RI':
+              texts = data.riText.split(",");
+              vals = data.riVals.split(",");
+              break;
+            case 'SC':
+              texts = data.scText.split(",");
+              vals = data.scVals.split(",");
+              break;
+            case 'SD':
+              texts = data.sdText.split(",");
+              vals = data.sdVals.split(",");
+              break;
+            case 'TN':
+              texts = data.tnText.split(",");
+              vals = data.tnVals.split(",");
+              break;
+            case 'TX':
+              texts = data.txText.split(",");
+              vals = data.txVals.split(",");
+              break;
+            case 'UT':
+              texts = data.utText.split(",");
+              vals = data.utVals.split(",");
+              break;
+            case 'VA':
+              texts = data.vaText.split(",");
+              vals = data.vaVals.split(",");
+              break;
+            case 'VT':
+              texts = data.vtText.split(",");
+              vals = data.vtVals.split(",");
+              break;
+            case 'WA':
+              texts = data.waText.split(",");
+              vals = data.waVals.split(",");
+              break;
+            case 'WI':
+              texts = data.wiText.split(",");
+              vals = data.wiVals.split(",");
+              break;
+            case 'WV':
+              texts = data.wvText.split(",");
+              vals = data.wvVals.split(",");
+              break;
+            case 'WY':
+              texts = data.wyText.split(",");
+              vals = data.wyVals.split(",");
+              break;
+						default:
+							texts = ['Please select the state of this opportunity first'];
+              break;
+					}
+					var $regionDropdown = $("#region_dropdown");
+					$regionDropdown.empty();
+					$.each(texts, function(index, value) {
+						$regionDropdown.append("<option value=\"" + vals[index] + "\">" + value + "</option>");
+					});
+				});
+			});
+    });
+  </script>
 </head>
 <body>
   <app-root></app-root>

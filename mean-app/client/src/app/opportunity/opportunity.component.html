@@ -1,40 +1,31 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<div class="container-fluid" style="background-color: gray">
+  <div class="row-fluid" style="margin-left: 50px; margin-right: 50px; background-color: white">
+      <h1 class="text-center" style="padding-top: 15px; margin-bottom: 20px">Opportunity Comparison</h1>
+      <form class="ex1" style="margin-right: 25px" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <fieldset>
-          <legend>Opportunity Comparison</legend>
-          <div class="form-group">
-            <label class="col-sm-2 col-form-label">
-              Type of Opportunity:
-            </label>
-            <div class="custom-control custom-radio">
+          <div class="form-group row">
+            <label class="col-md-4">Opportunity Type:</label>
+            <span class="col-md-4">
               <input required type="radio" formControlName="type" id="customRadio1" value="job" name="type" class="custom-control-input">
               <label class="custom-control-label" for="customRadio1">Job</label>
-            </div>
-            <div class="custom-control custom-radio">
+            </span>
+            <span class="col-md-4">
               <input required type="radio" formControlName="type" id="customRadio2" value="grad_school" name="type" class="custom-control-input">
               <label class="custom-control-label" for="customRadio2">Graduate School</label>
-            </div>
+            </span>
           </div>
-          <div class="form-group">
-            <label>
-              Opportunity Name:
-              <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name">
-            </label>
+          <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+            <label>Opportunity Name:</label>
+            <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name">
           </div>
           <div class="form-group row">
-            <div class = "col-sm-5">
-              <label>
-                City:
-                <input required type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in">
-              </label>
+            <div class="col-md-6">
+              <label>City:</label>
+              <input required type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in">
             </div>
-          </div>
-          <div class="form-group row">
-            <div class = "col-sm-5">
+            <div class="col-md-6">
               <label>State:</label>
-              <select required class="form-control" formControlName="stateName">
+              <select required id="state_dropdown" class="form-control" formControlName="stateName">
                 <option value="">Select an option</option>
                 <option value="AK">Alaska</option>
                 <option value="AL">Alabama</option>
@@ -91,11 +82,15 @@
               </select>
             </div>
           </div>
+          <div class="form-group row" style="padding-left: 15px; padding-right: 15px" data-ng-app data-ng-controller="dropdownCtrl">
+            <label>Region:</label>
+            <select required id="region_dropdown" class="form-control" formControlName="code">
+              <option value="">Please select the state of this opportunity first</option>
+            </select>
+          </div>
           <div class="form-group row">
-            <div class = "col-sm-5">
-              <label>
-                Opportunity Income:
-              </label>
+            <div class="col-md-6">
+              <label>Opportunity Income:</label>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
@@ -103,12 +98,8 @@
                 <input required type="number" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
               </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class = "col-sm-5">
-              <label>
-                Opportunity Debt:
-              </label>
+            <div class="col-md-6">
+              <label>Opportunity Debt:</label>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
@@ -118,11 +109,8 @@
             </div>
           </div>
           <div class="form-group row">
-            <div class = "col-sm-5">
-              <label>
-                Would this opportunity require you to move your primary residence?:
-              </label>
-              <div class="btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="move">
+              <label class="col-md-6">Would this opportunity require you to move your primary residence?</label>
+              <div class="col-md-6 btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="move">
                 <label ngbButtonLabel class="btn btn-primary">
                   <input required ngbButton type="radio" formControlName="move" value="Yes"> Yes
                 </label>
@@ -130,19 +118,18 @@
                   <input required ngbButton type="radio" formControlName="move" value="No"> No
                 </label>
               </div>
-            </div>
           </div>
-          <div class="row">
+          <div class="form-group row">
             <div class="col">
               <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
             </div>
             <div class="col">
-              <a class="nav-link" href="#" routerLink="/results" routerLinkActive="active"><button type="button" class="btn btn-primary">See Results</button></a>
+              <a class="nav-link text-right" href="#" routerLink="/results" routerLinkActive="active" style="padding-top: 0px; padding-right: 0px"><button type="button" class="btn btn-primary">See Results</button></a>
             </div>
           </div>
         </fieldset>
       </form>
-      <p>&nbsp;</p>
+      <!-- <p>&nbsp;</p> -->
       <table class="table table-hover">
         <thead>
           <tr>
@@ -153,6 +140,7 @@
             <th scope="col">Cost</th>
             <th scope="col">Debt</th>
             <th scope="col">Relocate</th>
+            <th scope="col">Code</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
@@ -166,11 +154,11 @@
             <td>{{ opportunity.oppCost }}</td>
             <td>{{ opportunity.oppDebt }}</td>
             <td>{{ opportunity.move }}</td>
+            <td>{{ opportunity.code }}</td>
             <td><a [routerLink]="['/edit',opportunity._id]" class="btn btn-secondary">Edit</a></td>
             <td><a (click) = "deleteOpportunity(opportunity._id)" class="btn btn-danger">Delete</a></td>
           </tr>
         </tbody>
       </table>
-    </div>
   </div>
 </div>

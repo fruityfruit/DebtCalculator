@@ -36,10 +36,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.updateLink();
-    window.addEventListener("unload", function(event) {
-      console.log("unload event listener heard");
-      this.auth.signout();
-    }.bind(this));
+    // window.addEventListener("unload", function(event) {
+    //   console.log("unload event listener heard");
+    //   this.auth.signout();
+    // }.bind(this));
   }
 
 }

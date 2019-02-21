@@ -21,7 +21,8 @@ export class OppeditComponent implements OnInit {
     oppDebt: '',
     move: '',
     _id: '',
-    user: ''
+    user: '',
+    code: ''
   }
 
   constructor(private activatedRouter: ActivatedRoute,
@@ -36,6 +37,7 @@ export class OppeditComponent implements OnInit {
         oppCost: ['', Validators.required],
         oppDebt: ['', Validators.required],
         move: ['', Validators.required],
+        code: ['', Validators.required]
       });
     }
 
@@ -57,6 +59,7 @@ export class OppeditComponent implements OnInit {
     this.formdata.oppCost = this.profileForm.value.oppCost;
     this.formdata.oppDebt = this.profileForm.value.oppDebt;
     this.formdata.move = this.profileForm.value.move;
+    this.formdata.code = this.profileForm.value.code;
     this.updateOpportunity();
   }
 

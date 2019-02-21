@@ -36,4 +36,6 @@ router.post('/password', ctrlAuth.updatePassword);
 
 router.post('/delete', ctrlAuth.deleteUser);
 
+router.post('/bls', ctrlResult.getBLS);
+
 module.exports = router;

@@ -9,6 +9,7 @@ var opportunitySchema = new mongoose.Schema({
   oppCost: String,
   oppDebt: String,
   move: String,
+  code: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

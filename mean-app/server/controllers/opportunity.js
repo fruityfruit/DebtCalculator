@@ -13,6 +13,7 @@ module.exports.saveOpp = function(req, res) {
   opp.oppCost = req.body.oppCost;
   opp.oppDebt = req.body.oppDebt;
   opp.move = req.body.move;
+  opp.code = req.body.code;
   //adds the opportunity to the user
   User.findOneAndUpdate({username: req.body.user}, {$push: {opportunities: opp._id}}, function(err, user) {
     if (err) {
@@ -77,6 +78,7 @@ module.exports.updateOpp = function(req, res) {
       opp.oppCost = req.body.oppCost;
       opp.oppDebt = req.body.oppDebt;
       opp.move = req.body.move;
+      opp.code = req.body.code;
       opp.save()
         .then(opp => {
           res.status(200).json('Update complete');

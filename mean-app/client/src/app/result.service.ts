@@ -20,4 +20,8 @@ export class ResultService {
   public getChartsData(user: string) {
     return this.http.get(`/api/charts/${user}`);
   }
+
+  public getBLSData(codes) {
+    return this.http.post(`/api/bls`, codes);
+  }
 }

@@ -12,6 +12,7 @@ export interface Opportunity {
   move: string;
   _id: string;
   user: string;
+  code: string;
 }
 
 @Injectable({
@@ -30,7 +31,8 @@ export class OpportunityService {
       oppCost: form.oppCost,
       oppDebt: form.oppDebt,
       move: form.move,
-      user: form.user
+      user: form.user,
+      code: form.code
     };
     return this.http.post(`/api/opportunity`, obj);
   }
@@ -51,7 +53,8 @@ export class OpportunityService {
       stateName: form.stateName,
       oppCost: form.oppCost,
       oppDebt: form.oppDebt,
-      move: form.move
+      move: form.move,
+      code: form.code
       };
     return this.http.post(`/api/edit/${id}`, obj);
   }
