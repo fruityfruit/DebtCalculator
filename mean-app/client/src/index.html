@@ -11,7 +11,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
     $(function() {
-      $("#state_dropdown").change(function() {
+      $(document).on('click', '#state_dropdown', function() {
+        $("#state_dropdown").trigger("change");
+      });
+      $(document).on('change', '#state_dropdown', function() {
 				var $dropdown = $(this);
 				$.getJSON("assets/jsondata/data.json", function(data, err) { //path may have to change for deployment
 					var key = $dropdown.val();
@@ -240,7 +243,7 @@
     });
   </script>
 </head>
-<body>
+<body style="background-color: lightgray">
   <app-root></app-root>
 </body>
 </html>

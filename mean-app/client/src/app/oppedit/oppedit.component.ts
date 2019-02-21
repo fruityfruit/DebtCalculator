@@ -67,6 +67,12 @@ export class OppeditComponent implements OnInit {
     this.activatedRouter.params.subscribe(params => {
       this.oppService.editOpportunity(params['id']).subscribe(res => {
         this.opportunity = res;
+        this.opportunity.code = '';
+        var savedState = this.opportunity.stateName;
+        this.opportunity.stateName = '';
+        //this.profileForm.value.stateName = this.opportunity.stateName;
+        //this.opportunity.stateName = 'KS';
+        this.opportunity.stateName = savedState;
       });
     });
   }
