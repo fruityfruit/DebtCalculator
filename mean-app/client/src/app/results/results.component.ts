@@ -18,6 +18,8 @@ export class ResultsComponent implements OnInit {
   debtChart = [];
   salaryChart = [];
   debtProjection=[];
+  netIncome=[] as Chart;
+  netIncomeTemp=[];
   someProfile: Profile;
   actualProfile: Profile = {
     username: "",
@@ -41,20 +43,25 @@ export class ResultsComponent implements OnInit {
               private router: Router) { }
 
   private generateCharts() {
+    var colors=['DarkGreen','aqua','Indigo','maroon','SkyBlue','Magenta','Pink','Gold','Salmon',];
     //this gives you auth back in data as a profile type, shows correctly in console
-    this.auth.getProfile(this.username).subscribe((data: Profile) => {
-    //  console.log(data);
-      var intrestRate = data.interest;
-      var principle= data.debt;
+    this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
+    this.auth.getProfile(this.username).subscribe((data2: Profile) => {
+      //  console.log(data);
+      var intrestRate = data2.interest;
+      var principle= data2.debt;
       //assume yearly intrerest
     //  var debtFiveYears= principle*(1+intrestRate*5);
       var points=[];
       var labels=[];
+      var netPoints=[];
     //  console.log(debtFiveYears);
       var num = 0;
       while(num<=10){
+        var calculatedDebt=principle*(1+intrestRate*num/100);
         labels.push(num);
-        points.push(principle*(1+intrestRate*num/100));
+        points.push(calculatedDebt);
+
         num=num+1;
       }
       //console.log(points);
@@ -66,7 +73,7 @@ export class ResultsComponent implements OnInit {
           datasets: [{
             label: "Debt Projection Over 10 Years",
             data: points,
-          }]
+          }],
         },
         options: {
           scales: {
@@ -78,13 +85,77 @@ export class ResultsComponent implements OnInit {
           }
         }
       });
-      //this.actualProfile.interest= data.interest;
-      //console.log(this.actualProfile.interest);
+      var numOpp=0;
+      var netIncomeTemp=[];
+      var opportunities = data['opportunities'];
+      var oppNameList=[];
+      opportunities.forEach(function(item, index) {
+        var num = 0;
+        oppNameList.push(item.oppName);
+        while(num<=10){
+          var calculatedDebt=principle*(1+intrestRate*num/100);
+          var total=item.oppCost*(num+1);
+          netPoints.push(total-calculatedDebt);
+          //console.log(total-calculatedDebt);
+          num=num+1;
+        }
+        netIncomeTemp.push(netPoints);
+        netPoints=[];
+        numOpp=numOpp+1;
+      });
+      this.netIncome = new Chart('canvas4', {
+        title: {
+          display: true,
+          text:"Debt Projection from Opportunities",
+        },
+        legend: {
+      horizontalAlign: "center", // "left" , "right"
+      verticalAlign: "bottom",  // "top" , "center"
+      fontSize: 15
+    },
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: oppNameList[0],
+            data: netIncomeTemp[0],
+            borderColor: colors[0],
+            pointBackgroundColor: colors[0],
+            backgroundColor: 'transparent'
+          }],
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+      var num=1;
+      while(num<numOpp){
+        var newSeries = {
+
+         data: netIncomeTemp[num],
+         label: oppNameList[num],
+         borderColor: colors[num],
+         pointBackgroundColor: colors[num],
+         backgroundColor: 'transparent'
+
+   };
+   //console.log(this.netIncome.data['datasets']);
+   //need to find way to get newSeries into datasets which is undefinded
+   this.netIncome.data['datasets'][num]=newSeries;
+   this.netIncome.update();
+    //this.netIncome.render();
+   //this.netIncome.options.data(netIncomeTemp[1]);
+   num=num+1;
+
+      }
     });
-    //gives back username but not the actualprofile income
 
-
-    this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
       var opportunities = data['opportunities'];
       var oppNames = [];
       var oppDebts = [];

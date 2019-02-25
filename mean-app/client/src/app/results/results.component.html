@@ -3,6 +3,9 @@
       <div *ngIf="debtProjection">
         <canvas id="canvas3"style="height: 500px; width: 100%;" >{{ debtProjection }}</canvas>
       </div>
+      <div *ngIf="netIncome">
+        <canvas id="canvas4"style="height: 600px; width: 100%;" >{{ netIncome }}</canvas>
+      </div>
       <div *ngIf="debtChart">
         <canvas id="canvas0" style="height: 500px; width: 100%;">{{ debtChart }}</canvas>
       </div>
