@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppComponent } from './app.component';
 import { OpportunityComponent } from './opportunity/opportunity.component';
 import { PersonalComponent } from './personal/personal.component';
@@ -20,6 +19,8 @@ import { AuthenticationService } from './authentication.service';
 import { OpportunityService } from './opportunity.service';
 import { ResultService } from './result.service';
 import { AccountComponent } from './account/account.component';
+import {MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // Define the routes
 const ROUTES = [
@@ -87,6 +88,10 @@ const ROUTES = [
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   providers: [AuthenticationService,// Add the Authentication service
