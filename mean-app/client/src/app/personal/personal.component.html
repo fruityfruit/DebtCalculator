@@ -6,82 +6,89 @@
 <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 <div class="form-group row">
 <div class = "col-sm-8">
-  <mat-form-field appearance="standard" hintLabel="Put in your income">
-    <textarea matInput required type="number" class="form-control"
+  <mat-form-field appearance="standard" hintLabel="Your income">
+    <input matInput required type="number" class="form-control"
     formControlName="income" placeholder="Current income"
-    #income [(ngModel)] = "currProfile.income"></textarea>
+    #income [(ngModel)] = "currProfile.income">
+    <mat-label><mat-icon>local_atm</mat-icon></mat-label>
+
   </mat-form-field>
   </div>
   </div>
 
   <div class="form-group row">
   <div class = "col-sm-8">
-  <mat-form-field appearance="standard">
-    <textarea matInput required type="number" class="form-control" formControlName="debt" placeholder="Current debt"
-#debt [(ngModel)] = "currProfile.debt"></textarea>
+  <mat-form-field appearance="standard" hintLabel="Your debt">
+    <input matInput required type="number" class="form-control" formControlName="debt" placeholder="Current debt"
+#debt [(ngModel)] = "currProfile.debt">
+  <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
   </mat-form-field>
   </div>
   </div>
   <div class="form-group row">
   <div class = "col-sm-8">
 
-  <mat-form-field appearance="standard">
-    <textarea matInput required type="number" class="form-control" formControlName="interest" placeholder="Debt interest as percent"
-#interest [(ngModel)] = "currProfile.interest"></textarea>
+  <mat-form-field appearance="standard" hintLabel="Your interest rate (percent)">
+    <input matInput required type="number" class="form-control" formControlName="interest" placeholder="Debt interest as percent"
+#interest [(ngModel)] = "currProfile.interest">
+<mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+
   </mat-form-field>
   </div>
   </div>
 
   <div class="form-group row">
   <div class = "col-sm-8">
-  <mat-form-field appearance="standard">
-    <textarea matInput input required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment"
-#payments [(ngModel)] = "currProfile.payments"></textarea>
+  <mat-form-field appearance="standard" hintLabel="Your monthly payments">
+    <input matInput required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment"
+#payments [(ngModel)] = "currProfile.payments">
+<mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+
+  </mat-form-field>
+  </div>
+  </div>
+
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
+  <mat-form-field appearance="standard" hintLabel="Your rent">
+    <input matInput required type="number" class="form-control" formControlName="rent" placeholder="Current rent, if any"
+#rent [(ngModel)] = "currProfile.rent">
+<mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+
   </mat-form-field>
   </div>
   </div>
 
   <div class="form-group row">
   <div class = "col-sm-8">
-  <mat-form-field appearance="standard">
-    <textarea matInput input required type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents"
-#dependents [(ngModel)] = "currProfile.dependents"></textarea>
+  <mat-form-field appearance="standard" hintLabel="Your monthly spending">
+    <input matInput required type="number" class="form-control" formControlName="spending" placeholder="Current spending monthly"
+#spending [(ngModel)] = "currProfile.spending">
+<mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+
   </mat-form-field>
   </div>
   </div>
 
   <div class="form-group row">
   <div class = "col-sm-8">
-  <mat-form-field appearance="standard">
-    <textarea matInput input required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment"
-#payments [(ngModel)] = "currProfile.payments"></textarea>
+  <mat-form-field appearance="standard" hintLabel="Your dependents">
+    <input matInput required type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents"
+#dependents [(ngModel)] = "currProfile.dependents">
+<mat-label><mat-icon>people</mat-icon></mat-label>
+
   </mat-form-field>
   </div>
   </div>
 
   <div class="form-group row">
   <div class = "col-sm-8">
-  <mat-form-field appearance="standard">
-    <textarea matInput input required type="number" class="form-control" formControlName="rent" placeholder="Current rent, if any"
-#rent [(ngModel)] = "currProfile.rent"></textarea>
-  </mat-form-field>
-  </div>
-  </div>
+  <mat-form-field appearance="standard" hintLabel="Your pets">
+    <input matInput required type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any"
+#pets [(ngModel)] = "currProfile.pets">
+<mat-label><mat-icon>favorite_border</mat-icon></mat-label>
 
-  <div class="form-group row">
-  <div class = "col-sm-8">
-  <mat-form-field appearance="standard">
-    <textarea matInput input required type="number" class="form-control" formControlName="spending" placeholder="Current spending monthly"
-#spending [(ngModel)] = "currProfile.spending"></textarea>
-  </mat-form-field>
-  </div>
-  </div>
-
-  <div class="form-group row">
-  <div class = "col-sm-8">
-  <mat-form-field appearance="standard">
-    <textarea matInput input required type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any"
-#pets [(ngModel)] = "currProfile.pets"></textarea>
   </mat-form-field>
   </div>
   </div>
