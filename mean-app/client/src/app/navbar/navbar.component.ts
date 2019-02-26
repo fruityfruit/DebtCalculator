@@ -41,5 +41,11 @@ export class NavbarComponent implements OnInit {
     //   this.auth.signout();
     // }.bind(this));
   }
+  signout() {
+    this.auth.signout();
+    window.alert("You have been signed out.");
+    this.auth.callUpdateLink();
+    this.router.navigateByUrl('/');
+  }
 
 }
