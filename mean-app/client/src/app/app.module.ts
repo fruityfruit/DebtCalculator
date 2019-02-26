@@ -19,7 +19,7 @@ import { AuthenticationService } from './authentication.service';
 import { OpportunityService } from './opportunity.service';
 import { ResultService } from './result.service';
 import { AccountComponent } from './account/account.component';
-import {MatSidenavModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule} from '@angular/material';
+import {MatSidenavModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule, MatButtonModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // Define the routes
@@ -94,6 +94,7 @@ const ROUTES = [
     MatIconModule,
     MatSidenavModule,
     BrowserAnimationsModule,
+    MatButtonModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   providers: [AuthenticationService,// Add the Authentication service

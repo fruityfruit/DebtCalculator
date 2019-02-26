@@ -1,21 +1,27 @@
 form.ex1 {
-margin-left: 25px;
 }
 
 .example-container {
-  display: flex;
-  flex-direction: column;
+  margin-left: 225px;
 }
 
 .example-container > * {
-  width: 100%;
 }
 
 body {
-  bgcolor: white;
+  background-color: white !important;
 }
 
 div.cen {
-  max-width: 960px;
+  width: 960px;
+  overflow:hidden;
   margin: auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.container-fluid{
+  overflow-y: hidden;
 }

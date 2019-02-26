@@ -41,8 +41,8 @@ export class PersonalComponent implements OnInit {
       rent: ['', Validators.required],
       spending: ['', Validators.required],
       pets: ['', Validators.required],
-      smoking: ['', Validators.required],
-      drinking: ['', Validators.required],
+      smoking: [''],
+      drinking: [''],
     });
   }
 
@@ -55,8 +55,6 @@ export class PersonalComponent implements OnInit {
     this.formdata.rent = this.profileForm.value.rent;
     this.formdata.spending = this.profileForm.value.spending;
     this.formdata.pets = this.profileForm.value.pets;
-    this.formdata.smoking = this.profileForm.value.smoking;
-    this.formdata.drinking = this.profileForm.value.drinking;
     if (this.username === null) {
       this.auth.register(this.credentials).subscribe(() => {
         this.username = this.auth.getUsername();
@@ -86,7 +84,7 @@ export class PersonalComponent implements OnInit {
       this.auth.getProfile(this.username).subscribe(res => {
         this.currProfile = res;
       });
-    }  
+    }
   }
 
 }

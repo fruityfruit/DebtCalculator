@@ -1,30 +1,98 @@
-<body>
-<div class="cen">
+<body class="mdc-typography mdc-typography--body1">
+<div class="cen container-fluid mat-elevation-z2">
 <div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Input">
-  </mat-form-field>
+  <h1 class="mdc-typography--headline1">Personal Page</h1>
 
-  <mat-form-field appearance="legacy" >
-    <textarea matInput placeholder="Textarea"></textarea>
+<form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<div class="form-group row">
+<div class = "col-sm-8">
+  <mat-form-field appearance="standard" hintLabel="Put in your income">
+    <textarea matInput required type="number" class="form-control"
+    formControlName="income" placeholder="Current income"
+    #income [(ngModel)] = "currProfile.income"></textarea>
   </mat-form-field>
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
   <mat-form-field appearance="standard">
-    <textarea matInput placeholder="Textarea"></textarea>
+    <textarea matInput required type="number" class="form-control" formControlName="debt" placeholder="Current debt"
+#debt [(ngModel)] = "currProfile.debt"></textarea>
   </mat-form-field>
-  <mat-form-field appearance="fill">
-    <textarea matInput placeholder="Textarea"></textarea>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <textarea matInput placeholder="Textarea"></textarea>
-  </mat-form-field>
-<mat-icon>attach_money</mat-icon>
-<mat-icon>monetization_on</mat-icon>
+  </div>
+  </div>
+  <div class="form-group row">
+  <div class = "col-sm-8">
 
-  <mat-form-field>
-    <mat-select placeholder="Select">
-      <mat-option value="option">Option</mat-option>
-    </mat-select>
+  <mat-form-field appearance="standard">
+    <textarea matInput required type="number" class="form-control" formControlName="interest" placeholder="Debt interest as percent"
+#interest [(ngModel)] = "currProfile.interest"></textarea>
   </mat-form-field>
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
+  <mat-form-field appearance="standard">
+    <textarea matInput input required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment"
+#payments [(ngModel)] = "currProfile.payments"></textarea>
+  </mat-form-field>
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
+  <mat-form-field appearance="standard">
+    <textarea matInput input required type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents"
+#dependents [(ngModel)] = "currProfile.dependents"></textarea>
+  </mat-form-field>
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
+  <mat-form-field appearance="standard">
+    <textarea matInput input required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment"
+#payments [(ngModel)] = "currProfile.payments"></textarea>
+  </mat-form-field>
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
+  <mat-form-field appearance="standard">
+    <textarea matInput input required type="number" class="form-control" formControlName="rent" placeholder="Current rent, if any"
+#rent [(ngModel)] = "currProfile.rent"></textarea>
+  </mat-form-field>
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
+  <mat-form-field appearance="standard">
+    <textarea matInput input required type="number" class="form-control" formControlName="spending" placeholder="Current spending monthly"
+#spending [(ngModel)] = "currProfile.spending"></textarea>
+  </mat-form-field>
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
+  <mat-form-field appearance="standard">
+    <textarea matInput input required type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any"
+#pets [(ngModel)] = "currProfile.pets"></textarea>
+  </mat-form-field>
+  </div>
+  </div>
+
+  <div class="form-group row">
+  <div class = "col-sm-8">
+<button type="submit" [disabled]="!profileForm.valid" mat-raised-button>Submit</button>
+</div>
+</div>
+
+</form>
 
 </div>
 </div>
