@@ -32,7 +32,7 @@ export class OpportunityComponent implements OnInit {
     oppCost: ['', Validators.required],
     oppDebt: ['', Validators.required],
     move: ['', Validators.required],
-    code: ['', Validators.required]
+    code: ['']
   });
 
   constructor(private builder: FormBuilder, private oppService: OpportunityService,

@@ -50,6 +50,7 @@ export class ResultsComponent implements OnInit {
       //  console.log(data);
       var intrestRate = data2.interest;
       var principle= data2.debt;
+      var yearlyPayment= data2.payments*12;
       //assume yearly intrerest
     //  var debtFiveYears= principle*(1+intrestRate*5);
       var points=[];
@@ -57,7 +58,7 @@ export class ResultsComponent implements OnInit {
       var netPoints=[];
     //  console.log(debtFiveYears);
       var num = 0;
-      while(num<=10){
+      while(num<=20){
         var calculatedDebt=principle*(1+intrestRate*num/100);
         labels.push(num);
         points.push(calculatedDebt);
@@ -91,11 +92,24 @@ export class ResultsComponent implements OnInit {
       var oppNameList=[];
       opportunities.forEach(function(item, index) {
         var num = 0;
+        var remainingBalance=principle;
         oppNameList.push(item.oppName);
-        while(num<=10){
+        while(num<=20){
           var calculatedDebt=principle*(1+intrestRate*num/100);
-          var total=item.oppCost*(num+1);
-          netPoints.push(total-calculatedDebt);
+          var amountOwed=calculatedDebt-yearlyPayment*num;
+          if(item.oppCost>0){
+            if (amountOwed>0){
+              var total=item.oppCost*(num+1);
+              netPoints.push(total-yearlyPayment);
+            }
+            else{
+              var total=item.oppCost*(num+1);
+              netPoints.push(total);
+            }
+        }
+        else {
+          netPoints.push(-1*calculatedDebt)
+        }
           //console.log(total-calculatedDebt);
           num=num+1;
         }
