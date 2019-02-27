@@ -1,3 +1,27 @@
 form.ex1 {
-margin-left: 25px;
+}
+
+.example-container {
+  margin-left: 225px;
+}
+
+.example-container > * {
+}
+
+body {
+  background-color: white !important;
+}
+
+div.cen {
+  width: 960px;
+  overflow:hidden;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.container-fluid{
+  overflow-y: hidden;
 }
