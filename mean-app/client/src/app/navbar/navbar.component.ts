@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
   username: string;
   loggedInText: string;
   routerLinkText: string;
-  constructor(private auth: AuthenticationService, private router: Router) {
+  constructor(public auth: AuthenticationService, private router: Router) {
     //listens for the auth service to tell it to update the navbar
     this.auth.invokeEvent.subscribe(value => {
       if (value === "UpdateLink") {

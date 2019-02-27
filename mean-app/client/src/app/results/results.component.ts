@@ -250,7 +250,7 @@ export class ResultsComponent implements OnInit {
     });
   }
 
-  private register() {
+  public register() {
     if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
       window.alert("Sorry, that username has already been taken. Please try another!");
     } else {
