@@ -35,7 +35,7 @@ export class OpportunityComponent implements OnInit {
         name: ['', Validators.required],
         city: ['', Validators.required],
         state: ['', Validators.required],
-        region: ['', Validators.required],
+        region: ['', ],
         income: [0],
         move: ['', Validators.required],
         principal: [0],
