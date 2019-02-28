@@ -132,7 +132,6 @@ export class ResultsComponent implements OnInit {
             var debt=this.debts[counter];
             var calculatedDebt=0;
             calculatedDebt= +debt.principal*(1+ +debt.rate*num/100);
-            console.log(calculatedDebt);
             if (counter==0){
               labels.push(num);
             }
@@ -166,11 +165,34 @@ export class ResultsComponent implements OnInit {
               backgroundColor: 'transparent'
 
                  };
-                 console.log(this.debtProjection.data['datasets']);
                  this.debtProjection.data['datasets'][counter]=newSeries;
                  this.debtProjection.update();
                  counter =counter+1;
           }
+          if(this.debts.length>1){
+          var num=0;
+          while (num<=20){
+            var addedDebt=debtProjectionPoints[0][num];
+            var counter=1;
+            while (counter<this.debts.length){
+            addedDebt=addedDebt+debtProjectionPoints[counter][num];
+            counter=counter+1;
+            }
+            netPoints.push(addedDebt);
+            num=num+1;
+          }
+          var newSeries2 = {
+            label: "Total Debt",
+            data: netPoints,
+            borderColor: 'red',
+            pointBackgroundColor: 'red',
+            backgroundColor: 'transparent'
+            };
+            this.debtProjection.data['datasets'][counter]=newSeries2;
+            this.debtProjection.update();
+          }
+
+
       //     var numOpp=0;
       //     var netIncomeTemp=[];
       //     var opportunities = data['opportunities'];
@@ -258,56 +280,58 @@ export class ResultsComponent implements OnInit {
       //     }
       //   });
       //
-      //   var opportunities = data['opportunities'];
-      //   var oppNames = [];
-      //   var oppDebts = [];
-      //   var oppCosts = [];
-      //   opportunities.forEach(function(item, index) {
-      //     oppNames.push(item.oppName);
-      //     oppDebts.push(item.oppDebt);
-      //     oppCosts.push(item.oppCost);
-      //   });
+        var oppNames = [];
+        var oppDebts = [];
+        var oppCosts = [];
+        var counter =0;
+        while (counter< this.opportunities.length){
+          oppNames.push(this.opportunities[counter].name);
+          oppDebts.push(this.opportunities[counter].principal);
+          oppCosts.push(this.opportunities[counter].income);
+          counter=counter+1;
+        }
       //
-      //   this.debtChart = new Chart('canvas0', {
-      //     type: 'bar',
-      //     data: {
-      //       labels: oppNames,
-      //       datasets: [{
-      //         label: "Debt From Opportunities Chart",
-      //         data: oppDebts,
-      //       }]
-      //     },
-      //     options: {
-      //       scales: {
-      //         yAxes: [{
-      //           ticks: {
-      //             beginAtZero: true
-      //           }
-      //         }]
-      //       }
-      //     }
-      //   });
       //
-      //   this.salaryChart = new Chart('canvas1', {
-      //     type: 'bar',
-      //     data: {
-      //       labels: oppNames,
-      //       datasets: [{
-      //         label: "Salary Chart",
-      //         data: oppCosts,
+        this.debtChart = new Chart('canvas0', {
+          type: "bar",
+          data: {
+            labels: oppNames,
+            datasets: [{
+              label: "Debt From Opportunities Chart",
+              data: oppDebts,
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
       //
-      //       }]
-      //     },
-      //     options: {
-      //       scales: {
-      //         yAxes: [{
-      //           ticks: {
-      //             beginAtZero: true
-      //           }
-      //         }]
-      //       }
-      //     }
-      //   });
+        this.salaryChart = new Chart('canvas1', {
+          type: 'bar',
+          data: {
+            labels: oppNames,
+            datasets: [{
+              label: "Salary Chart",
+              data: oppCosts,
+
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
       // }, (err) => {
       //   console.log(err);
       // });
