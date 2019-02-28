@@ -18,7 +18,7 @@ export class ResultsComponent implements OnInit {
   zillowResults: ResultSet[] = [];
   debtChart = [];
   salaryChart = [];
-  debtProjection=[];
+  debtProjection=[] as Chart;
   netIncome=[] as Chart;
   netIncomeTemp=[];
   profile: Profile = {
@@ -109,47 +109,68 @@ export class ResultsComponent implements OnInit {
   Also, this.profile contains the user's profile, which has their rent, dependents, monthly spending, etc.
 */
 
-
-
-
       //this gives you auth back in data as a profile type, shows correctly in console
       // this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
       //   this.auth.getProfile(this.username).subscribe((data2: Profile) => {
-      //     var intrestRate = data2.interest;
-      //     var principle= data2.debt;
-      //     var yearlyPayment= data2.payments*12;
-      //     //assume yearly interest
-      //     var points=[];
-      //     var labels=[];
-      //     var netPoints=[];
-      //     var num = 0;
-      //     while(num<=20){
-      //       var calculatedDebt=principle*(1+intrestRate*num/100);
-      //       labels.push(num);
-      //       points.push(calculatedDebt);
-      //
-      //       num=num+1;
-      //     }
-      //
-      //     this.debtProjection = new Chart('canvas3', {
-      //       type: 'line',
-      //       data: {
-      //         labels: labels,
-      //         datasets: [{
-      //           label: "Debt Projection Over 10 Years",
-      //           data: points,
-      //         }],
-      //       },
-      //       options: {
-      //         scales: {
-      //           yAxes: [{
-      //             ticks: {
-      //               beginAtZero: true
-      //             }
-      //           }]
-      //         }
-      //       }
-      //     });
+        //  var intrestRate = data2.interest;
+          //var principle= data2.debt;
+          //var yearlyPayment= data2.payments*12;
+          //assume yearly interest
+          var debtProjectionPoints=[];
+          var labels=[];
+          var netPoints=[];
+          var debtnames=[];
+          var num = 0;
+          var counter=0;
+          while(counter<this.debts.length)
+          {
+            var points=[];
+            var name="Debt Source " + (+counter+1);
+            debtnames.push(name);
+            while(num<=20){
+            //  var calculatedDebt=principle*(1+intrestRate*num/100);
+            var debt=this.debts[counter];
+            var calculatedDebt=0;
+            calculatedDebt= +debt.principal*(1+ +debt.rate*num/100);
+            console.log(calculatedDebt);
+            if (counter==0){
+              labels.push(num);
+            }
+              points.push(calculatedDebt);
+              num=num+1;
+            }
+            debtProjectionPoints.push(points);
+            counter=counter+1;
+            num=0;
+          }
+          this.debtProjection = new Chart('canvas3', {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: debtnames[0],
+                data: debtProjectionPoints[0],
+                borderColor: colors[0],
+               pointBackgroundColor: colors[0],
+               backgroundColor: 'transparent'
+              }],
+            },
+          });
+          var counter =1;
+          while(counter<this.debts.length){
+            var newSeries = {
+              label: debtnames[counter],
+              data: debtProjectionPoints[counter],
+              borderColor: colors[counter],
+              pointBackgroundColor: colors[counter],
+              backgroundColor: 'transparent'
+
+                 };
+                 console.log(this.debtProjection.data['datasets']);
+                 this.debtProjection.data['datasets'][counter]=newSeries;
+                 this.debtProjection.update();
+                 counter =counter+1;
+          }
       //     var numOpp=0;
       //     var netIncomeTemp=[];
       //     var opportunities = data['opportunities'];

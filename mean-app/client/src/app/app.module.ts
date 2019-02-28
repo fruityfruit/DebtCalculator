@@ -20,7 +20,8 @@ import { OpportunityService } from './opportunity.service';
 import { ResultService } from './result.service';
 import { ProfileService } from './profile.service';
 import { AccountComponent } from './account/account.component';
-import {MatSidenavModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule, MatButtonModule} from '@angular/material';
+import {MatSidenavModule, MatTableModule, MatFormFieldModule, MatInputModule,
+        MatSelectModule, MatIconModule, MatButtonModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DebteditComponent } from './debtedit/debtedit.component';
 
@@ -91,6 +92,7 @@ const ROUTES = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -100,7 +102,7 @@ const ROUTES = [
     MatSelectModule,
     MatIconModule,
     MatSidenavModule,
-    BrowserAnimationsModule,
+    MatTableModule,
     MatButtonModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],

@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { AuthenticationService, TokenPayload } from '../authentication.service';
 import { ProfileService, Profile, Debt } from '../profile.service';
 import { Router } from '@angular/router';
+import {MatTableDataSource, MatTable} from '@angular/material';
+import {ViewChild} from '@angular/core';
+//import { DataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-personal',
@@ -35,6 +38,9 @@ export class PersonalComponent implements OnInit {
     username: '',
     password: ''
   };
+  dataSource = new MatTableDataSource(this.debts);
+  displayedColumns: string[] = ['principal', 'rate', 'annualcompounds', 'monthlypayment', 'edit', 'delete'];
+  //@ViewChild(MatTable) table: MatTable<any>;
 
   constructor(private builder: FormBuilder, private router: Router,
     private auth: AuthenticationService, private profService: ProfileService) {
@@ -96,6 +102,7 @@ export class PersonalComponent implements OnInit {
         this.profService.createDebt(this.formdataDebt).subscribe(() => {
           this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
             this.debts = data['debts'];
+            this.dataSource.data = this.debts;
             this.profileFormDebt.reset();
           });
         }, (err) => {
@@ -112,6 +119,7 @@ export class PersonalComponent implements OnInit {
       this.profService.createDebt(this.formdataDebt).subscribe(() => {
         this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
           this.debts = data['debts'];
+          this.dataSource.data = this.debts;
           this.profileFormDebt.reset();
         });
       }, (err) => {
@@ -125,9 +133,12 @@ export class PersonalComponent implements OnInit {
     this.profService.deleteDebt(this.username, id).subscribe(res => {
       this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
         this.debts = data['debts'];
+        this.dataSource.data = this.debts;
       });
     });
   }
+
+
 
   ngOnInit() {
     this.username = this.auth.getUsername();
@@ -137,8 +148,8 @@ export class PersonalComponent implements OnInit {
       });
       this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
         this.debts = data['debts'];
+        this.dataSource.data = this.debts;
       });
     }
   }
-
 }
