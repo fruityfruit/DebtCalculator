@@ -17,8 +17,8 @@ module.exports.getZillow = function(req , res) {
       var zillow = new Zillow(ZILLOW_KEY);
       var parameters = {
         childtype: 'neighborhood',
-        state: opp.stateName.toLowerCase(),
-        city: opp.cityName.toLowerCase()
+        state: opp.state.toLowerCase(),
+        city: opp.city.toLowerCase()
       }
       zillow.get('GetRegionChildren', parameters)
         .then(function(results) {
@@ -56,18 +56,16 @@ module.exports.getBLS = function(req, res) {
     'annualaverage': true
   };
   var query;
-  for (code in req.body) {
-    query = 'CUUR'+req.body[code]+'SA0';
+  req.body.forEach(function(entry) {
+    query = 'CUUR'+entry+'SA0';
     options.seriesid.push(query);
-    console.log(query);
-  }
+  });
   query = 'CUUR0000SA0';
   options.seriesid.push(query);
   bls.fetch(options).then(function(response) {
     var retVal = [];
     for (entry in options.seriesid) {
       try {
-        console.log(response.Results.series[entry]);
         retVal.push(response.Results.series[entry].seriesID+": "+response.Results.series[entry].data[0].value);
       } catch(err) {
       }
@@ -82,15 +80,21 @@ module.exports.getBLS = function(req, res) {
 //gets the chart data that we want to use on the Results page
 module.exports.getCharts = function(req, res) {
   User.
-    findOne({username: req.params.user}). //finds the user
-    populate('opportunities'). //populates the user's opportunities
+    findOne({username: req.params.username}). //finds the user
+    populate('opportunities').
+    populate('debts'). //populates the user's opportunities and debts
     exec(function (err, user) {
       if (err) {
         res.status(400).send(err);
       } else if (!user) {
         res.status(400).send("unable to find the user");
       } else {
-        res.status(200).json({'opportunities': user.opportunities}); // TODO for now, we will return the entire opportunity.
+        console.log(user.opportunities);
+        console.log(user.debts);
+        res.status(200).json({
+          'opportunities' : user.opportunities,
+          'debts' : user.debts
+        }); // TODO for now, we will return all of the data
       }
     });
 };
