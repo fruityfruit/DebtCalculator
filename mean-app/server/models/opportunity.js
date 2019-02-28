@@ -3,13 +3,16 @@ var mongoose = require('mongoose');
 var opportunitySchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   type: String,
-  oppName: String,
-  stateName: String,
-  cityName: String,
-  oppCost: String,
-  oppDebt: String,
+  name: String,
+  state: String,
+  city: String,
+  region: String,
+  income: Number,
   move: String,
-  code: String,
+  principal: Number,
+  rate: Number,
+  annualCompounds: Number,
+  monthlyPayment: Number,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

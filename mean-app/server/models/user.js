@@ -18,19 +18,19 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  income: Number,
-  debt: Number,
-  interest: Number,
-  payments: Number,
+  state: String,
+  region: String,
   dependents: Number,
   rent: Number,
   spending: Number,
   pets: Number,
-  smoking: Boolean,
-  drinking: Boolean,
   opportunities: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Opportunity'
+  }],
+  debts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Debt'
   }]
 },
 {

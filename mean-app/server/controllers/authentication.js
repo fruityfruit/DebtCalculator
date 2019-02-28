@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User'); //User schema from ../models/user.js
+var Debt = mongoose.model('Debt'); //Debt schema from ../models/debt.js
+var Opportunity = mongoose.model('Opportunity'); //Opportunity schema from ../models/opportunity.js
 
 //registers and logs in a new user
 module.exports.register = function(req, res) {
@@ -140,11 +142,25 @@ module.exports.deleteUser = function(req, res) {
     } else if (!user || !user.validPassword(req.body.password)) { //the username doesn't exist or the password is wrong
       res.status(401).json({"message": 'Password is incorrect'});
     } else { //find and delete the user
-      User.deleteOne({ username: req.body.username }, function (err) {
+      user.debts.forEach(function(entry) {
+        Debt.findByIdAndRemove({ _id: entry }, function (err, doc) {
+          if (err) {
+            res.status(400).json(err);
+          }
+        });
+      });
+      user.opportunities.forEach(function(entry) {
+        Opportunity.findByIdAndRemove({ _id: entry }, function (err, doc) {
+          if (err) {
+            res.status(400).json(err);
+          }
+        });
+      });
+      User.deleteOne({ username: req.body.username }, function (err) { //TODO maybe this can be turned into just the request
         if (err) { //return the error
           res.status(400).json(err);
         }
-        res.status(200).json({}); //return a blank 200 status
+        res.status(200).json('Successfully deleted'); //return a 200 status
       });
     }
   });

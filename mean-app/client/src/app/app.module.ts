@@ -18,9 +18,11 @@ import { OppeditComponent } from './oppedit/oppedit.component';
 import { AuthenticationService } from './authentication.service';
 import { OpportunityService } from './opportunity.service';
 import { ResultService } from './result.service';
+import { ProfileService } from './profile.service';
 import { AccountComponent } from './account/account.component';
 import {MatSidenavModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule, MatButtonModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { DebteditComponent } from './debtedit/debtedit.component';
 
 // Define the routes
 const ROUTES = [
@@ -47,6 +49,10 @@ const ROUTES = [
   {
     path: 'edit/:id',
     component: OppeditComponent
+  },
+  {
+    path: 'debtedit/:id',
+    component: DebteditComponent
   },
   {
     path: 'personal',
@@ -80,7 +86,8 @@ const ROUTES = [
     RegisterComponent,
     SigninComponent,
     OppeditComponent,
-    AccountComponent
+    AccountComponent,
+    DebteditComponent
   ],
   imports: [
     BrowserModule,
@@ -99,6 +106,7 @@ const ROUTES = [
   ],
   providers: [AuthenticationService,// Add the Authentication service
               ResultService, // Add the Result service
+              ProfileService, // Add the Profile service
               OpportunityService], // Add the Opportunity service
   bootstrap: [AppComponent]
 })

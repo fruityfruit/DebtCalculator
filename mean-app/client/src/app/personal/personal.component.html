@@ -1,110 +1,129 @@
 <body class="mdc-typography mdc-typography--body1">
-<div class="cen container-fluid mat-elevation-z2">
-<div class="example-container">
-  <h1 class="mdc-typography--headline1">Personal Page</h1>
-
-<form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div class="cen container-fluid mat-elevation-z2">
+    <div class="example-container">
+      <h1 class="mdc-typography--headline1">Personal Page</h1>
+      <form class="ex1" [formGroup]="profileFormProfile" (ngSubmit)="onSubmitProfile()">
+        <div class="form-group row">
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your rent">
+              <input matInput required type="number" class="form-control" formControlName="rent" placeholder="Current rent, if any"
+              #rent [(ngModel)] = "currProfile.rent">
+              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <div class = "col-sm-8">
+            <mat-form-field appearance="standard" hintLabel="Your monthly spending">
+              <input matInput required type="number" class="form-control" formControlName="spending" placeholder="Current spending monthly"
+              #spending [(ngModel)] = "currProfile.spending">
+              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your dependents">
+              <input matInput required type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents"
+              #dependents [(ngModel)] = "currProfile.dependents">
+              <mat-label><mat-icon>people</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your pets">
+              <input matInput required type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any"
+              #pets [(ngModel)] = "currProfile.pets">
+              <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your state">
+              <input matInput required type="text" class="form-control" size="56" formControlName="state" placeholder="What state"
+              #state [(ngModel)] = "currProfile.state">
+              <mat-label><mat-icon>people</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your region">
+              <input matInput required type="text" class="form-control" size="56" formControlName="region" placeholder="What region"
+              #region [(ngModel)] = "currProfile.region">
+              <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <div class = "col-sm-8">
+            <button type="submit" [disabled]="!profileFormProfile.valid" mat-raised-button>Submit</button>
+          </div>
+        </div>
+      </form>
+      <form class="ex1" [formGroup]="profileFormDebt" (ngSubmit)="onSubmitDebt()">
+        <div class="form-group row">
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your principal">
+              <input matInput required type="number" class="form-control" size="56" formControlName="principal" placeholder="What principal">
+              <mat-label><mat-icon>people</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your rate">
+              <input matInput required type="number" class="form-control" size="56" formControlName="rate" placeholder="What rate">
+              <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
+              <input matInput required type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="What annualCompounds">
+              <mat-label><mat-icon>people</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+          <div class = "col-sm-4">
+            <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
+              <input matInput required type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="What monthlyPayment">
+              <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+          <div class = "col-sm-8">
+            <button type="submit" [disabled]="!profileFormDebt.valid" mat-raised-button>Submit</button>
+          </div>
+        </div>
+      </form>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Principal</th>
+            <th scope="col">Rate</th>
+            <th scope="col">annualCompounds</th>
+            <th scope="col">monthlyPayment</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-info" *ngFor="let debt of debts">
+            <th scope="row">{{ debt.principal }}</th>
+            <td>{{ debt.rate }}</td>
+            <td>{{ debt.annualCompounds }}</td>
+            <td>{{ debt.monthlyPayment }}</td>
+            <td><a [routerLink]="['/debtedit',debt._id]" class="btn btn-secondary">Edit</a></td>
+            <td><a (click) = "deleteDebt(debt._id)" class="btn btn-danger">Delete</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <br>
-
-<div class="form-group row">
-<div class = "col-sm-4">
-  <mat-form-field appearance="standard" hintLabel="Your income">
-    <input matInput required type="number" class="form-control"
-    formControlName="income" placeholder="Current income"
-    #income [(ngModel)] = "currProfile.income">
-    <mat-label><mat-icon>local_atm</mat-icon></mat-label>
-  </mat-form-field>
-  </div>
-
-  <div class = "col-sm-4">
-  <mat-form-field appearance="standard" hintLabel="Your debt">
-    <input matInput required type="number" class="form-control" formControlName="debt" placeholder="Current debt"
-#debt [(ngModel)] = "currProfile.debt">
-  <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
-  </mat-form-field>
-  </div>
-
-  </div>
   <br>
-
-  <div class="form-group row">
-  <div class = "col-sm-8">
-
-  <mat-form-field appearance="standard" hintLabel="Your interest rate (percent)">
-    <input matInput required type="number" class="form-control" formControlName="interest" placeholder="Debt interest as percent"
-#interest [(ngModel)] = "currProfile.interest">
-<mat-label><mat-icon>account_balance</mat-icon></mat-label>
-
-  </mat-form-field>
-  </div>
-  </div>
-  <br>
-
-  <div class="form-group row">
-  <div class = "col-sm-4">
-  <mat-form-field appearance="standard" hintLabel="Your monthly payments">
-    <input matInput required type="number" class="form-control" formControlName="payments" placeholder="Current monthly payment"
-#payments [(ngModel)] = "currProfile.payments">
-<mat-label><mat-icon>monetization_on</mat-icon></mat-label>
-
-  </mat-form-field>
-  </div>
-  <div class = "col-sm-4">
-  <mat-form-field appearance="standard" hintLabel="Your rent">
-    <input matInput required type="number" class="form-control" formControlName="rent" placeholder="Current rent, if any"
-#rent [(ngModel)] = "currProfile.rent">
-<mat-label><mat-icon>monetization_on</mat-icon></mat-label>
-
-  </mat-form-field>
-  </div>
-  </div>
-
-
-  <br>
-
-  <div class="form-group row">
-  <div class = "col-sm-8">
-  <mat-form-field appearance="standard" hintLabel="Your monthly spending">
-    <input matInput required type="number" class="form-control" formControlName="spending" placeholder="Current spending monthly"
-#spending [(ngModel)] = "currProfile.spending">
-<mat-label><mat-icon>monetization_on</mat-icon></mat-label>
-
-  </mat-form-field>
-  </div>
-  </div>
-  <br>
-
-  <div class="form-group row">
-  <div class = "col-sm-4">
-  <mat-form-field appearance="standard" hintLabel="Your dependents">
-    <input matInput required type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents"
-#dependents [(ngModel)] = "currProfile.dependents">
-<mat-label><mat-icon>people</mat-icon></mat-label>
-
-  </mat-form-field>
-  </div>
-  <div class = "col-sm-4">
-  <mat-form-field appearance="standard" hintLabel="Your pets">
-    <input matInput required type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets, if any"
-#pets [(ngModel)] = "currProfile.pets">
-<mat-label><mat-icon>favorite_border</mat-icon></mat-label>
-
-  </mat-form-field>
-  </div>
-
-  </div>
-  <br>
-
-  <div class="form-group row">
-  <div class = "col-sm-8">
-<button type="submit" [disabled]="!profileForm.valid" mat-raised-button>Submit</button>
-</div>
-</div>
-
-</form>
-</div>
-</div>
-<br>
-<br>
-
 </body>

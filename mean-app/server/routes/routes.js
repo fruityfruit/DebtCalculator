@@ -12,29 +12,39 @@ router.post('/register', ctrlAuth.register);
 
 router.post('/signin', ctrlAuth.signin);
 
-router.get('/opportunity/:user', ctrlOpp.getOpps);
-
-router.get('/edit/:id', ctrlOpp.editOpp);
-
-router.get('/opportunity/delete/:user/:id', ctrlOpp.deleteOpp);
-
-router.post('/opportunity', ctrlOpp.saveOpp);
-
-router.post('/edit/:id', ctrlOpp.updateOpp);
-
-router.get('/personal/:user', ctrlProfile.getProfile);
-
-router.post('/personal', ctrlProfile.updateProfile);
-
-router.get('/zillow/:id', ctrlResult.getZillow);
-
-router.get('/charts/:user', ctrlResult.getCharts);
-
 router.post('/username', ctrlAuth.updateUsername);
 
 router.post('/password', ctrlAuth.updatePassword);
 
 router.post('/delete', ctrlAuth.deleteUser);
+
+router.post('/opportunity', ctrlOpp.createOpp);
+
+router.get('/opportunity/:username', ctrlOpp.getOpps);
+
+router.get('/opportunity/edit/:id', ctrlOpp.editOpp);
+
+router.post('/opportunity/edit/:id', ctrlOpp.updateOpp);
+
+router.get('/opportunity/delete/:username/:id', ctrlOpp.deleteOpp);
+
+router.post('/personal', ctrlProfile.updateProfile);
+
+router.get('/personal/:user', ctrlProfile.getProfile);
+
+router.post('/debt', ctrlProfile.createDebt);
+
+router.get('/debt/:username', ctrlProfile.getDebts);
+
+router.get('/debt/edit/:id', ctrlProfile.editDebt);
+
+router.post('/debt/edit/:id', ctrlProfile.updateDebt);
+
+router.get('/debt/delete/:username/:id', ctrlProfile.deleteDebt);
+
+router.get('/zillow/:id', ctrlResult.getZillow);
+
+router.get('/charts/:user', ctrlResult.getCharts);
 
 router.post('/bls', ctrlResult.getBLS);
 

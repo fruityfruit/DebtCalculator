@@ -16,16 +16,16 @@
         </div>
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <label>Opportunity Name:</label>
-          <input required type="text" class="form-control" size="55" formControlName="oppName" placeholder="Give the opportunity a name">
+          <input required type="text" class="form-control" size="55" formControlName="name" placeholder="Give the opportunity a name">
         </div>
         <div class="form-group row">
           <div class="col-md-6">
             <label>City:</label>
-            <input required type="text" class="form-control" size="55" formControlName="cityName" placeholder="City the opportunity is in">
+            <input required type="text" class="form-control" size="55" formControlName="city" placeholder="City the opportunity is in">
           </div>
           <div class="col-md-6">
             <label>State:</label>
-            <select required id="state_dropdown" class="form-control" formControlName="stateName">
+            <select required id="state_dropdown" class="form-control" formControlName="state">
               <option value="">Select an option</option>
               <option value="AK">Alaska</option>
               <option value="AL">Alabama</option>
@@ -84,7 +84,7 @@
         </div>
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <label>Region:</label>
-          <select required id="region_dropdown" class="form-control" formControlName="code">
+          <select required id="region_dropdown" class="form-control" formControlName="region">
             <option value="">Please select the state of this opportunity first</option>
           </select>
         </div>
@@ -95,16 +95,43 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
               </div>
-              <input required type="number" class="form-control" formControlName="oppCost" placeholder="Projected opportunity income">
+              <input type="number" class="form-control" formControlName="income" placeholder="Projected opportunity income">
             </div>
           </div>
           <div class="col-md-6">
-            <label>Opportunity Debt:</label>
+            <label>Opportunity Principal:</label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
               </div>
-              <input required type="number" class="form-control" formControlName="oppDebt" placeholder="Projected opportunity debt">
+              <input type="number" class="form-control" formControlName="principal" placeholder="Projected opportunity principal">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>Opportunity Rate:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="number" class="form-control" formControlName="rate" placeholder="Projected opportunity rate">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>Opportunity annualCompounds:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="number" class="form-control" formControlName="annualCompounds" placeholder="Projected opportunity annualCompounds">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>Opportunity monthlyPayment:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input type="number" class="form-control" formControlName="monthlyPayment" placeholder="Projected opportunity monthlyPayment">
             </div>
           </div>
         </div>
@@ -137,24 +164,20 @@
           <th scope="col">Type</th>
           <th scope="col">City</th>
           <th scope="col">State</th>
-          <th scope="col">Cost</th>
-          <th scope="col">Debt</th>
+          <th scope="col">Income</th>
           <th scope="col">Relocate</th>
-          <!-- <th scope="col">Code</th> -->
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
         <tr class="table-info" *ngFor="let opportunity of opportunities">
-          <th scope="row">{{ opportunity.oppName }}</th>
+          <th scope="row">{{ opportunity.name }}</th>
           <td>{{ opportunity.type }}</td>
-          <td>{{ opportunity.cityName }}</td>
-          <td>{{ opportunity.stateName }}</td>
-          <td>{{ opportunity.oppCost }}</td>
-          <td>{{ opportunity.oppDebt }}</td>
+          <td>{{ opportunity.city }}</td>
+          <td>{{ opportunity.state }}</td>
+          <td>{{ opportunity.income }}</td>
           <td>{{ opportunity.move }}</td>
-          <!-- <td>{{ opportunity.code }}</td> -->
           <td><a [routerLink]="['/edit',opportunity._id]" class="btn btn-secondary">Edit</a></td>
           <td><a (click) = "deleteOpportunity(opportunity._id)" class="btn btn-danger">Delete</a></td>
         </tr>

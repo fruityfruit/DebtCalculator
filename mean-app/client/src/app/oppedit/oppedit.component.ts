@@ -13,16 +13,18 @@ export class OppeditComponent implements OnInit {
   opportunity: any = {};
   profileForm: FormGroup;
   formdata: Opportunity = {
+    username: '',
     type: '',
-    oppName: '',
-    cityName: '',
-    stateName: '',
-    oppCost: '',
-    oppDebt: '',
+    name: '',
+    state: '',
+    city: '',
+    region: '',
+    income: 0,
     move: '',
-    _id: '',
-    user: '',
-    code: ''
+    principal: 0,
+    rate: 0,
+    annualCompounds: 0,
+    monthlyPayment: 0
   }
 
   constructor(private activatedRouter: ActivatedRoute,
@@ -31,13 +33,16 @@ export class OppeditComponent implements OnInit {
     private builder: FormBuilder) {
       this.profileForm = this.builder.group({
         type: ['', Validators.required],
-        oppName: ['', Validators.required],
-        cityName: ['', Validators.required],
-        stateName: ['', Validators.required],
-        oppCost: ['', Validators.required],
-        oppDebt: ['', Validators.required],
+        name: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+        region: ['', Validators.required],
+        income: [0],
         move: ['', Validators.required],
-        code: ['', Validators.required]
+        principal: [0],
+        rate: [0],
+        annualCompounds: [0],
+        monthlyPayment: [0]
       });
     }
 
@@ -53,13 +58,16 @@ export class OppeditComponent implements OnInit {
 
   public onSubmit() {
     this.formdata.type = this.profileForm.value.type;
-    this.formdata.oppName = this.profileForm.value.oppName;
-    this.formdata.cityName = this.profileForm.value.cityName;
-    this.formdata.stateName = this.profileForm.value.stateName;
-    this.formdata.oppCost = this.profileForm.value.oppCost;
-    this.formdata.oppDebt = this.profileForm.value.oppDebt;
+    this.formdata.name = this.profileForm.value.name;
+    this.formdata.city = this.profileForm.value.city;
+    this.formdata.state = this.profileForm.value.state;
+    this.formdata.region = this.profileForm.value.region;
+    this.formdata.income = this.profileForm.value.income;
     this.formdata.move = this.profileForm.value.move;
-    this.formdata.code = this.profileForm.value.code;
+    this.formdata.principal = this.profileForm.value.principal;
+    this.formdata.rate = this.profileForm.value.rate;
+    this.formdata.annualCompounds = this.profileForm.value.annualCompounds;
+    this.formdata.monthlyPayment = this.profileForm.value.monthlyPayment;
     this.updateOpportunity();
   }
 
@@ -67,12 +75,6 @@ export class OppeditComponent implements OnInit {
     this.activatedRouter.params.subscribe(params => {
       this.oppService.editOpportunity(params['id']).subscribe(res => {
         this.opportunity = res;
-        this.opportunity.code = '';
-        var savedState = this.opportunity.stateName;
-        this.opportunity.stateName = '';
-        //this.profileForm.value.stateName = this.opportunity.stateName;
-        //this.opportunity.stateName = 'KS';
-        this.opportunity.stateName = savedState;
       });
     });
   }

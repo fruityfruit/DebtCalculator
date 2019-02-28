@@ -34,18 +34,15 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.updateLink();
-    // window.addEventListener("unload", function(event) {
-    //   console.log("unload event listener heard");
-    //   this.auth.signout();
-    // }.bind(this));
-  }
-  signout() {
+  public signout() {
     this.auth.signout();
     window.alert("You have been signed out.");
-    this.auth.callUpdateLink();
+    this.updateLink();
     this.router.navigateByUrl('/');
+  }
+
+  ngOnInit() {
+    this.updateLink();
   }
 
 }

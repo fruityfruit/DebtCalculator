@@ -3,35 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import * as Rx from 'rxjs';
 
-export interface TokenPayload {
-  password: string;
-  username: string;
-}
-
-export interface Profile {
-  username: string;
-  income: number;
-  debt: number;
-  interest: number;
-  payments: number;
-  dependents: number;
-  rent: number;
-  spending: number;
-  pets: number;
-  smoking: boolean;
-  drinking: boolean;
-}
-
 export interface PasswordPayload {
-  username: string;
-  oldPassword: string;
-  newPassword: string;
+  username: String;
+  oldPassword: String;
+  newPassword: String;
 }
 
 export interface UsernamePayload {
-  oldUsername: string;
-  newUsername: string;
-  password: string;
+  oldUsername: String;
+  newUsername: String;
+  password: String;
+}
+
+export interface TokenPayload {
+  password: String;
+  username: String;
 }
 
 interface TokenResponse {
@@ -43,8 +29,8 @@ interface TokenResponse {
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private token: string;
-  private username: string;
+  private token: String;
+  private username: String;
   public invokeEvent: Rx.Subject<any> = new Rx.Subject(); //used to update the navbar
 
   constructor(private http: HttpClient) {
@@ -119,27 +105,6 @@ export class AuthenticationService {
     } else {
       return false;
     }
-  }
-
-  public updateProfile(form: Profile) {
-    const obj = {
-      username: form.username,
-      income: form.income,
-      debt: form.debt,
-      interest: form.interest,
-      payments: form.payments,
-      dependents: form.dependents,
-      rent: form.rent,
-      spending: form.spending,
-      pets: form.pets,
-      smoking: form.smoking,
-      drinking: form.drinking
-    };
-    return this.http.post(`/api/personal`, obj);
-  }
-
-  public getProfile(user) {
-    return this.http.get(`/api/personal/${user}`);
   }
 
   // this method calls the "updateLink" method in the navbar component

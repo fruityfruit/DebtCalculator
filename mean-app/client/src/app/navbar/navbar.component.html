@@ -17,23 +17,20 @@
       <li class="nav-item">
         <a class="nav-link" href="#"  routerLink="/info" routerLinkActive="active">How it Works</a>
       </li>
-
-<div *ngIf="!this.auth.isLoggedIn()">
-	<li class="nav-item">
-		<a class="nav-link" id="toggle-link" href="#" routerLink="/{{this.routerLinkText}}" routerLinkActive="active">{{this.loggedInText}}</a>
-	</li>
-</div>
-<div *ngIf="this.auth.isLoggedIn()">
-	<li class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" routerLinkActive="active">{{this.loggedInText}}</a>
-		<div class="dropdown-menu">
-			<a class="dropdown-item" routerLink="/account" href="#">Account Management</a>
-			<a class="dropdown-item" (click)="signout()" href="#">Sign Out</a>
-		</div>
-	</li>
-	</div>
-
-
+      <div *ngIf="!this.auth.isLoggedIn()">
+        <li class="nav-item">
+          <a class="nav-link" id="toggle-link" href="#" routerLink="/{{this.routerLinkText}}" routerLinkActive="active">{{this.loggedInText}}</a>
+        </li>
+      </div>
+      <div *ngIf="this.auth.isLoggedIn()">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" routerLinkActive="active">{{this.loggedInText}}</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/account" href="#">Account Management</a>
+            <a class="dropdown-item" (click)="signout()" href="#">Sign Out</a>
+          </div>
+        </li>
+      </div>
     </ul>
   </div>
 </nav>

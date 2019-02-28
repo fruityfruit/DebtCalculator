@@ -10,44 +10,54 @@ import { Router } from '@angular/router';
   styleUrls: ['./opportunity.component.css']
 })
 export class OpportunityComponent implements OnInit {
-  username: string;
+  username: String;
   opportunities: Opportunity[];
+  profileForm: FormGroup;
   formdata: Opportunity = {
+    username: '',
     type: '',
-    oppName: '',
-    cityName: '',
-    stateName: '',
-    oppCost: '',
-    oppDebt: '',
+    name: '',
+    state: '',
+    city: '',
+    region: '',
+    income: 0,
     move: '',
-    _id: '',
-    user: '',
-    code: ''
+    principal: 0,
+    rate: 0,
+    annualCompounds: 0,
+    monthlyPayment: 0
   }
-  profileForm = this.builder.group({
-    type: ['', Validators.required],
-    oppName: ['', Validators.required],
-    cityName: ['', Validators.required],
-    stateName: ['', Validators.required],
-    oppCost: ['', Validators.required],
-    oppDebt: ['', Validators.required],
-    move: ['', Validators.required],
-    code: ['', Validators.required]
-  });
 
   constructor(private builder: FormBuilder, private oppService: OpportunityService,
-    private authService: AuthenticationService, private router: Router) { }
+    private authService: AuthenticationService, private router: Router) {
+      this.profileForm = this.builder.group({
+        type: ['', Validators.required],
+        name: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+        region: ['', Validators.required],
+        income: [0],
+        move: ['', Validators.required],
+        principal: [0],
+        rate: [0],
+        annualCompounds: [0],
+        monthlyPayment: [0]
+      });
+    }
 
   onSubmit() {
     this.formdata.type = this.profileForm.value.type;
-    this.formdata.oppName = this.profileForm.value.oppName;
-    this.formdata.cityName = this.profileForm.value.cityName;
-    this.formdata.stateName = this.profileForm.value.stateName;
-    this.formdata.oppCost = this.profileForm.value.oppCost;
-    this.formdata.oppDebt = this.profileForm.value.oppDebt;
+    this.formdata.name = this.profileForm.value.name;
+    this.formdata.city = this.profileForm.value.city;
+    this.formdata.state = this.profileForm.value.state;
+    this.formdata.region = this.profileForm.value.region;
+    this.formdata.income = this.profileForm.value.income;
     this.formdata.move = this.profileForm.value.move;
-    this.formdata.code = this.profileForm.value.code;
-    this.formdata.user = this.username;
+    this.formdata.principal = this.profileForm.value.principal;
+    this.formdata.rate = this.profileForm.value.rate;
+    this.formdata.annualCompounds = this.profileForm.value.annualCompounds;
+    this.formdata.monthlyPayment = this.profileForm.value.monthlyPayment;
+    this.formdata.username = this.username;
     this.oppService.addOpportunity(this.formdata).subscribe(() => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];
@@ -59,7 +69,7 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
-  deleteOpportunity(id: string) {
+  deleteOpportunity(id: String) {
     this.oppService.deleteOpportunity(this.username, id).subscribe(res => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];

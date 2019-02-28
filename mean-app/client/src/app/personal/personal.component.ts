@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthenticationService, Profile, TokenPayload } from '../authentication.service';
+import { AuthenticationService, TokenPayload } from '../authentication.service';
+import { ProfileService, Profile, Debt } from '../profile.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,21 +10,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./personal.component.css']
 })
 export class PersonalComponent implements OnInit {
-  username: string;
+  username: String;
   currProfile: any = {};
-  profileForm: FormGroup;
-  formdata: Profile = {
-    username: "",
-    income: 0,
-    debt: 0,
-    interest: 0,
-    payments: 0,
+  debts: Debt[];
+  profileFormProfile: FormGroup;
+  profileFormDebt: FormGroup;
+  formdataProfile: Profile = {
+    username: '',
+    state: '',
+    region: '',
     dependents: 0,
     rent: 0,
     spending: 0,
-    pets: 0,
-    smoking: false,
-    drinking: true
+    pets: 0
+  };
+  formdataDebt: Debt = {
+    username: '',
+    principal: 0,
+    rate: 0,
+    annualCompounds: 0,
+    monthlyPayment: 0
   };
   credentials: TokenPayload = {
     username: '',
@@ -31,35 +37,35 @@ export class PersonalComponent implements OnInit {
   };
 
   constructor(private builder: FormBuilder, private router: Router,
-    private auth: AuthenticationService) {
-    this.profileForm = this.builder.group({
-      income: ['', Validators.required],
-      debt: ['', Validators.required],
-      interest: ['', Validators.required],
-      payments: ['', Validators.required],
-      dependents: ['', Validators.required],
-      rent: ['', Validators.required],
-      spending: ['', Validators.required],
-      pets: ['', Validators.required],
-      smoking: [''],
-      drinking: [''],
+    private auth: AuthenticationService, private profService: ProfileService) {
+    this.profileFormProfile = this.builder.group({
+      state: ['', Validators.required],
+      region: ['', Validators.required],
+      dependents: [0, Validators.required],
+      rent: [0, Validators.required],
+      spending: [0, Validators.required],
+      pets: [0, Validators.required]
     });
+    this.profileFormDebt = this.builder.group({
+      principal: [0, Validators.required],
+      rate: [0, Validators.required],
+      annualCompounds: [0, Validators.required],
+      monthlyPayment: [0, Validators.required],
+    })
   }
 
-  public onSubmit() {
-    this.formdata.income = this.profileForm.value.income;
-    this.formdata.debt = this.profileForm.value.debt;
-    this.formdata.interest = this.profileForm.value.interest;
-    this.formdata.payments = this.profileForm.value.payments;
-    this.formdata.dependents = this.profileForm.value.dependents;
-    this.formdata.rent = this.profileForm.value.rent;
-    this.formdata.spending = this.profileForm.value.spending;
-    this.formdata.pets = this.profileForm.value.pets;
+  public onSubmitProfile() {
+    this.formdataProfile.dependents = this.profileFormProfile.value.dependents;
+    this.formdataProfile.rent = this.profileFormProfile.value.rent;
+    this.formdataProfile.spending = this.profileFormProfile.value.spending;
+    this.formdataProfile.pets = this.profileFormProfile.value.pets;
+    this.formdataProfile.state = this.profileFormProfile.value.state;
+    this.formdataProfile.region = this.profileFormProfile.value.region;
     if (this.username === null) {
       this.auth.register(this.credentials).subscribe(() => {
         this.username = this.auth.getUsername();
-        this.formdata.username = this.username;
-        this.auth.updateProfile(this.formdata).subscribe(() => {
+        this.formdataProfile.username = this.username;
+        this.profService.updateProfile(this.formdataProfile).subscribe(() => {
           this.router.navigate(['opportunity']);
         }, (err) => {
           console.log(err);
@@ -69,8 +75,8 @@ export class PersonalComponent implements OnInit {
       });
     }
     else {
-      this.formdata.username = this.username;
-      this.auth.updateProfile(this.formdata).subscribe(() => {
+      this.formdataProfile.username = this.username;
+      this.profService.updateProfile(this.formdataProfile).subscribe(() => {
         this.router.navigate(['opportunity']);
       }, (err) => {
         console.log(err);
@@ -78,11 +84,39 @@ export class PersonalComponent implements OnInit {
     }
   }
 
+  public onSubmitDebt() {
+    this.formdataDebt.principal = this.profileFormDebt.value.principal;
+    this.formdataDebt.rate = this.profileFormDebt.value.rate;
+    this.formdataDebt.annualCompounds = this.profileFormDebt.value.annualCompounds;
+    this.formdataDebt.monthlyPayment = this.profileFormDebt.value.monthlyPayment;
+    this.formdataDebt.username = this.username;
+    this.profService.createDebt(this.formdataDebt).subscribe(() => {
+      this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
+        this.debts = data['debts'];
+        this.profileFormDebt.reset();
+      });
+    }, (err) => {
+      console.log(err);
+      this.profileFormDebt.reset();
+    });
+  }
+
+  deleteDebt(id: String) {
+    this.profService.deleteDebt(this.username, id).subscribe(res => {
+      this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
+        this.debts = data['debts'];
+      });
+    });
+  }
+
   ngOnInit() {
     this.username = this.auth.getUsername();
     if (this.username !== null) {
-      this.auth.getProfile(this.username).subscribe(res => {
+      this.profService.getProfile(this.username).subscribe(res => {
         this.currProfile = res;
+      });
+      this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
+        this.debts = data['debts'];
       });
     }
   }

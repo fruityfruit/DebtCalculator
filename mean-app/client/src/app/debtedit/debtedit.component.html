@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row-fluid" style="margin-left: 50px; margin-right: 50px; background-color: white">
+    <h1 class="text-center" style="padding-top: 15px; margin-bottom: 20px">Debt Editing</h1>
+    <form class="ex1" style="margin-right: 25px" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <label>Debt Principal:</label>
+          <input required type="text" class="form-control" size="55" formControlName="principal" placeholder="Give the debt a principal"
+          #principal [(ngModel)] = "debt.principal">
+        </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <label>Debt Rate:</label>
+          <input required type="text" class="form-control" size="55" formControlName="rate" placeholder="Give the debt a rate"
+          #rate [(ngModel)] = "debt.rate">
+        </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <label>Debt annualCompounds:</label>
+          <input required type="text" class="form-control" size="55" formControlName="annualCompounds" placeholder="Give the debt a annualCompounds"
+          #annualCompounds [(ngModel)] = "debt.annualCompounds">
+        </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <label>Debt monthlyPayment:</label>
+          <input required type="text" class="form-control" size="55" formControlName="monthlyPayment" placeholder="Give the debt a monthlyPayment"
+          #monthlyPayment [(ngModel)] = "debt.monthlyPayment">
+        </div>
+        <div class="form-group row">
+          <div class="col">
+            <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Update</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

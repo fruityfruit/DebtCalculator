@@ -3,19 +3,22 @@ var Opportunity = mongoose.model('Opportunity'); //Opportunity schema from ../mo
 var User = mongoose.model('User'); //User schema from ../models/user.js
 
 //save a new opportunity to the database
-module.exports.saveOpp = function(req, res) {
+module.exports.createOpp = function(req, res) {
   var opp = new Opportunity();
   opp._id = new mongoose.Types.ObjectId();
   opp.type = req.body.type;
-  opp.oppName = req.body.oppName;
-  opp.cityName = req.body.cityName;
-  opp.stateName = req.body.stateName;
-  opp.oppCost = req.body.oppCost;
-  opp.oppDebt = req.body.oppDebt;
+  opp.name = req.body.name;
+  opp.state = req.body.state;
+  opp.city = req.body.city;
+  opp.region = req.body.region;
+  opp.income = req.body.income;
   opp.move = req.body.move;
-  opp.code = req.body.code;
+  opp.principal = req.body.principal;
+  opp.rate = req.body.rate;
+  opp.annualCompounds = req.body.annualCompounds;
+  opp.monthlyPayment = req.body.monthlyPayment;
   //adds the opportunity to the user
-  User.findOneAndUpdate({username: req.body.user}, {$push: {opportunities: opp._id}}, function(err, user) {
+  User.findOneAndUpdate({username: req.body.username}, {$push: {opportunities: opp._id}}, function(err, user) {
     if (err) {
       res.status(400).send(err);
     } else if (!user) {
@@ -37,7 +40,7 @@ module.exports.saveOpp = function(req, res) {
 //get opportunities from the database for a user
 module.exports.getOpps = function(req, res) {
   User.
-    findOne({username: req.params.user}). //finds the user in question
+    findOne({username: req.params.username}). //finds the user in question
     populate('opportunities'). //populates his/her opportunities
     exec(function(err, user) {
       if (err) {
@@ -48,7 +51,7 @@ module.exports.getOpps = function(req, res) {
         res.status(200).json({'opportunities': user.opportunities});
       }
     });
-  };
+};
 
 //gets a specific opportunity for editting purposes
 module.exports.editOpp = function(req, res) {
@@ -72,13 +75,16 @@ module.exports.updateOpp = function(req, res) {
       res.status(400).send("unable to find the opportunity");
     } else {
       opp.type = req.body.type;
-      opp.oppName = req.body.oppName;
-      opp.cityName = req.body.cityName;
-      opp.stateName = req.body.stateName;
-      opp.oppCost = req.body.oppCost;
-      opp.oppDebt = req.body.oppDebt;
+      opp.name = req.body.name;
+      opp.state = req.body.state;
+      opp.city = req.body.city;
+      opp.region = req.body.region;
+      opp.income = req.body.income;
       opp.move = req.body.move;
-      opp.code = req.body.code;
+      opp.principal = req.body.principal;
+      opp.rate = req.body.rate;
+      opp.annualCompounds = req.body.annualCompounds;
+      opp.monthlyPayment = req.body.monthlyPayment;
       opp.save()
         .then(opp => {
           res.status(200).json('Update complete');
@@ -93,7 +99,7 @@ module.exports.updateOpp = function(req, res) {
 //deletes an opportunity and the reference to it in the user that owns it
 module.exports.deleteOpp = function(req, res) {
   //finds the user that owns the opportunity and removes the opportunity from him/her
-  User.findOneAndUpdate({username: req.params.user}, {$pull: {opportunities: req.params.id}}, function(err, user) {
+  User.findOneAndUpdate({username: req.params.username}, {$pull: {opportunities: req.params.id}}, function(err, user) {
     if (err) {
       res.status(400).send(err);
     } else if (!user) {

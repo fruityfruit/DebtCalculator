@@ -74,11 +74,23 @@ npm test
 
 ## Deploying our project
 
-To deploy our project on Google Cloud Platform, we opened a Cloud Shell session, cloned our repo, ran:
+To deploy our project on Google Cloud Platform, we opened a Cloud Shell session, cloned our repo, ran the following commands in the mean-app/client directory:
+```
+npm install
+```
+```
+npm run buildProd
+```
+```
+cp -r dist/ ..
+```
+Then, in the mean-app directory, we ran:
+```
+npm install
+```
 ```
 export NODE_ENV='production'
 ```
-And then ran:
 ```
 gcloud app deploy
 ```

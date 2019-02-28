@@ -48,3 +48,4 @@ process.on('SIGTERM', function() {
 // Bring in schemas and models
 require('./opportunity');
 require('./user');
+require('./debt');

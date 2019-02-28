@@ -3,16 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 export interface Opportunity {
-  type: string;
-  oppName: string;
-  cityName: string;
-  stateName: string;
-  oppCost: string;
-  oppDebt: string;
-  move: string;
-  _id: string;
-  user: string;
-  code: string;
+  username: String;
+  type: String;
+  name: String;
+  state: String;
+  city: String;
+  region: String;
+  income: Number;
+  move: String;
+  principal: Number;
+  rate: Number;
+  annualCompounds: Number;
+  monthlyPayment: Number;
 }
 
 @Injectable({
@@ -24,43 +26,49 @@ export class OpportunityService {
 
   public addOpportunity(form: Opportunity) {
     const obj = {
+      username: form.username,
       type: form.type,
-      oppName: form.oppName,
-      cityName: form.cityName,
-      stateName: form.stateName,
-      oppCost: form.oppCost,
-      oppDebt: form.oppDebt,
+      name: form.name,
+      city: form.city,
+      state: form.state,
+      region: form.region,
+      income: form.income,
       move: form.move,
-      user: form.user,
-      code: form.code
+      principal: form.principal,
+      rate: form.rate,
+      annualCompounds: form.annualCompounds,
+      monthlyPayment: form.monthlyPayment
     };
     return this.http.post(`/api/opportunity`, obj);
   }
 
-  public getOpportunities(user: string) {
-    return this.http.get(`/api/opportunity/${user}`);
+  public getOpportunities(username: String) {
+    return this.http.get(`/api/opportunity/${username}`);
   }
 
-  public editOpportunity(id: string) {
-    return this.http.get(`/api/edit/${id}`);
+  public editOpportunity(id: String) {
+    return this.http.get(`/api/opportunity/edit/${id}`);
   }
 
-  public updateOpportunity(form: Opportunity, id: string) {
+  public updateOpportunity(form: Opportunity, id: String) {
     const obj = {
       type: form.type,
-      oppName: form.oppName,
-      cityName: form.cityName,
-      stateName: form.stateName,
-      oppCost: form.oppCost,
-      oppDebt: form.oppDebt,
+      name: form.name,
+      city: form.city,
+      state: form.state,
+      region: form.region,
+      income: form.income,
       move: form.move,
-      code: form.code
-      };
-    return this.http.post(`/api/edit/${id}`, obj);
+      principal: form.principal,
+      rate: form.rate,
+      annualCompounds: form.annualCompounds,
+      monthlyPayment: form.monthlyPayment
+    };
+    return this.http.post(`/api/opportunity/edit/${id}`, obj);
   }
 
-  public deleteOpportunity(user: string, id: string) {
-    return this.http.get(`/api/opportunity/delete/${user}/${id}`);
+  public deleteOpportunity(username: String, id: String) {
+    return this.http.get(`/api/opportunity/delete/${username}/${id}`);
   }
 
 }

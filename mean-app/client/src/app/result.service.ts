@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 export interface ResultSet {
-  oppName: string;
-  city: string;
-  zillowData: string;
+  oppName: String;
+  city: String;
+  zillowData: String;
 }
 
 @Injectable({
@@ -13,11 +13,11 @@ export interface ResultSet {
 export class ResultService {
   constructor(private http: HttpClient) { }
 
-  public getZillowData(id: string) {
+  public getZillowData(id: String) {
     return this.http.get(`/api/zillow/${id}`);
   }
 
-  public getChartsData(user: string) {
+  public getChartsData(user: String) {
     return this.http.get(`/api/charts/${user}`);
   }
 
