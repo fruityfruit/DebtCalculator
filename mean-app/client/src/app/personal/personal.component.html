@@ -40,14 +40,14 @@
             <mat-form-field appearance="standard" hintLabel="Your state">
               <input matInput required type="text" class="form-control" size="56" formControlName="state" placeholder="What state"
               #state [(ngModel)] = "currProfile.state">
-              <mat-label><mat-icon>people</mat-icon></mat-label>
+              <mat-label><mat-icon>home</mat-icon></mat-label>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Your region">
               <input matInput required type="text" class="form-control" size="56" formControlName="region" placeholder="What region"
               #region [(ngModel)] = "currProfile.region">
-              <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+              <mat-label><mat-icon>home</mat-icon></mat-label>
             </mat-form-field>
           </div>
         </div>
@@ -59,13 +59,13 @@
                 <div class="col-md-6">
                   <mat-form-field appearance="standard" hintLabel="Your principal">
                     <input matInput required type="number" class="form-control" size="56" formControlName="principal" placeholder="What principal">
-                    <mat-label><mat-icon>people</mat-icon></mat-label>
+                    <mat-label><mat-icon>money</mat-icon></mat-label>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field appearance="standard" hintLabel="Your rate">
                     <input matInput required type="number" class="form-control" size="56" formControlName="rate" placeholder="What rate">
-                    <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+                    <mat-label><mat-icon>transform</mat-icon></mat-label>
                   </mat-form-field>
                 </div>
               </div>
@@ -73,48 +73,71 @@
                 <div class="col-md-6">
                   <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
                     <input matInput required type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="What annualCompounds">
-                    <mat-label><mat-icon>people</mat-icon></mat-label>
+                    <mat-label><mat-icon>show_chart</mat-icon></mat-label>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
                     <input matInput required type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="What monthlyPayment">
-                    <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+                    <mat-label><mat-icon>money_off</mat-icon></mat-label>
                   </mat-form-field>
                 </div>
               </div>
             </div>
             <div class="col-md-2" style="padding-right: 0px">
-              <button type="submit" style="top: calc(50% - 18px); left: calc(100% - 90px)" [disabled]="!profileFormDebt.valid" mat-raised-button>Add Debt</button>
+              <button type="submit" style="top: calc(50% - 18px); left: calc(100% - 90px)"
+               [disabled]="!profileFormDebt.valid" mat-raised-button>Add Debt</button>
             </div>
           </div>
         </form>
         <div class="form-group row" style="margin-right: 0px">
-            <button style="left: calc(100% - 121px);" type="submit" [disabled]="!profileFormProfile.valid" mat-raised-button>Submit Profile</button>
+            <button style="left: calc(100% - 121px);" type="submit"
+            [disabled]="!profileFormProfile.valid" mat-raised-button>Submit Profile</button>
         </div>
       </form>
-      <table class="table table-hover" *ngIf="debts && debts.length">
-        <thead>
-          <tr>
-            <th scope="col">Principal</th>
-            <th scope="col">Rate</th>
-            <th scope="col">annualCompounds</th>
-            <th scope="col">monthlyPayment</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-info" *ngFor="let debt of debts">
-            <th scope="row">{{ debt.principal }}</th>
-            <td>{{ debt.rate }}</td>
-            <td>{{ debt.annualCompounds }}</td>
-            <td>{{ debt.monthlyPayment }}</td>
-            <td><a [routerLink]="['/debtedit',debt._id]" class="btn btn-secondary">Edit</a></td>
-            <td><a (click) = "deleteDebt(debt._id)" class="btn btn-danger">Delete</a></td>
-          </tr>
-        </tbody>
-      </table>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="debts && debts.length">>
+      <!-- Position Column -->
+      <ng-container matColumnDef="principal">
+        <th mat-header-cell *matHeaderCellDef> Principal </th>
+        <td mat-cell *matCellDef="let debt"> {{debt.principal}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="rate">
+        <th mat-header-cell *matHeaderCellDef> Rate </th>
+        <td mat-cell *matCellDef="let debt"> {{debt.rate}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="annualcompounds">
+        <th mat-header-cell *matHeaderCellDef> Annual Compounds </th>
+        <td mat-cell *matCellDef="let debt"> {{debt.annualCompounds}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="monthlypayment">
+        <th mat-header-cell *matHeaderCellDef> Monthly Payment </th>
+        <td mat-cell *matCellDef="let debt"> {{debt.monthlyPayment}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let debt"><a [routerLink]="['/debtedit',debt._id]">
+          <button mat-icon-button><mat-icon>create</mat-icon></button></a></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let debt"><a (click) = "deleteDebt(debt._id)">
+          <button mat-icon-button><mat-icon>delete</mat-icon></button></a></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
     </div>
   </div>
+   <br>
+   <br>
 </div>
