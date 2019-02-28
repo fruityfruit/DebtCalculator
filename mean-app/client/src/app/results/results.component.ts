@@ -92,19 +92,22 @@ export class ResultsComponent implements OnInit {
       var oppNameList=[];
       opportunities.forEach(function(item, index) {
         var num = 0;
-        var remainingBalance=principle;
+        var net:number =0;
         oppNameList.push(item.oppName);
         while(num<=20){
           var calculatedDebt=principle*(1+intrestRate*num/100);
           var amountOwed=calculatedDebt-yearlyPayment*num;
           if(item.oppCost>0){
+            console.log(net);
             if (amountOwed>0){
               var total=item.oppCost*(num+1);
-              netPoints.push(total-yearlyPayment);
+              net=total-yearlyPayment;
+              netPoints.push(net);
             }
             else{
-              var total=item.oppCost*(num+1);
-              netPoints.push(total);
+              var total:number = item.oppCost;
+              net= +net+ +total;
+              netPoints.push(<number>net);
             }
         }
         else {
