@@ -51,44 +51,46 @@
             </mat-form-field>
           </div>
         </div>
-        <h3 class="mdc-typography--headline1" style="text-align: center">Enter your debt</h3>
+        <h3 class="mdc-typography--headline1" style="text-align: center">Enter Your Debt</h3>
         <form class="ex1" [formGroup]="profileFormDebt" (ngSubmit)="onSubmitDebt()">
           <div class="form-group row">
-            <div class="col-md-4">
-              <mat-form-field appearance="standard" hintLabel="Your principal">
-                <input matInput required type="number" class="form-control" size="56" formControlName="principal" placeholder="What principal">
-                <mat-label><mat-icon>people</mat-icon></mat-label>
-              </mat-form-field>
+            <div class="row col-md-10" style="margin-left: 0px">
+              <div class="form-group row" style="width: 100%">
+                <div class="col-md-6">
+                  <mat-form-field appearance="standard" hintLabel="Your principal">
+                    <input matInput required type="number" class="form-control" size="56" formControlName="principal" placeholder="What principal">
+                    <mat-label><mat-icon>people</mat-icon></mat-label>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="standard" hintLabel="Your rate">
+                    <input matInput required type="number" class="form-control" size="56" formControlName="rate" placeholder="What rate">
+                    <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="form-group row" style="width: 100%">
+                <div class="col-md-6">
+                  <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
+                    <input matInput required type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="What annualCompounds">
+                    <mat-label><mat-icon>people</mat-icon></mat-label>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
+                    <input matInput required type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="What monthlyPayment">
+                    <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
+                  </mat-form-field>
+                </div>
+              </div>
             </div>
-            <div class="col-md-4">
-              <mat-form-field appearance="standard" hintLabel="Your rate">
-                <input matInput required type="number" class="form-control" size="56" formControlName="rate" placeholder="What rate">
-                <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-md-4">
-              <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
-                <input matInput required type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="What annualCompounds">
-                <mat-label><mat-icon>people</mat-icon></mat-label>
-              </mat-form-field>
-            </div>
-            <div class="col-md-4">
-              <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
-                <input matInput required type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="What monthlyPayment">
-                <mat-label><mat-icon>favorite_border</mat-icon></mat-label>
-              </mat-form-field>
-            </div>
-            <div class="col-md-4">
-              <button type="submit" [disabled]="!profileFormDebt.valid" mat-raised-button>Add Debt</button>
+            <div class="col-md-2" style="padding-right: 0px">
+              <button type="submit" style="top: calc(50% - 18px); left: calc(100% - 90px)" [disabled]="!profileFormDebt.valid" mat-raised-button>Add Debt</button>
             </div>
           </div>
         </form>
-        <div class="form-group row">
-          <div>
-            <button type="submit" style="float: right" [disabled]="!profileFormProfile.valid" mat-raised-button>Submit Profile</button>
-          </div>
+        <div class="form-group row" style="margin-right: 0px">
+            <button style="left: calc(100% - 121px);" type="submit" [disabled]="!profileFormProfile.valid" mat-raised-button>Submit Profile</button>
         </div>
       </form>
       <table class="table table-hover" *ngIf="debts && debts.length">
