@@ -4,3 +4,8 @@ div.ex1 {
 div.ex2 {
   margin-left: 200px;
 }
+div.cen {
+  max-width: 1200px;
+  overflow:hidden;
+  margin: auto;
+}

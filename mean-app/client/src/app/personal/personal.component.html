@@ -85,12 +85,12 @@
               </div>
             </div>
             <div class="col-md-2" style="padding-right: 0px">
-              <button type="submit" style="top: calc(50% - 18px); left: calc(100% - 90px)" [disabled]="!profileFormDebt.valid" mat-raised-button>Add Debt</button>
+              <button type="submit" style="top: calc(50% - 18px); left: calc(100% - 90px); color: white; background-color: #78C2AC" [disabled]="!profileFormDebt.valid" mat-raised-button>Add Debt</button>
             </div>
           </div>
         </form>
         <div class="form-group row" style="margin-right: 0px">
-            <button style="left: calc(100% - 121px);" type="submit" [disabled]="!profileFormProfile.valid" mat-raised-button>Submit Profile</button>
+            <button style="left: calc(100% - 121px); color: white; background-color: #78C2AC" type="submit" [disabled]="!profileFormProfile.valid" mat-raised-button>Submit Profile</button>
         </div>
       </form>
       <table class="table table-hover" *ngIf="debts && debts.length">
