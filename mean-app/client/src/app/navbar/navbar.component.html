@@ -4,26 +4,26 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" style="width: 100%">
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/personal" routerLinkActive="active">Personal Page</a>
+        <a class="nav-link" href="#" routerLink="/personal" routerLinkActive="active">Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/opportunity" routerLinkActive="active">Opportunity Comparison</a>
+        <a class="nav-link" href="#" routerLink="/opportunity" routerLinkActive="active">Opportunities</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"  routerLink="/results" routerLinkActive="active">Results</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"  routerLink="/info" routerLinkActive="active">How it Works</a>
+        <a class="nav-link" href="#"  routerLink="/info" routerLinkActive="active">How It Works</a>
       </li>
-      <div *ngIf="!this.auth.isLoggedIn()">
-        <li class="nav-item">
+      <div *ngIf="!this.auth.isLoggedIn()" style="margin: auto">
+        <li class="nav-item" style="width: 100%">
           <a class="nav-link" id="toggle-link" href="#" routerLink="/{{this.routerLinkText}}" routerLinkActive="active">{{this.loggedInText}}</a>
         </li>
       </div>
-      <div *ngIf="this.auth.isLoggedIn()">
-        <li class="nav-item dropdown">
+      <div *ngIf="this.auth.isLoggedIn()" style="margin: auto">
+        <li class="nav-item dropdown" style="width: 100%">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" routerLinkActive="active">{{this.loggedInText}}</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" routerLink="/account" href="#">Account Management</a>

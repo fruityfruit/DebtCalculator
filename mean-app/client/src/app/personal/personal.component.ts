@@ -89,16 +89,36 @@ export class PersonalComponent implements OnInit {
     this.formdataDebt.rate = this.profileFormDebt.value.rate;
     this.formdataDebt.annualCompounds = this.profileFormDebt.value.annualCompounds;
     this.formdataDebt.monthlyPayment = this.profileFormDebt.value.monthlyPayment;
-    this.formdataDebt.username = this.username;
-    this.profService.createDebt(this.formdataDebt).subscribe(() => {
-      this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
-        this.debts = data['debts'];
+    if (this.username === null) {
+      this.auth.register(this.credentials).subscribe(() => {
+        this.username = this.auth.getUsername();
+        this.formdataDebt.username = this.username;
+        this.profService.createDebt(this.formdataDebt).subscribe(() => {
+          this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
+            this.debts = data['debts'];
+            this.profileFormDebt.reset();
+          });
+        }, (err) => {
+          console.log(err);
+          this.profileFormDebt.reset();
+        });
+      }, (err) => {
+        console.log(err);
         this.profileFormDebt.reset();
       });
-    }, (err) => {
-      console.log(err);
-      this.profileFormDebt.reset();
-    });
+    }
+    else {
+      this.formdataDebt.username = this.username;
+      this.profService.createDebt(this.formdataDebt).subscribe(() => {
+        this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
+          this.debts = data['debts'];
+          this.profileFormDebt.reset();
+        });
+      }, (err) => {
+        console.log(err);
+        this.profileFormDebt.reset();
+      });
+    }
   }
 
   deleteDebt(id: String) {

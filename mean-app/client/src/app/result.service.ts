@@ -17,11 +17,11 @@ export class ResultService {
     return this.http.get(`/api/zillow/${id}`);
   }
 
-  public getChartsData(user: String) {
-    return this.http.get(`/api/charts/${user}`);
+  public getChartsData(username: String) {
+    return this.http.get(`/api/charts/${username}`);
   }
 
-  public getBLSData(codes) {
-    return this.http.post(`/api/bls`, codes);
+  public getBLSData(regions: String[]) {
+    return this.http.post(`/api/bls`, regions);
   }
 }

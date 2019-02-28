@@ -30,7 +30,7 @@ router.get('/opportunity/delete/:username/:id', ctrlOpp.deleteOpp);
 
 router.post('/personal', ctrlProfile.updateProfile);
 
-router.get('/personal/:user', ctrlProfile.getProfile);
+router.get('/personal/:username', ctrlProfile.getProfile);
 
 router.post('/debt', ctrlProfile.createDebt);
 
@@ -44,7 +44,7 @@ router.get('/debt/delete/:username/:id', ctrlProfile.deleteDebt);
 
 router.get('/zillow/:id', ctrlResult.getZillow);
 
-router.get('/charts/:user', ctrlResult.getCharts);
+router.get('/charts/:username', ctrlResult.getCharts);
 
 router.post('/bls', ctrlResult.getBLS);
 
