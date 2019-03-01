@@ -6,6 +6,7 @@ import { OpportunityService, Opportunity } from '../opportunity.service';
 import { ResultService, ResultSet } from '../result.service';
 import { ProfileService, Profile, Debt } from '../profile.service';
 import { Router } from '@angular/router';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-results',
@@ -35,6 +36,8 @@ export class ResultsComponent implements OnInit {
   opportunities: Opportunity[] = [];
   newUsername: string;
   newPassword: string;
+  dataSource = new MatTableDataSource(this.zillowResults);
+  displayedColumns: string[] = ['name', 'city', 'estimate'];
 
   constructor(private auth: AuthenticationService,
     private resultService: ResultService,
@@ -411,6 +414,7 @@ export class ResultsComponent implements OnInit {
           };
           this.zillowResults.push(result);
         }
+        this.dataSource.data = this.zillowResults;
       }, (err) => {
         var result: ResultSet = {
           oppName: oppName,
@@ -418,6 +422,7 @@ export class ResultsComponent implements OnInit {
           zillowData: 'Zillow does not have estimate data for this city.'
         };
         this.zillowResults.push(result);
+        this.dataSource.data = this.zillowResults;
       });
     }
 

@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { AuthenticationService, TokenPayload } from '../authentication.service';
 import { ProfileService, Profile, Debt } from '../profile.service';
 import { Router } from '@angular/router';
-import {MatTableDataSource, MatTable} from '@angular/material';
+import {MatTableDataSource} from '@angular/material';
 import {ViewChild} from '@angular/core';
-//import { DataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-personal',
@@ -40,7 +39,6 @@ export class PersonalComponent implements OnInit {
   };
   dataSource = new MatTableDataSource(this.debts);
   displayedColumns: string[] = ['principal', 'rate', 'annualcompounds', 'monthlypayment', 'edit', 'delete'];
-  //@ViewChild(MatTable) table: MatTable<any>;
 
   constructor(private builder: FormBuilder, private router: Router,
     private auth: AuthenticationService, private profService: ProfileService) {
@@ -56,8 +54,8 @@ export class PersonalComponent implements OnInit {
       principal: [0, Validators.required],
       rate: [0, Validators.required],
       annualCompounds: [0, Validators.required],
-      monthlyPayment: [0, Validators.required],
-    })
+      monthlyPayment: [0, Validators.required]
+    });
   }
 
   public onSubmitProfile() {
@@ -141,6 +139,7 @@ export class PersonalComponent implements OnInit {
 
 
   ngOnInit() {
+    this.profileFormDebt.reset();
     this.username = this.auth.getUsername();
     if (this.username !== null) {
       this.profService.getProfile(this.username).subscribe(res => {
