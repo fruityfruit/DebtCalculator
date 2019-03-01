@@ -30,6 +30,7 @@ export class ResultsComponent implements OnInit {
     spending: 0,
     pets: 0
   };
+  loop : Number =20;
   debts: Debt[] = [];
   opportunities: Opportunity[] = [];
   newUsername: string;
@@ -127,7 +128,7 @@ export class ResultsComponent implements OnInit {
             var points=[];
             var name="Debt Source " + (+counter+1);
             debtnames.push(name);
-            while(num<=20){
+            while(num<=this.loop){
             //  var calculatedDebt=principle*(1+intrestRate*num/100);
             var debt=this.debts[counter];
             var calculatedDebt=0;
@@ -171,7 +172,7 @@ export class ResultsComponent implements OnInit {
           }
           if(this.debts.length>1){
           var num=0;
-          while (num<=20){
+          while (num<=this.loop){
             var addedDebt=debtProjectionPoints[0][num];
             var counter=1;
             while (counter<this.debts.length){
@@ -191,7 +192,114 @@ export class ResultsComponent implements OnInit {
             this.debtProjection.data['datasets'][counter]=newSeries2;
             this.debtProjection.update();
           }
+          var yearlyPayment=[];
+          var netIncomePoints=[];
+          var debtCounter=0;
+            while(debtCounter<this.debts.length){
+              var yearly = [];
+          //    yearly.push(+this.debts[debtCounter].monthlyPayment*12);
+              var num=0;
+              var total= +this.debts[debtCounter].principal;
+              while (num<=this.loop){
+                total=total + (+this.debts[debtCounter].principal* +this.debts[debtCounter].rate/100) - (+this.debts[debtCounter].monthlyPayment*12);
+              //  console.log(total);
+                if (total>=0){
+                  yearly.push(+this.debts[debtCounter].monthlyPayment*12);
+                }
+                else {
+                  yearly.push(0);
+                }
+                num=num+1;
+              }
+              yearlyPayment.push(yearly);
+              debtCounter=debtCounter+1;
+              }
+            var oppCounter =0;
+           while (oppCounter < this.opportunities.length){
+             var yearly=[];
+             var num=0;
+             var total = +this.opportunities[oppCounter].principal;
+             while(num<=this.loop){
+               total=total + (+this.opportunities[oppCounter].principal* +this.opportunities[oppCounter].rate/100) - (+this.opportunities[oppCounter].monthlyPayment*12);
+               if (total>=0){
+                 yearly.push(+this.opportunities[oppCounter].monthlyPayment*12);
+               }
+               else {
+                 yearly.push(0);
+               }
+               num=num+1;
+             }
+             yearlyPayment.push(yearly);
+            oppCounter =oppCounter+1;
+          }
+      //  console.log(yearlyPayment);
+      var oppCounter=0;
+      var netPoints=[];
+      var oppNameList=[];
+      while (oppCounter<this.opportunities.length){
+        oppNameList.push(this.opportunities[oppCounter].name);
+        var net=[];
+        var num =0;
+        var total= +this.opportunities[oppCounter].income;
+        while(num<=this.loop){
+          var debtLoop=0;
+          while (debtLoop<yearlyPayment.length){
+            total=total - +yearlyPayment[debtLoop][num];
+            debtLoop=debtLoop+1;
+          }
+          net.push(total);
+          total=total+ +this.opportunities[oppCounter].income;
+          num=num+1;
+        }
+        netPoints.push(net);
+        oppCounter=oppCounter+1;
+      }
+      //console.log(netPoints);
+          this.netIncome = new Chart('canvas4', {
+            title: {
+              display: true,
+              text:"Debt Projection from Opportunities",
+            },
+            legend: {
+              horizontalAlign: "center", // "left" , "right"
+              verticalAlign: "bottom",  // "top" , "center"
+              fontSize: 15
+            },
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: oppNameList[0],
+                data: netPoints[0],
+                borderColor: colors[0],
+                pointBackgroundColor: colors[0],
+                backgroundColor: 'transparent'
+              }],
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
 
+          var oppCounter=1;
+          while(oppCounter<this.opportunities.length){
+          var newSeries3 = {
+            data: netPoints[oppCounter],
+            label: oppNameList[oppCounter],
+            borderColor: colors[oppCounter],
+            pointBackgroundColor: colors[oppCounter],
+            backgroundColor: 'transparent'
+          };
+            this.netIncome.data['datasets'][oppCounter]=newSeries3;
+            this.netIncome.update();
+            oppCounter=oppCounter+1;
+          }
 
       //     var numOpp=0;
       //     var netIncomeTemp=[];
@@ -227,52 +335,8 @@ export class ResultsComponent implements OnInit {
       //       netPoints=[];
       //       numOpp=numOpp+1;
       //     });
-      //     this.netIncome = new Chart('canvas4', {
-      //       title: {
-      //         display: true,
-      //         text:"Debt Projection from Opportunities",
-      //       },
-      //       legend: {
-      //         horizontalAlign: "center", // "left" , "right"
-      //         verticalAlign: "bottom",  // "top" , "center"
-      //         fontSize: 15
-      //       },
-      //       type: 'line',
-      //       data: {
-      //         labels: labels,
-      //         datasets: [{
-      //           label: oppNameList[0],
-      //           data: netIncomeTemp[0],
-      //           borderColor: colors[0],
-      //           pointBackgroundColor: colors[0],
-      //           backgroundColor: 'transparent'
-      //         }],
-      //       },
-      //       options: {
-      //         scales: {
-      //           yAxes: [{
-      //             ticks: {
-      //               beginAtZero: true
-      //             }
-      //           }]
-      //         }
-      //       }
-      //     });
-      //     var num=1;
-      //     while(num<numOpp){
-      //       var newSeries = {
-      //
-      //         data: netIncomeTemp[num],
-      //         label: oppNameList[num],
-      //         borderColor: colors[num],
-      //         pointBackgroundColor: colors[num],
-      //         backgroundColor: 'transparent'
-      //
-      //       };
-      //       //console.log(this.netIncome.data['datasets']);
-      //       //need to find way to get newSeries into datasets which is undefinded
-      //       this.netIncome.data['datasets'][num]=newSeries;
-      //       this.netIncome.update();
+
+
       //       //this.netIncome.render();
       //       //this.netIncome.options.data(netIncomeTemp[1]);
       //       num=num+1;
