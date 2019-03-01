@@ -412,7 +412,7 @@ export class ResultsComponent implements OnInit {
           var result: ResultSet = {
             oppName: oppName,
             city: city,
-            zillowData: data['average']
+            zillowData: this.auth.formatMoney(data['average'])
           };
           this.zillowResults.push(result);
         }
@@ -435,8 +435,8 @@ export class ResultsComponent implements OnInit {
         var ids = [];
         var counter = 0;
         data['opportunities'].forEach(function(item, index) {
-          names.push(item.oppName);
-          cities.push(item.cityName);
+          names.push(item.name);
+          cities.push(item.city);
           ids.push(item._id);
           counter = counter + 1;
         });

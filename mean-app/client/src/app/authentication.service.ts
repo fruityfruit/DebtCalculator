@@ -111,4 +111,11 @@ export class AuthenticationService {
   public callUpdateLink() {
     this.invokeEvent.next("UpdateLink");
   }
+
+  public formatMoney(money: number) {
+    var rounded = String(money.toFixed(2));
+    var leadDigits = 0;
+    if (rounded.substr(0,rounded.indexOf(".")).length > 3) leadDigits = (rounded.length % 3);
+    return "" + (leadDigits ? rounded.substr(0, leadDigits) + "," : "") + rounded.substr(leadDigits).replace(/(\d{3})(?=\d)/g, "$1" + ",");
+  }
 }
