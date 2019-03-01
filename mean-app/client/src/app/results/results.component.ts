@@ -195,7 +195,7 @@ export class ResultsComponent implements OnInit {
             this.debtProjection.data['datasets'][counter]=newSeries2;
             this.debtProjection.update();
           }
-          var yearlyPayment=[];
+          var yearlyPaymentDebts=[];
           var netIncomePoints=[];
           var debtCounter=0;
             while(debtCounter<this.debts.length){
@@ -214,9 +214,10 @@ export class ResultsComponent implements OnInit {
                 }
                 num=num+1;
               }
-              yearlyPayment.push(yearly);
+              yearlyPaymentDebts.push(yearly);
               debtCounter=debtCounter+1;
               }
+          var yearlyPaymentOpp=[];
             var oppCounter =0;
            while (oppCounter < this.opportunities.length){
              var yearly=[];
@@ -232,10 +233,10 @@ export class ResultsComponent implements OnInit {
                }
                num=num+1;
              }
-             yearlyPayment.push(yearly);
+             yearlyPaymentOpp.push(yearly);
             oppCounter =oppCounter+1;
           }
-      //  console.log(yearlyPayment);
+       //console.log(yearlyPaymentOpp);
       var oppCounter=0;
       var netPoints=[];
       var oppNameList=[];
@@ -246,10 +247,11 @@ export class ResultsComponent implements OnInit {
         var total= +this.opportunities[oppCounter].income;
         while(num<=this.loop){
           var debtLoop=0;
-          while (debtLoop<yearlyPayment.length){
-            total=total - +yearlyPayment[debtLoop][num];
+          while (debtLoop<yearlyPaymentDebts.length){
+            total=total - +yearlyPaymentDebts[debtLoop][num];
             debtLoop=debtLoop+1;
           }
+          total=total- +yearlyPaymentOpp[oppCounter][num];
           net.push(total);
           total=total+ +this.opportunities[oppCounter].income;
           num=num+1;
