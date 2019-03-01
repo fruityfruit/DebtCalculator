@@ -39,7 +39,7 @@ export class ResultsComponent implements OnInit {
   dataSource = new MatTableDataSource(this.zillowResults);
   displayedColumns: string[] = ['name', 'city', 'estimate'];
 
-  constructor(private auth: AuthenticationService,
+  constructor(public auth: AuthenticationService,
     private resultService: ResultService,
     private oppService: OpportunityService,
     private profService: ProfileService,
