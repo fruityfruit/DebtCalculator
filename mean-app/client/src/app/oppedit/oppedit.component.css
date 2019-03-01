@@ -1,7 +1,37 @@
-h1.ex1 {
-  margin-left: 300px;
+form.ex1 {
 }
 
-form.ex1 {
-margin-left: 25px;
+.example-container {
+  margin-left: 225px;
 }
+
+.example-container > * {
+}
+
+body {
+  background-color: white !important;
+}
+
+div.cen {
+  width: 960px;
+  overflow:hidden;
+  margin: auto;
+  padding-bottom: 50px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.container-fluid{
+  overflow-y: hidden;
+}
+
+table {
+  width: 100%;
+}
+
+ ::ng-deep th.mat-header-cell{
+     width: 200px;
+     min-width: 140px;
+ }

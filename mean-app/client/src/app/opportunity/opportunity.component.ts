@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { OpportunityService, Opportunity } from '../opportunity.service';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import {MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-opportunity',
@@ -26,7 +27,9 @@ export class OpportunityComponent implements OnInit {
     rate: 0,
     annualCompounds: 0,
     monthlyPayment: 0
-  }
+  };
+  dataSource = new MatTableDataSource(this.opportunities);
+  displayedColumns: string[] = ['name', 'city', 'state', 'income', 'edit', 'delete'];
 
   constructor(private builder: FormBuilder, private oppService: OpportunityService,
     private authService: AuthenticationService, private router: Router) {
@@ -61,6 +64,7 @@ export class OpportunityComponent implements OnInit {
     this.oppService.addOpportunity(this.formdata).subscribe(() => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];
+        this.dataSource.data = this.opportunities;
         this.profileForm.reset();
       });
     }, (err) => {
@@ -73,6 +77,7 @@ export class OpportunityComponent implements OnInit {
     this.oppService.deleteOpportunity(this.username, id).subscribe(res => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];
+        this.dataSource.data = this.opportunities;
       });
     });
   }
@@ -85,6 +90,7 @@ export class OpportunityComponent implements OnInit {
     } else {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];
+        this.dataSource.data = this.opportunities;
       });
     }
   }

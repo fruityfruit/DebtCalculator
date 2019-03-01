@@ -1,187 +1,189 @@
-<div class="container-fluid">
-  <div class="row-fluid" style="margin-left: 50px; margin-right: 50px; background-color: white">
-    <h1 class="text-center" style="padding-top: 15px; margin-bottom: 20px">Opportunity Comparison</h1>
-    <form class="ex1" style="margin-right: 25px" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <fieldset>
-        <div class="form-group row">
-          <label class="col-md-4">Opportunity Type:</label>
-          <span class="col-md-4">
-            <input required type="radio" formControlName="type" id="customRadio1" value="job" name="type" class="custom-control-input">
-            <label class="custom-control-label" for="customRadio1">Job</label>
-          </span>
-          <span class="col-md-4">
-            <input required type="radio" formControlName="type" id="customRadio2" value="grad_school" name="type" class="custom-control-input">
-            <label class="custom-control-label" for="customRadio2">Graduate School</label>
-          </span>
-        </div>
+<div class="mdc-typography mdc-typography--body1">
+  <div class="cen container-fluid mat-elevation-z2">
+    <div class="example-container" style="margin: 0px 50px">
+      <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px; margin-bottom: 20px">Opportunity Comparison</h1>
+      <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
-          <label>Opportunity Name:</label>
-          <input required type="text" class="form-control" size="55" formControlName="name" placeholder="Give the opportunity a name">
+          <mat-form-field appearance="standard" hintLabel="Opportunity Name">
+            <input matInput required type="text" class="form-control" formControlName="name" placeholder="Name this opportunity">
+            <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+          </mat-form-field>
         </div>
         <div class="form-group row">
           <div class="col-md-6">
-            <label>City:</label>
-            <input required type="text" class="form-control" size="55" formControlName="city" placeholder="City the opportunity is in">
+            <mat-form-field appearance="standard" hintLabel="City">
+              <input matInput required type="text" class="form-control" formControlName="city" placeholder="City this opportunity is in">
+              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            </mat-form-field>
           </div>
           <div class="col-md-6">
-            <label>State:</label>
-            <select required id="state_dropdown" class="form-control" formControlName="state">
-              <option value="">Select an option</option>
-              <option value="AK">Alaska</option>
-              <option value="AL">Alabama</option>
-              <option value="AR">Arkansas</option>
-              <option value="AZ">Arizona</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DC">District of Columbia</option>
-              <option value="DE">Delaware</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="IA">Iowa</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MD">Maryland</option>
-              <option value="ME">Maine</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MO">Missouri</option>
-              <option value="MS">Mississippi</option>
-              <option value="MT">Montana</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="NE">Nebraska</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NV">Nevada</option>
-              <option value="NY">New York</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="PR">Puerto Rico</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VA">Virginia</option>
-              <option value="VT">Vermont</option>
-              <option value="WA">Washington</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WV">West Virginia</option>
-              <option value="WY">Wyoming</option>
-            </select>
+            <mat-form-field appearance="standard" hintLabel="State">
+            <mat-select required id="state_dropdown" class="form-control" formControlName="state">
+              <mat-option value="">Select an option</mat-option>
+              <mat-option value="AK">Alaska</mat-option>
+              <mat-option value="AL">Alabama</mat-option>
+              <mat-option value="AR">Arkansas</mat-option>
+              <mat-option value="AZ">Arizona</mat-option>
+              <mat-option value="CA">California</mat-option>
+              <mat-option value="CO">Colorado</mat-option>
+              <mat-option value="CT">Connecticut</mat-option>
+              <mat-option value="DC">District of Columbia</mat-option>
+              <mat-option value="DE">Delaware</mat-option>
+              <mat-option value="FL">Florida</mat-option>
+              <mat-option value="GA">Georgia</mat-option>
+              <mat-option value="HI">Hawaii</mat-option>
+              <mat-option value="IA">Iowa</mat-option>
+              <mat-option value="ID">Idaho</mat-option>
+              <mat-option value="IL">Illinois</mat-option>
+              <mat-option value="IN">Indiana</mat-option>
+              <mat-option value="KS">Kansas</mat-option>
+              <mat-option value="KY">Kentucky</mat-option>
+              <mat-option value="LA">Louisiana</mat-option>
+              <mat-option value="MA">Massachusetts</mat-option>
+              <mat-option value="MD">Maryland</mat-option>
+              <mat-option value="ME">Maine</mat-option>
+              <mat-option value="MI">Michigan</mat-option>
+              <mat-option value="MN">Minnesota</mat-option>
+              <mat-option value="MO">Missouri</mat-option>
+              <mat-option value="MS">Mississippi</mat-option>
+              <mat-option value="MT">Montana</mat-option>
+              <mat-option value="NC">North Carolina</mat-option>
+              <mat-option value="ND">North Dakota</mat-option>
+              <mat-option value="NE">Nebraska</mat-option>
+              <mat-option value="NH">New Hampshire</mat-option>
+              <mat-option value="NJ">New Jersey</mat-option>
+              <mat-option value="NM">New Mexico</mat-option>
+              <mat-option value="NV">Nevada</mat-option>
+              <mat-option value="NY">New York</mat-option>
+              <mat-option value="OH">Ohio</mat-option>
+              <mat-option value="OK">Oklahoma</mat-option>
+              <mat-option value="OR">Oregon</mat-option>
+              <mat-option value="PA">Pennsylvania</mat-option>
+              <mat-option value="PR">Puerto Rico</mat-option>
+              <mat-option value="RI">Rhode Island</mat-option>
+              <mat-option value="SC">South Carolina</mat-option>
+              <mat-option value="SD">South Dakota</mat-option>
+              <mat-option value="TN">Tennessee</mat-option>
+              <mat-option value="TX">Texas</mat-option>
+              <mat-option value="UT">Utah</mat-option>
+              <mat-option value="VA">Virginia</mat-option>
+              <mat-option value="VT">Vermont</mat-option>
+              <mat-option value="WA">Washington</mat-option>
+              <mat-option value="WI">Wisconsin</mat-option>
+              <mat-option value="WV">West Virginia</mat-option>
+              <mat-option value="WY">Wyoming</mat-option>
+            </mat-select>
+            </mat-form-field>
           </div>
-        </div>
-        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
-          <label>Region:</label>
-          <select id="region_dropdown" class="form-control" formControlName="region">
-            <option value="">Please select the state of this opportunity first</option>
-          </select>
         </div>
         <div class="form-group row">
           <div class="col-md-6">
-            <label>Opportunity Income:</label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="number" class="form-control" formControlName="income" placeholder="Projected opportunity income">
-            </div>
+            <mat-form-field appearance="standard" hintLabel="Opportunity Income">
+              <input matInput required type="number" class="form-control" formControlName="income" placeholder="Projected opportunity income">
+              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            </mat-form-field>
           </div>
           <div class="col-md-6">
-            <label>Opportunity Principal:</label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="number" class="form-control" formControlName="principal" placeholder="Projected opportunity principal">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <label>Opportunity Rate:</label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="number" class="form-control" formControlName="rate" placeholder="Projected opportunity rate">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <label>Opportunity annualCompounds:</label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="number" class="form-control" formControlName="annualCompounds" placeholder="Projected opportunity annualCompounds">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <label>Opportunity monthlyPayment:</label>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="number" class="form-control" formControlName="monthlyPayment" placeholder="Projected opportunity monthlyPayment">
-            </div>
+            <mat-form-field appearance="standard" hintLabel="Region">
+            <mat-select id="region_dropdown" class="form-control" formControlName="region">
+              <mat-option value="">Please select the state of this opportunity first</mat-option>
+            </mat-select>
+            </mat-form-field>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-6">Would this opportunity require you to move your primary residence?</label>
-          <div class="col-md-6 btn-group btn-group-toggle" ngbRadioGroup name="residence" formControlName="move">
-            <label ngbButtonLabel class="btn btn-primary">
-              <input required ngbButton type="radio" formControlName="move" value="Yes"> Yes
-            </label>
-            <label ngbButtonLabel class="btn btn-primary">
-              <input required ngbButton type="radio" formControlName="move" value="No"> No
-            </label>
+          <div class="col-md-6">
+            <mat-form-field appearance="standard" hintLabel="Opportunity Principal">
+              <input matInput required type="number" class="form-control" formControlName="principal" placeholder="Projected opportunity principal">
+              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="standard" hintLabel="Opportunity Rate">
+              <input matInput required type="number" class="form-control" formControlName="rate" placeholder="Projected opportunity rate">
+              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="standard" hintLabel="Opportunity annualCompounds">
+              <input matInput required type="number" class="form-control" formControlName="annualCompounds" placeholder="Projected opportunity annualCompounds">
+              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="standard" hintLabel="Opportunity monthlyPayment">
+              <input matInput required type="number" class="form-control" formControlName="monthlyPayment" placeholder="Projected opportunity monthlyPayment">
+              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <mat-form-field appearance="standard" hintLabel="Opportunity Type">
+              <mat-select class="form-control" formControlName="type">
+                <mat-option value="">Select an option</mat-option>
+                <mat-option value="job">Job</mat-option>
+                <mat-option value="grad_school">Graduate School</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="standard" hintLabel="Relocation Required?">
+              <mat-select class="form-control" formControlName="move">
+                <mat-option value="">Will this opportunity require you to move?</mat-option>
+                <mat-option value="Yes">Yes</mat-option>
+                <mat-option value="No">No</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
         <div class="form-group row">
           <div class="col">
-            <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Add opportunity</button>
+            <button type="submit" mat-raised-button style="color: white; background-color: #78C2AC" [disabled]="!profileForm.valid">Add opportunity</button>
           </div>
           <div class="col">
-            <a class="nav-link text-right" href="#" routerLink="/results" routerLinkActive="active" style="padding-top: 0px; padding-right: 0px"><button type="button" class="btn btn-primary">See Results</button></a>
+            <a class="nav-link text-right" href="#" routerLink="/results" routerLinkActive="active" style="padding-top: 0px; padding-right: 0px"><button type="button" mat-raised-button style="color: white; background-color: #78C2AC">See Results</button></a>
           </div>
         </div>
-      </fieldset>
-    </form>
-    <!-- <p>&nbsp;</p> -->
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">City</th>
-          <th scope="col">State</th>
-          <th scope="col">Income</th>
-          <th scope="col">Relocate</th>
-          <th scope="col">Edit</th>
-          <th scope="col">Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-info" *ngFor="let opportunity of opportunities">
-          <th scope="row">{{ opportunity.name }}</th>
-          <td>{{ opportunity.type }}</td>
-          <td>{{ opportunity.city }}</td>
-          <td>{{ opportunity.state }}</td>
-          <td>{{ opportunity.income }}</td>
-          <td>{{ opportunity.move }}</td>
-          <td><a [routerLink]="['/edit',opportunity._id]" class="btn btn-secondary">Edit</a></td>
-          <td><a (click) = "deleteOpportunity(opportunity._id)" class="btn btn-danger">Delete</a></td>
-        </tr>
-      </tbody>
-    </table>
+      </form>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2"*ngIf="opportunities && opportunities.length">>
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <th style="width: 114px" mat-header-cell *matHeaderCellDef> Name </th>
+          <td style="width: 114px" mat-cell *matCellDef="let opportunity"> {{opportunity.name}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef> City </th>
+          <td mat-cell *matCellDef="let opportunity"> {{opportunity.city}} </td>
+        </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef> State </th>
+          <td mat-cell *matCellDef="let opportunity"> {{opportunity.state}} </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="income">
+          <th mat-header-cell *matHeaderCellDef> Income </th>
+          <td mat-cell *matCellDef="let opportunity"> {{opportunity.income}} </td>
+        </ng-container>
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef> Edit </th>
+          <td mat-cell *matCellDef="let opportunity"><a [routerLink]="['/edit',opportunity._id]">
+          <button mat-icon-button><mat-icon>create</mat-icon></button></a></td>
+        </ng-container>
+        <!-- Delete Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Delete </th>
+          <td mat-cell *matCellDef="let opportunity"><a (click) = "deleteOpportunity(opportunity._id)">
+          <button mat-icon-button><mat-icon>delete</mat-icon></button></a></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
   </div>
+  <br>
+  <br>
 </div>
