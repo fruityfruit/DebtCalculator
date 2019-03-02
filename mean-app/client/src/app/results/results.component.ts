@@ -97,7 +97,7 @@ export class ResultsComponent implements OnInit {
     }
 
     private generateCharts() {
-      var colors=['DarkGreen','aqua','Indigo','maroon','SkyBlue','Magenta','Pink','Gold','Salmon'];
+      var colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon'];
 
 /*
   READ THIS
@@ -139,7 +139,7 @@ while(counter<this.debts.length)
   var calculatedDebt=0;
   calculatedDebt= +debt.principal*(1+ +debt.rate*num/100);
   if (counter==0){
-    labels.push(num);
+    labels.push("Year "+num);
   }
     points.push(calculatedDebt);
     num=num+1;
@@ -156,14 +156,22 @@ this.debtProjection = new Chart('canvas3', {
       label: debtnames[0],
       data: debtProjectionPoints[0],
       borderColor: colors[0],
-     pointBackgroundColor: colors[0],
-     backgroundColor: 'transparent'
+      pointBackgroundColor: colors[0],
+      pointBorderColor: colors[0],
+      pointHoverBorderColor: colors[0],
+      pointHoverBackgroundColor: colors[0],
+      backgroundColor: 'transparent'
     }],
   },
   options: {
     title: {
       display: true,
       text: title,
+    },
+    tooltips:{
+      position: 'nearest',
+      mode: 'index',
+      intersect: false,
     },
     legend: {
       display: true,
@@ -197,6 +205,9 @@ while(counter<this.debts.length){
     data: debtProjectionPoints[counter],
     borderColor: colors[counter],
     pointBackgroundColor: colors[counter],
+    pointBorderColor: colors[counter],
+    pointHoverBorderColor: colors[counter],
+    pointHoverBackgroundColor: colors[counter],
     backgroundColor: 'transparent'
 
        };
@@ -220,7 +231,10 @@ var newSeries2 = {
   label: "Total Debt",
   data: netPoints,
   borderColor: 'red',
-  pointBackgroundColor: 'red',
+  pointBackgroundColor:'red',
+  pointBorderColor: 'red',
+  pointHoverBorderColor: 'red',
+  pointHoverBackgroundColor: 'red',
   backgroundColor: 'transparent'
   };
   this.debtProjection.data['datasets'][counter]=newSeries2;
@@ -283,6 +297,12 @@ while (debtLoop<yearlyPaymentDebts.length){
   debtLoop=debtLoop+1;
 }
 total=total- +yearlyPaymentOpp[oppCounter][num];
+total=total- +this.profile.spending*12;
+//console.log(typeof this.opportunities[oppCounter].move);
+//console.log(this.opportunities[oppCounter].move.length);
+if(this.opportunities[oppCounter].move.length==2){
+total=total- +this.profile.rent*12;
+}
 net.push(total);
 total=total+ +this.opportunities[oppCounter].income;
 num=num+1;
@@ -301,6 +321,9 @@ this.netIncome = new Chart('canvas4', {
       data: netPoints[0],
       borderColor: colors[0],
       pointBackgroundColor: colors[0],
+      pointBorderColor: colors[0],
+      pointHoverBorderColor: colors[0],
+      pointHoverBackgroundColor: colors[0],
       backgroundColor: 'transparent'
     }],
   },
@@ -311,6 +334,11 @@ this.netIncome = new Chart('canvas4', {
     },
     legend: {
       display: true,
+    },
+    tooltips:{
+      position: 'nearest',
+      mode: 'index',
+      intersect: false,
     },
     scales: {
       yAxes: [{
@@ -342,6 +370,9 @@ var newSeries3 = {
   label: oppNameList[oppCounter],
   borderColor: colors[oppCounter],
   pointBackgroundColor: colors[oppCounter],
+  pointBorderColor: colors[oppCounter],
+  pointHoverBorderColor: colors[oppCounter],
+  pointHoverBackgroundColor: colors[oppCounter],
   backgroundColor: 'transparent'
 };
   this.netIncome.data['datasets'][oppCounter]=newSeries3;
