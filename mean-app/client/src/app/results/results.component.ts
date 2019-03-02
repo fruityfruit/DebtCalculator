@@ -380,49 +380,6 @@ var newSeries3 = {
   oppCounter=oppCounter+1;
 }
 
-//     var numOpp=0;
-//     var netIncomeTemp=[];
-//     var opportunities = data['opportunities'];
-//     var oppNameList=[];
-//     opportunities.forEach(function(item, index) {
-//       var num = 0;
-//       var net:number =0;
-//       oppNameList.push(item.oppName);
-//       while(num<=20){
-//         var calculatedDebt=principle*(1+intrestRate*num/100);
-//         var amountOwed=calculatedDebt-yearlyPayment*num;
-//         if(item.oppCost>0){
-//           console.log(net);
-//           if (amountOwed>0){
-//             var total=item.oppCost*(num+1);
-//             net=total-yearlyPayment;
-//             netPoints.push(net);
-//           }
-//           else{
-//             var total:number = item.oppCost;
-//             net= +net+ +total;
-//             netPoints.push(<number>net);
-//           }
-//         }
-//         else {
-//           netPoints.push(-1*calculatedDebt)
-//         }
-//         //console.log(total-calculatedDebt);
-//         num=num+1;
-//       }
-//       netIncomeTemp.push(netPoints);
-//       netPoints=[];
-//       numOpp=numOpp+1;
-//     });
-
-
-//       //this.netIncome.render();
-//       //this.netIncome.options.data(netIncomeTemp[1]);
-//       num=num+1;
-//
-//     }
-//   });
-//
 var oppNames = [];
 var oppDebts = [];
 var oppCosts = [];
@@ -442,9 +399,18 @@ data: {
   datasets: [{
     label: "Debt From Opportunities Chart",
     data: oppDebts,
+    backgroundColor: colors,
+    borderColor: colors,
   }]
 },
 options: {
+  title: {
+    display: true,
+    text:"Debt From Opportunities",
+  },
+  legend:{
+    display: false,
+  },
   scales: {
     yAxes: [{
       scaleLabel:{
@@ -469,10 +435,19 @@ data: {
   datasets: [{
     label: "Salary Chart",
     data: oppCosts,
+    backgroundColor: colors,
+    borderColor: colors,
 
   }]
 },
 options: {
+  title: {
+    display: true,
+    text:"Income From Opportunities",
+  },
+  legend:{
+    display: false,
+  },
   scales: {
     yAxes: [{
       scaleLabel:{
