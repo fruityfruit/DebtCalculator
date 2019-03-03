@@ -14,8 +14,9 @@
       <div *ngIf="salaryChart">
         <canvas id="canvas1" style="height: 500px; width: 100%;">{{ salaryChart }}</canvas>
       </div>
-      <p>&nbsp;</p>
+      <!-- <p>&nbsp;</p> -->
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="zillowResults && zillowResults.length" style="width: 100%">
+        <caption style="text-align: center; caption-side: top; font-size: .8rem; font-weight: bold; color: #666666;">Zillow Home Ownership Data</caption>
         <!-- Position Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Opportunity Name </th>
