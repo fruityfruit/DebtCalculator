@@ -179,7 +179,11 @@ export class ResultsComponent implements OnInit {
                     var stringValue='';
                     if(value >= 1000){
                                stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                            } else {
+                            }
+                            else if(value <= -1000){
+                                        stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                            }
+                            else {
                                stringValue = '$' + value;
                             }
                     var label = data.datasets[tooltipItem.datasetIndex].label || '';
@@ -205,7 +209,11 @@ export class ResultsComponent implements OnInit {
                 callback: function(value, index, values) {
                                    if(parseInt(value) >= 1000){
                                       return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   } else {
+                                   }
+                                   else if(parseInt(value) <= -1000){
+                                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                   }
+                                    else {
                                       return '$' + value;
                                    }
                               }
@@ -368,7 +376,11 @@ export class ResultsComponent implements OnInit {
                             var stringValue='';
                             if(value >= 1000){
                                        stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                    } else {
+                                    }
+                            else if(value <= -1000){
+                                        stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                            }
+                            else {
                                        stringValue = '$' + value;
                                     }
                             var label = data.datasets[tooltipItem.datasetIndex].label || '';
@@ -391,7 +403,11 @@ export class ResultsComponent implements OnInit {
                 callback: function(value, index, values) {
                                  if(parseInt(value) >= 1000){
                                     return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                 } else {
+                                 }
+                                 else if(parseInt(value) <= -1000){
+                                    return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                 }
+                                 else {
                                     return '$' + value;
                                  }
                             }
@@ -466,7 +482,11 @@ export class ResultsComponent implements OnInit {
               callback: function(value, index, values) {
                                    if(parseInt(value) >= 1000){
                                       return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   } else {
+                                   }
+                                   else if(parseInt(value) <= -1000){
+                                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                   }
+                                    else {
                                       return '$' + value;
                                    }
                               }
@@ -507,7 +527,11 @@ export class ResultsComponent implements OnInit {
               callback: function(value, index, values) {
                                    if(parseInt(value) >= 1000){
                                       return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   } else {
+                                   }
+                                   else if(parseInt(value) <= -1000){
+                                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                   }
+                                    else {
                                       return '$' + value;
                                    }
                               }
