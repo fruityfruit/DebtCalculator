@@ -34,7 +34,7 @@ export class DebteditComponent implements OnInit {
   private updateDebt() {
     this.activatedRouter.params.subscribe(params => {
       this.profService.updateDebt(this.formdata, params['id']).subscribe(() => {
-        this.router.navigate(['personal']);
+        this.router.navigate(['debt']);
       }, (err) => {
         console.log(err);
       });
