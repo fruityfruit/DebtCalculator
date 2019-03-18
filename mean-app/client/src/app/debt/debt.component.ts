@@ -48,10 +48,16 @@ export class DebtComponent implements OnInit {
         this.debts = data['debts'];
         this.dataSource.data = this.debts;
         this.profileFormDebt.reset();
+        Object.keys(this.profileFormDebt.controls).forEach(key => { //workaround
+          this.profileFormDebt.controls[key].setErrors(null);
+        });
       });
     }, (err) => {
       console.log(err);
       this.profileFormDebt.reset();
+      Object.keys(this.profileFormDebt.controls).forEach(key => { //workaround
+        this.profileFormDebt.controls[key].setErrors(null);
+      });
     });
   }
 
@@ -66,6 +72,9 @@ export class DebtComponent implements OnInit {
 
   ngOnInit() {
     this.profileFormDebt.reset();
+    Object.keys(this.profileFormDebt.controls).forEach(key => { //workaround
+      this.profileFormDebt.controls[key].setErrors(null);
+    });
     this.username = this.auth.getUsername();
     if (this.username === null) {
       window.alert("Please fill out the Personal page before accessing this page.");
