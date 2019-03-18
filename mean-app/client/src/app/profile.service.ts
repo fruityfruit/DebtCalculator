@@ -14,6 +14,7 @@ export interface Profile {
 
 export interface Debt {
   username: String;
+  name: String;
   principal: Number;
   rate: Number;
   annualCompounds: Number;
@@ -47,6 +48,7 @@ export class ProfileService {
   public createDebt(form: Debt) {
     const obj = {
       username: form.username,
+      name: form.name,
       principal: form.principal,
       rate: form.rate,
       annualCompounds: form.annualCompounds,
@@ -65,6 +67,7 @@ export class ProfileService {
 
   public updateDebt(form: Debt, id: String) {
     const obj = {
+      name: form.name,
       principal: form.principal,
       rate: form.rate,
       annualCompounds: form.annualCompounds,

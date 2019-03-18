@@ -3,40 +3,46 @@
     <div class="example-container" style="margin: 0px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px; margin-bottom: 20px">Personal Debt Sources</h1>
       <form class="ex1" [formGroup]="profileFormDebt" (ngSubmit)="onSubmitDebt()">
-        <div class="form-group row">
-          <div class="row col-md-10" style="margin-left: 0px">
-            <div class="form-group row" style="width: 100%">
-              <div class="col-md-6">
-                <mat-form-field appearance="standard" hintLabel="Your principal">
-                  <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="Type here...">
-                </mat-form-field>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field appearance="standard" hintLabel="Your rate">
-                  <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="Type here...">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="form-group row" style="width: 100%">
-              <div class="col-md-6">
-                <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
-                  <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Type here...">
-                </mat-form-field>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
-                  <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Type here...">
-                </mat-form-field>
-              </div>
-            </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <mat-form-field appearance="standard" hintLabel="Debt Name">
+            <input matInput required type="text" class="form-control" formControlName="name" placeholder="Name this debt">
+          </mat-form-field>
+        </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <div class="col-md-6" style="padding-left: 0px">
+            <mat-form-field appearance="standard" hintLabel="Your principal">
+              <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="Type here...">
+            </mat-form-field>
           </div>
-          <div class="col-md-2" style="padding-right: 0px">
-            <button type="submit" style="top: calc(50% - 18px); left: calc(100% - 90px)"
-            [disabled]="!profileFormDebt.valid" mat-raised-button>Add Debt</button>
+          <div class="col-md-6" style="padding-right: 0px">
+            <mat-form-field appearance="standard" hintLabel="Your rate">
+              <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="Type here...">
+            </mat-form-field>
           </div>
+        </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <div class="col-md-6" style="padding-left: 0px">
+            <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
+              <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Type here...">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6" style="padding-right: 0px">
+            <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
+              <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Type here...">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <button type="submit" style="top: calc(50% - 18px); left: calc(100% - 90px)"
+          [disabled]="!profileFormDebt.valid" mat-raised-button>Add Debt</button>
         </div>
       </form>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="debts && debts.length">>
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let debt"> {{debt.name}} </td>
+        </ng-container>
         <!-- Position Column -->
         <ng-container matColumnDef="principal">
           <th mat-header-cell *matHeaderCellDef> Principal </th>
@@ -48,10 +54,10 @@
           <td mat-cell *matCellDef="let debt"> {{debt.rate}} </td>
         </ng-container>
         <!-- Weight Column -->
-        <ng-container matColumnDef="annualcompounds">
+        <!-- <ng-container matColumnDef="annualcompounds">
           <th mat-header-cell *matHeaderCellDef> Annual Compounds </th>
           <td mat-cell *matCellDef="let debt"> {{debt.annualCompounds}} </td>
-        </ng-container>
+        </ng-container> -->
         <!-- Symbol Column -->
         <ng-container matColumnDef="monthlypayment">
           <th mat-header-cell *matHeaderCellDef> Monthly Payment </th>

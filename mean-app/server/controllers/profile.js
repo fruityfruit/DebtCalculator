@@ -44,6 +44,7 @@ module.exports.getProfile = function(req, res) {
 module.exports.createDebt = function(req, res) {
   var debt = new Debt();
   debt._id = new mongoose.Types.ObjectId();
+  debt.name = req.body.name;
   debt.principal = req.body.principal;
   debt.rate = req.body.rate;
   debt.annualCompounds = req.body.annualCompounds;
@@ -105,6 +106,7 @@ module.exports.updateDebt = function(req, res) {
     } else if (!debt) {
       res.status(400).send("unable to find the debt");
     } else {
+      debt.name = req.body.name;
       debt.principal = req.body.principal;
       debt.rate = req.body.rate;
       debt.annualCompounds = req.body.annualCompounds;

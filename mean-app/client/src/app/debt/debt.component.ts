@@ -15,6 +15,7 @@ export class DebtComponent implements OnInit {
   profileFormDebt: FormGroup;
   formdataDebt: Debt = {
     username: '',
+    name: '',
     principal: 0,
     rate: 0,
     annualCompounds: 0,
@@ -22,11 +23,12 @@ export class DebtComponent implements OnInit {
   };
   debts: Debt[];
   dataSource = new MatTableDataSource(this.debts);
-  displayedColumns: string[] = ['principal', 'rate', 'annualcompounds', 'monthlypayment', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'principal', 'rate', 'monthlypayment', 'edit', 'delete'];
 
   constructor(private builder: FormBuilder, private router: Router,
     private auth: AuthenticationService, private profService: ProfileService) {
     this.profileFormDebt = this.builder.group({
+      name: ['', Validators.required],
       principal: [0, Validators.required],
       rate: [0, Validators.required],
       annualCompounds: [0, Validators.required],
@@ -35,6 +37,7 @@ export class DebtComponent implements OnInit {
   }
 
   public onSubmitDebt() {
+    this.formdataDebt.name = this.profileFormDebt.value.name;
     this.formdataDebt.principal = this.profileFormDebt.value.principal;
     this.formdataDebt.rate = this.profileFormDebt.value.rate;
     this.formdataDebt.annualCompounds = this.profileFormDebt.value.annualCompounds;
