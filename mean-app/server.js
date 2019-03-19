@@ -25,4 +25,9 @@ app.use(express.static(path.join(__dirname, 'dist/mean-app')));
 // Use the API routes when path starts with /api
 app.use('/api', routesApi);
 
+// Redirect all other routes to the index page
+app.use(function(req, res, next) {
+  res.sendFile(__dirname + '/dist/mean-app/index.html');
+});
+
 module.exports = app;
