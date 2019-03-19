@@ -65,10 +65,16 @@ export class OpportunityComponent implements OnInit {
         this.opportunities = data['opportunities'];
         this.dataSource.data = this.opportunities;
         this.profileForm.reset();
+        Object.keys(this.profileForm.controls).forEach(key => { //workaround
+          this.profileForm.controls[key].setErrors(null);
+        });
       });
     }, (err) => {
       console.log(err);
       this.profileForm.reset();
+      Object.keys(this.profileForm.controls).forEach(key => { //workaround
+        this.profileForm.controls[key].setErrors(null);
+      });
     });
   }
 

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var debtSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  name: String,
   principal: Number,
   rate: Number,
   annualCompounds: Number,

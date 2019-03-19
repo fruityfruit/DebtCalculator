@@ -61,6 +61,7 @@ export class ResultsComponent implements OnInit {
           data.debts.forEach(function(entry) {
             var newDebt: Debt = {
               username: tempUsername,
+              name: entry.name,
               principal: entry.principal,
               rate: entry.rate,
               annualCompounds: entry.annualCompounds,
@@ -131,7 +132,7 @@ export class ResultsComponent implements OnInit {
       while(counter<this.debts.length)
       {
         var points=[];
-        var name="Debt Source " + (+counter+1);
+        var name=this.debts[counter].name;
         debtnames.push(name);
         while(num<=this.loop){
         //  var calculatedDebt=principle*(1+intrestRate*num/100);

@@ -13,6 +13,7 @@ export class DebteditComponent implements OnInit {
   profileForm: FormGroup;
   formdata: Debt = {
     username: '',
+    name: '',
     principal: 0,
     rate: 0,
     annualCompounds: 0,
@@ -24,6 +25,7 @@ export class DebteditComponent implements OnInit {
     private profService: ProfileService,
     private builder: FormBuilder) {
       this.profileForm = this.builder.group({
+        name: ['', Validators.required],
         principal: ['', Validators.required],
         rate: ['', Validators.required],
         annualCompounds: ['', Validators.required],
@@ -34,7 +36,7 @@ export class DebteditComponent implements OnInit {
   private updateDebt() {
     this.activatedRouter.params.subscribe(params => {
       this.profService.updateDebt(this.formdata, params['id']).subscribe(() => {
-        this.router.navigate(['personal']);
+        this.router.navigate(['debt']);
       }, (err) => {
         console.log(err);
       });
@@ -42,6 +44,7 @@ export class DebteditComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.formdata.name = this.profileForm.value.name;
     this.formdata.principal = this.profileForm.value.principal;
     this.formdata.rate = this.profileForm.value.rate;
     this.formdata.annualCompounds = this.profileForm.value.annualCompounds;

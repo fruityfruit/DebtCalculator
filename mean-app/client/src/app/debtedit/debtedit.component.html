@@ -3,15 +3,21 @@
     <div class="example-container" style="margin: 0px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px">Edit Debt</h1>
       <form class="ex1"[formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <div class="form-group row" style="width: 100%">
-          <div class="col-md-6">
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <mat-form-field appearance="standard" hintLabel="Debt Name">
+            <input matInput required type="text" class="form-control" formControlName="name" placeholder="Name this debt"
+            #name [(ngModel)] = "debt.name">
+          </mat-form-field>
+        </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <div class="col-md-6" style="padding-left: 0px">
             <mat-form-field appearance="standard" hintLabel="Your principal">
               <input matInput required type="number" class="form-control" size="56" formControlName="principal" placeholder="What principal"
               #principal [(ngModel)] = "debt.principal">
               <mat-label><mat-icon>money</mat-icon></mat-label>
             </mat-form-field>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="padding-right: 0px">
             <mat-form-field appearance="standard" hintLabel="Your rate">
               <input matInput required type="number" class="form-control" size="56" formControlName="rate" placeholder="What rate"
               #rate [(ngModel)] = "debt.rate">
@@ -19,15 +25,15 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="form-group row" style="width: 100%">
-          <div class="col-md-6">
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <div class="col-md-6" style="padding-left: 0px">
             <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
               <input matInput required type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="What annualCompounds"
               #annualCompounds [(ngModel)] = "debt.annualCompounds">
               <mat-label><mat-icon>show_chart</mat-icon></mat-label>
             </mat-form-field>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="padding-right: 0px">
             <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
               <input matInput required type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="What monthlyPayment"
               #monthlyPayment [(ngModel)] = "debt.monthlyPayment">

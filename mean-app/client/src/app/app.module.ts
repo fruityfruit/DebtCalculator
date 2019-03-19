@@ -25,6 +25,7 @@ import {MatSidenavModule, MatTableModule, MatFormFieldModule, MatInputModule,
         MatSelectModule, MatIconModule, MatButtonModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DebteditComponent } from './debtedit/debtedit.component';
+import { DebtComponent } from './debt/debt.component';
 
 // Define the routes
 const ROUTES = [
@@ -51,6 +52,10 @@ const ROUTES = [
   {
     path: 'edit/:id',
     component: OppeditComponent
+  },
+  {
+    path: 'debt',
+    component: DebtComponent
   },
   {
     path: 'debtedit/:id',
@@ -89,7 +94,8 @@ const ROUTES = [
     SigninComponent,
     OppeditComponent,
     AccountComponent,
-    DebteditComponent
+    DebteditComponent,
+    DebtComponent
   ],
   imports: [
     BrowserModule,
