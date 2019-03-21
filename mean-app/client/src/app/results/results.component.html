@@ -3,6 +3,12 @@
     <div class="example-container" style="margin: 0px 50px 20px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px">Results</h1>
       <div *ngIf="debtProjection">
+        <div>
+          <mat-form-field appearance="standard" hintLabel="How Many Years">
+          <input #year matInput required type="number" placeholder="How many Years" id ="numYears" min="0" oninput="this.value = Math.abs(this.value)">&nbsp;
+          </mat-form-field>
+          <button (click)="updateCharts()" style="color: white; background-color: #78C2AC" mat-raised-button>Create Charts</button>
+          </div>
         <canvas id="canvas3"style="height: 500px; width: 100%;" >{{ debtProjection }}</canvas>
       </div>
       <div *ngIf="netIncome">

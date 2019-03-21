@@ -19,7 +19,7 @@ export class ResultsComponent implements OnInit {
   zillowResults: ResultSet[] = [];
   debtChart = [];
   salaryChart = [];
-  debtProjection=[] as Chart;
+public debtProjection=[] as Chart;
   netIncome=[] as Chart;
   netIncomeTemp=[];
   profile: Profile = {
@@ -644,6 +644,13 @@ export class ResultsComponent implements OnInit {
         this.displayBLSData();
         this.getData();
       }
+    }
+
+    updateCharts(){
+      this.loop= +((document.getElementById("numYears") as HTMLInputElement).value);
+      this.debtProjection.config.data.datasets=[];
+      this.netIncome.config.data.datasets=[];
+      this.ngOnInit();
     }
 
   }

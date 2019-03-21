@@ -13,12 +13,12 @@
     "hammerjs": "^2.0.8",
     "jsonwebtoken": "^5.0.4",
     "mocha": "^5.2.0",
-    "mongoose": "^5.3.14",
+    "mongoose": "^5.4.19",
     "morgan": "^1.9.1",
     "node-zillow": "^2.0.0"
   },
   "devDependencies": {
-    "cypress": "^3.1.5"
+    "cypress": "^3.2.0"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.6.",
   "main": "server.js",
