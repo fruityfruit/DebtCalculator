@@ -7,6 +7,7 @@ import { ResultService, ResultSet } from '../result.service';
 import { ProfileService, Profile, Debt } from '../profile.service';
 import { Router } from '@angular/router';
 import {MatTableDataSource} from '@angular/material';
+import { SnackbaralertService } from '../snackbaralert.service';
 
 @Component({
   selector: 'app-results',
@@ -19,7 +20,7 @@ export class ResultsComponent implements OnInit {
   zillowResults: ResultSet[] = [];
   debtChart = [];
   salaryChart = [];
-  debtProjection=[] as Chart;
+public debtProjection=[] as Chart;
   netIncome=[] as Chart;
   netIncomeTemp=[];
   profile: Profile = {
@@ -43,7 +44,8 @@ export class ResultsComponent implements OnInit {
     private resultService: ResultService,
     private oppService: OpportunityService,
     private profService: ProfileService,
-    private router: Router) { }
+    private router: Router,
+    private alerts: SnackbaralertService) { }
 
     private getData() {
       this.profService.getProfile(this.username).subscribe((data: any) => { //returns the user's profile
@@ -586,7 +588,8 @@ export class ResultsComponent implements OnInit {
 
     public register() {
       if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
-        window.alert("Sorry, that username has already been taken. Please try another!");
+        //window.alert("Sorry, that username has already been taken. Please try another!");
+        this.alerts.open("Sorry, that username has already been taken. Please try another!");
       } else {
         var updateUsername: UsernamePayload = {
           oldUsername: this.username,
@@ -600,14 +603,16 @@ export class ResultsComponent implements OnInit {
         }
         this.auth.changeUsername(updateUsername).subscribe(() => {
           this.auth.changePassword(updatePassword).subscribe(() => {
-            window.alert("Registered!");
+            //window.alert("Registered!");
+            this.alerts.open("Registered!");
             this.auth.callUpdateLink();
           }, (err) => {
             console.log(err);
           });
         }, (err) => {
           if (err.error.code === 11000) {
-            window.alert("Sorry, that username has already been taken. Please try another!");
+            //window.alert("Sorry, that username has already been taken. Please try another!");
+            this.alerts.open("Sorry, that username has already been taken. Please try another!");
           } else {
             console.log(err);
             this.router.navigateByUrl('/');
@@ -636,7 +641,8 @@ export class ResultsComponent implements OnInit {
     ngOnInit() {
       this.username = this.auth.getUsername();
       if (this.username === null) {
-        window.alert("Please fill out the Personal page before accessing this page.");
+        //window.alert("Please fill out the Personal page before accessing this page.");
+        this.alerts.open("Please fill out the Personal page before accessing this page.");
         this.router.navigateByUrl('/personal');
       } else {
 
@@ -644,6 +650,13 @@ export class ResultsComponent implements OnInit {
         this.displayBLSData();
         this.getData();
       }
+    }
+
+    updateCharts(){
+      this.loop= +((document.getElementById("numYears") as HTMLInputElement).value);
+      this.debtProjection.config.data.datasets=[];
+      this.netIncome.config.data.datasets=[];
+      this.ngOnInit();
     }
 
   }
