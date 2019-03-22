@@ -1,4 +1,74 @@
-.navbar-nav li {
-  width: 16.666%;
+.topnav {
+  overflow: hidden;
+  background-color: rgb(120,194,173);
+  height: 49px;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: rgba(255,255,255,0.6);
   text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.4px;
+  height: 49px;
+  font-family: Montserrat;
+  width: calc((100% - 190px)/6);
+  text-align: center;
+}
+
+.brand {
+  color: white !important;
+  font-size: 20px !important;
+  line-height: 23px !important;
+  width: 100% !important;
+  max-width: 190px !important;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.topnav .special {
+  height: 0px
+}
+
+.topnav a:hover {
+  background-color: rgb(120,194,173) !important;
+  color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  .topnav a:not(:first-child) {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .topnav.responsive {
+    position: relative;
+    height: auto;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive .link {
+    width: 100%;
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .special {
+    height: 49px
+  }
+
 }

@@ -35,6 +35,7 @@ export class NavbarComponent implements OnInit {
   }
 
   public signout() {
+    this.closeDropdown();
     this.auth.signout();
     window.alert("You have been signed out.");
     this.updateLink();
@@ -44,5 +45,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.updateLink();
   }
-
+  public myFunction() {
+    console.log("my function called");
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  public closeDropdown() {
+    document.getElementById("myTopnav").className = "topnav";
+  }
 }

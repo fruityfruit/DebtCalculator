@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-static-top" role = "navigation">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-static-top" role = "navigation">
   <a class="navbar-brand" href="#" routerLink="/" routerLinkActive="active">Debt Calculator</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -36,4 +36,24 @@
       </div>
     </ul>
   </div>
-</nav>
+</nav> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="topnav" id="myTopnav">
+  <a href="#" class="brand" routerLink="/" routerLinkActive="active" (click)="closeDropdown()">Debt Calculator</a>
+  <a class="link special" style="padding: 0px"></a>
+  <a href="#" class="link" routerLink="/personal" routerLinkActive="active" (click)="closeDropdown()">Profile</a>
+  <a href="#" class="link" routerLink="/debt" routerLinkActive="active" (click)="closeDropdown()">Debts</a>
+  <a href="#" class="link" routerLink="/opportunity" routerLinkActive="active" (click)="closeDropdown()">Opportunities</a>
+  <a href="#" class="link" routerLink="/results" routerLinkActive="active" (click)="closeDropdown()">Results</a>
+  <a href="#" class="link" routerLink="/info" routerLinkActive="active" (click)="closeDropdown()">How It Works</a>
+  <div *ngIf="!this.auth.isLoggedIn()">
+    <a style="padding: 0px; height: 0px"></a>
+    <a class="link" href="#" routerLink="/signin" routerLinkActive="active" (click)="closeDropdown()">Sign In</a>
+  </div>
+  <div *ngIf="this.auth.isLoggedIn()">
+    <a style="padding: 0px; height: 0px"></a>
+    <a class="link" href="#" (click)="signout()">Sign Out</a>
+  </div>
+  <a href="javascript:void(0);" style="font-size:26px;" class="icon" (click)="myFunction()">&#9776;</a>
+</div>
