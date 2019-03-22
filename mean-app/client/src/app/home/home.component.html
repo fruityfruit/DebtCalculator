@@ -4,6 +4,8 @@
       <div class="text-center" style="padding-top: 50px">
         <img style="max-width: 960px; width: 100%" src="assets/homepage.jpg" alt="Debt Calculator Logo"/> <!--Root is from client/src in dev, but maybe from client in prod  -->
       </div>
+
+      <div *ngIf="!this.auth.isLoggedIn()" style="margin: auto">
       <div class="container" style="padding-bottom: 5px">
         <div class="row">
           <div class="col">
@@ -14,6 +16,20 @@
           </div>
         </div>
       </div>
+</div>
+<div *ngIf="this.auth.isLoggedIn()" style="margin: auto">
+<div class="container" style="padding-bottom: 5px">
+  <div class="row">
+    <div class="col">
+      <a class="nav-link text-center" href="#" routerLink="/account" routerLinkActive="active"><button type="button" style="color: white; background-color: #78C2AC" mat-raised-button>Account</button></a>
+    </div>
+    <div class="col">
+      <a class="nav-link text-center" href="#" routerLink="/personal" routerLinkActive="active"><button type="button" style="color: white; background-color: #78C2AC" mat-raised-button>Get Started</button></a>
+    </div>
+  </div>
+</div>
+</div>
+
     </div>
   </div>
   <br>
