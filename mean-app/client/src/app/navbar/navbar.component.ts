@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import { SnackbaralertService } from '../snackbaralert.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,8 @@ export class NavbarComponent implements OnInit {
   username: string;
   loggedInText: string;
   routerLinkText: string;
-  constructor(public auth: AuthenticationService, private router: Router) {
+  constructor(public auth: AuthenticationService, private router: Router,
+  private alerts: SnackbaralertService) {
     //listens for the auth service to tell it to update the navbar
     this.auth.invokeEvent.subscribe(value => {
       if (value === "UpdateLink") {
@@ -36,7 +38,8 @@ export class NavbarComponent implements OnInit {
 
   public signout() {
     this.auth.signout();
-    window.alert("You have been signed out.");
+    //window.alert("You have been signed out.");
+    this.alerts.open('You have been signed out.');
     this.updateLink();
     this.router.navigateByUrl('/');
   }

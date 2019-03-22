@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OpportunityService, Opportunity } from '../opportunity.service';
 import { AuthenticationService } from '../authentication.service';
+import { SnackbaralertService } from '../snackbaralert.service';
 import { Router } from '@angular/router';
 import {MatTableDataSource} from '@angular/material';
 
@@ -32,7 +33,8 @@ export class OpportunityComponent implements OnInit {
   displayedColumns: string[] = ['name', 'city', 'state', 'income', 'edit', 'delete'];
 
   constructor(private builder: FormBuilder, private oppService: OpportunityService,
-    private auth: AuthenticationService, private router: Router) {
+    private auth: AuthenticationService, private router: Router,
+    private alerts: SnackbaralertService) {
     this.profileForm = this.builder.group({
       type: ['', Validators.required],
       name: ['', Validators.required],
@@ -90,7 +92,8 @@ export class OpportunityComponent implements OnInit {
   ngOnInit() {
     this.username = this.auth.getUsername();
     if (this.username === null) {
-      window.alert("Please fill out the Personal page before accessing this page.");
+      //window.alert("Please fill out the Personal page before accessing this page.");
+      this.alerts.open('Please fill out the Personal page before accessing this page.');
       this.router.navigateByUrl('/personal');
     } else {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {

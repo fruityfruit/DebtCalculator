@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { AuthenticationService } from '../authentication.service';
 import { ProfileService, Debt } from '../profile.service';
 import { Router } from '@angular/router';
+import { SnackbaralertService } from '../snackbaralert.service';
 
 @Component({
   selector: 'app-debt',
@@ -26,7 +27,8 @@ export class DebtComponent implements OnInit {
   displayedColumns: string[] = ['name', 'principal', 'rate', 'monthlypayment', 'edit', 'delete'];
 
   constructor(private builder: FormBuilder, private router: Router,
-    private auth: AuthenticationService, private profService: ProfileService) {
+    private auth: AuthenticationService, private profService: ProfileService,
+    private alerts: SnackbaralertService) {
     this.profileFormDebt = this.builder.group({
       name: ['', Validators.required],
       principal: [0, Validators.required],
@@ -77,7 +79,8 @@ export class DebtComponent implements OnInit {
     });
     this.username = this.auth.getUsername();
     if (this.username === null) {
-      window.alert("Please fill out the Personal page before accessing this page.");
+      //window.alert("Please fill out the Personal page before accessing this page.");
+      this.alerts.open('Please fill out the Personal page before accessing this page.');
       this.router.navigateByUrl('/personal');
     } else {
       this.profService.getDebts(this.username).subscribe((data: Debt[]) => {

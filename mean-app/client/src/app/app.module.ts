@@ -22,7 +22,8 @@ import { ResultService } from './result.service';
 import { ProfileService } from './profile.service';
 import { AccountComponent } from './account/account.component';
 import {MatSidenavModule, MatTableModule, MatFormFieldModule, MatInputModule,
-        MatSelectModule, MatIconModule, MatButtonModule} from '@angular/material';
+        MatSelectModule, MatIconModule, MatButtonModule,
+        MatSnackBarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DebteditComponent } from './debtedit/debtedit.component';
 import { DebtComponent } from './debt/debt.component';
@@ -111,6 +112,7 @@ const ROUTES = [
     MatSidenavModule,
     MatTableModule,
     MatButtonModule,
+    MatSnackBarModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   providers: [AuthenticationService,// Add the Authentication service

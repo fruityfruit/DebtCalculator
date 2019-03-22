@@ -7,6 +7,7 @@ import { ResultService, ResultSet } from '../result.service';
 import { ProfileService, Profile, Debt } from '../profile.service';
 import { Router } from '@angular/router';
 import {MatTableDataSource} from '@angular/material';
+import { SnackbaralertService } from '../snackbaralert.service';
 
 @Component({
   selector: 'app-results',
@@ -43,7 +44,8 @@ public debtProjection=[] as Chart;
     private resultService: ResultService,
     private oppService: OpportunityService,
     private profService: ProfileService,
-    private router: Router) { }
+    private router: Router,
+    private alerts: SnackbaralertService) { }
 
     private getData() {
       this.profService.getProfile(this.username).subscribe((data: any) => { //returns the user's profile
@@ -586,7 +588,8 @@ public debtProjection=[] as Chart;
 
     public register() {
       if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
-        window.alert("Sorry, that username has already been taken. Please try another!");
+        //window.alert("Sorry, that username has already been taken. Please try another!");
+        this.alerts.open("Sorry, that username has already been taken. Please try another!");
       } else {
         var updateUsername: UsernamePayload = {
           oldUsername: this.username,
@@ -600,14 +603,16 @@ public debtProjection=[] as Chart;
         }
         this.auth.changeUsername(updateUsername).subscribe(() => {
           this.auth.changePassword(updatePassword).subscribe(() => {
-            window.alert("Registered!");
+            //window.alert("Registered!");
+            this.alerts.open("Registered!");
             this.auth.callUpdateLink();
           }, (err) => {
             console.log(err);
           });
         }, (err) => {
           if (err.error.code === 11000) {
-            window.alert("Sorry, that username has already been taken. Please try another!");
+            //window.alert("Sorry, that username has already been taken. Please try another!");
+            this.alerts.open("Sorry, that username has already been taken. Please try another!");
           } else {
             console.log(err);
             this.router.navigateByUrl('/');
@@ -636,7 +641,8 @@ public debtProjection=[] as Chart;
     ngOnInit() {
       this.username = this.auth.getUsername();
       if (this.username === null) {
-        window.alert("Please fill out the Personal page before accessing this page.");
+        //window.alert("Please fill out the Personal page before accessing this page.");
+        this.alerts.open("Please fill out the Personal page before accessing this page.");
         this.router.navigateByUrl('/personal');
       } else {
 
