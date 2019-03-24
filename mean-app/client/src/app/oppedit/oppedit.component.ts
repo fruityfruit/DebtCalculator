@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OpportunityService, Opportunity } from '../opportunity.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-oppedit',
@@ -28,7 +29,7 @@ export class OppeditComponent implements OnInit {
   }
 
   constructor(private activatedRouter: ActivatedRoute,
-    private router: Router,
+    private router: Router, private auth: AuthenticationService,
     private oppService: OpportunityService,
     private builder: FormBuilder) {
       this.profileForm = this.builder.group({
@@ -72,6 +73,7 @@ export class OppeditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.callUpdateColor("other");
     this.activatedRouter.params.subscribe(params => {
       this.oppService.editOpportunity(params['id']).subscribe(res => {
         this.opportunity = res;

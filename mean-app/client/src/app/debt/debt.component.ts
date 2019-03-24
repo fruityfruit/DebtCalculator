@@ -73,6 +73,7 @@ export class DebtComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.callUpdateColor("debts");
     this.profileFormDebt.reset();
     Object.keys(this.profileFormDebt.controls).forEach(key => { //workaround
       this.profileFormDebt.controls[key].setErrors(null);

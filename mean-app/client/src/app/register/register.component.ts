@@ -23,7 +23,6 @@ export class RegisterComponent implements OnInit {
       this.alerts.open('Sorry, that username has already been taken. Please try another!');
     } else {
       this.auth.register(this.credentials).subscribe(() => {
-        this.auth.callUpdateLink();
         //window.alert("Registered!");
         this.alerts.open('Registered!');
         this.router.navigateByUrl('/');
@@ -39,6 +38,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.auth.callUpdateColor("other");
+  }
 
 }

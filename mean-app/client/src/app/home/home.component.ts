@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit {
 
   constructor(public auth: AuthenticationService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.auth.callUpdateColor("other");
+  }
 
 }

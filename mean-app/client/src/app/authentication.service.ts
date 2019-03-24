@@ -107,9 +107,9 @@ export class AuthenticationService {
     }
   }
 
-  // this method calls the "updateLink" method in the navbar component
-  public callUpdateLink() {
-    this.invokeEvent.next("UpdateLink");
+  // this method calls the "updateColor" method in the navbar component
+  public callUpdateColor(text: string) {
+    this.invokeEvent.next(text);
   }
 
   public formatMoney(money: number) {

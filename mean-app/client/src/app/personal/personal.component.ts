@@ -71,6 +71,7 @@ export class PersonalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.callUpdateColor("profile");
     this.username = this.auth.getUsername();
     if (this.username !== null) {
       this.profService.getProfile(this.username).subscribe(res => {

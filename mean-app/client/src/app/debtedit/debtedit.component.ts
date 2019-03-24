@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProfileService, Debt } from '../profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-debtedit',
@@ -21,7 +22,7 @@ export class DebteditComponent implements OnInit {
   }
 
   constructor(private activatedRouter: ActivatedRoute,
-    private router: Router,
+    private router: Router, private auth: AuthenticationService,
     private profService: ProfileService,
     private builder: FormBuilder) {
       this.profileForm = this.builder.group({
@@ -53,6 +54,7 @@ export class DebteditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.callUpdateColor("other");
     this.activatedRouter.params.subscribe(params => {
       this.profService.editDebt(params['id']).subscribe(res => {
         this.debt = res;

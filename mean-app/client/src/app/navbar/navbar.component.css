@@ -9,7 +9,6 @@
   display: block;
   color: rgba(255,255,255,0.6);
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
   font-size: 16px;
   font-weight: 400;
@@ -18,14 +17,11 @@
   font-family: Montserrat;
   width: calc((100% - 190px)/6);
   text-align: center;
+  padding: 14px 16px;
 }
 
-.brand {
-  color: white !important;
-  font-size: 20px !important;
-  line-height: 23px !important;
-  width: 100% !important;
-  max-width: 190px !important;
+.topnav .link {
+  padding: 16px;
 }
 
 .topnav .icon {
@@ -39,6 +35,14 @@
 .topnav a:hover {
   background-color: rgb(120,194,173) !important;
   color: white;
+}
+
+.brand {
+  color: white !important;
+  font-size: 20px !important;
+  line-height: 23px !important;
+  width: 100% !important;
+  max-width: 190px !important;
 }
 
 @media screen and (max-width: 1024px) {

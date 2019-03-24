@@ -605,7 +605,6 @@ public debtProjection=[] as Chart;
           this.auth.changePassword(updatePassword).subscribe(() => {
             //window.alert("Registered!");
             this.alerts.open("Registered!");
-            this.auth.callUpdateLink();
           }, (err) => {
             console.log(err);
           });
@@ -639,6 +638,7 @@ public debtProjection=[] as Chart;
     }
 
     ngOnInit() {
+      this.auth.callUpdateColor("results");
       this.username = this.auth.getUsername();
       if (this.username === null) {
         //window.alert("Please fill out the Personal page before accessing this page.");

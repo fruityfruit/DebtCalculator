@@ -19,7 +19,6 @@ export class SigninComponent implements OnInit {
 
   public signin() {
     this.auth.signin(this.credentials).subscribe(() => {
-      this.auth.callUpdateLink(); //updates the navbar
       //window.alert("Signed In!");
       this.alerts.open('Signed In!');
       this.router.navigateByUrl('/');
@@ -34,6 +33,8 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.auth.callUpdateColor("other");
+  }
 
 }

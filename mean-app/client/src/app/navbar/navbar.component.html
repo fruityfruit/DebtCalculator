@@ -1,52 +1,11 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-static-top" role = "navigation">
-  <a class="navbar-brand" href="#" routerLink="/" routerLinkActive="active">Debt Calculator</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto" style="width: 100%">
-      <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/personal" routerLinkActive="active">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/debt" routerLinkActive="active">Debts</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/opportunity" routerLinkActive="active">Opportunities</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"  routerLink="/results" routerLinkActive="active">Results</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"  routerLink="/info" routerLinkActive="active">How It Works</a>
-      </li>
-      <div *ngIf="!this.auth.isLoggedIn()" style="margin: auto">
-        <li class="nav-item" style="width: 100%">
-          <a class="nav-link" id="toggle-link" href="#" routerLink="/{{this.routerLinkText}}" routerLinkActive="active">{{this.loggedInText}}</a>
-        </li>
-      </div>
-      <div *ngIf="this.auth.isLoggedIn()" style="margin: auto">
-        <li class="nav-item dropdown" style="width: 100%">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" routerLinkActive="active">{{this.loggedInText}}</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" routerLink="/account" href="#">Account</a>
-            <a class="dropdown-item" (click)="signout()" href="#">Sign Out</a>
-          </div>
-        </li>
-      </div>
-    </ul>
-  </div>
-</nav> -->
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="topnav" id="myTopnav">
+<div class="topnav" id="navbar">
   <a href="#" class="brand" routerLink="/" routerLinkActive="active" (click)="closeDropdown()">Debt Calculator</a>
   <a class="link special" style="padding: 0px"></a>
-  <a href="#" class="link" routerLink="/personal" routerLinkActive="active" (click)="closeDropdown()">Profile</a>
-  <a href="#" class="link" routerLink="/debt" routerLinkActive="active" (click)="closeDropdown()">Debts</a>
-  <a href="#" class="link" routerLink="/opportunity" routerLinkActive="active" (click)="closeDropdown()">Opportunities</a>
-  <a href="#" class="link" routerLink="/results" routerLinkActive="active" (click)="closeDropdown()">Results</a>
-  <a href="#" class="link" routerLink="/info" routerLinkActive="active" (click)="closeDropdown()">How It Works</a>
+  <a id="link1" href="#" class="link" routerLink="/personal" routerLinkActive="active" (click)="closeDropdown()">Profile</a>
+  <a id="link2" href="#" class="link" routerLink="/debt" routerLinkActive="active" (click)="closeDropdown()">Debts</a>
+  <a id="link3" href="#" class="link" routerLink="/opportunity" routerLinkActive="active" (click)="closeDropdown()">Opportunities</a>
+  <a id="link4" href="#" class="link" routerLink="/results" routerLinkActive="active" (click)="closeDropdown()">Results</a>
+  <a id="link5" href="#" class="link" routerLink="/info" routerLinkActive="active" (click)="closeDropdown()">How It Works</a>
   <div *ngIf="!this.auth.isLoggedIn()">
     <a style="padding: 0px; height: 0px"></a>
     <a class="link" href="#" routerLink="/signin" routerLinkActive="active" (click)="closeDropdown()">Sign In</a>
@@ -55,5 +14,5 @@
     <a style="padding: 0px; height: 0px"></a>
     <a class="link" href="#" (click)="signout()">Sign Out</a>
   </div>
-  <a href="javascript:void(0);" style="font-size:26px;" class="icon" (click)="myFunction()">&#9776;</a>
+  <a href="javascript:void(0);" style="font-size:26px;" class="icon" (click)="responsive()">&#9776;</a>
 </div>

@@ -90,6 +90,7 @@ export class OpportunityComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.callUpdateColor("opportunities");
     this.username = this.auth.getUsername();
     if (this.username === null) {
       //window.alert("Please fill out the Personal page before accessing this page.");
