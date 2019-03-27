@@ -146,7 +146,7 @@
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Opportunity annualCompounds">
-              <input matInput required type="number" class="form-control" formControlName="annualCompounds" placeholder="Projected opportunity annualCompounds">
+              <input matInput required type="number" class="form-control" formControlName="annualCompounds" placeholder="Projected opportunity annualCompounds" min="0" oninput="this.value = Math.abs(this.value)" value="0">
               <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
             </mat-form-field>
           </div>
