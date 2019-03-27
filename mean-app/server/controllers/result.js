@@ -63,12 +63,22 @@ module.exports.getBLS = function(req, res) {
   query = 'CUUR0000SA0';
   options.seriesid.push(query);
   bls.fetch(options).then(function(response) {
+    var baseLine;
     var retVal = [];
     for (entry in options.seriesid) {
       try {
-        retVal.push(response.Results.series[entry].seriesID+": "+response.Results.series[entry].data[0].value);
-      } catch(err) {
-      }
+        if (response.Results.series[entry].seriesID === 'CUUR0000SA0') {
+          baseLine = response.Results.series[entry].data[0].value;
+          break;
+        }
+      } catch(err) {}
+    }
+    for (entry in options.seriesid) {
+      try {
+        if (response.Results.series[entry].seriesID !== 'CUUR0000SA0') {
+          retVal.push(response.Results.series[entry].seriesID+": "+1/((response.Results.series[entry].data[0].value/baseLine)));
+        }
+      } catch(err) {}
     }
     res.status(200).json(retVal);
   }).catch(function(err) {

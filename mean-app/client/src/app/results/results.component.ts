@@ -18,8 +18,7 @@ import { SnackbaralertService } from '../snackbaralert.service';
 export class ResultsComponent implements OnInit {
   username: string = '';
   zillowResults: ResultSet[] = [];
-  debtChart = [];
-  salaryChart = [];
+  blsChart = [];
 public debtProjection=[] as Chart;
   netIncome=[] as Chart;
   netIncomeTemp=[];
@@ -39,6 +38,7 @@ public debtProjection=[] as Chart;
   newPassword: string;
   dataSource = new MatTableDataSource(this.zillowResults);
   displayedColumns: string[] = ['name', 'city', 'estimate'];
+  colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon'];
 
   constructor(public auth: AuthenticationService,
     private resultService: ResultService,
@@ -100,7 +100,6 @@ public debtProjection=[] as Chart;
     }
 
     private generateCharts() {
-      var colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon'];
 
       /*
         READ THIS
@@ -158,11 +157,11 @@ public debtProjection=[] as Chart;
           datasets: [{
             label: debtnames[0],
             data: debtProjectionPoints[0],
-            borderColor: colors[0],
-            pointBackgroundColor: colors[0],
-            pointBorderColor: colors[0],
-            pointHoverBorderColor: colors[0],
-            pointHoverBackgroundColor: colors[0],
+            borderColor: this.colors[0],
+            pointBackgroundColor: this.colors[0],
+            pointBorderColor: this.colors[0],
+            pointHoverBorderColor: this.colors[0],
+            pointHoverBackgroundColor: this.colors[0],
             backgroundColor: 'transparent'
           }],
         },
@@ -236,11 +235,11 @@ public debtProjection=[] as Chart;
         var newSeries = {
           label: debtnames[counter],
           data: debtProjectionPoints[counter],
-          borderColor: colors[counter],
-          pointBackgroundColor: colors[counter],
-          pointBorderColor: colors[counter],
-          pointHoverBorderColor: colors[counter],
-          pointHoverBackgroundColor: colors[counter],
+          borderColor: this.colors[counter],
+          pointBackgroundColor: this.colors[counter],
+          pointBorderColor: this.colors[counter],
+          pointHoverBorderColor: this.colors[counter],
+          pointHoverBackgroundColor: this.colors[counter],
           backgroundColor: 'transparent'
 
              };
@@ -352,11 +351,11 @@ public debtProjection=[] as Chart;
           datasets: [{
             label: oppNameList[0],
             data: netPoints[0],
-            borderColor: colors[0],
-            pointBackgroundColor: colors[0],
-            pointBorderColor: colors[0],
-            pointHoverBorderColor: colors[0],
-            pointHoverBackgroundColor: colors[0],
+            borderColor: this.colors[0],
+            pointBackgroundColor: this.colors[0],
+            pointBorderColor: this.colors[0],
+            pointHoverBorderColor: this.colors[0],
+            pointHoverBackgroundColor: this.colors[0],
             backgroundColor: 'transparent'
           }],
         },
@@ -431,118 +430,17 @@ public debtProjection=[] as Chart;
       var newSeries3 = {
         data: netPoints[oppCounter],
         label: oppNameList[oppCounter],
-        borderColor: colors[oppCounter],
-        pointBackgroundColor: colors[oppCounter],
-        pointBorderColor: colors[oppCounter],
-        pointHoverBorderColor: colors[oppCounter],
-        pointHoverBackgroundColor: colors[oppCounter],
+        borderColor: this.colors[oppCounter],
+        pointBackgroundColor: this.colors[oppCounter],
+        pointBorderColor: this.colors[oppCounter],
+        pointHoverBorderColor: this.colors[oppCounter],
+        pointHoverBackgroundColor: this.colors[oppCounter],
         backgroundColor: 'transparent'
       };
         this.netIncome.data['datasets'][oppCounter]=newSeries3;
         this.netIncome.update();
         oppCounter=oppCounter+1;
       }
-
-      var oppNames = [];
-      var oppDebts = [];
-      var oppCosts = [];
-      var counter =0;
-      while (counter< this.opportunities.length){
-      oppNames.push(this.opportunities[counter].name);
-      oppDebts.push(this.opportunities[counter].principal);
-      oppCosts.push(this.opportunities[counter].income);
-      counter=counter+1;
-      }
-      //
-      //
-      this.debtChart = new Chart('canvas0', {
-      type: "bar",
-      data: {
-        labels: oppNames,
-        datasets: [{
-          label: "Debt From Opportunities Chart",
-          data: oppDebts,
-          backgroundColor: colors,
-          borderColor: colors,
-        }]
-      },
-      options: {
-        title: {
-          display: true,
-          text:"Debt From Opportunities",
-        },
-        legend:{
-          display: false,
-        },
-        scales: {
-          yAxes: [{
-            scaleLabel:{
-              display:true,
-              labelString: 'Dollars',
-            },
-            ticks: {
-              beginAtZero: true,
-              callback: function(value, index, values) {
-                                   if(parseInt(value) >= 1000){
-                                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   }
-                                   else if(parseInt(value) <= -1000){
-                                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   }
-                                    else {
-                                      return '$' + value;
-                                   }
-                              }
-            }
-          }]
-        }
-      }
-      });
-      //
-      this.salaryChart = new Chart('canvas1', {
-      type: 'bar',
-      data: {
-        labels: oppNames,
-        datasets: [{
-          label: "Salary Chart",
-          data: oppCosts,
-          backgroundColor: colors,
-          borderColor: colors,
-
-        }]
-      },
-      options: {
-        title: {
-          display: true,
-          text:"Income From Opportunities",
-        },
-        legend:{
-          display: false,
-        },
-        scales: {
-          yAxes: [{
-            scaleLabel:{
-              display:true,
-              labelString: 'Dollars',
-            },
-            ticks: {
-              beginAtZero: true,
-              callback: function(value, index, values) {
-                                   if(parseInt(value) >= 1000){
-                                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   }
-                                   else if(parseInt(value) <= -1000){
-                                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   }
-                                    else {
-                                      return '$' + value;
-                                   }
-                              }
-            }
-          }]
-        }
-      }
-      });
     }
 
     private getOpportunityZillow(oppName: string, city: string, id: string) {
@@ -627,10 +525,95 @@ public debtProjection=[] as Chart;
         data['opportunities'].forEach(function(item, index) {
           names.push(item.name);
           regions.push(item.region);
-          console.log(item.region);
         });
-        this.resultService.getBLSData(regions).subscribe((data) => {
-          console.log(data);
+        this.resultService.getBLSData(regions).subscribe((retVal: any[]) => {
+          names = [];
+          regions = [];
+          var prices = [];
+          var displayPrices = [];
+          for (var i = 0; i < retVal.length; ++i) {
+            var split = retVal[i].indexOf(':');
+            prices.push(retVal[i].substring(split+2));
+            regions.push(retVal[i].substring(0,split));
+          }
+          data['opportunities'].forEach(function(item, index) {
+            regions.forEach(function(item2, index2) {
+              if (item2.includes(item.region)) {
+                names.push(item.city);
+                displayPrices.push(prices[index2]);
+              }
+            });
+          });
+          // cost of living chart
+          this.blsChart = new Chart('canvas0', {
+            type: "bar",
+            data: {
+              labels: names,
+              datasets: [{
+                label: "1$ in the average American town is worth this much here",
+                data: displayPrices,
+                backgroundColor: this.colors,
+                borderColor: this.colors,
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text:"Purchasing Power Index",
+              },
+              legend:{
+                display: false,
+              },
+              tooltips:{
+                position: 'nearest',
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+                  label: function(tooltipItem, data) {
+                    var valueTemp=+data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    var value = Math.round(valueTemp * 100) / 100;
+                    var stringValue='';
+                    if(value >= 1000){
+                      stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
+                    else if(value <= -1000){
+                      stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
+                    else {
+                      stringValue = '$' + value;
+                    }
+                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    return label + stringValue;
+                  }
+                }
+              },
+              scales: {
+                yAxes: [{
+                  scaleLabel:{
+                    display:true,
+                    labelString: 'Dollars',
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                      if(parseInt(value) >= 1000){
+                        return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      }
+                      else if(parseInt(value) <= -1000){
+                        return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      }
+                      else {
+                        return '$' + value;
+                      }
+                    }
+                  }
+                }]
+              }
+            }
+          });
         }, (err) => {
           console.log(err);
         });

@@ -14,11 +14,8 @@
       <div *ngIf="netIncome">
         <canvas id="canvas4"style="height: 600px; width: 100%;" >{{ netIncome }}</canvas>
       </div>
-      <div *ngIf="debtChart">
-        <canvas id="canvas0" style="height: 500px; width: 100%;">{{ debtChart }}</canvas>
-      </div>
-      <div *ngIf="salaryChart">
-        <canvas id="canvas1" style="height: 500px; width: 100%;">{{ salaryChart }}</canvas>
+      <div *ngIf="blsChart">
+        <canvas id="canvas0" style="height: 500px; width: 100%;">{{ blsChart }}</canvas>
       </div>
       <!-- <p>&nbsp;</p> -->
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="zillowResults && zillowResults.length" style="width: 100%">
