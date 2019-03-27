@@ -46,22 +46,17 @@
         <!-- Position Column -->
         <ng-container matColumnDef="principal">
           <th mat-header-cell *matHeaderCellDef> Principal </th>
-          <td mat-cell *matCellDef="let debt"> {{debt.principal}} </td>
+          <td mat-cell *matCellDef="let debt"> {{this.auth.formatMoney(debt.principal, false)}} </td>
         </ng-container>
         <!-- Name Column -->
         <ng-container matColumnDef="rate">
           <th mat-header-cell *matHeaderCellDef> Rate </th>
-          <td mat-cell *matCellDef="let debt"> {{debt.rate}} </td>
+          <td mat-cell *matCellDef="let debt"> {{debt.rate}}% </td>
         </ng-container>
-        <!-- Weight Column -->
-        <!-- <ng-container matColumnDef="annualcompounds">
-          <th mat-header-cell *matHeaderCellDef> Annual Compounds </th>
-          <td mat-cell *matCellDef="let debt"> {{debt.annualCompounds}} </td>
-        </ng-container> -->
         <!-- Symbol Column -->
         <ng-container matColumnDef="monthlypayment">
           <th mat-header-cell *matHeaderCellDef> Monthly Payment </th>
-          <td mat-cell *matCellDef="let debt"> {{debt.monthlyPayment}} </td>
+          <td mat-cell *matCellDef="let debt"> {{this.auth.formatMoney(debt.monthlyPayment, false)}} </td>
         </ng-container>
         <!-- Edit Column -->
         <ng-container matColumnDef="edit">

@@ -1,0 +1,44 @@
+var db = require('../server/models/db');
+var mongoose = require('mongoose');
+var User = mongoose.model('User'); //User schema from ../models/user.js
+var Debt = mongoose.model('Debt'); //Debt schema from ../models/debt.js
+var Opportunity = mongoose.model('Opportunity'); //Opportunity schema from ../models/opportunity.js
+
+User.find({ username: /dlcptwfcmc/i }, 'username', function (err, usernames) { //finds all users with non-permanent usernames
+  if (err) {
+    console.log(err);
+  } else {
+    for (var username in usernames) {
+      var actualUsername = usernames[username].username;
+      User.findOne({ username: actualUsername }, function (err, user) { //finds the user
+        if (err) { //return the error
+          console.log(err);
+        } else if (!user) { //the username doesn't exist or the password is wrong
+          console.log("!user");
+        } else { //find and delete the user
+          if (Date.now() - user.creation > 86400000) { //more than one day old
+            user.debts.forEach(function(entry) {
+              Debt.findByIdAndRemove({ _id: entry }, function (err, doc) {
+                if (err) {
+                  console.log(err);
+                }
+              });
+            });
+            user.opportunities.forEach(function(entry) {
+              Opportunity.findByIdAndRemove({ _id: entry }, function (err, doc) {
+                if (err) {
+                  console.log(err);
+                }
+              });
+            });
+            User.deleteOne({ username: actualUsername }, function (err) {
+              if (err) { //return the error
+                console.log(err);
+              }
+            });
+          }
+        }
+      });
+    }
+  }
+});

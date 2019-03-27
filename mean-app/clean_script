@@ -1,0 +1,9 @@
+#!/bin/bash
+
+node ./bin/clean > /dev/null 2>&1 & sleep 5
+kill -0 $! && kill $!
+
+# To set up a cron job to run this script once a week, run
+# `chmod 755 clean_script`
+# `whereis sh`
+# `0 0 * * 0 {path to sh} {path to this script} > /dev/null 2>&1`

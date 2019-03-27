@@ -5,7 +5,7 @@
       <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <mat-form-field appearance="standard" hintLabel="Opportunity Name">
-            <input matInput required type="text" class="form-control" formControlName="name" placeholder="Name this opportunity"
+            <input matInput type="text" class="form-control" formControlName="name" placeholder="Name this opportunity"
             #name [(ngModel)] = "opportunity.name">
             <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
           </mat-form-field>
@@ -13,14 +13,14 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="City">
-              <input matInput required type="text" class="form-control" formControlName="city" placeholder="City this opportunity is in"
+              <input matInput type="text" class="form-control" formControlName="city" placeholder="City this opportunity is in"
               #city [(ngModel)] = "opportunity.city">
               <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="State">
-              <mat-select required class="form-control" formControlName="state"
+              <mat-select class="form-control" formControlName="state"
               #state [(ngModel)] = "opportunity.state">
                 <mat-option value="">Select an option</mat-option>
                 <mat-option value="AL">Alabama</mat-option>
@@ -83,14 +83,14 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Opportunity Income">
-              <input matInput required type="number" class="form-control" formControlName="income" placeholder="Projected opportunity income"
+              <input matInput type="number" class="form-control" formControlName="income" placeholder="Projected opportunity income"
               #income [(ngModel)] = "opportunity.income">
               <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Region">
-              <mat-select required class="form-control" formControlName="region"
+              <mat-select class="form-control" formControlName="region"
               #region [(ngModel)] = "opportunity.region">
                 <mat-option value="">Select a region</mat-option>
                 <mat-option value="S35C">Atlanta-Sandy Springs-Roswell</mat-option>
@@ -140,28 +140,28 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Opportunity Principal">
-              <input matInput required type="number" class="form-control" formControlName="principal" placeholder="Projected opportunity principal"
+              <input matInput type="number" class="form-control" formControlName="principal" placeholder="Projected opportunity principal"
               #principal [(ngModel)] = "opportunity.principal">
               <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Opportunity Rate">
-              <input matInput required type="number" class="form-control" formControlName="rate" placeholder="Projected opportunity rate"
+              <input matInput type="number" class="form-control" formControlName="rate" placeholder="Projected opportunity rate"
               #rate [(ngModel)] = "opportunity.rate">
               <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Opportunity annualCompounds">
-              <input matInput required type="number" class="form-control" formControlName="annualCompounds" placeholder="Projected opportunity annualCompounds"
+              <input matInput type="number" class="form-control" formControlName="annualCompounds" placeholder="Projected opportunity annualCompounds"
               #annualCompounds [(ngModel)] = "opportunity.annualCompounds">
               <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Opportunity monthlyPayment">
-              <input matInput required type="number" class="form-control" formControlName="monthlyPayment" placeholder="Projected opportunity monthlyPayment"
+              <input matInput type="number" class="form-control" formControlName="monthlyPayment" placeholder="Projected opportunity monthlyPayment"
               #monthlyPayment [(ngModel)] = "opportunity.monthlyPayment">
               <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
             </mat-form-field>
