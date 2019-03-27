@@ -139,7 +139,13 @@ public debtProjection=[] as Chart;
         //  var calculatedDebt=principle*(1+intrestRate*num/100);
         var debt=this.debts[counter];
         var calculatedDebt=0;
-        calculatedDebt= +debt.principal*(1+ +debt.rate*num/100);
+        var rate= +debt.rate/100;
+        if (+debt.annualCompounds==0){
+        calculatedDebt= +debt.principal*(1+ rate*num);
+      }
+      else {
+        calculatedDebt= +debt.principal*Math.pow(1+ (rate/ +debt.annualCompounds),+debt.annualCompounds*num);
+      }
         if (counter==0){
           labels.push("Year "+num);
         }
@@ -297,23 +303,37 @@ public debtProjection=[] as Chart;
       var yearlyPaymentOpp=[];
         var oppCounter =0;
        while (oppCounter < this.opportunities.length){
+         var paidOff=false;
          var yearly=[];
          var num=0;
          var total = +this.opportunities[oppCounter].principal;
+         var rate = +this.opportunities[oppCounter].rate/100;
          while(num<=this.loop){
-           total=total + (+this.opportunities[oppCounter].principal* +this.opportunities[oppCounter].rate/100) - (+this.opportunities[oppCounter].monthlyPayment*12);
-           if (total>=0){
-             yearly.push(+this.opportunities[oppCounter].monthlyPayment*12);
-           }
-           else {
-             yearly.push(0);
-           }
-           num=num+1;
+                 if(+this.opportunities[oppCounter].annualCompounds==0){
+                 total=total + (+this.opportunities[oppCounter].principal* +this.opportunities[oppCounter].rate/100) - (+this.opportunities[oppCounter].monthlyPayment*12);
+               }
+               else {
+                 //  calculatedDebt= +debt.principal*Math.pow(1+ (rate/ +debt.annualCompounds),+debt.annualCompounds*num);
+                 total= +this.opportunities[oppCounter].principal*Math.pow(1+(rate/ +this.opportunities[oppCounter].annualCompounds),+this.opportunities[oppCounter].annualCompounds*num) - (+this.opportunities[oppCounter].monthlyPayment*num*12);
+               }
+               if(paidOff==true){
+                 yearly.push(0);
+               }
+               else{
+                     if (total>=0){
+                       yearly.push(+this.opportunities[oppCounter].monthlyPayment*12);
+                     }
+                     else {
+                       yearly.push(0);
+                       paidOff=true;
+                     }
+             }
+        num=num+1;
          }
          yearlyPaymentOpp.push(yearly);
         oppCounter =oppCounter+1;
       }
-      //console.log(yearlyPaymentOpp);
+      console.log(yearlyPaymentOpp);
       var oppCounter=0;
       var netPoints=[];
       var oppNameList=[];
