@@ -119,3 +119,6 @@ typings/
 # Cypress
 /cypress/screenshots
 /cypress/videos
+
+# Google Cloud Platform
+.gcloudignore

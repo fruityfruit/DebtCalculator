@@ -1,9 +1,16 @@
 #!/bin/bash
 
+# node ./bin/clean & sleep 5
 node ./bin/clean > /dev/null 2>&1 & sleep 5
 kill -0 $! && kill $!
+
+# To run this script on the production server, run the following first:
+# `export NODE_ENV='production'`
 
 # To set up a cron job to run this script once a week, run
 # `chmod 755 clean_script`
 # `whereis sh`
 # `0 0 * * 0 {path to sh} {path to this script} > /dev/null 2>&1`
+# For example, on the production machine we have:
+# `0 0 * * 0 /bin/sh /home/donface45/DebtCalculator/mean-app/clean_script > /dev/null 2>&1`
+
