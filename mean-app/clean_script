@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # node ./bin/clean & sleep 5
+export NODE_ENV='production'
 node ./bin/clean > /dev/null 2>&1 & sleep 5
 kill -0 $! && kill $!
 
@@ -13,4 +14,3 @@ kill -0 $! && kill $!
 # `0 0 * * 0 {path to sh} {path to this script} > /dev/null 2>&1`
 # For example, on the production machine we have:
 # `0 0 * * 0 /bin/sh /home/donface45/DebtCalculator/mean-app/clean_script > /dev/null 2>&1`
-
