@@ -38,7 +38,32 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-    </div>
+      <br>
+      <mat-card *ngIf="!this.auth.isLoggedIn()">
+        <mat-card-header>
+          <mat-card-title>Want to save your data for next time? Register here!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="ex1" [formGroup]="profileForm" (ngSubmit)="register()">
+            <div class="form-group row" style="margin-left:0px; margin-right:0px">
+              <div class="col-md-6">
+                <mat-form-field appearance="standard" hintLabel="Username">
+                  <input matInput type="text" class="form-control" formControlName="username" placeholder="Enter your username">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="standard" hintLabel="Password">
+                  <input matInput type="password" class="form-control" formControlName="password" placeholder="Enter your password">
+                </mat-form-field>
+              </div>
+            </div>
+            <button type="submit" [disabled]="!profileForm.valid" mat-raised-button style="margin-left:15px">Register!</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+
+    <!-- </div>
   </div>
   <br>
   <div class="cen container-fluid mat-elevation-z2" *ngIf="!this.auth.isLoggedIn()">
@@ -60,7 +85,7 @@
           </div>
         </div>
         <button type="submit" style="color: white; background-color: #78C2AC" mat-raised-button>Register!</button>
-      </form>
+      </form> -->
     </div>
   </div>
   <br>

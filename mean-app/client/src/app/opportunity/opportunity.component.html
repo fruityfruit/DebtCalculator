@@ -87,7 +87,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <button type="submit" mat-raised-button [disabled]="!profileForm.valid" style="left: calc(100% - 147px)">Add opportunity</button>
+          <button type="submit" mat-raised-button [disabled]="!isValid()" style="left: calc(100% - 147px)">Add opportunity</button>
         </div>
       </form>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z2"*ngIf="opportunities && opportunities.length">>

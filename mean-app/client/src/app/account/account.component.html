@@ -1,61 +1,75 @@
 <div class="mdc-typography mdc-typography--body1">
   <div class="cen container-fluid mat-elevation-z2">
     <div class="example-container" style="margin: 0px 50px">
-      <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px">Account Management</h1>
-      <div class="container" style="margin-bottom: 20px">
-        <h2 style="margin-bottom: 0px">Change Your Username</h2>
-        <form (submit)="username()">
-          <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-6">
-              <mat-form-field style="width: 100%" appearance="standard" hintLabel="New Username">
-                <input matInput type="text" class="form-control" name="name" placeholder="Enter your new username" [(ngModel)]="updateUsername.newUsername">
-              </mat-form-field>
+      <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px; margin-bottom: 20px">Account Management</h1>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Change Your Username</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="ex1" [formGroup]="profileFormUser" (ngSubmit)="onUsername()">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <mat-form-field appearance="standard" hintLabel="New Username">
+                  <input matInput type="text" class="form-control" formControlName="newUsername" placeholder="Enter your new username">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="standard" hintLabel="Password">
+                  <input matInput type="password" class="form-control" formControlName="password" placeholder="Enter your password">
+                </mat-form-field>
+              </div>
             </div>
-            <div class="col-md-6">
-              <mat-form-field style="width: 100%" appearance="standard" hintLabel="Password">
-                <input matInput type="password" class="form-control" name="password" placeholder="Enter your password" [(ngModel)]="updateUsername.password">
-              </mat-form-field>
+            <button type="submit" [disabled]="!isValid('user')" mat-raised-button>Update</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Change Your Password</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="ex1" [formGroup]="profileFormPassword" (ngSubmit)="onPassword()">
+            <div class="form-group row">
+              <div class="col-md-4">
+                <mat-form-field appearance="standard" hintLabel="Old Password">
+                  <input matInput type="password" class="form-control" formControlName="oldPassword" placeholder="Enter your old password">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="standard" hintLabel="New Password">
+                  <input matInput type="password" class="form-control" formControlName="newPassword" placeholder="Enter your new password">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="standard" hintLabel="Re-enter New Password">
+                  <input matInput type="password" class="form-control" formControlName="repeatNewPassword" placeholder="Re-enter your new password">
+                </mat-form-field>
+              </div>
             </div>
-          </div>
-          <button type="submit" style="color: white; background-color: #78C2AC" mat-raised-button>Update</button>
-        </form>
-      </div>
-      <div class="container" style="margin-bottom: 20px">
-        <h2 style="margin-bottom: 0px">Change Your Password</h2>
-        <form (submit)="password()">
-          <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-4">
-              <mat-form-field style="width: 100%" appearance="standard" hintLabel="Old Password">
-                <input matInput type="password" class="form-control" name="oldPass" placeholder="Enter your old password" [(ngModel)]="updatePassword.oldPassword">
-              </mat-form-field>
+            <button type="submit" [disabled]="!isValid('password')" mat-raised-button>Update</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Delete Your Account</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="ex1" [formGroup]="profileFormDelete" (ngSubmit)="onDelete()">
+            <div class="form-group row">
+               <div class="col-md-12">
+                <mat-form-field appearance="standard" hintLabel="Password">
+                  <input matInput type="password" class="form-control" formControlName="password" placeholder="Enter your password to confirm">
+                </mat-form-field>
+              </div>
             </div>
-            <div class="col-md-4">
-              <mat-form-field style="width: 100%" appearance="standard" hintLabel="New Password">
-                <input matInput type="password" class="form-control" name="newPass1" placeholder="Enter your new password" [(ngModel)]="updatePassword.newPassword">
-              </mat-form-field>
-            </div>
-            <div class="col-md-4">
-              <mat-form-field style="width: 100%" appearance="standard" hintLabel="Re-enter New Password">
-                <input matInput type="password" class="form-control" name="newPass2" placeholder="Re-enter your new password" [(ngModel)]="duplicateNewPassword">
-              </mat-form-field>
-            </div>
-          </div>
-          <button type="submit" style="color: white; background-color: #78C2AC" mat-raised-button>Update</button>
-        </form>
-      </div>
-      <div class="container" style="margin-bottom: 20px">
-        <h2 style="margin-bottom: 0px">Delete Account</h2>
-        <form (submit)="delete()">
-          <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-12">
-              <mat-form-field style="width: 100%" appearance="standard" hintLabel="Password">
-                <input matInput type="password" class="form-control" name="confirmPass" placeholder="Enter your password to confirm" [(ngModel)]="deleteAccount.password">
-              </mat-form-field>
-            </div>
-          </div>
-          <button type="submit" style="color: white; background-color: #78C2AC" mat-raised-button>Delete</button>
-        </form>
-      </div>
+            <button type="submit" [disabled]="!profileFormDelete.valid" mat-raised-button>Delete</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
   <br>

@@ -13,8 +13,8 @@ import { ViewChild } from '@angular/core';
 export class PersonalComponent implements OnInit {
   username: String;
   currProfile: any = {};
-  profileFormProfile: FormGroup;
-  formdataProfile: Profile = {
+  profileForm: FormGroup;
+  formdata: Profile = {
     username: '',
     state: '',
     region: '',
@@ -295,7 +295,7 @@ export class PersonalComponent implements OnInit {
 
   constructor(private builder: FormBuilder, private router: Router,
     private auth: AuthenticationService, private profService: ProfileService) {
-    this.profileFormProfile = this.builder.group({
+    this.profileForm = this.builder.group({
       state: ['', Validators.required],
       region: ['', Validators.required],
       dependents: [0, Validators.required],
@@ -305,18 +305,18 @@ export class PersonalComponent implements OnInit {
     });
   }
 
-  public onSubmitProfile() {
-    this.formdataProfile.dependents = this.profileFormProfile.value.dependents;
-    this.formdataProfile.rent = this.profileFormProfile.value.rent;
-    this.formdataProfile.spending = this.profileFormProfile.value.spending;
-    this.formdataProfile.pets = this.profileFormProfile.value.pets;
-    this.formdataProfile.state = this.profileFormProfile.value.state;
-    this.formdataProfile.region = this.profileFormProfile.value.region;
+  public onSubmit() {
+    this.formdata.dependents = this.profileForm.value.dependents;
+    this.formdata.rent = this.profileForm.value.rent;
+    this.formdata.spending = this.profileForm.value.spending;
+    this.formdata.pets = this.profileForm.value.pets;
+    this.formdata.state = this.profileForm.value.state;
+    this.formdata.region = this.profileForm.value.region;
     if (this.username === null) {
       this.auth.register(this.credentials).subscribe(() => {
         this.username = this.auth.getUsername();
-        this.formdataProfile.username = this.username;
-        this.profService.updateProfile(this.formdataProfile).subscribe(() => {
+        this.formdata.username = this.username;
+        this.profService.updateProfile(this.formdata).subscribe(() => {
           this.router.navigate(['debt']);
         }, (err) => {
           console.log(err);
@@ -326,8 +326,8 @@ export class PersonalComponent implements OnInit {
       });
     }
     else {
-      this.formdataProfile.username = this.username;
-      this.profService.updateProfile(this.formdataProfile).subscribe(() => {
+      this.formdata.username = this.username;
+      this.profService.updateProfile(this.formdata).subscribe(() => {
         this.router.navigate(['debt']);
       }, (err) => {
         console.log(err);

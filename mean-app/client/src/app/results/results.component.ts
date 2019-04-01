@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService, PasswordPayload, UsernamePayload} from '../authentication.service';
@@ -6,7 +7,7 @@ import { OpportunityService, Opportunity } from '../opportunity.service';
 import { ResultService, ResultSet } from '../result.service';
 import { ProfileService, Profile, Debt } from '../profile.service';
 import { Router } from '@angular/router';
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
 import { SnackbaralertService } from '../snackbaralert.service';
 
 @Component({
@@ -36,6 +37,7 @@ export class ResultsComponent implements OnInit {
   opportunities: Opportunity[] = [];
   newUsername: string;
   newPassword: string;
+  profileForm: FormGroup;
   dataSource = new MatTableDataSource(this.zillowResults);
   displayedColumns: string[] = ['name', 'city', 'estimate'];
   colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon'];
@@ -44,8 +46,14 @@ export class ResultsComponent implements OnInit {
     private resultService: ResultService,
     private oppService: OpportunityService,
     private profService: ProfileService,
+    private builder: FormBuilder,
     private router: Router,
-    private alerts: SnackbaralertService) { }
+    private alerts: SnackbaralertService) {
+      this.profileForm = this.builder.group({
+        username: ['', Validators.required],
+        password: ['', Validators.required]
+      });
+    }
 
     private getData() {
       this.profService.getProfile(this.username).subscribe((data: any) => { //returns the user's profile
@@ -505,6 +513,8 @@ export class ResultsComponent implements OnInit {
   }
 
   public register() {
+    this.newUsername = this.profileForm.value.username;
+    this.newPassword = this.profileForm.value.password;
     if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
       this.alerts.open("Sorry, that username has already been taken. Please try another!");
     } else {

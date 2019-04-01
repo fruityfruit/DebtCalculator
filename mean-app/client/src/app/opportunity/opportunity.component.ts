@@ -305,16 +305,26 @@ export class OpportunityComponent implements OnInit {
       name: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      region: ['', ],
+      region: ['', Validators.required],
       income: [0],
       move: ['', Validators.required],
       principal: [0],
       rate: [0],
       annualCompounds: [0],
-      monthlyPayment: [0],
+      monthlyPayment: [0]
     });
   }
-  onSubmit() {
+
+  public isValid() {
+    if (this.profileForm.value.type && this.profileForm.value.name && this.profileForm.value.city && this.profileForm.value.state &&
+      this.profileForm.value.region && this.profileForm.value.move && (this.profileForm.value.income || (this.profileForm.value.principal &&
+      this.profileForm.value.rate && this.profileForm.value.monthlyPayment))) {
+      return true;
+    }
+    return false;
+  }
+
+  public onSubmit() {
     this.formdata.type = this.profileForm.value.type;
     this.formdata.name = this.profileForm.value.name;
     this.formdata.city = this.profileForm.value.city;
@@ -345,7 +355,7 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
-  deleteOpportunity(id: String) {
+  public deleteOpportunity(id: String) {
     this.oppService.deleteOpportunity(this.username, id).subscribe(res => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data['opportunities'];

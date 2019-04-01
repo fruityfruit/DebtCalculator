@@ -1,5 +1,51 @@
+form.ex1 {
+}
+
+.mat-card {
+  color: #5a5a5a;
+}
+
+.example-container {
+  margin-left: 225px;
+}
+
+.example-container > * {
+}
+
+body {
+  background-color: white !important;
+}
+
 div.cen {
-  max-width: 1200px;
+  width: 960px;
   overflow:hidden;
   margin: auto;
+  padding-bottom: 50px;
 }
+
+mat-form-field {
+  width: 100%;
+}
+
+.container-fluid{
+  overflow-y: hidden;
+}
+
+table {
+  width: 100%;
+}
+
+ ::ng-deep th.mat-header-cell{
+     width: 200px;
+     min-width: 140px;
+ }
+
+ .mat-raised-button {
+   color: white;
+   background-color: #78C2AC;
+ }
+
+ .mat-raised-button:disabled {
+   color: rgba(0,0,0,.26);
+   background-color: rgba(0,0,0,.12);
+ }

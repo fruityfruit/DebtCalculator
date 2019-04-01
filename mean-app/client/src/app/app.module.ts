@@ -23,7 +23,7 @@ import { ProfileService } from './profile.service';
 import { AccountComponent } from './account/account.component';
 import {MatSidenavModule, MatTableModule, MatFormFieldModule, MatInputModule,
         MatSelectModule, MatIconModule, MatButtonModule,
-        MatSnackBarModule} from '@angular/material';
+        MatSnackBarModule, MatCardModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DebteditComponent } from './debtedit/debtedit.component';
 import { DebtComponent } from './debt/debt.component';
@@ -113,6 +113,7 @@ const ROUTES = [
     MatTableModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatCardModule,
     RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
   providers: [AuthenticationService,// Add the Authentication service
