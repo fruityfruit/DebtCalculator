@@ -38,7 +38,7 @@ export class ResultsComponent implements OnInit {
   newPassword: string;
   dataSource = new MatTableDataSource(this.zillowResults);
   displayedColumns: string[] = ['name', 'city', 'estimate'];
-  colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon'];
+  colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon','mediumseagreen'];
 
   constructor(public auth: AuthenticationService,
     private resultService: ResultService,
@@ -101,27 +101,10 @@ export class ResultsComponent implements OnInit {
 
   private generateCharts() {
 
-    /*
-    READ THIS
-
-    I have commented out the graph generation portion because i think that we have changed the data that we have so much that
-    trying to edit the old graphs that I didn't write would be very hard.
-    Here's what I've done to the file:
-    By the time this function is called, this.opportunities and this.debts contain all of the opportunities and
-    debts that the user has. Each opportunity may have a debt (4 characteristics) and/or an income. this.debts
-    contains the debts that the user has regardless of the opportunity (this is entered on the personal page).
-    To see what a "Debt" or what an "Opportunity" is, check out the profile.service and opportunity.service files,
-    which is where they are defined.
-    Also, this.profile contains the user's profile, which has their rent, dependents, monthly spending, etc.
-    */
-
-    //this gives you auth back in data as a profile type, shows correctly in console
-    // this.resultService.getChartsData(this.username).subscribe((data: Opportunity[]) => {
-    //   this.auth.getProfile(this.username).subscribe((data2: Profile) => {
-    //  var intrestRate = data2.interest;
-    //var principle= data2.debt;
-    //var yearlyPayment= data2.payments*12;
-    //assume yearly interest
+    if(this.debtProjection.hasOwnProperty('config')){
+      this.debtProjection.config.data.datasets=[];
+      this.netIncome.config.data.datasets=[];
+    }
     var debtProjectionPoints=[];
     var labels=[];
     var netPoints=[];
@@ -638,7 +621,7 @@ export class ResultsComponent implements OnInit {
     this.loop= +((document.getElementById("numYears") as HTMLInputElement).value);
     this.debtProjection.config.data.datasets=[];
     this.netIncome.config.data.datasets=[];
-    this.ngOnInit();
+    this.getData();
   }
 
   ngOnInit() {
