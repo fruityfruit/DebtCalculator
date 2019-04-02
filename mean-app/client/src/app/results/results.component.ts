@@ -19,10 +19,9 @@ import { SnackbaralertService } from '../snackbaralert.service';
 export class ResultsComponent implements OnInit {
   username: string = '';
   zillowResults: ResultSet[] = [];
-  blsChart = [];
-  public debtProjection=[] as Chart;
-  netIncome=[] as Chart;
-  netIncomeTemp=[];
+  blsChart = [] as Chart;
+  debtProjection = [] as Chart;
+  netIncome = [] as Chart;
   profile: Profile = {
     username: "",
     state: "",
@@ -32,7 +31,6 @@ export class ResultsComponent implements OnInit {
     spending: 0,
     pets: 0
   };
-  loop : Number =5;
   debts: Debt[] = [];
   opportunities: Opportunity[] = [];
   newUsername: string;
@@ -42,21 +40,17 @@ export class ResultsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'city', 'estimate'];
   colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon','mediumseagreen'];
 
-  constructor(public auth: AuthenticationService,
-    private resultService: ResultService,
-    private oppService: OpportunityService,
-    private profService: ProfileService,
-    private builder: FormBuilder,
-    private router: Router,
-    private alerts: SnackbaralertService) {
-      this.profileForm = this.builder.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required]
-      });
-    }
+  constructor(public auth: AuthenticationService, private resultService: ResultService,
+    private oppService: OpportunityService, private profService: ProfileService,
+    private builder: FormBuilder, private router: Router, private alerts: SnackbaralertService) {
+    this.profileForm = this.builder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
-    private getData() {
-      this.profService.getProfile(this.username).subscribe((data: any) => { //returns the user's profile
+  private getData() {
+    this.profService.getProfile(this.username).subscribe((data: any) => { //returns the user's profile
       this.profile.username = this.username;
       this.profile.state = data.state;
       this.profile.region = data.region;
@@ -98,7 +92,7 @@ export class ResultsComponent implements OnInit {
           tempOpps.push(newOpp);
         });
         this.opportunities = tempOpps;
-        this.generateCharts(); //generate the charts using the data that we've just collected
+        this.generateCharts(5); //generate the charts using the data that we've just collected
       }, (err) => {
         console.log(err);
       });
@@ -107,47 +101,54 @@ export class ResultsComponent implements OnInit {
     });
   }
 
-  private generateCharts() {
-
-    if(this.debtProjection.hasOwnProperty('config')){
-      this.debtProjection.config.data.datasets=[];
-      this.netIncome.config.data.datasets=[];
+  private generateCharts(numberOfYears: number) {
+    if (this.debtProjection.hasOwnProperty('config')) {
+      this.debtProjection.config.data.datasets = [];
+      this.netIncome.config.data.datasets = [];
     }
-    var debtProjectionPoints=[];
-    var labels=[];
-    var netPoints=[];
-    var debtnames=[];
+    var labels = [];
+    labels.push("0 Months");
+    labels.push("1 Month");
+    for (var i = 2; i <= numberOfYears*12; i = i+1) {
+      labels.push(i+" Months");
+    }
+    this.generateDebtChart(labels);
+    this.generateSavingsChart(labels);
+  }
+
+  private generateDebtChart(labels: string[]) {
+    var debtProjectionPoints = [];
+    var netPoints = [];
+    var debtnames = [];
     var num = 0;
-    var counter=0;
-    var title = "Debt Projected Over "+ this.loop+ " Years";
-    var title2 = "Savings Over "+ this.loop+ " Years From Opportunities";
-    while(counter<this.debts.length)
-    {
-      var points=[];
-      var name=this.debts[counter].name;
-      debtnames.push(name);
-      while(num<=this.loop){
-        //  var calculatedDebt=principle*(1+intrestRate*num/100);
-        var debt=this.debts[counter];
-        var calculatedDebt=0;
-        var rate= +debt.rate/100;
-        if (+debt.annualCompounds==0){
-          calculatedDebt= +debt.principal*(1+ rate*num);
+    var counter = 0;
+    var title = "Debt Projected Over "+(labels.length - 1)+" Months";
+    while (counter < this.debts.length) {
+      var points = [];
+      //var name = this.debts[counter].name;
+      debtnames.push(this.debts[counter].name);
+      var currentPrincipal = this.debts[counter].principal;
+      var rate = this.debts[counter].rate/1200;
+      while (num <= labels.length) {
+        if (this.debts[counter].annualCompounds === 0) {
+          //simple interest
+          currentPrincipal = currentPrincipal*(1+rate);
+          currentPrincipal = currentPrincipal - this.debts[counter].monthlyPayment;
         }
         else {
-          calculatedDebt= +debt.principal*Math.pow(1+ (rate/ +debt.annualCompounds),+debt.annualCompounds*num);
+          currentPrincipal= this.debts[counter].principal*Math.pow(1+ (rate/ this.debts[counter].annualCompounds),this.debts[counter].annualCompounds*num);
         }
-        if (counter==0){
-          labels.push("Year "+num);
+        if (currentPrincipal < 0) {
+          break;
         }
-        points.push(calculatedDebt);
+        points.push(currentPrincipal);
         num=num+1;
       }
       debtProjectionPoints.push(points);
       counter=counter+1;
       num=0;
     }
-    this.debtProjection = new Chart('canvas3', {
+    this.debtProjection = new Chart('canvas0', {
       type: 'line',
       data: {
         labels: labels,
@@ -246,7 +247,7 @@ export class ResultsComponent implements OnInit {
     }
     if(this.debts.length>1){
       var num=0;
-      while (num<=this.loop){
+      while (num<=labels.length){
         var addedDebt=debtProjectionPoints[0][num];
         var counter=1;
         while (counter<this.debts.length){
@@ -269,6 +270,10 @@ export class ResultsComponent implements OnInit {
       this.debtProjection.data['datasets'][counter]=newSeries2;
       this.debtProjection.update();
     }
+  }
+
+  private generateSavingsChart(labels) {
+    var title = "Savings Over "+(labels.length - 1)+" Months From Opportunities";
     var yearlyPaymentDebts=[];
     var netIncomePoints=[];
     var debtCounter=0;
@@ -277,7 +282,7 @@ export class ResultsComponent implements OnInit {
       //    yearly.push(+this.debts[debtCounter].monthlyPayment*12);
       var num=0;
       var total= +this.debts[debtCounter].principal;
-      while (num<=this.loop){
+      while (num<=labels.length){
         total=total + (+this.debts[debtCounter].principal* +this.debts[debtCounter].rate/100) - (+this.debts[debtCounter].monthlyPayment*12);
         //  console.log(total);
         if (total>=0){
@@ -299,12 +304,11 @@ export class ResultsComponent implements OnInit {
       var num=0;
       var total = +this.opportunities[oppCounter].principal;
       var rate = +this.opportunities[oppCounter].rate/100;
-      while(num<=this.loop){
+      while(num<=labels.length){
         if(+this.opportunities[oppCounter].annualCompounds==0){
           total=total + (+this.opportunities[oppCounter].principal* +this.opportunities[oppCounter].rate/100) - (+this.opportunities[oppCounter].monthlyPayment*12);
         }
         else {
-          //  calculatedDebt= +debt.principal*Math.pow(1+ (rate/ +debt.annualCompounds),+debt.annualCompounds*num);
           total= +this.opportunities[oppCounter].principal*Math.pow(1+(rate/ +this.opportunities[oppCounter].annualCompounds),+this.opportunities[oppCounter].annualCompounds*num) - (+this.opportunities[oppCounter].monthlyPayment*num*12);
         }
         if(paidOff==true){
@@ -333,7 +337,7 @@ export class ResultsComponent implements OnInit {
       var net=[];
       var num =0;
       var total= +this.opportunities[oppCounter].income;
-      while(num<=this.loop){
+      while(num<=labels.length){
         var debtLoop=0;
         while (debtLoop<yearlyPaymentDebts.length){
           total=total - +yearlyPaymentDebts[debtLoop][num];
@@ -354,7 +358,7 @@ export class ResultsComponent implements OnInit {
       oppCounter=oppCounter+1;
     }
     //console.log(netPoints);
-    this.netIncome = new Chart('canvas4', {
+    this.netIncome = new Chart('canvas1', {
       animationEnabled: true,
       type: 'line',
       data: {
@@ -373,7 +377,7 @@ export class ResultsComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text:title2,
+          text:title,
         },
         legend: {
           display: true,
@@ -495,39 +499,6 @@ export class ResultsComponent implements OnInit {
     });
   }
 
-  public register() {
-    this.newUsername = this.profileForm.value.username;
-    this.newPassword = this.profileForm.value.password;
-    if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
-      this.alerts.open("Sorry, that username has already been taken. Please try another!");
-    } else {
-      var updateUsername: UsernamePayload = {
-        oldUsername: this.username,
-        newUsername: this.newUsername,
-        password: ''
-      }
-      var updatePassword: PasswordPayload = {
-        username: this.newUsername,
-        oldPassword: '',
-        newPassword: this.newPassword
-      }
-      this.auth.changeUsername(updateUsername).subscribe(() => {
-        this.auth.changePassword(updatePassword).subscribe(() => {
-          this.alerts.open("Registered!");
-        }, (err) => {
-          console.log(err);
-        });
-      }, (err) => {
-        if (err.error.code === 11000) {
-          this.alerts.open("Sorry, that username has already been taken. Please try another!");
-        } else {
-          console.log(err);
-          this.router.navigateByUrl('/');
-        }
-      });
-    }
-  }
-
   private displayBLSData() {
     this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
       var regions = [];
@@ -555,12 +526,12 @@ export class ResultsComponent implements OnInit {
           });
         });
         // cost of living chart
-        this.blsChart = new Chart('canvas0', {
+        this.blsChart = new Chart('canvas2', {
           type: "bar",
           data: {
             labels: names,
             datasets: [{
-              label: "1$ in the average American town is worth this much here",
+              label: "1$ in the average American city is worth this much here",
               data: displayPrices,
               backgroundColor: this.colors,
               borderColor: this.colors,
@@ -592,7 +563,7 @@ export class ResultsComponent implements OnInit {
                   else {
                     stringValue = '$' + value;
                   }
-                  var label = "1$ in the average American town is worth "+stringValue+" here";
+                  var label = "1$ in the average American city is worth "+stringValue+" here";
                   return label;
                 }
               }
@@ -627,11 +598,44 @@ export class ResultsComponent implements OnInit {
     });
   }
 
-  updateCharts() {
-    this.loop= +((document.getElementById("numYears") as HTMLInputElement).value);
+  public updateCharts() {
+    var numberOfYears = +((document.getElementById("numYears") as HTMLInputElement).value);
     this.debtProjection.config.data.datasets=[];
     this.netIncome.config.data.datasets=[];
-    this.getData();
+    this.generateCharts(numberOfYears);
+  }
+
+  public register() {
+    this.newUsername = this.profileForm.value.username;
+    this.newPassword = this.profileForm.value.password;
+    if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
+      this.alerts.open("Sorry, that username has already been taken. Please try another!");
+    } else {
+      var updateUsername: UsernamePayload = {
+        oldUsername: this.username,
+        newUsername: this.newUsername,
+        password: ''
+      }
+      var updatePassword: PasswordPayload = {
+        username: this.newUsername,
+        oldPassword: '',
+        newPassword: this.newPassword
+      }
+      this.auth.changeUsername(updateUsername).subscribe(() => {
+        this.auth.changePassword(updatePassword).subscribe(() => {
+          this.alerts.open("Registered!");
+        }, (err) => {
+          console.log(err);
+        });
+      }, (err) => {
+        if (err.error.code === 11000) {
+          this.alerts.open("Sorry, that username has already been taken. Please try another!");
+        } else {
+          console.log(err);
+          this.router.navigateByUrl('/');
+        }
+      });
+    }
   }
 
   ngOnInit() {
@@ -641,10 +645,9 @@ export class ResultsComponent implements OnInit {
       this.alerts.open("Please fill out the Personal page before accessing this page.");
       this.router.navigateByUrl('/personal');
     } else {
-
-      this.displayZillowData();
-      this.displayBLSData();
       this.getData();
+      this.displayBLSData();
+      this.displayZillowData();
     }
   }
 

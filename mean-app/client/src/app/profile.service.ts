@@ -6,19 +6,19 @@ export interface Profile {
   username: String;
   state: String;
   region: String;
-  dependents: Number;
-  rent: Number;
-  spending: Number;
-  pets: Number;
+  dependents: number;
+  rent: number;
+  spending: number;
+  pets: number;
 }
 
 export interface Debt {
   username: String;
   name: String;
-  principal: Number;
-  rate: Number;
-  annualCompounds: Number;
-  monthlyPayment: Number;
+  principal: number;
+  rate: number;
+  annualCompounds: number;
+  monthlyPayment: number;
 }
 
 @Injectable({
