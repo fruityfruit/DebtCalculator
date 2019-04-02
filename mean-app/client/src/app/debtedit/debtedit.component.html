@@ -11,33 +11,32 @@
         </div>
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
-            <mat-form-field appearance="standard" hintLabel="Your principal">
-              <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="What principal"
+            <mat-form-field appearance="standard" hintLabel="Principal Amount">
+              <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="Initial debt amount"
               #principal [(ngModel)] = "debt.principal">
-              <mat-label><mat-icon>money</mat-icon></mat-label>
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">
-            <mat-form-field appearance="standard" hintLabel="Your rate">
-              <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="What rate"
+            <mat-form-field appearance="standard" hintLabel="Yearly Rate (APR or APY)">
+              <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="Interest rate of debt source"
               #rate [(ngModel)] = "debt.rate">
-              <mat-label><mat-icon>transform</mat-icon></mat-label>
+              <span matSuffix>&nbsp;%</span>
             </mat-form-field>
           </div>
         </div>
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
-            <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
-              <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="What annualCompounds"
+            <mat-form-field appearance="standard" hintLabel="Compound Frequency (Enter 0 for Simple Interest)">
+              <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Times per year that interest is compounded"
               #annualCompounds [(ngModel)] = "debt.annualCompounds">
-              <mat-label><mat-icon>show_chart</mat-icon></mat-label>
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">
-            <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
-              <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="What monthlyPayment"
+            <mat-form-field appearance="standard" hintLabel="Monthly Payment">
+              <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Payment made each month"
               #monthlyPayment [(ngModel)] = "debt.monthlyPayment">
-              <mat-label><mat-icon>money_off</mat-icon></mat-label>
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
         </div>

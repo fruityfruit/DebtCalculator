@@ -3,3 +3,7 @@ div.cen {
   overflow:hidden;
   margin: auto;
 }
+
+.mat-card {
+  color: #5a5a5a;
+}

@@ -11,15 +11,13 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="City">
-              <input matInput type="text" class="form-control" formControlName="city" placeholder="City this opportunity is in">
-              <mat-label><mat-icon>home</mat-icon></mat-label>
+              <input matInput type="text" class="form-control" formControlName="city" placeholder="Location of this opportunity">
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="State">
-              <mat-select class="form-control" formControlName="state" (selectionChange)="stateChangeAction(this.profileForm.value.state)">
-                <mat-option value="" selected>Select an option</mat-option>
-                <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
+              <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(this.profileForm.value.state)">
+                        <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -27,60 +25,56 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Opportunity Income">
-              <input matInput type="number" class="form-control" formControlName="income" placeholder="Projected opportunity income">
-              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+              <input matInput type="number" class="form-control" formControlName="income" placeholder="Projected income earned">
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Region">
-              <mat-select class="form-control" formControlName="region">
-                <mat-option value="" selected>Select an option</mat-option>
-                <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>
+              <mat-select class="form-control" formControlName="region" placeholder="Select an option">
+                        <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Opportunity Principal">
-              <input matInput type="number" class="form-control" formControlName="principal" placeholder="Projected opportunity principal">
-              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            <mat-form-field appearance="standard" hintLabel="Principal Amount">
+              <input matInput type="number" class="form-control" formControlName="principal" placeholder="Initial loan amount">
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Opportunity Rate">
-              <input matInput type="number" class="form-control" formControlName="rate" placeholder="Projected opportunity rate">
-              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            <mat-form-field appearance="standard" hintLabel="Yearly Rate (APR or APY)">
+              <input matInput type="number" class="form-control" formControlName="rate" placeholder="Interest rate of loan source">
+              <span matSuffix>&nbsp;%</span>
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Opportunity annualCompounds">
-              <input matInput type="number" class="form-control" formControlName="annualCompounds" placeholder="Projected opportunity annualCompounds" min="0" oninput="this.value = Math.abs(this.value)" value="0">
-              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            <mat-form-field appearance="standard" hintLabel="Compound Frequency (Enter 0 for Simple Interest)">
+              <input matInput type="number" class="form-control" formControlName="annualCompounds" placeholder="Times per year that interest is compounded">
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Opportunity monthlyPayment">
-              <input matInput type="number" class="form-control" formControlName="monthlyPayment" placeholder="Projected opportunity monthlyPayment">
-              <mat-label><mat-icon>monetization_on</mat-icon></mat-label>
+            <mat-form-field appearance="standard" hintLabel="Monthly Payment">
+              <input matInput type="number" class="form-control" formControlName="monthlyPayment" placeholder="Payment made each month">
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Opportunity Type">
-              <mat-select class="form-control" formControlName="type">
-                <mat-option value="">Select an option</mat-option>
-                <mat-option value="job">Job</mat-option>
+            <mat-form-field appearance="standard" hintLabel="Type of Opportunity">
+              <mat-select class="form-control" formControlName="type" placeholder="Select an option">
+                        <mat-option value="job">Job</mat-option>
                 <mat-option value="grad_school">Graduate School</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Relocation Required?">
-              <mat-select class="form-control" formControlName="move">
-                <mat-option value="">Will this opportunity require you to move?</mat-option>
-                <mat-option value="Yes">Yes</mat-option>
+              <mat-select class="form-control" formControlName="move" placeholder="Will this opportunity required you to move?">
+                        <mat-option value="Yes">Yes</mat-option>
                 <mat-option value="No">No</mat-option>
               </mat-select>
             </mat-form-field>

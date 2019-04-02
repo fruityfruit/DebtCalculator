@@ -324,7 +324,7 @@ export class ResultsComponent implements OnInit {
       yearlyPaymentOpp.push(yearly);
       oppCounter =oppCounter+1;
     }
-    console.log(yearlyPaymentOpp);
+    //console.log(yearlyPaymentOpp);
     var oppCounter=0;
     var netPoints=[];
     var oppNameList=[];

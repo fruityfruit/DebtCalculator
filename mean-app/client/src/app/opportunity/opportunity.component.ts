@@ -375,6 +375,10 @@ export class OpportunityComponent implements OnInit {
 
   ngOnInit() {
     this.auth.callUpdateColor("opportunities");
+    this.profileForm.reset();
+    Object.keys(this.profileForm.controls).forEach(key => { //workaround
+      this.profileForm.controls[key].setErrors(null);
+    });
     this.username = this.auth.getUsername();
     if (this.username === null) {
       //window.alert("Please fill out the Personal page before accessing this page.");

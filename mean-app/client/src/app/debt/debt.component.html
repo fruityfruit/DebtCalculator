@@ -10,25 +10,28 @@
         </div>
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
-            <mat-form-field appearance="standard" hintLabel="Your principal">
-              <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="Type here...">
+            <mat-form-field appearance="standard" hintLabel="Principal Amount">
+              <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="Initial debt amount">
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">
-            <mat-form-field appearance="standard" hintLabel="Your rate">
-              <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="Type here...">
+            <mat-form-field appearance="standard" hintLabel="Yearly Rate (APR or APY)">
+              <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="Interest rate of debt source">
+              <span matSuffix>&nbsp;%</span>
             </mat-form-field>
           </div>
         </div>
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
-            <mat-form-field appearance="standard" hintLabel="Your annualCompounds">
-              <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Type here...">
+            <mat-form-field appearance="standard" hintLabel="Compound Frequency (Enter 0 for Simple Interest)">
+              <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Times per year that interest is compounded">
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">
-            <mat-form-field appearance="standard" hintLabel="Your monthlyPayment">
-              <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Type here...">
+            <mat-form-field appearance="standard" hintLabel="Monthly Payment">
+              <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Payment made each month">
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
         </div>
