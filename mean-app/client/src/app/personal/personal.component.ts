@@ -18,10 +18,10 @@ export class PersonalComponent implements OnInit {
     username: '',
     state: '',
     region: '',
-    dependents: 0,
+    groceries: 0,
     rent: 0,
     spending: 0,
-    pets: 0
+    savings: 0
   };
   credentials: TokenPayload = {
     username: '',
@@ -298,18 +298,18 @@ export class PersonalComponent implements OnInit {
     this.profileForm = this.builder.group({
       state: ['', Validators.required],
       region: ['', Validators.required],
-      dependents: [0, Validators.required],
+      groceries: [0, Validators.required],
       rent: [0, Validators.required],
       spending: [0, Validators.required],
-      pets: [0, Validators.required]
+      savings: [0, Validators.required]
     });
   }
 
   public onSubmit() {
-    this.formdata.dependents = this.profileForm.value.dependents;
+    this.formdata.groceries = this.profileForm.value.groceries;
     this.formdata.rent = this.profileForm.value.rent;
     this.formdata.spending = this.profileForm.value.spending;
-    this.formdata.pets = this.profileForm.value.pets;
+    this.formdata.savings = this.profileForm.value.savings;
     this.formdata.state = this.profileForm.value.state;
     this.formdata.region = this.profileForm.value.region;
     if (this.username === null) {

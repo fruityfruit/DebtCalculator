@@ -2,20 +2,23 @@
   <div class="cen container-fluid mat-elevation-z2">
     <div class="example-container" style="margin: 0px 50px 20px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px">Results</h1>
+      <!--
+        This is where the chart with the overall ranking should go
+      -->
       <div *ngIf="debtProjection">
-        <div>
-          <mat-form-field appearance="standard" hintLabel="How Many Years">
-            <input #year matInput type="number" placeholder="How many Years" id ="numYears" min="0" oninput="this.value = Math.abs(this.value)">&nbsp;
+        <form class="ex1" [formGroup]="chartForm" (ngSubmit)="updateCharts()" style="margin: 0px 5px">
+          <mat-form-field appearance="standard" hintLabel="Number of Months" style="max-width: calc(100% - 141px)">
+            <input matInput type="number" class="form-control" formControlName="numMonths" placeholder="Over how many months would you like to view the charts?">
           </mat-form-field>
-          <button (click)="updateCharts()" style="color: white; background-color: #78C2AC" mat-raised-button>Create Charts</button>
-        </div>
-        <canvas id="canvas0"style="height: 500px; width: 100%;" >{{ debtProjection }}</canvas>
+          <button type="submit" [disabled]="!chartForm.value.numMonths" mat-raised-button style="margin-left:15px">Update Charts!</button>
+        </form>
+        <canvas id="canvas0">{{ debtProjection }}</canvas>
       </div>
       <div *ngIf="netIncome">
-        <canvas id="canvas1"style="height: 600px; width: 100%;" >{{ netIncome }}</canvas>
+        <canvas id="canvas1">{{ netIncome }}</canvas>
       </div>
       <div *ngIf="blsChart"> <!-- && blsChart.canvas && blsChart.canvas.id && blsChart.canvas.id==='canvas2'"> -->
-        <canvas id="canvas2" style="height: 500px; width: 100%;">{{ blsChart }}</canvas>
+        <canvas id="canvas2">{{ blsChart }}</canvas>
       </div>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="zillowResults && zillowResults.length" style="width: 100%">
         <caption style="text-align: center; caption-side: top; font-size: .8rem; font-weight: bold; color: #666666;">Zillow Home Ownership Data</caption>

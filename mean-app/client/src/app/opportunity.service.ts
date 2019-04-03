@@ -9,12 +9,12 @@ export interface Opportunity {
   state: String;
   city: String;
   region: String;
-  income: Number;
+  income: number;
   move: String;
-  principal: Number;
-  rate: Number;
-  annualCompounds: Number;
-  monthlyPayment: Number;
+  principal: number;
+  rate: number;
+  annualCompounds: number;
+  monthlyPayment: number;
 }
 
 @Injectable({

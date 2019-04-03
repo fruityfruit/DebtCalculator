@@ -12,10 +12,10 @@ module.exports.updateProfile = function(req, res) {
     } else {
       user.state = req.body.state;
       user.region = req.body.region;
-      user.dependents = req.body.dependents;
+      user.groceries = req.body.groceries;
       user.rent = req.body.rent;
       user.spending = req.body.spending;
-      user.pets = req.body.pets;
+      user.savings = req.body.savings;
       user.save() //save user's profile to database
         .then(user => {
           res.status(200).json('user updated successfully');

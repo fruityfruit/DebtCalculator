@@ -104,7 +104,7 @@ module.exports.getCharts = function(req, res) {
         res.status(200).json({
           'opportunities' : user.opportunities,
           'debts' : user.debts
-        }); // TODO for now, we will return all of the data
+        });
       }
     });
 };

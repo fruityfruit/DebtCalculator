@@ -6,10 +6,10 @@ export interface Profile {
   username: String;
   state: String;
   region: String;
-  dependents: number;
+  groceries: number;
   rent: number;
   spending: number;
-  pets: number;
+  savings: number;
 }
 
 export interface Debt {
@@ -33,10 +33,10 @@ export class ProfileService {
       username: form.username,
       state: form.state,
       region: form.region,
-      dependents: form.dependents,
+      groceries: form.groceries,
       rent: form.rent,
       spending: form.spending,
-      pets: form.pets
+      savings: form.savings
     };
     return this.http.post(`/api/personal`, obj);
   }

@@ -20,10 +20,10 @@ var userSchema = new mongoose.Schema({
   },
   state: String,
   region: String,
-  dependents: Number,
+  groceries: Number,
   rent: Number,
   spending: Number,
-  pets: Number,
+  savings: Number,
   opportunities: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Opportunity'

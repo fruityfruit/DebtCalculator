@@ -5,31 +5,33 @@
       <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <div class="form-group row">
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Rent">
+            <mat-form-field appearance="standard" hintLabel="Monthly Rent">
               <input matInput type="number" class="form-control" formControlName="rent" placeholder="Current monthly rent"
               #rent [(ngModel)] = "currProfile.rent">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Monthly Spending">
-              <input matInput type="number" class="form-control" formControlName="spending" placeholder="Current monthly spending"
-              #spending [(ngModel)] = "currProfile.spending">
+            <mat-form-field appearance="standard" hintLabel="Monthly Grocery Bill">
+              <input matInput type="number" class="form-control" formControlName="groceries" placeholder="Current monthly grocery budget"
+              #groceries [(ngModel)] = "currProfile.groceries">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Number of Dependents">
-              <input matInput type="number" class="form-control" size="56" formControlName="dependents" placeholder="How many dependents do you have?"
-              #dependents [(ngModel)] = "currProfile.dependents">
+            <mat-form-field appearance="standard" hintLabel="Miscellaneous Monthly Spending">
+              <input matInput type="number" class="form-control" formControlName="spending" placeholder="Other monthly spending"
+              #spending [(ngModel)] = "currProfile.spending">
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Number of Pets">
-              <input matInput type="number" class="form-control" size="56" formControlName="pets" placeholder="How many pets do you have?"
-              #pets [(ngModel)] = "currProfile.pets">
+            <mat-form-field appearance="standard" hintLabel="Total Savings">
+              <input matInput type="number" class="form-control" formControlName="savings" placeholder="Current savings total"
+              #savings [(ngModel)] = "currProfile.savings">
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
         </div>
