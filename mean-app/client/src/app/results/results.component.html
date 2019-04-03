@@ -17,7 +17,7 @@
       <div *ngIf="netIncome">
         <canvas id="canvas1">{{ netIncome }}</canvas>
       </div>
-      <div *ngIf="blsChart"> <!-- && blsChart.canvas && blsChart.canvas.id && blsChart.canvas.id==='canvas2'"> -->
+      <div *ngIf="blsChart">
         <canvas id="canvas2">{{ blsChart }}</canvas>
       </div>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="zillowResults && zillowResults.length" style="width: 100%">

@@ -56,7 +56,7 @@ export class ResultsComponent implements OnInit {
     });
   }
 
-  private getData() {
+  private getData(callGeneral: boolean) {
     this.profService.getProfile(this.username).subscribe((data: any) => { //returns the user's profile
       this.profile.username = this.username;
       this.profile.state = data.state;
@@ -102,7 +102,7 @@ export class ResultsComponent implements OnInit {
         });
         this.opportunities = tempOpps;
         this.opportunityIDs = tempIDs;
-        this.displayBLSData();
+        this.displayBLSData(callGeneral);
         this.displayZillowData();
       }, (err) => {
         console.log(err);
@@ -112,7 +112,7 @@ export class ResultsComponent implements OnInit {
     });
   }
 
-  private displayBLSData() {
+  private displayBLSData(callGeneral: boolean) {
       var regions = [];
       var names = [];
       for (var i = 0; i < this.opportunities.length; ++i) {
@@ -146,7 +146,7 @@ export class ResultsComponent implements OnInit {
           }
         }
         //now I am ready to construct the graphs
-        this.generateCharts(60); //generate the charts using a start value of 60 months
+        this.generateCharts(60, callGeneral); //generate the charts using a start value of 60 months
         //remove duplicates
         var tempNames = [];
         var tempPrices = [];
@@ -233,7 +233,7 @@ export class ResultsComponent implements OnInit {
       });
   }
 
-  private generateCharts(numberOfMonths: number) {
+  private generateCharts(numberOfMonths: number, callGeneral: boolean) {
     if (this.debtProjection.hasOwnProperty('config')) {
       this.debtProjection.config.data.datasets = [];
       this.netIncome.config.data.datasets = [];
@@ -244,10 +244,10 @@ export class ResultsComponent implements OnInit {
     for (var i = 2; i <= numberOfMonths; i = i + 1) {
       labels.push(i + " Months");
     }
-    this.generateDebtChart(labels);
+    this.generateDebtChart(labels, callGeneral);
   }
 
-  private generateDebtChart(labels: string[]) {
+  private generateDebtChart(labels: string[], callGeneral: boolean) {
     var debtProjectionPoints = [];
     var debtNames = [];
     var debtCount = 0;
@@ -399,10 +399,10 @@ export class ResultsComponent implements OnInit {
       };
       this.debtProjection.update();
     }
-    this.generateSavingsChart(labels);
+    this.generateSavingsChart(labels, callGeneral);
   }
 
-  private generateSavingsChart(labels: string[]) {
+  private generateSavingsChart(labels: string[], callGeneral: boolean) {
     var title = "Projected Savings By Opportunity Over " + (labels.length - 1) + " Months";
     //how much does the user pay in debts each month
     var monthlyDebtPayments = [];
@@ -584,6 +584,49 @@ export class ResultsComponent implements OnInit {
       oppCount = oppCount + 1;
     }
     this.netIncome.update();
+    if (callGeneral) {
+      this.generateOverallChart();
+    }
+  }
+
+  private generateOverallChart() {
+    var oppMinSavings = [];
+    for (var i = 0; i < this.opportunities.length; ++i) {
+      var minSavings = 1000000000;
+      for (var j = 0; j < this.netIncome.data['datasets'][i].data.length; ++j) {
+        if (minSavings > this.netIncome.data['datasets'][i].data[j]) {
+          minSavings = this.netIncome.data['datasets'][i].data[j];
+        }
+      }
+      oppMinSavings.push(minSavings);
+    }
+    var sortedOpps = [];
+    for (var i = 0; i < oppMinSavings.length; ++i) {
+      var maxSavings = -1000000000;
+      var savedIndex = -1;
+      for (var j = 0; j < oppMinSavings.length; ++j) {
+        if (maxSavings < oppMinSavings[j]) {
+          var jInSortedOpps = false;
+          for (var k = 0; k < sortedOpps.length; ++k) {
+            if (sortedOpps[k] === j) {
+              jInSortedOpps = true;
+              break;
+            }
+          }
+          if (!jInSortedOpps) {
+            maxSavings = oppMinSavings[j];
+            savedIndex = j;
+          }
+        }
+      }
+      sortedOpps.push(savedIndex);
+    }
+    /*
+      Sorted opps now contains a mapping of the sorted opportunities from best to worst
+      That is, this.opportunities[sortedOpps[0]] is the opportunity that puts the least stress on the user's savings
+      this.opportunities[sortedOpps[1]] is the second easiest, and so on
+    */
+    //TODO create the graph
   }
 
   private displayZillowData() {
@@ -621,7 +664,7 @@ export class ResultsComponent implements OnInit {
   }
 
   public updateCharts() {
-    this.generateCharts(this.chartForm.value.numMonths);
+    this.generateCharts(this.chartForm.value.numMonths, false);
     this.chartForm.reset();
   }
 
@@ -666,7 +709,7 @@ export class ResultsComponent implements OnInit {
       this.alerts.open("Please fill out the Personal page before accessing this page.");
       this.router.navigateByUrl('/personal');
     } else {
-      this.getData();
+      this.getData(true);
     }
   }
 
