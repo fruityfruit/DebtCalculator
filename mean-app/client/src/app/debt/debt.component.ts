@@ -34,12 +34,12 @@ export class DebtComponent implements OnInit {
       principal: [0, Validators.required],
       rate: [0, Validators.required],
       annualCompounds: [0],
-      monthlyPayment: [0, Validators.required]
+      monthlyPayment: [0]
     });
   }
 
   public isValid() {
-    if (this.profileFormDebt.value.name && this.profileFormDebt.value.principal && this.profileFormDebt.value.rate && this.profileFormDebt.value.monthlyPayment) {
+    if (this.profileFormDebt.value.name && this.profileFormDebt.value.principal && this.profileFormDebt.value.rate) {
       return true;
     }
     return false;
@@ -49,8 +49,16 @@ export class DebtComponent implements OnInit {
     this.formdataDebt.name = this.profileFormDebt.value.name;
     this.formdataDebt.principal = this.profileFormDebt.value.principal;
     this.formdataDebt.rate = this.profileFormDebt.value.rate;
-    this.formdataDebt.annualCompounds = this.profileFormDebt.value.annualCompounds;
-    this.formdataDebt.monthlyPayment = this.profileFormDebt.value.monthlyPayment;
+    if (this.profileFormDebt.value.annualCompounds) {
+      this.formdataDebt.annualCompounds = this.profileFormDebt.value.annualCompounds;
+    } else {
+      this.formdataDebt.annualCompounds = 0;
+    }
+    if (this.profileFormDebt.value.monthlyPayment) {
+      this.formdataDebt.monthlyPayment = this.profileFormDebt.value.monthlyPayment;
+    } else {
+      this.formdataDebt.monthlyPayment = 0;
+    }
     this.formdataDebt.username = this.username;
     this.profService.createDebt(this.formdataDebt).subscribe(() => {
       this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
