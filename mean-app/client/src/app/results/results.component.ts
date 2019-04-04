@@ -712,5 +712,9 @@ export class ResultsComponent implements OnInit {
       this.getData(true);
     }
   }
-
+  
+  ngAfterViewInit(): void {
+      // @ts-ignore
+      twttr.widgets.load();
+  }
 }
