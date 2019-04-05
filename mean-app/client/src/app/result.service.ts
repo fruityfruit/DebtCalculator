@@ -9,9 +9,9 @@ export interface ResultSet {
 export interface ResultSetOpp {
   oppName: String;
   city: String;
-  income: number;
-  savings1: number;
-  savings2: number;
+  income: String;
+  savings1: String;
+  savings2: String;
 }
 
 @Injectable({
