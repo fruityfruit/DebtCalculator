@@ -3,7 +3,7 @@
     <div class="example-container" style="margin: 0px 50px 20px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px">Results</h1>
       <table mat-table [dataSource]="rankingSource" class="mat-elevation-z2" *ngIf="rankings && rankings.length" style="width: 100%">
-        <caption style="text-align: center; caption-side: top; font-size: .8rem; font-weight: bold; color: #666666;">Opportunities Ordered By Savings</caption>
+        <caption style="text-align: center; caption-side: top; font-size: .8rem; font-weight: bold; color: #666666;">Opportunities Sorted By Affordability</caption>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Opportunity Name </th>
           <td mat-cell *matCellDef="let oppResult"> {{oppResult.oppName}} </td>
@@ -25,9 +25,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumnsOpp"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsOpp;"></tr>
       </table>
-      <!--
-        This is where the chart with the overall ranking should go
-      -->
       <div *ngIf="debtProjection">
         <form class="ex1" [formGroup]="chartForm" (ngSubmit)="updateCharts()" style="margin: 0px 5px">
           <mat-form-field appearance="standard" hintLabel="Number of Months" style="max-width: calc(100% - 141px)">

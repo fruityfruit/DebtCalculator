@@ -594,14 +594,20 @@ export class ResultsComponent implements OnInit {
 
   private generateOverallChart() {
     var oppMinSavings = [];
+    var oppMaxSavings = [];
     for (var i = 0; i < this.opportunities.length; ++i) {
       var minSavings = 1000000000;
+      var maxSavings = -1000000000;
       for (var j = 0; j < this.netIncome.data['datasets'][i].data.length; ++j) {
         if (minSavings > this.netIncome.data['datasets'][i].data[j]) {
           minSavings = this.netIncome.data['datasets'][i].data[j];
         }
+        if (maxSavings < this.netIncome.data['datasets'][i].data[j]) {
+          maxSavings = this.netIncome.data['datasets'][i].data[j];
+        }
       }
       oppMinSavings.push(minSavings);
+      oppMaxSavings.push(maxSavings);
     }
     var sortedOpps = [];
     for (var i = 0; i < oppMinSavings.length; ++i) {
@@ -624,7 +630,19 @@ export class ResultsComponent implements OnInit {
       }
       sortedOpps.push(savedIndex);
     }
-    for (var i=0;i<sortedOpps.length;i++){
+    var stopSwapping = false;
+    while (!stopSwapping) {
+      stopSwapping = true;
+      for (var i = 0; i < sortedOpps.length - 1; ++i) {
+        if ((oppMinSavings[sortedOpps[i]] == oppMinSavings[sortedOpps[i+1]]) && (oppMaxSavings[sortedOpps[i]] < oppMaxSavings[sortedOpps[i+1]])) {
+          var temp = sortedOpps[i];
+          sortedOpps[i] = sortedOpps[i+1];
+          sortedOpps[i+1] = temp;
+          stopSwapping = false;
+        }
+      }
+    }
+    for (var i = 0; i < sortedOpps.length; ++i) {
       var oppResult: ResultSetOpp = {
         oppName: this.opportunities[sortedOpps[i]].name,
         city: this.opportunities[sortedOpps[i]].city,
@@ -633,13 +651,7 @@ export class ResultsComponent implements OnInit {
       };
       this.rankings.push(oppResult);
     }
-    this.rankingSource.data=this.rankings;
-    /*
-      Sorted opps now contains a mapping of the sorted opportunities from best to worst
-      That is, this.opportunities[sortedOpps[0]] is the opportunity that puts the least stress on the user's savings
-      this.opportunities[sortedOpps[1]] is the second easiest, and so on
-    */
-    //TODO create the graph
+    this.rankingSource.data = this.rankings;
   }
 
   private displayZillowData() {
