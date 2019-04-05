@@ -4,7 +4,7 @@ import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService, PasswordPayload, UsernamePayload} from '../authentication.service';
 import { OpportunityService, Opportunity } from '../opportunity.service';
-import { ResultService, ResultSet } from '../result.service';
+import { ResultService, ResultSet, ResultSetOpp } from '../result.service';
 import { ProfileService, Profile, Debt } from '../profile.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
@@ -19,6 +19,7 @@ import { SnackbaralertService } from '../snackbaralert.service';
 export class ResultsComponent implements OnInit {
   username: string = '';
   zillowResults: ResultSet[] = [];
+  rankings: ResultSetOpp[]=[];
   blsChart = [] as Chart;
   debtProjection = [] as Chart;
   netIncome = [] as Chart;
@@ -41,7 +42,9 @@ export class ResultsComponent implements OnInit {
   profileForm: FormGroup;
   chartForm: FormGroup;
   dataSource = new MatTableDataSource(this.zillowResults);
+  rankingSource = new MatTableDataSource(this.rankings);
   displayedColumns: string[] = ['name', 'city', 'estimate'];
+  displayedColumnsOpp: string[] = ['name', 'city', 'income','savings'];
   colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon','mediumseagreen'];
 
   constructor(public auth: AuthenticationService, private resultService: ResultService,
@@ -621,6 +624,16 @@ export class ResultsComponent implements OnInit {
       }
       sortedOpps.push(savedIndex);
     }
+    for (var i=0;i<sortedOpps.length;i++){
+      var oppResult: ResultSetOpp = {
+        oppName: this.opportunities[sortedOpps[i]].name,
+        city: this.opportunities[sortedOpps[i]].city,
+        income: this.opportunities[sortedOpps[i]].income,
+        savings: this.netIncome.data['datasets'][sortedOpps[i]].data[1]
+      };
+      this.rankings.push(oppResult);
+    }
+    this.rankingSource.data=this.rankings;
     /*
       Sorted opps now contains a mapping of the sorted opportunities from best to worst
       That is, this.opportunities[sortedOpps[0]] is the opportunity that puts the least stress on the user's savings
@@ -712,7 +725,7 @@ export class ResultsComponent implements OnInit {
       this.getData(true);
     }
   }
-  
+
   ngAfterViewInit(): void {
       // @ts-ignore
       twttr.widgets.load();

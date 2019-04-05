@@ -2,7 +2,29 @@
   <div class="cen container-fluid mat-elevation-z2">
     <div class="example-container" style="margin: 0px 50px 20px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px">Results</h1>
-
+      <table mat-table [dataSource]="rankingSource" class="mat-elevation-z2" *ngIf="rankings && rankings.length" style="width: 100%">
+        <caption style="text-align: center; caption-side: top; font-size: .8rem; font-weight: bold; color: #666666;">Opportunities Ordered By Savings</caption>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Opportunity Name </th>
+          <td mat-cell *matCellDef="let oppResult"> {{oppResult.oppName}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef> Opportunity City </th>
+          <td mat-cell *matCellDef="let oppResult"> {{oppResult.city}} </td>
+        </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="income">
+          <th mat-header-cell *matHeaderCellDef> Yearly Income </th>
+          <td mat-cell *matCellDef="let oppResult"> {{oppResult.income}} </td>
+        </ng-container>
+        <ng-container matColumnDef="savings">
+          <th mat-header-cell *matHeaderCellDef> Monthly Savings </th>
+          <td mat-cell *matCellDef="let oppResult"> {{oppResult.savings}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsOpp"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsOpp;"></tr>
+      </table>
       <!--
         This is where the chart with the overall ranking should go
       -->

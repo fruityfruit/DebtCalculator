@@ -6,6 +6,12 @@ export interface ResultSet {
   city: String;
   zillowData: String;
 }
+export interface ResultSetOpp {
+  oppName: String;
+  city: String;
+  income: number;
+  savings: number;
+}
 
 @Injectable({
   providedIn: 'root'
