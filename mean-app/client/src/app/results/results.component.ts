@@ -44,7 +44,7 @@ export class ResultsComponent implements OnInit {
   dataSource = new MatTableDataSource(this.zillowResults);
   rankingSource = new MatTableDataSource(this.rankings);
   displayedColumns: string[] = ['name', 'city', 'estimate'];
-  displayedColumnsOpp: string[] = ['name', 'city', 'income','savings'];
+  displayedColumnsOpp: string[] = ['name', 'city', 'income','savings1','savings2'];
   colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon','mediumseagreen'];
 
   constructor(public auth: AuthenticationService, private resultService: ResultService,
@@ -625,11 +625,15 @@ export class ResultsComponent implements OnInit {
       sortedOpps.push(savedIndex);
     }
     for (var i=0;i<sortedOpps.length;i++){
+      var yearOne=this.netIncome.data['datasets'][sortedOpps[i]].data[12];
+      var yearThree=this.netIncome.data['datasets'][sortedOpps[i]].data[36];
+      var income= this.opportunities[sortedOpps[i]].income;
       var oppResult: ResultSetOpp = {
         oppName: this.opportunities[sortedOpps[i]].name,
         city: this.opportunities[sortedOpps[i]].city,
-        income: this.opportunities[sortedOpps[i]].income,
-        savings: this.netIncome.data['datasets'][sortedOpps[i]].data[1]
+        income: this.auth.formatMoney(income, true),
+        savings1: this.auth.formatMoney(yearOne, true),
+        savings2: this.auth.formatMoney(yearThree, true)
       };
       this.rankings.push(oppResult);
     }

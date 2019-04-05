@@ -18,9 +18,13 @@
           <th mat-header-cell *matHeaderCellDef> Yearly Income </th>
           <td mat-cell *matCellDef="let oppResult"> {{oppResult.income}} </td>
         </ng-container>
-        <ng-container matColumnDef="savings">
-          <th mat-header-cell *matHeaderCellDef> Estimate of Monthly Savings </th>
-          <td mat-cell *matCellDef="let oppResult"> {{oppResult.savings}} </td>
+        <ng-container matColumnDef="savings1">
+          <th mat-header-cell *matHeaderCellDef> Savings After One Year </th>
+          <td mat-cell *matCellDef="let oppResult"> {{oppResult.savings1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="savings2">
+          <th mat-header-cell *matHeaderCellDef> Savings After Three Years </th>
+          <td mat-cell *matCellDef="let oppResult"> {{oppResult.savings2}} </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumnsOpp"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsOpp;"></tr>
