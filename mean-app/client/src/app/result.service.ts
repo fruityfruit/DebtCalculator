@@ -10,7 +10,8 @@ export interface ResultSetOpp {
   oppName: String;
   city: String;
   income: number;
-  savings: number;
+  savings1: number;
+  savings2: number;
 }
 
 @Injectable({
