@@ -95,7 +95,6 @@ export class DebtComponent implements OnInit {
     });
     this.username = this.auth.getUsername();
     if (this.username === null) {
-      //window.alert("Please fill out the Personal page before accessing this page.");
       this.alerts.open('Please fill out the Personal page before accessing this page.');
       this.router.navigateByUrl('/personal');
     } else {

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import * as Rx from 'rxjs';
+import { Router } from '@angular/router';
+import { SnackbaralertService } from './snackbaralert.service';
 
 export interface PasswordPayload {
   username: String;
@@ -33,7 +35,7 @@ export class AuthenticationService {
   private username: String;
   public invokeEvent: Rx.Subject<any> = new Rx.Subject(); //used to update the navbar
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router, private alerts: SnackbaralertService) {
     this.username = '';
   }
 
@@ -108,12 +110,13 @@ export class AuthenticationService {
       var newTime = d.getTime();
       if (newTime - Number(oldTime) > 7200000) { //two hours
         this.signout();
+        this.alerts.open('You have been logged out due to inactivity.');
+        this.router.navigateByUrl('/home');
         return false;
       } else {
         return true;
       }
     } else {
-      this.signout();
       return false;
     }
   }
