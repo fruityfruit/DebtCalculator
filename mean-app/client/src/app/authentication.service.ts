@@ -38,7 +38,8 @@ export class AuthenticationService {
   }
 
   private saveToken(token: string) {
-    localStorage.setItem('debt-calc-token', token);
+    var d = new Date();
+    localStorage.setItem('debt-calc-token', (d.getTime()+":"+token));
     this.token = token;
   }
 
@@ -101,8 +102,18 @@ export class AuthenticationService {
 
   public isLoggedIn() {
     if (window.localStorage.getItem('debt-calc-token')) {
-      return true;
+      var oldTime = window.localStorage.getItem('debt-calc-token');
+      oldTime = oldTime.substring(0, oldTime.indexOf(":"));
+      var d = new Date();
+      var newTime = d.getTime();
+      if (newTime - Number(oldTime) > 7200000) { //two hours
+        this.signout();
+        return false;
+      } else {
+        return true;
+      }
     } else {
+      this.signout();
       return false;
     }
   }
