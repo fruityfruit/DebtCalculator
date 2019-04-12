@@ -1,6 +1,10 @@
 # DebtCalculator
 
-## Getting Started
+## Our app is live!
+
+To use the live version of our app, head to https://debt-calculator-csce-490.appspot.com/.
+
+## Getting Started with a Development Environment
 
 ### Prerequisites
 
