@@ -75,6 +75,12 @@ Then
 ```
 npm test
 ```
+### Frontend unit testing with Karma and Jasmine
+
+To run our frontend tests, navigate to the "mean-app/client" directory of our project in a terminal window and type:
+```
+ng test
+```
 
 ## Deploying our project
 
