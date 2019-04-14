@@ -1,6 +1,10 @@
 # DebtCalculator
 
-## Getting Started
+## Our app is live!
+
+To use the live version of our app, head to https://debt-calculator-csce-490.appspot.com/.
+
+## Getting Started with a Development Environment
 
 ### Prerequisites
 
@@ -70,6 +74,12 @@ npm install
 Then
 ```
 npm test
+```
+### Frontend unit testing with Karma and Jasmine
+
+To run our frontend tests, navigate to the "mean-app/client" directory of our project in a terminal window and type:
+```
+ng test
 ```
 
 ## Deploying our project
