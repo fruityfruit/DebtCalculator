@@ -20,7 +20,7 @@
             <mat-form-field appearance="standard" hintLabel="State">
               <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(state._value)"
               #state [(ngModel)] = "opportunity.state">
-                    <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
+                <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -37,7 +37,7 @@
             <mat-form-field appearance="standard" hintLabel="Region">
               <mat-select class="form-control" formControlName="region" placeholder="Select an option"
               #region [(ngModel)] = "opportunity.region">
-                    <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>
+                <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -76,8 +76,10 @@
             <mat-form-field appearance="standard" hintLabel="Opportunity Type">
               <mat-select class="form-control" formControlName="type"
               #type [(ngModel)] = "opportunity.type">
-                    <mat-option value="job">Job</mat-option>
+                <mat-option value="job">Job</mat-option>
                 <mat-option value="grad_school">Graduate School</mat-option>
+                <mat-option value="self_employ">Self-Employment</mat-option>
+                <mat-option value="volunteer">Volunteering</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -85,7 +87,7 @@
             <mat-form-field appearance="standard" hintLabel="Relocation Required?">
               <mat-select class="form-control" formControlName="move"
               #move [(ngModel)] = "opportunity.move">
-                    <mat-option value="Yes">Yes</mat-option>
+                <mat-option value="Yes">Yes</mat-option>
                 <mat-option value="No">No</mat-option>
               </mat-select>
             </mat-form-field>

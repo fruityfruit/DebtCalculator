@@ -17,7 +17,7 @@
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="State">
               <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(this.profileForm.value.state)">
-                        <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
+                <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -32,7 +32,7 @@
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Region">
               <mat-select class="form-control" formControlName="region" placeholder="Select an option">
-                        <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>
+                <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -66,15 +66,17 @@
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Type of Opportunity">
               <mat-select class="form-control" formControlName="type" placeholder="Select an option">
-                        <mat-option value="job">Job</mat-option>
+                <mat-option value="job">Job</mat-option>
                 <mat-option value="grad_school">Graduate School</mat-option>
+                <mat-option value="self_employ">Self-Employment</mat-option>
+                <mat-option value="volunteer">Volunteering</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Relocation Required?">
               <mat-select class="form-control" formControlName="move" placeholder="Will this opportunity required you to move?">
-                        <mat-option value="Yes">Yes</mat-option>
+                <mat-option value="Yes">Yes</mat-option>
                 <mat-option value="No">No</mat-option>
               </mat-select>
             </mat-form-field>
