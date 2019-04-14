@@ -12,14 +12,14 @@
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
             <mat-form-field appearance="standard" hintLabel="Principal Amount">
-              <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="Initial debt amount" onkeydown="return event.keyCode !== 69"
+              <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="Initial debt amount" onkeydown="return (event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190)"
               #principal [(ngModel)] = "debt.principal">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">
             <mat-form-field appearance="standard" hintLabel="Yearly Rate (APR or APY)">
-              <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="Interest rate of debt source" onkeydown="return event.keyCode !== 69"
+              <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="Interest rate of debt source" onkeydown="return (event.keyCode !== 69 && event.keyCode !== 189)"
               #rate [(ngModel)] = "debt.rate">
               <span matSuffix>&nbsp;%</span>
             </mat-form-field>
@@ -28,13 +28,13 @@
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
             <mat-form-field appearance="standard" hintLabel="Compound Frequency (Enter 0 for Simple Interest)">
-              <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Times per year that interest is compounded" onkeydown="return event.keyCode !== 69"
+              <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Times per year that interest is compounded" onkeydown="return (event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190)"
               #annualCompounds [(ngModel)] = "debt.annualCompounds">
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">
             <mat-form-field appearance="standard" hintLabel="Monthly Payment">
-              <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Payment made each month" onkeydown="return event.keyCode !== 69"
+              <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Payment made each month" onkeydown="return (event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190)"
               #monthlyPayment [(ngModel)] = "debt.monthlyPayment">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>

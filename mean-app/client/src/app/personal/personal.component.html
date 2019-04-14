@@ -6,14 +6,14 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Monthly Rent">
-              <input matInput type="number" class="form-control" formControlName="rent" placeholder="Current monthly rent" onkeydown="return event.keyCode !== 69"
+              <input matInput type="number" class="form-control" formControlName="rent" placeholder="Current monthly rent" onkeydown="return (event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190)"
               #rent [(ngModel)] = "currProfile.rent">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Monthly Grocery Bill">
-              <input matInput type="number" class="form-control" formControlName="groceries" placeholder="Current monthly grocery budget" onkeydown="return event.keyCode !== 69"
+              <input matInput type="number" class="form-control" formControlName="groceries" placeholder="Current monthly grocery budget" onkeydown="return (event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190)"
               #groceries [(ngModel)] = "currProfile.groceries">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
@@ -22,14 +22,14 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Miscellaneous Monthly Spending">
-              <input matInput type="number" class="form-control" formControlName="spending" placeholder="Other monthly spending" onkeydown="return event.keyCode !== 69"
+              <input matInput type="number" class="form-control" formControlName="spending" placeholder="Other monthly spending" onkeydown="return (event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190)"
               #spending [(ngModel)] = "currProfile.spending">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Current Savings">
-              <input matInput type="number" class="form-control" formControlName="savings" placeholder="Current savings total" onkeydown="return event.keyCode !== 69"
+              <input matInput type="number" class="form-control" formControlName="savings" placeholder="Current savings total" onkeydown="return (event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 190)"
               #savings [(ngModel)] = "currProfile.savings">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
