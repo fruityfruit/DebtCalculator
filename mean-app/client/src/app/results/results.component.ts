@@ -68,48 +68,53 @@ export class ResultsComponent implements OnInit {
       this.profile.rent = data.rent;
       this.profile.spending = data.spending;
       this.profile.savings = data.savings;
-      this.resultService.getChartsData(this.username).subscribe((data: any) => { //returns the debts and opportunities for each user
-        var tempUsername = this.username;
-        var tempDebts: Debt[] = [];
-        var tempOpps: Opportunity[] = [];
-        var tempIDs: string[] = [];
-        data.debts.forEach(function(entry) {
-          var newDebt: Debt = {
-            username: tempUsername,
-            name: entry.name,
-            principal: entry.principal,
-            rate: entry.rate,
-            annualCompounds: entry.annualCompounds,
-            monthlyPayment: entry.monthlyPayment
-          };
-          tempDebts.push(newDebt);
+      if (!(this.profile.username && this.profile.state && this.profile.region && this.profile.groceries && this.profile.rent && this.profile.spending && this.profile.savings)) {
+        this.alerts.open("Please fill out the Personal page before accessing this page.");
+        this.router.navigateByUrl('/personal');
+      } else {
+        this.resultService.getChartsData(this.username).subscribe((data: any) => { //returns the debts and opportunities for each user
+          var tempUsername = this.username;
+          var tempDebts: Debt[] = [];
+          var tempOpps: Opportunity[] = [];
+          var tempIDs: string[] = [];
+          data.debts.forEach(function(entry) {
+            var newDebt: Debt = {
+              username: tempUsername,
+              name: entry.name,
+              principal: entry.principal,
+              rate: entry.rate,
+              annualCompounds: entry.annualCompounds,
+              monthlyPayment: entry.monthlyPayment
+            };
+            tempDebts.push(newDebt);
+          });
+          this.debts = tempDebts;
+          data.opportunities.forEach(function(entry) {
+            var newOpp: Opportunity = {
+              username: tempUsername,
+              type: entry.type,
+              name: entry.name,
+              state: entry.state,
+              city: entry.city,
+              region: entry.region,
+              income: entry.income,
+              move: entry.move,
+              principal: entry.principal,
+              rate: entry.rate,
+              annualCompounds: entry.annualCompounds,
+              monthlyPayment: entry.monthlyPayment
+            };
+            tempOpps.push(newOpp);
+            tempIDs.push(entry._id);
+          });
+          this.opportunities = tempOpps;
+          this.opportunityIDs = tempIDs;
+          this.displayBLSData(callGeneral);
+          this.displayZillowData();
+        }, (err) => {
+          console.log(err);
         });
-        this.debts = tempDebts;
-        data.opportunities.forEach(function(entry) {
-          var newOpp: Opportunity = {
-            username: tempUsername,
-            type: entry.type,
-            name: entry.name,
-            state: entry.state,
-            city: entry.city,
-            region: entry.region,
-            income: entry.income,
-            move: entry.move,
-            principal: entry.principal,
-            rate: entry.rate,
-            annualCompounds: entry.annualCompounds,
-            monthlyPayment: entry.monthlyPayment
-          };
-          tempOpps.push(newOpp);
-          tempIDs.push(entry._id);
-        });
-        this.opportunities = tempOpps;
-        this.opportunityIDs = tempIDs;
-        this.displayBLSData(callGeneral);
-        this.displayZillowData();
-      }, (err) => {
-        console.log(err);
-      });
+      }
     }, (err) => {
       console.log(err);
     });

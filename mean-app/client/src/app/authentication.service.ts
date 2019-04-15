@@ -127,10 +127,15 @@ export class AuthenticationService {
   }
 
   public formatMoney(money: number, decimal: boolean) {
+    var returnValue = "";
+    if (money < 0) {
+      money = money * -1;
+      returnValue = "-";
+    }
     var rounded = String(money.toFixed(2));
     var leadDigits = 0;
     if (rounded.substr(0,rounded.indexOf(".")).length > 3) leadDigits = (rounded.length % 3);
-    var returnValue = "$" + (leadDigits ? rounded.substr(0, leadDigits) + "," : "") + rounded.substr(leadDigits).replace(/(\d{3})(?=\d)/g, "$1" + ",");
+    returnValue = returnValue + "$" + (leadDigits ? rounded.substr(0, leadDigits) + "," : "") + rounded.substr(leadDigits).replace(/(\d{3})(?=\d)/g, "$1" + ",");
     if (!decimal) {
       returnValue = returnValue.substring(0,returnValue.length-3);
     }

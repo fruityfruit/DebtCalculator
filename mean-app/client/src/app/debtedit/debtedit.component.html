@@ -5,7 +5,7 @@
       <form class="ex1"[formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <mat-form-field appearance="standard" hintLabel="Debt Name">
-            <input matInput type="text" class="form-control" formControlName="name" placeholder="Name this debt" maxlength="20"
+            <input matInput type="text" class="form-control" formControlName="name" placeholder="Name this debt"
             #name [(ngModel)] = "debt.name">
           </mat-form-field>
         </div>
