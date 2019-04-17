@@ -12,9 +12,6 @@ describe('User', function() {
       assert.ok(returnValue);
     })
   });
-});
-
-describe('User', function() {
   describe('#generateToken()', function() {
     it('should generate tokens, and tokens from different sessions should be different', function() {
       var user = new User();

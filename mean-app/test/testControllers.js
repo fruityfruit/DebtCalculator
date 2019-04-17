@@ -76,3 +76,82 @@ describe('Authentication', function() {
     });
   });
 });
+
+var username = "dummyUsername";
+var password = "dummyPassword";
+request(routes)
+  .post('/register')
+  .send({"username":username,
+         "password":password})
+  .expect(200);
+
+describe('Opportunity', function() {
+  describe('#createOpp()', function() {
+    it('should register the opp and return a 200 value', function(done) {
+      request(routes)
+        .post('/opportunity')
+        .send({
+          "username":username,
+          "type":"job",
+          "name":"opp1",
+          "state":"SC",
+          "city":"Columbia",
+          "region":"0000",
+          "income":"50000",
+          "bonus":"5000",
+          "move":"Yes",
+          "principal":"10000",
+          "rate":"6",
+          "annualCompounds":"12",
+          "monthlyPayment":"300"})
+        .expect(200);
+      done();
+    });
+  });
+});
+
+describe('Profile', function() {
+  describe('#updateProfile()', function() {
+    it('should update the profile of the user and return a 200 value', function(done) {
+      request(routes)
+        .post('/personal')
+        .send({
+          "username":username,
+          "state":"SC",
+          "region":"0000",
+          "groceries":"300",
+          "rent":"1000",
+          "spending":"1000",
+          "savings":"3000"})
+        .expect(200);
+      done();
+    });
+  });
+  describe('#createDebt()', function() {
+    it('should create the debt and return a 200 value', function(done) {
+      request(routes)
+        .post('/debt')
+        .send({
+          "username":username,
+          "name":"debt1",
+          "principal":"10000",
+          "rate":"6",
+          "annualCompounds":"12",
+          "monthlyPayment":"300"})
+        .expect(200);
+      done();
+    });
+  });
+});
+
+describe('Result', function() {
+  describe('#getBLS()', function() {
+    it('should get the BLS data and return a 200 value', function(done) {
+      request(routes)
+        .post('/bls')
+        .send(["0000", "0100", "0200", "0300"])
+        .expect(200);
+      done();
+    });
+  });
+});
