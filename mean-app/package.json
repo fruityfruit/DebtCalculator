@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha"
+    "test": "./mocha_script"
   },
   "private": true,
   "dependencies": {
@@ -15,7 +15,9 @@
     "mocha": "^5.2.0",
     "mongoose": "^5.4.19",
     "morgan": "^1.9.1",
-    "node-zillow": "^2.0.0"
+    "node-zillow": "^2.0.0",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "cypress": "^3.2.0"

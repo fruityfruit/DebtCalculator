@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 var dbURI = 'mongodb://localhost/debtDB';
 if (process.env.NODE_ENV === 'production') {
   dbURI = 'mongodb://debtcalculator:test123@ds111103.mlab.com:11103/debtcalculator';
+} else if (process.env.NODE_ENV === 'testing') {
+  dbURI = 'mongodb://localhost/testDebtDB';
 }
-mongoose.connect(dbURI);
+mongoose.connect(dbURI, {useCreateIndex: true, useNewUrlParser: true});
 
 // Connection events
 mongoose.connection.on('connected', function() {
