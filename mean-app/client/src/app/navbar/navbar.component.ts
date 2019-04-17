@@ -28,36 +28,49 @@ export class NavbarComponent implements OnInit {
       document.getElementById("link3").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link4").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link5").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link6").style.color = "rgba(255,255,255,0.6)";
     } else if (value === "debts") {
       document.getElementById("link1").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link2").style.color = "white";
       document.getElementById("link3").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link4").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link5").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link6").style.color = "rgba(255,255,255,0.6)";
     } else if (value === "opportunities") {
       document.getElementById("link1").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link2").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link3").style.color = "white";
       document.getElementById("link4").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link5").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link6").style.color = "rgba(255,255,255,0.6)";
     } else if (value === "results") {
       document.getElementById("link1").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link2").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link3").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link4").style.color = "white";
       document.getElementById("link5").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link6").style.color = "rgba(255,255,255,0.6)";
     } else if (value === "info") {
       document.getElementById("link1").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link2").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link3").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link4").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link5").style.color = "white";
+      document.getElementById("link6").style.color = "rgba(255,255,255,0.6)";
+    } else if (value === "account") {
+      document.getElementById("link1").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link2").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link3").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link4").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link5").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link6").style.color = "white";
     } else {
       document.getElementById("link1").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link2").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link3").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link4").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link5").style.color = "rgba(255,255,255,0.6)";
+      document.getElementById("link6").style.color = "rgba(255,255,255,0.6)";
     }
   }
 

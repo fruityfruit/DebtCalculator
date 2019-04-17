@@ -119,7 +119,7 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.callUpdateColor("other");
+    this.auth.callUpdateColor("account");
     if (!this.auth.isLoggedIn()) {
       this.alerts.open('Please sign in before accessing this page.')
       this.router.navigateByUrl('/signin');
