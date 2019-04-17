@@ -23,6 +23,7 @@ export class OpportunityComponent implements OnInit {
     city: '',
     region: '',
     income: 0,
+    bonus: 0,
     move: '',
     principal: 0,
     rate: 0,
@@ -307,6 +308,7 @@ export class OpportunityComponent implements OnInit {
       state: ['', Validators.required],
       region: ['', Validators.required],
       income: [0],
+      bonus: [0],
       move: ['', Validators.required],
       principal: [0],
       rate: [0],
@@ -331,6 +333,7 @@ export class OpportunityComponent implements OnInit {
     this.formdata.state = this.profileForm.value.state;
     this.formdata.region = this.profileForm.value.region;
     this.formdata.income = this.profileForm.value.income;
+    this.formdata.bonus = this.profileForm.value.bonus;
     this.formdata.move = this.profileForm.value.move;
     this.formdata.principal = this.profileForm.value.principal;
     this.formdata.rate = this.profileForm.value.rate;

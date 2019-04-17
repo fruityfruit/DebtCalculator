@@ -99,6 +99,7 @@ export class ResultsComponent implements OnInit {
               city: entry.city,
               region: entry.region,
               income: entry.income,
+              bonus: entry.bonus,
               move: entry.move,
               principal: entry.principal,
               rate: entry.rate,
@@ -505,8 +506,11 @@ export class ResultsComponent implements OnInit {
         currentSavings = currentSavings + (this.opportunities[oppCount].income / 12);
         currentSavings = currentSavings - (monthlyOppPayments[oppCount][pointCount]);
         currentSavings = currentSavings - (monthlyDebtPayments[pointCount]);
-        if (pointCount === 0 && this.opportunities[oppCount].move === "Yes") { //relocation costs about 4 times the rent of the apartment being moved
-          currentSavings = currentSavings - 4*this.profile.rent;
+        if (pointCount === 0) { //in the first month, bonus and moving costs should be factored in
+          currentSavings = currentSavings + this.opportunities[oppCount].bonus;
+          if (this.opportunities[oppCount].move === "Yes") { //relocation costs about 4 times the rent of the apartment being moved
+            currentSavings = currentSavings - 4*this.profile.rent;
+          }
         }
         var baseSpending = this.profile.rent+this.profile.groceries+this.profile.spending;
         currentSavings = currentSavings - (baseSpending * (this.opportunityBLS[oppCount] / this.homeBLS)); //adjust for Cost of Living

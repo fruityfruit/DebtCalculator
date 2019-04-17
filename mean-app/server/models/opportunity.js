@@ -8,6 +8,7 @@ var opportunitySchema = new mongoose.Schema({
   city: String,
   region: String,
   income: Number,
+  bonus: Number,
   move: String,
   principal: Number,
   rate: Number,

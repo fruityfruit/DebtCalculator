@@ -10,17 +10,25 @@
           </mat-form-field>
         </div>
         <div class="form-group row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <mat-form-field appearance="standard" hintLabel="City">
               <input matInput type="text" class="form-control" formControlName="city" placeholder="Location of this opportunity"
               #city [(ngModel)] = "opportunity.city">
             </mat-form-field>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <mat-form-field appearance="standard" hintLabel="State">
               <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(state._value)"
               #state [(ngModel)] = "opportunity.state">
                 <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="standard" hintLabel="Region">
+              <mat-select class="form-control" formControlName="region" placeholder="Select an option"
+              #region [(ngModel)] = "opportunity.region">
+                <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -34,11 +42,10 @@
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Region">
-              <mat-select class="form-control" formControlName="region" placeholder="Select an option"
-              #region [(ngModel)] = "opportunity.region">
-                <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>
-              </mat-select>
+            <mat-form-field appearance="standard" hintLabel="Opportunity One-Time Bonus">
+              <input matInput type="number" class="form-control" formControlName="bonus" placeholder="Bonus income, if applicable" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')"
+              #bonus [(ngModel)] = "opportunity.bonus">
+              <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
         </div>

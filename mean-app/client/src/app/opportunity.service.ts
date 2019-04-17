@@ -10,6 +10,7 @@ export interface Opportunity {
   city: String;
   region: String;
   income: number;
+  bonus: number;
   move: String;
   principal: number;
   rate: number;
@@ -33,6 +34,7 @@ export class OpportunityService {
       state: form.state,
       region: form.region,
       income: form.income,
+      bonus: form.bonus,
       move: form.move,
       principal: form.principal,
       rate: form.rate,
@@ -58,6 +60,7 @@ export class OpportunityService {
       state: form.state,
       region: form.region,
       income: form.income,
+      bonus: form.bonus,
       move: form.move,
       principal: form.principal,
       rate: form.rate,
