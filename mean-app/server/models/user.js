@@ -58,7 +58,7 @@ userSchema.methods.generateToken = function() {
     _id: this._id,
     username: this.username,
     exp: parseInt(expiry.getTime() / 1000),
-  }, "MY_SECRET"); // TODO DO NOT KEEP YOUR SECRET IN THE CODE!
+  }, "MY_SECRET");
 };
 
 // create the mongoose model User for the rest of the app to see
