@@ -99,8 +99,6 @@ module.exports.getCharts = function(req, res) {
       } else if (!user) {
         res.status(400).send("unable to find the user");
       } else {
-        console.log(user.opportunities);
-        console.log(user.debts);
         res.status(200).json({
           'opportunities' : user.opportunities,
           'debts' : user.debts
