@@ -90,6 +90,9 @@ export class ResultsComponent implements OnInit {
             tempDebts.push(newDebt);
           });
           this.debts = tempDebts;
+          if (this.debts.length === 0) {
+            document.getElementById("canvas0").style.height = "0";
+          }
           data.opportunities.forEach(function(entry) {
             var newOpp: Opportunity = {
               username: tempUsername,
@@ -110,6 +113,9 @@ export class ResultsComponent implements OnInit {
             tempIDs.push(entry._id);
           });
           this.opportunities = tempOpps;
+          if (this.opportunities.length === 0) {
+            document.getElementById("canvas1").style.height = "0";
+          }
           this.opportunityIDs = tempIDs;
           this.displayBLSData(callGeneral);
           this.displayZillowData();
@@ -175,6 +181,9 @@ export class ResultsComponent implements OnInit {
         });
         names = tempNames;
         displayPrices = tempPrices;
+        if (names.length === 0 || displayPrices === 0) {
+          document.getElementById("canvas2").style.height = "0";
+        }
         // cost of living chart
         this.blsChart = new Chart('canvas2', {
           type: "bar",

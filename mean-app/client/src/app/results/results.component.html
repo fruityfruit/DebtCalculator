@@ -27,13 +27,15 @@
         <mat-header-row *matHeaderRowDef="displayedColumnsOpp"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumnsOpp;"></mat-row>
       </table>
-      <div *ngIf="debtProjection">
+      <div *ngIf="debts.length || opportunities.length">
         <form class="ex1" [formGroup]="chartForm" (ngSubmit)="updateCharts()" style="margin: 0px 5px">
           <mat-form-field appearance="standard" hintLabel="Number of Months" style="max-width: calc(100% - 141px)">
             <input matInput type="number" class="form-control" formControlName="numMonths" placeholder="Over how many months would you like to view the charts?" onkeypress="return(this.value.length < 3)" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
           </mat-form-field>
           <button type="submit" [disabled]="!chartForm.value.numMonths" mat-raised-button style="margin-left:15px">Update Charts!</button>
         </form>
+      </div>
+      <div *ngIf="debtProjection">
         <canvas id="canvas0">{{ debtProjection }}</canvas>
       </div>
       <div *ngIf="netIncome">
