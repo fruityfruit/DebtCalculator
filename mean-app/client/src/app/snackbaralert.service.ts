@@ -24,4 +24,8 @@ export class SnackbaralertService {
     this.snackBar.open(message, action, config);
   }
 
+  public clearSnack() {
+    this.snackBar.dismiss();
+  }
+
 }

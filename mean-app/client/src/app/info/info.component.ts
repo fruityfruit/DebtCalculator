@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { SnackbaralertService } from '../snackbaralert.service';
 
 @Component({
   selector: 'app-info',
@@ -8,10 +9,14 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class InfoComponent implements OnInit {
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService, private alerts: SnackbaralertService) { }
 
   ngOnInit() {
     this.auth.callUpdateColor("info");
+    if (window.localStorage.getItem("persistent-snackbar")) {
+      window.localStorage.removeItem("persistent-snackbar");
+      this.alerts.clearSnack();
+    }
   }
 
 }

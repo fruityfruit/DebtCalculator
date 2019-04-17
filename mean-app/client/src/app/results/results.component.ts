@@ -181,7 +181,7 @@ export class ResultsComponent implements OnInit {
         });
         names = tempNames;
         displayPrices = tempPrices;
-        if (names.length === 0 || displayPrices === 0) {
+        if (names.length === 0 || displayPrices.length === 0) {
           document.getElementById("canvas2").style.height = "0";
         }
         // cost of living chart

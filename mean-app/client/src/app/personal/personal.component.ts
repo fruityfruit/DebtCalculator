@@ -360,9 +360,11 @@ export class PersonalComponent implements OnInit {
         window.localStorage.removeItem("profile-snackbar");
         var duplicateAlerts = this.alerts;
         setTimeout(function() {
+          window.localStorage.setItem("persistent-snackbar", "true");
           duplicateAlerts.openLoginWarning();
         }, 5000);
       } else {
+        window.localStorage.setItem("persistent-snackbar", "true");
         this.alerts.openLoginWarning();
       }
     }

@@ -42,6 +42,10 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.auth.callUpdateColor("other");
+    if (window.localStorage.getItem("persistent-snackbar")) {
+      window.localStorage.removeItem("persistent-snackbar");
+      this.alerts.clearSnack();
+    }
   }
 
 }
