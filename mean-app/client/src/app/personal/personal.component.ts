@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService, TokenPayload } from '../authentication.service';
 import { ProfileService, Profile } from '../profile.service';
+import { SnackbaralertService } from '../snackbaralert.service';
 import { Router } from '@angular/router';
 import { ViewChild } from '@angular/core';
 
@@ -294,7 +295,8 @@ export class PersonalComponent implements OnInit {
   ];
 
   constructor(private builder: FormBuilder, private router: Router,
-    private auth: AuthenticationService, private profService: ProfileService) {
+    private auth: AuthenticationService, private profService: ProfileService,
+    private alerts: SnackbaralertService) {
     this.profileForm = this.builder.group({
       state: ['', Validators.required],
       region: ['', Validators.required],
@@ -352,6 +354,17 @@ export class PersonalComponent implements OnInit {
         this.currProfile = res;
         this.stateChangeAction(this.currProfile.state);
       });
+    }
+    if (!this.auth.isLoggedIn()) {
+      if (window.localStorage.getItem("profile-snackbar")) {
+        window.localStorage.removeItem("profile-snackbar");
+        var duplicateAlerts = this.alerts;
+        setTimeout(function() {
+          duplicateAlerts.openLoginWarning();
+        }, 5000);
+      } else {
+        this.alerts.openLoginWarning();
+      }
     }
   }
 }

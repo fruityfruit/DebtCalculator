@@ -108,7 +108,7 @@ export class AuthenticationService {
       oldTime = oldTime.substring(0, oldTime.indexOf(":"));
       var d = new Date();
       var newTime = d.getTime();
-      if (newTime - Number(oldTime) > 7200000) { //two hours
+      if (newTime - Number(oldTime) > 21600000) { //six hours
         this.signout();
         this.alerts.open('You have been logged out due to inactivity.');
         this.router.navigateByUrl('/home');

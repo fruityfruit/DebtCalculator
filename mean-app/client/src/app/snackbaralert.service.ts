@@ -5,15 +5,23 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
   providedIn: 'root'
 })
 export class SnackbaralertService {
-  private config: MatSnackBarConfig = {
-    verticalPosition: 'top',
-    duration: 5000
-  };
   constructor(public snackBar: MatSnackBar) {}
 
-  public open(message) {
+  public open(message: string) {
     var action = 'OK';
-    this.snackBar.open(message, action, this.config);
+    var config: MatSnackBarConfig = {
+      verticalPosition: 'top',
+      duration: 5000
+    };
+    this.snackBar.open(message, action, config);
+  }
+  public openLoginWarning() {
+    var message = 'You are not logged in. Any data that you enter here will be lost if you log in later. You will also be able to create a new account after viewing your results.';
+    var action = 'OK';
+    var config: MatSnackBarConfig = {
+      verticalPosition: 'bottom'
+    };
+    this.snackBar.open(message, action, config);
   }
 
 }

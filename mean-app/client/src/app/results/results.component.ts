@@ -69,7 +69,8 @@ export class ResultsComponent implements OnInit {
       this.profile.spending = data.spending;
       this.profile.savings = data.savings;
       if (!(this.profile.username && this.profile.state && this.profile.region && this.profile.groceries && this.profile.rent && this.profile.spending && this.profile.savings)) {
-        this.alerts.open("Please fill out the Personal page before accessing this page.");
+        this.alerts.open("Please fill out the Profile page before accessing this page.");
+        window.localStorage.setItem('profile-snackbar', "true");
         this.router.navigateByUrl('/personal');
       } else {
         this.resultService.getChartsData(this.username).subscribe((data: any) => { //returns the debts and opportunities for each user
@@ -740,7 +741,8 @@ export class ResultsComponent implements OnInit {
     this.auth.callUpdateColor("results");
     this.username = this.auth.getUsername();
     if (this.username === null) {
-      this.alerts.open("Please fill out the Personal page before accessing this page.");
+      this.alerts.open("Please fill out the Profile page before accessing this page.");
+      window.localStorage.setItem('profile-snackbar', "true");
       this.router.navigateByUrl('/personal');
     } else {
       this.getData(true);
