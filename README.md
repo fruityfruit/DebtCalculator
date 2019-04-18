@@ -62,7 +62,7 @@ So far, we are using the following testing frameworks:
 
 To run our behavioral tests, navigate to the "mean-app" directory of our project in a new terminal window and type:
 ```
-./cypress_script
+./cypress_script.sh
 ```
 
 ### Backend unit testing with Mocha
