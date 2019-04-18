@@ -4,7 +4,7 @@ describe('Password Change Test',function (){
     cy.get('.form-control').first().type('TestUser')
     cy.get('.form-control').last().type('TestPassword')
     cy.contains('Sign In!').click()
-    cy.contains('Account').click()
+    cy.contains('Account').click({ force: true })
     cy.url().should('include','/account')
     cy.get('input').eq(2).type('TestPassword')
     cy.get('input').eq(3).type('issaTest')

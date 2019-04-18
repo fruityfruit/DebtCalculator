@@ -4,7 +4,7 @@ describe('Delete Account Test',function (){
     cy.get('.form-control').first().type('TestUser')
     cy.get('.form-control').last().type('issaTest')
     cy.contains('Sign In!').click()
-    cy.contains('Account').click()
+    cy.contains('Account').click({ force: true })
     cy.url().should('include','/account')
     cy.get('input').eq(5).type('issaTest')
     cy.get('button').eq(2).click({ force: true })
