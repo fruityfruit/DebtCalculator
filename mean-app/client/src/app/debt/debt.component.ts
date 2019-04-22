@@ -33,13 +33,14 @@ export class DebtComponent implements OnInit {
       name: ['', Validators.required],
       principal: [0, Validators.required],
       rate: [0, Validators.required],
-      annualCompounds: [0],
-      monthlyPayment: [0]
+      annualCompounds: [0, Validators.required],
+      monthlyPayment: [0, Validators.required]
     });
   }
 
   public isValid() {
-    if (this.profileFormDebt.value.name && this.profileFormDebt.value.principal && this.profileFormDebt.value.rate) {
+    if (this.profileFormDebt.value.name && this.profileFormDebt.value.principal && this.profileFormDebt.value.rate
+    && this.profileFormDebt.value.annualCompounds && this.profileFormDebt.value.monthlyPayment) {
       return true;
     }
     return false;

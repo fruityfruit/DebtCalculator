@@ -307,20 +307,20 @@ export class OpportunityComponent implements OnInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
       region: ['', Validators.required],
-      income: [0],
-      bonus: [0],
+      income: [0, Validators.required],
+      bonus: [0, Validators.required],
       move: ['', Validators.required],
-      principal: [0],
-      rate: [0],
-      annualCompounds: [0],
-      monthlyPayment: [0]
+      principal: [0, Validators.required],
+      rate: [0, Validators.required],
+      annualCompounds: [0, Validators.required],
+      monthlyPayment: [0, Validators.required]
     });
   }
 
   public isValid() {
     if (this.profileForm.value.type && this.profileForm.value.name && this.profileForm.value.city && this.profileForm.value.state &&
       this.profileForm.value.region && this.profileForm.value.move && (this.profileForm.value.income || (this.profileForm.value.principal &&
-      this.profileForm.value.rate && this.profileForm.value.monthlyPayment))) {
+      this.profileForm.value.rate && this.profileForm.value.monthlyPayment && this.profileForm.value.annualCompounds))) {
       return true;
     }
     return false;
