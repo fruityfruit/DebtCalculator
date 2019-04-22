@@ -5,6 +5,7 @@
       <mat-card class="mat-elevation-z2">
         <mat-card-header>
           <mat-card-title>Change Your Username</mat-card-title>
+          <mat-card-subtitle>Your current username is: {{updateUsername.oldUsername}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <form class="ex1" [formGroup]="profileFormUser" (ngSubmit)="onUsername()">

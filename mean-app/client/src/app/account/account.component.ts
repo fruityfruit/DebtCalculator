@@ -60,6 +60,7 @@ export class AccountComponent implements OnInit {
     this.updateUsername.newUsername = this.profileFormUser.value.newUsername;
     this.updateUsername.password = this.profileFormUser.value.password;
     this.auth.changeUsername(this.updateUsername).subscribe(() => {
+      this.updateUsername.oldUsername = this.updateUsername.newUsername;
       this.alerts.open('Username successfully updated');
       this.profileFormUser.reset();
       Object.keys(this.profileFormUser.controls).forEach(key => { //workaround
@@ -124,6 +125,7 @@ export class AccountComponent implements OnInit {
       this.alerts.open('Please sign in before accessing this page.')
       this.router.navigateByUrl('/signin');
     }
+    this.updateUsername.oldUsername = this.auth.getUsername();
   }
 
 }
