@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Chart } from 'chart.js';
-import { HttpClient } from '@angular/common/http';
-import { AuthenticationService, PasswordPayload, UsernamePayload} from '../authentication.service';
-import { OpportunityService, Opportunity } from '../opportunity.service';
-import { ResultService, ResultSet, ResultSetOpp } from '../result.service';
-import { ProfileService, Profile, Debt } from '../profile.service';
-import { Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
-import { SnackbaralertService } from '../snackbaralert.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
+import { Chart } from "chart.js";
+import { HttpClient } from "@angular/common/http";
+import { AuthenticationService, PasswordPayload, UsernamePayload} from "../authentication.service";
+import { OpportunityService, Opportunity } from "../opportunity.service";
+import { ResultService, ResultSet, ResultSetOpp } from "../result.service";
+import { ProfileService, Profile, Debt } from "../profile.service";
+import { Router } from "@angular/router";
+import { MatTableDataSource } from "@angular/material";
+import { SnackbaralertService } from "../snackbaralert.service";
 
 @Component({
-  selector: 'app-results',
-  templateUrl: './results.component.html',
-  styleUrls: ['./results.component.css']
+  selector: "app-results",
+  templateUrl: "./results.component.html",
+  styleUrls: ["./results.component.css"]
 })
 
 export class ResultsComponent implements OnInit {
-  username: string = '';
+  username: string = "";
   zillowResults: ResultSet[] = [];
   rankings: ResultSetOpp[]=[];
   blsChart = [] as Chart;
@@ -43,16 +43,16 @@ export class ResultsComponent implements OnInit {
   chartForm: FormGroup;
   dataSource = new MatTableDataSource(this.zillowResults);
   rankingSource = new MatTableDataSource(this.rankings);
-  displayedColumns: string[] = ['name', 'city', 'estimate'];
-  displayedColumnsOpp: string[] = ['name', 'city', 'income','savings1','savings2'];
-  colors=['darkgreen','aqua','indigo','maroon','skyblue','magenta','pink','gold','salmon','mediumseagreen'];
+  displayedColumns: string[] = ["name", "city", "estimate"];
+  displayedColumnsOpp: string[] = ["name", "city", "income","savings1","savings2"];
+  colors=["darkgreen","aqua","indigo","maroon","skyblue","magenta","pink","gold","salmon","mediumseagreen"];
 
   constructor(public auth: AuthenticationService, private resultService: ResultService,
     private oppService: OpportunityService, private profService: ProfileService,
     private builder: FormBuilder, private router: Router, private alerts: SnackbaralertService) {
     this.profileForm = this.builder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ["", Validators.required],
+      password: ["", Validators.required]
     });
     this.chartForm = this.builder.group({
       numMonths: [Validators.required]
@@ -70,8 +70,8 @@ export class ResultsComponent implements OnInit {
       this.profile.savings = data.savings;
       if (!(this.profile.username && this.profile.state && this.profile.region && (this.profile.groceries >= 0) && (this.profile.rent >= 0) && (this.profile.spending >= 0) && (this.profile.savings >= 0))) {
         this.alerts.open("Please fill out the Profile page before accessing this page.");
-        window.localStorage.setItem('profile-snackbar', "true");
-        this.router.navigateByUrl('/personal');
+        window.localStorage.setItem("profile-snackbar", "true");
+        this.router.navigateByUrl("/personal");
       } else {
         this.resultService.getChartsData(this.username).subscribe((data: any) => { //returns the debts and opportunities for each user
           var tempUsername = this.username;
@@ -139,7 +139,7 @@ export class ResultsComponent implements OnInit {
         var prices = [];
         var displayPrices = [];
         for (var i = 0; i < retVal.length; ++i) {
-          var split = retVal[i].indexOf(':');
+          var split = retVal[i].indexOf(":");
           prices.push(retVal[i].substring(split+2));
           regions.push(retVal[i].substring(0,split));
         }
@@ -182,7 +182,7 @@ export class ResultsComponent implements OnInit {
           document.getElementById("canvas2").style.height = "0";
         }
         // cost of living chart
-        this.blsChart = new Chart('canvas2', {
+        this.blsChart = new Chart("canvas2", {
           type: "bar",
           data: {
             labels: names,
@@ -202,22 +202,22 @@ export class ResultsComponent implements OnInit {
               display: false,
             },
             tooltips:{
-              position: 'nearest',
-              mode: 'index',
+              position: "nearest",
+              mode: "index",
               intersect: false,
               callbacks: {
                 label: function(tooltipItem, data) {
                   var valueTemp=+data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
                   var value = Math.round(valueTemp * 100) / 100;
-                  var stringValue='';
+                  var stringValue="";
                   if(value >= 1000){
-                    stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    stringValue= "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                   }
                   else if(value <= -1000){
-                    stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    stringValue= "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                   }
                   else {
-                    stringValue = '$' + value;
+                    stringValue = "$" + value;
                   }
                   var label = "1$ in the average American city is worth "+stringValue+" here";
                   return label;
@@ -230,13 +230,13 @@ export class ResultsComponent implements OnInit {
                   beginAtZero: true,
                   callback: function(value, index, values) {
                     if(parseInt(value) >= 1000){
-                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      return "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     }
                     else if(parseInt(value) <= -1000){
-                      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      return "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     }
                     else {
-                      return '$' + value;
+                      return "$" + value;
                     }
                   }
                 }
@@ -250,7 +250,7 @@ export class ResultsComponent implements OnInit {
   }
 
   private generateCharts(numberOfMonths: number, callGeneral: boolean) {
-    if (this.debtProjection.hasOwnProperty('config')) {
+    if (this.debtProjection.hasOwnProperty("config")) {
       this.debtProjection.config.data.datasets = [];
       this.netIncome.config.data.datasets = [];
     }
@@ -312,8 +312,8 @@ export class ResultsComponent implements OnInit {
       }
       debtCount = debtCount + 1;
     }
-    this.debtProjection = new Chart('canvas0', {
-      type: 'line',
+    this.debtProjection = new Chart("canvas0", {
+      type: "line",
       data: {
         labels: labels,
         datasets: [],
@@ -324,26 +324,26 @@ export class ResultsComponent implements OnInit {
           text: title,
         },
         tooltips:{
-          position: 'nearest',
-          mode: 'index',
+          position: "nearest",
+          mode: "index",
           intersect: false,
           callbacks: {
             label: function(tooltipItem, data) {
               var valueTemp=+data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
               var value = Math.round(valueTemp * 100) / 100;
-              var stringValue='';
+              var stringValue="";
               if(value >= 1000){
-                stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                stringValue= "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
               }
               else if(value <= -1000){
-                stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                stringValue= "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
               }
               else {
-                stringValue = '$' + value;
+                stringValue = "$" + value;
               }
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
+              var label = data.datasets[tooltipItem.datasetIndex].label || "";
               if (label) {
-                label += ': ';
+                label += ": ";
               }
               return label + stringValue;
 
@@ -359,13 +359,13 @@ export class ResultsComponent implements OnInit {
               beginAtZero: true,
               callback: function(value, index, values) {
                 if(parseInt(value) >= 1000){
-                  return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
                 else if(parseInt(value) <= -1000){
-                  return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
                 else {
-                  return '$' + value;
+                  return "$" + value;
                 }
               }
             },
@@ -383,10 +383,10 @@ export class ResultsComponent implements OnInit {
         pointBorderColor: this.colors[debtCount],
         pointHoverBorderColor: this.colors[debtCount],
         pointHoverBackgroundColor: this.colors[debtCount],
-        backgroundColor: 'transparent'
+        backgroundColor: "transparent"
 
       };
-      this.debtProjection.data['datasets'][debtCount] = newSeries;
+      this.debtProjection.data["datasets"][debtCount] = newSeries;
       debtCount = debtCount + 1;
     }
     this.debtProjection.update();
@@ -405,15 +405,15 @@ export class ResultsComponent implements OnInit {
         totalPoints.push(addedDebt);
         pointCount = pointCount + 1;
       }
-      this.debtProjection.data['datasets'][debtCount] = {
+      this.debtProjection.data["datasets"][debtCount] = {
         label: "Total Debt",
         data: totalPoints,
-        borderColor: 'red',
-        pointBackgroundColor:'red',
-        pointBorderColor: 'red',
-        pointHoverBorderColor: 'red',
-        pointHoverBackgroundColor: 'red',
-        backgroundColor: 'transparent'
+        borderColor: "red",
+        pointBackgroundColor:"red",
+        pointBorderColor: "red",
+        pointHoverBorderColor: "red",
+        pointHoverBackgroundColor: "red",
+        backgroundColor: "transparent"
       };
       this.debtProjection.update();
     }
@@ -428,19 +428,19 @@ export class ResultsComponent implements OnInit {
     while (pointCount < labels.length - 1) {
       var debtCount = 0;
       var monthlyDebtPayment = 0;
-      if (this.debtProjection.data['datasets'].length > 1) { //total debts is included, so we must exclude it
-        while (debtCount < this.debtProjection.data['datasets'].length - 1) {
+      if (this.debtProjection.data["datasets"].length > 1) { //total debts is included, so we must exclude it
+        while (debtCount < this.debtProjection.data["datasets"].length - 1) {
           //console.log("debtCount: "+debtCount);
-          var thisMonth = this.debtProjection.data['datasets'][debtCount].data[pointCount];
-          var nextMonth = this.debtProjection.data['datasets'][debtCount].data[pointCount + 1];
+          var thisMonth = this.debtProjection.data["datasets"][debtCount].data[pointCount];
+          var nextMonth = this.debtProjection.data["datasets"][debtCount].data[pointCount + 1];
           if (thisMonth && nextMonth) {
             monthlyDebtPayment = monthlyDebtPayment + (thisMonth - nextMonth);
           }
           debtCount = debtCount + 1;
         }
-      } else if (this.debtProjection.data['datasets'].length === 1) { //only one debt is present, so only have to do the process once
-        var thisMonth = this.debtProjection.data['datasets'][debtCount].data[pointCount];
-        var nextMonth = this.debtProjection.data['datasets'][debtCount].data[pointCount + 1];
+      } else if (this.debtProjection.data["datasets"].length === 1) { //only one debt is present, so only have to do the process once
+        var thisMonth = this.debtProjection.data["datasets"][debtCount].data[pointCount];
+        var nextMonth = this.debtProjection.data["datasets"][debtCount].data[pointCount + 1];
         if (thisMonth && nextMonth) {
           monthlyDebtPayment = monthlyDebtPayment + (thisMonth - nextMonth);
         }
@@ -454,7 +454,7 @@ export class ResultsComponent implements OnInit {
     var monthlyDebtPayment = 0;
     while (debtCount < this.debts.length) {
       if (this.debts[debtCount].opportunity==="all") {
-        var owedAmount = this.debtProjection.data['datasets'][includedDebtCount].data[pointCount];
+        var owedAmount = this.debtProjection.data["datasets"][includedDebtCount].data[pointCount];
         if (owedAmount && owedAmount > this.debts[debtCount].monthlyPayment) {
           monthlyDebtPayment = monthlyDebtPayment + this.debts[debtCount].monthlyPayment;
         } else if (owedAmount) {
@@ -563,9 +563,9 @@ export class ResultsComponent implements OnInit {
     console.log(monthlyOppPayments);
     console.log(monthlyDebtPayments);
     console.log(oppProjectionPoints);
-    this.netIncome = new Chart('canvas1', {
+    this.netIncome = new Chart("canvas1", {
       animationEnabled: true,
-      type: 'line',
+      type: "line",
       data: {
         labels: labels,
         datasets: [],
@@ -579,26 +579,26 @@ export class ResultsComponent implements OnInit {
           display: true,
         },
         tooltips:{
-          position: 'nearest',
-          mode: 'index',
+          position: "nearest",
+          mode: "index",
           intersect: false,
           callbacks: {
             label: function(tooltipItem, data) {
               var valueTemp=+data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
               var value = Math.round(valueTemp * 100) / 100;
-              var stringValue='';
+              var stringValue="";
               if(value >= 1000){
-                stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                stringValue= "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
               }
               else if(value <= -1000){
-                stringValue= '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                stringValue= "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
               }
               else {
-                stringValue = '$' + value;
+                stringValue = "$" + value;
               }
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
+              var label = data.datasets[tooltipItem.datasetIndex].label || "";
               if (label) {
-                label += ': ';
+                label += ": ";
               }
               return label + stringValue;
 
@@ -611,13 +611,13 @@ export class ResultsComponent implements OnInit {
               beginAtZero: true,
               callback: function(value, index, values) {
                 if(parseInt(value) >= 1000){
-                  return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
                 else if(parseInt(value) <= -1000){
-                  return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return "$" + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
                 else {
-                  return '$' + value;
+                  return "$" + value;
                 }
               }
             },
@@ -635,9 +635,9 @@ export class ResultsComponent implements OnInit {
         pointBorderColor: this.colors[oppCount],
         pointHoverBorderColor: this.colors[oppCount],
         pointHoverBackgroundColor: this.colors[oppCount],
-        backgroundColor: 'transparent'
+        backgroundColor: "transparent"
       };
-      this.netIncome.data['datasets'][oppCount] = newSeries;
+      this.netIncome.data["datasets"][oppCount] = newSeries;
       oppCount = oppCount + 1;
     }
     this.netIncome.update();
@@ -652,12 +652,12 @@ export class ResultsComponent implements OnInit {
     for (var i = 0; i < this.opportunities.length; ++i) {
       var minSavings = 1000000000;
       var maxSavings = -1000000000;
-      for (var j = 0; j < this.netIncome.data['datasets'][i].data.length; ++j) {
-        if (minSavings > this.netIncome.data['datasets'][i].data[j]) {
-          minSavings = this.netIncome.data['datasets'][i].data[j];
+      for (var j = 0; j < this.netIncome.data["datasets"][i].data.length; ++j) {
+        if (minSavings > this.netIncome.data["datasets"][i].data[j]) {
+          minSavings = this.netIncome.data["datasets"][i].data[j];
         }
-        if (maxSavings < this.netIncome.data['datasets'][i].data[j]) {
-          maxSavings = this.netIncome.data['datasets'][i].data[j];
+        if (maxSavings < this.netIncome.data["datasets"][i].data[j]) {
+          maxSavings = this.netIncome.data["datasets"][i].data[j];
         }
       }
       oppMinSavings.push(minSavings);
@@ -697,8 +697,8 @@ export class ResultsComponent implements OnInit {
       }
     }
     for (var i = 0; i < sortedOpps.length; ++i) {
-      var yearOne = this.netIncome.data['datasets'][sortedOpps[i]].data[12];
-      var yearThree = this.netIncome.data['datasets'][sortedOpps[i]].data[36];
+      var yearOne = this.netIncome.data["datasets"][sortedOpps[i]].data[12];
+      var yearThree = this.netIncome.data["datasets"][sortedOpps[i]].data[36];
       var income = this.opportunities[sortedOpps[i]].income;
       var oppResult: ResultSetOpp = {
         oppName: this.opportunities[sortedOpps[i]].name,
@@ -726,11 +726,11 @@ export class ResultsComponent implements OnInit {
 
   private getOpportunityZillow(oppName: string, city: string, id: string) {
     this.resultService.getZillowData(id).subscribe((data) => {
-      if (data['average'] > 0) {
+      if (data["average"] > 0) {
         var result: ResultSet = {
           oppName: oppName,
           city: city,
-          zillowData: this.auth.formatMoney(data['average'], true)
+          zillowData: this.auth.formatMoney(data["average"], true)
         };
         this.zillowResults.push(result);
       }
@@ -739,7 +739,7 @@ export class ResultsComponent implements OnInit {
       var result: ResultSet = {
         oppName: oppName,
         city: city,
-        zillowData: 'Zillow does not have estimate data for this city.'
+        zillowData: "Zillow does not have estimate data for this city."
       };
       this.zillowResults.push(result);
       this.dataSource.data = this.zillowResults;
@@ -754,17 +754,17 @@ export class ResultsComponent implements OnInit {
   public register() {
     this.newUsername = this.profileForm.value.username;
     this.newPassword = this.profileForm.value.password;
-    if (this.newUsername === '' || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
+    if (this.newUsername === "" || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
       this.alerts.open("Sorry, that username has already been taken. Please try another!");
     } else {
       var updateUsername: UsernamePayload = {
         oldUsername: this.username,
         newUsername: this.newUsername,
-        password: ''
+        password: ""
       }
       var updatePassword: PasswordPayload = {
         username: this.newUsername,
-        oldPassword: '',
+        oldPassword: "",
         newPassword: this.newPassword
       }
       this.auth.changeUsername(updateUsername).subscribe(() => {
@@ -778,7 +778,7 @@ export class ResultsComponent implements OnInit {
           this.alerts.open("Sorry, that username has already been taken. Please try another!");
         } else {
           console.log(err);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl("/");
         }
       });
     }
@@ -790,8 +790,8 @@ export class ResultsComponent implements OnInit {
     this.username = this.auth.getUsername();
     if (this.username === null) {
       this.alerts.open("Please fill out the Profile page before accessing this page.");
-      window.localStorage.setItem('profile-snackbar', "true");
-      this.router.navigateByUrl('/personal');
+      window.localStorage.setItem("profile-snackbar", "true");
+      this.router.navigateByUrl("/personal");
     } else {
       this.getData(true);
     }

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
-import { Router } from '@angular/router';
-import { SnackbaralertService } from '../snackbaralert.service';
+import { Component, OnInit } from "@angular/core";
+import { AuthenticationService } from "../authentication.service";
+import { Router } from "@angular/router";
+import { SnackbaralertService } from "../snackbaralert.service";
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
   username: string;
@@ -77,8 +77,8 @@ export class NavbarComponent implements OnInit {
   public signout() {
     this.closeDropdown();
     this.auth.signout();
-    this.alerts.open('You have been signed out.');
-    this.router.navigateByUrl('/');
+    this.alerts.open("You have been signed out.");
+    this.router.navigateByUrl("/");
   }
 
   public responsive() {

@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { OpportunityComponent } from './opportunity.component';
+import { OpportunityComponent } from "./opportunity.component";
 
-describe('OpportunityComponent', () => {
+describe("OpportunityComponent", () => {
   let component: OpportunityComponent;
   let fixture: ComponentFixture<OpportunityComponent>;
 
@@ -19,7 +19,7 @@ describe('OpportunityComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

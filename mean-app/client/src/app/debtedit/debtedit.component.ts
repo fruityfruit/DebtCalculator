@@ -1,28 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProfileService, Debt } from '../profile.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
-import { OpportunityService, ShortOpportunity } from '../opportunity.service';
-import { SnackbaralertService } from '../snackbaralert.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
+import { ProfileService, Debt } from "../profile.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthenticationService } from "../authentication.service";
+import { OpportunityService, ShortOpportunity } from "../opportunity.service";
+import { SnackbaralertService } from "../snackbaralert.service";
 
 @Component({
-  selector: 'app-debtedit',
-  templateUrl: './debtedit.component.html',
-  styleUrls: ['./debtedit.component.css']
+  selector: "app-debtedit",
+  templateUrl: "./debtedit.component.html",
+  styleUrls: ["./debtedit.component.css"]
 })
 export class DebteditComponent implements OnInit {
   username: String;
   debt: any = {};
   profileForm: FormGroup;
   formdata: Debt = {
-    username: '',
-    name: '',
+    username: "",
+    name: "",
     principal: 0,
     rate: 0,
     annualCompounds: 0,
     monthlyPayment: 0,
-    opportunity: ''
+    opportunity: ""
   }
   oppList = [];
 
@@ -31,19 +31,19 @@ export class DebteditComponent implements OnInit {
     private profService: ProfileService, private builder: FormBuilder,
     private oppService: OpportunityService, private alerts: SnackbaralertService) {
       this.profileForm = this.builder.group({
-        name: ['', Validators.required],
+        name: ["", Validators.required],
         principal: [0, Validators.required],
         rate: [0, Validators.required],
         annualCompounds: [0, Validators.required],
         monthlyPayment: [0, Validators.required],
-        opportunity: ['', Validators.required]
+        opportunity: ["", Validators.required]
       });
   }
 
   private updateDebt() {
     this.activatedRouter.params.subscribe(params => {
-      this.profService.updateDebt(this.formdata, params['id']).subscribe(() => {
-        this.router.navigate(['debt']);
+      this.profService.updateDebt(this.formdata, params["id"]).subscribe(() => {
+        this.router.navigate(["debt"]);
       }, (err) => {
         console.log(err);
       });
@@ -64,9 +64,9 @@ export class DebteditComponent implements OnInit {
     this.auth.callUpdateColor("other");
     this.username = this.auth.getUsername();
     if (this.username === null) {
-      this.alerts.open('Please fill out the Profile page before accessing this page.');
-      window.localStorage.setItem('profile-snackbar', "true");
-      this.router.navigateByUrl('/personal');
+      this.alerts.open("Please fill out the Profile page before accessing this page.");
+      window.localStorage.setItem("profile-snackbar", "true");
+      this.router.navigateByUrl("/personal");
     } else {
       this.oppService.getShortOpps(this.username).subscribe((data: ShortOpportunity[]) => {
         var selectAll = {
@@ -74,15 +74,15 @@ export class DebteditComponent implements OnInit {
           oppName:"Select All"
         }
         this.oppList.push(selectAll);
-        for (var i = 0; i < data['opportunities'].length; ++i) {
+        for (var i = 0; i < data["opportunities"].length; ++i) {
           var opp = {
-            oppId:data['opportunities'][i]._id,
-            oppName:data['opportunities'][i].name
+            oppId:data["opportunities"][i]._id,
+            oppName:data["opportunities"][i].name
           }
           this.oppList.push(opp);
         }
         this.activatedRouter.params.subscribe(params => {
-          this.profService.editDebt(params['id']).subscribe(res => {
+          this.profService.editDebt(params["id"]).subscribe(res => {
             this.debt = res;
           });
         });

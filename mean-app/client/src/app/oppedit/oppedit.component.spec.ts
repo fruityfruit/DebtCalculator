@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { OppeditComponent } from './oppedit.component';
+import { OppeditComponent } from "./oppedit.component";
 
-describe('OppeditComponent', () => {
+describe("OppeditComponent", () => {
   let component: OppeditComponent;
   let fixture: ComponentFixture<OppeditComponent>;
 
@@ -19,7 +19,7 @@ describe('OppeditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
