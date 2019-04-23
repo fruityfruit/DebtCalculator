@@ -54,18 +54,19 @@ export class DebtComponent implements OnInit {
     this.formdataDebt.name = this.profileFormDebt.value.name;
     this.formdataDebt.principal = this.profileFormDebt.value.principal;
     this.formdataDebt.rate = this.profileFormDebt.value.rate;
-    if (this.profileFormDebt.value.annualCompounds) {
-      this.formdataDebt.annualCompounds = this.profileFormDebt.value.annualCompounds;
-    } else {
-      this.formdataDebt.annualCompounds = 0;
-    }
-    if (this.profileFormDebt.value.monthlyPayment) {
-      this.formdataDebt.monthlyPayment = this.profileFormDebt.value.monthlyPayment;
-    } else {
-      this.formdataDebt.monthlyPayment = 0;
-    }
+    this.formdataDebt.annualCompounds = this.profileFormDebt.value.annualCompounds;
+    this.formdataDebt.monthlyPayment = this.profileFormDebt.value.monthlyPayment;
     this.formdataDebt.username = this.username;
     this.formdataDebt.opportunity = this.profileFormDebt.value.opportunity;
+    if (!this.formdataDebt.rate) {
+      this.formdataDebt.rate = 0;
+    }
+    if (!this.formdataDebt.annualCompounds) {
+      this.formdataDebt.annualCompounds = 0;
+    }
+    if (!this.formdataDebt.monthlyPayment) {
+      this.formdataDebt.monthlyPayment = 0;
+    }
     this.profService.createDebt(this.formdataDebt).subscribe(() => {
       this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
         this.debts = data["debts"];

@@ -11,13 +11,14 @@
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
             <mat-form-field appearance="standard" hintLabel="Principal Amount">
-              <input matInput type="number" class="form-control" size="56" formControlName="principal" placeholder="Initial debt amount" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
+              <input matInput matTooltip="This is the amount of money that you borrowed that you have not yet paid back. For example, if you had borrowed $1000 and had already paid back $200 of the loan amount, you would enter $800 here."
+              type="number" class="form-control" size="56" formControlName="principal" placeholder="Initial debt amount" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">
             <mat-form-field appearance="standard" hintLabel="Yearly Rate (APR)">
-              <input matInput matTooltip="For example, if your loan has an APR of 10 percent, you pay $10 per $100 you borrow annually."
+              <input matInput matTooltip="This is a variable listed in the terms of your loan. For example, if your loan has an APR of 10 percent, you pay $10 per $100 you borrow annually."
               type="number" class="form-control" size="56" formControlName="rate" placeholder="Interest rate of debt source" onkeydown="return (event.key !== 'e' && event.key !== '-')">
               <span matSuffix>&nbsp;%</span>
             </mat-form-field>
@@ -26,20 +27,22 @@
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
             <mat-form-field appearance="standard" hintLabel="Compound Frequency (Enter 0 for Simple Interest)">
-              <input matInput matTooltip="For example, enter 12 if the interest is compounded monthly."
+              <input matInput matTooltip="This is also a variable listed in the terms of your loan. For example, if the interest on your loan is compounded monthly, you would enter 12 here."
               type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Times per year that interest is compounded" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">
             <mat-form-field appearance="standard" hintLabel="Monthly Payment">
-              <input matInput type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Payment made each month" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
+              <input matInput matTooltip="This is payment that you make each month towards repaying this loan. If this number varies from month to month, just enter your average payment."
+              type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Payment made each month" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
         </div>
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <mat-form-field appearance="standard" hintLabel="Associated Opportunity">
-            <mat-select class="form-control" formControlName="opportunity" placeholder="Select an option">
+            <mat-select matTooltip='If this debt source is associated with a specific opportunity, such as a student loan or mortgage payment, please select that opportunity here. If this debt source would be present across all opportunities, such as a car payment or credit card debt, please select "All Opportunities" here.'
+            class="form-control" formControlName="opportunity" placeholder="Select an option">
               <mat-option *ngFor="let opp of oppList" [value]="opp.oppId">{{opp.oppName}}</mat-option>
             </mat-select>
           </mat-form-field>

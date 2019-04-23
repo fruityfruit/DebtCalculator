@@ -22,14 +22,16 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Miscellaneous Monthly Spending">
-              <input matInput type="number" class="form-control" formControlName="spending" placeholder="Other monthly spending" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')"
+              <input matInput matTooltip="Please include all other recurring expenses, such as insurance payments, utilities costs, gym memberships, etc."
+              type="number" class="form-control" formControlName="spending" placeholder="Other monthly spending" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')"
               #spending [(ngModel)] = "currProfile.spending">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="Current Savings">
-              <input matInput type="number" class="form-control" formControlName="savings" placeholder="Current savings total" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')"
+              <input matInput matTooltip="Please include all savings and investment accounts, but exclude all retirement accounts."
+              type="number" class="form-control" formControlName="savings" placeholder="Current savings total" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')"
               #savings [(ngModel)] = "currProfile.savings">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
@@ -37,7 +39,7 @@
         </div>
         <div class="form-group row">
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="State">
+            <mat-form-field appearance="standard" hintLabel="State Of Your Current Residence">
               <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(state._value)"
               #state [(ngModel)] = "currProfile.state">
                 <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
@@ -45,7 +47,7 @@
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field appearance="standard" hintLabel="Region">
+            <mat-form-field appearance="standard" hintLabel="Region Of Your Current Residence">
               <mat-select class="form-control" formControlName="region" placeholder="Select an option"
               #region [(ngModel)] = "currProfile.region">
                 <mat-option *ngFor="let region of regionList" [value]="region.regionCode">{{region.regionName}}</mat-option>

@@ -300,8 +300,8 @@ export class OppeditComponent implements OnInit {
         city: ["", Validators.required],
         state: ["", Validators.required],
         region: ["", Validators.required],
-        income: [0, Validators.required],
-        bonus: [0, Validators.required],
+        income: [0],
+        bonus: [0],
         move: ["", Validators.required]
       });
     }
@@ -316,15 +316,6 @@ export class OppeditComponent implements OnInit {
     });
   }
 
-  public isValid() {
-    if (this.profileForm.value.type && this.profileForm.value.name && this.profileForm.value.city && this.profileForm.value.state &&
-      this.profileForm.value.region && this.profileForm.value.move) { //income is not required
-      return true;
-    }
-    return false;
-  }
-
-
   public onSubmit() {
     this.formdata.type = this.profileForm.value.type;
     this.formdata.name = this.profileForm.value.name;
@@ -334,6 +325,12 @@ export class OppeditComponent implements OnInit {
     this.formdata.income = this.profileForm.value.income;
     this.formdata.bonus = this.profileForm.value.bonus;
     this.formdata.move = this.profileForm.value.move;
+    if (!this.formdata.income) {
+      this.formdata.income = 0;
+    }
+    if (!this.formdata.bonus) {
+      this.formdata.bonus = 0;
+    }
     this.updateOpportunity();
   }
 

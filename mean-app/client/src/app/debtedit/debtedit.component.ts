@@ -64,6 +64,15 @@ export class DebteditComponent implements OnInit {
     this.formdata.annualCompounds = this.profileForm.value.annualCompounds;
     this.formdata.monthlyPayment = this.profileForm.value.monthlyPayment;
     this.formdata.opportunity = this.profileForm.value.opportunity;
+    if (!this.formdata.rate) {
+      this.formdata.rate = 0;
+    }
+    if (!this.formdata.annualCompounds) {
+      this.formdata.annualCompounds = 0;
+    }
+    if (!this.formdata.monthlyPayment) {
+      this.formdata.monthlyPayment = 0;
+    }
     this.updateDebt();
   }
 

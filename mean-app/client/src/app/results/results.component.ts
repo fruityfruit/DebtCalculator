@@ -78,6 +78,7 @@ export class ResultsComponent implements OnInit {
           var tempDebts: Debt[] = [];
           var tempOpps: Opportunity[] = [];
           var tempIDs: string[] = [];
+          var debtsForAllOpps = 0;
           data.debts.forEach(function(entry) {
             var newDebt: Debt = {
               username: tempUsername,
@@ -88,10 +89,13 @@ export class ResultsComponent implements OnInit {
               monthlyPayment: entry.monthlyPayment,
               opportunity: entry.opportunity
             };
+            if (newDebt.opportunity === "all") {
+              debtsForAllOpps = debtsForAllOpps + 1;
+            }
             tempDebts.push(newDebt);
           });
           this.debts = tempDebts;
-          if (this.debts.length === 0) {
+          if (debtsForAllOpps === 0) {
             document.getElementById("canvas0").style.height = "0";
           }
           data.opportunities.forEach(function(entry) {

@@ -303,8 +303,8 @@ export class OpportunityComponent implements OnInit {
       city: ["", Validators.required],
       state: ["", Validators.required],
       region: ["", Validators.required],
-      income: [0, Validators.required],
-      bonus: [0, Validators.required],
+      income: [0],
+      bonus: [0],
       move: ["", Validators.required]
     });
   }
@@ -327,6 +327,12 @@ export class OpportunityComponent implements OnInit {
     this.formdata.bonus = this.profileForm.value.bonus;
     this.formdata.move = this.profileForm.value.move;
     this.formdata.username = this.username;
+    if (!this.formdata.income) {
+      this.formdata.income = 0;
+    }
+    if (!this.formdata.bonus) {
+      this.formdata.bonus = 0;
+    }
     this.oppService.addOpportunity(this.formdata).subscribe(() => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data["opportunities"];
