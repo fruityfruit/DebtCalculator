@@ -24,11 +24,7 @@ export class OpportunityComponent implements OnInit {
     region: '',
     income: 0,
     bonus: 0,
-    move: '',
-    principal: 0,
-    rate: 0,
-    annualCompounds: 0,
-    monthlyPayment: 0
+    move: ''
   };
   dataSource = new MatTableDataSource(this.opportunities);
   displayedColumns: string[] = ['name', 'city', 'state', 'income', 'edit', 'delete'];
@@ -309,18 +305,13 @@ export class OpportunityComponent implements OnInit {
       region: ['', Validators.required],
       income: [0, Validators.required],
       bonus: [0, Validators.required],
-      move: ['', Validators.required],
-      principal: [0, Validators.required],
-      rate: [0, Validators.required],
-      annualCompounds: [0, Validators.required],
-      monthlyPayment: [0, Validators.required]
+      move: ['', Validators.required]
     });
   }
 
   public isValid() {
     if (this.profileForm.value.type && this.profileForm.value.name && this.profileForm.value.city && this.profileForm.value.state &&
-      this.profileForm.value.region && this.profileForm.value.move && (this.profileForm.value.income || (this.profileForm.value.principal &&
-      this.profileForm.value.rate && this.profileForm.value.monthlyPayment && this.profileForm.value.annualCompounds))) {
+      this.profileForm.value.region && this.profileForm.value.move) { //income is not required
       return true;
     }
     return false;
@@ -335,10 +326,6 @@ export class OpportunityComponent implements OnInit {
     this.formdata.income = this.profileForm.value.income;
     this.formdata.bonus = this.profileForm.value.bonus;
     this.formdata.move = this.profileForm.value.move;
-    this.formdata.principal = this.profileForm.value.principal;
-    this.formdata.rate = this.profileForm.value.rate;
-    this.formdata.annualCompounds = this.profileForm.value.annualCompounds;
-    this.formdata.monthlyPayment = this.profileForm.value.monthlyPayment;
     this.formdata.username = this.username;
     this.oppService.addOpportunity(this.formdata).subscribe(() => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {

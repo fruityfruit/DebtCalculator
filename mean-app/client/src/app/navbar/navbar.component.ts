@@ -29,14 +29,14 @@ export class NavbarComponent implements OnInit {
       document.getElementById("link4").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link5").style.color = "rgba(255,255,255,0.6)";
       if (document.getElementById("link6")) document.getElementById("link6").style.color = "rgba(255,255,255,0.6)";
-    } else if (value === "debts") {
+    } else if (value === "opportunities") {
       document.getElementById("link1").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link2").style.color = "white";
       document.getElementById("link3").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link4").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link5").style.color = "rgba(255,255,255,0.6)";
       if (document.getElementById("link6")) document.getElementById("link6").style.color = "rgba(255,255,255,0.6)";
-    } else if (value === "opportunities") {
+    } else if (value === "debts") {
       document.getElementById("link1").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link2").style.color = "rgba(255,255,255,0.6)";
       document.getElementById("link3").style.color = "white";

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 export interface Profile {
   username: String;
@@ -19,10 +19,11 @@ export interface Debt {
   rate: number;
   annualCompounds: number;
   monthlyPayment: number;
+  opportunity: String;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ProfileService {
 
@@ -52,7 +53,8 @@ export class ProfileService {
       principal: form.principal,
       rate: form.rate,
       annualCompounds: form.annualCompounds,
-      monthlyPayment: form.monthlyPayment
+      monthlyPayment: form.monthlyPayment,
+      opportunity: form.opportunity
     };
     return this.http.post(`/api/debt`, obj);
   }
@@ -71,7 +73,8 @@ export class ProfileService {
       principal: form.principal,
       rate: form.rate,
       annualCompounds: form.annualCompounds,
-      monthlyPayment: form.monthlyPayment
+      monthlyPayment: form.monthlyPayment,
+      opportunity: form.opportunity
     };
     return this.http.post(`/api/debt/edit/${id}`, obj);
   }

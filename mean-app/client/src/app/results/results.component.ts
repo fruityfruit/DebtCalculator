@@ -68,7 +68,7 @@ export class ResultsComponent implements OnInit {
       this.profile.rent = data.rent;
       this.profile.spending = data.spending;
       this.profile.savings = data.savings;
-      if (!(this.profile.username && this.profile.state && this.profile.region && this.profile.groceries && this.profile.rent && this.profile.spending && this.profile.savings)) {
+      if (!(this.profile.username && this.profile.state && this.profile.region && (this.profile.groceries >= 0) && (this.profile.rent >= 0) && (this.profile.spending >= 0) && (this.profile.savings >= 0))) {
         this.alerts.open("Please fill out the Profile page before accessing this page.");
         window.localStorage.setItem('profile-snackbar', "true");
         this.router.navigateByUrl('/personal');
@@ -85,7 +85,8 @@ export class ResultsComponent implements OnInit {
               principal: entry.principal,
               rate: entry.rate,
               annualCompounds: entry.annualCompounds,
-              monthlyPayment: entry.monthlyPayment
+              monthlyPayment: entry.monthlyPayment,
+              opportunity: entry.opportunity
             };
             tempDebts.push(newDebt);
           });
@@ -103,11 +104,7 @@ export class ResultsComponent implements OnInit {
               region: entry.region,
               income: entry.income,
               bonus: entry.bonus,
-              move: entry.move,
-              principal: entry.principal,
-              rate: entry.rate,
-              annualCompounds: entry.annualCompounds,
-              monthlyPayment: entry.monthlyPayment
+              move: entry.move
             };
             tempOpps.push(newOpp);
             tempIDs.push(entry._id);
@@ -272,45 +269,47 @@ export class ResultsComponent implements OnInit {
     var debtCount = 0;
     var title = "Projected Debt Over " + (labels.length - 1) + " Months";
     while (debtCount < this.debts.length) {
-      var points = [];
-      debtNames.push(this.debts[debtCount].name);
-      var currentPrincipal = this.debts[debtCount].principal;
-      var pointCount = 0;
-      if (this.debts[debtCount].annualCompounds <= 0) { //simple interest
-        var currentInterest = 0;
-        var sum = currentInterest + currentPrincipal;
-        var rateMultiplier = (this.debts[debtCount].rate / 1200);
-        while (pointCount < labels.length) {
-          if (sum < 0) {
-            points.push(0);
-            break;
+      if (this.debts[debtCount].opportunity==="all") {
+        var points = [];
+        debtNames.push(this.debts[debtCount].name);
+        var currentPrincipal = this.debts[debtCount].principal;
+        var pointCount = 0;
+        if (this.debts[debtCount].annualCompounds <= 0) { //simple interest
+          var currentInterest = 0;
+          var sum = currentInterest + currentPrincipal;
+          var rateMultiplier = (this.debts[debtCount].rate / 1200);
+          while (pointCount < labels.length) {
+            if (sum < 0) {
+              points.push(0);
+              break;
+            }
+            points.push(sum);
+            currentInterest = currentInterest + (currentPrincipal * rateMultiplier);
+            if (currentInterest < this.debts[debtCount].monthlyPayment) {
+              currentPrincipal = currentPrincipal - (this.debts[debtCount].monthlyPayment - currentInterest);
+              currentInterest = 0;
+            } else {
+              currentInterest = currentInterest - this.debts[debtCount].monthlyPayment;
+            }
+            sum = currentPrincipal + currentInterest;
+            pointCount = pointCount + 1;
           }
-          points.push(sum);
-          currentInterest = currentInterest + (currentPrincipal * rateMultiplier);
-          if (currentInterest < this.debts[debtCount].monthlyPayment) {
-            currentPrincipal = currentPrincipal - (this.debts[debtCount].monthlyPayment - currentInterest);
-            currentInterest = 0;
-          } else {
-            currentInterest = currentInterest - this.debts[debtCount].monthlyPayment;
+        } else { //compound interest
+          var rateMultiplier = 1 + ((this.debts[debtCount].rate / 100) / this.debts[debtCount].annualCompounds);
+          rateMultiplier = Math.pow(rateMultiplier,(this.debts[debtCount].annualCompounds / 12));
+          while (pointCount < labels.length) {
+            if (currentPrincipal < 0) {
+              points.push(0);
+              break;
+            }
+            points.push(currentPrincipal);
+            currentPrincipal = currentPrincipal * rateMultiplier;
+            currentPrincipal = currentPrincipal - this.debts[debtCount].monthlyPayment;
+            pointCount = pointCount + 1;
           }
-          sum = currentPrincipal + currentInterest;
-          pointCount = pointCount + 1;
         }
-      } else { //compound interest
-        var rateMultiplier = 1 + ((this.debts[debtCount].rate / 100) / this.debts[debtCount].annualCompounds);
-        rateMultiplier = Math.pow(rateMultiplier,(this.debts[debtCount].annualCompounds / 12));
-        while (pointCount < labels.length) {
-          if (currentPrincipal < 0) {
-            points.push(0);
-            break;
-          }
-          points.push(currentPrincipal);
-          currentPrincipal = currentPrincipal * rateMultiplier;
-          currentPrincipal = currentPrincipal - this.debts[debtCount].monthlyPayment;
-          pointCount = pointCount + 1;
-        }
+        debtProjectionPoints.push(points);
       }
-      debtProjectionPoints.push(points);
       debtCount = debtCount + 1;
     }
     this.debtProjection = new Chart('canvas0', {
@@ -375,7 +374,7 @@ export class ResultsComponent implements OnInit {
       }
     });
     debtCount = 0;
-    while (debtCount < this.debts.length) {
+    while (debtCount < debtNames.length) {
       var newSeries = {
         label: debtNames[debtCount],
         data: debtProjectionPoints[debtCount],
@@ -391,13 +390,13 @@ export class ResultsComponent implements OnInit {
       debtCount = debtCount + 1;
     }
     this.debtProjection.update();
-    if (this.debts.length > 1) { //create total debt
+    if (debtNames.length > 1) { //create total debt
       var totalPoints = [];
       var pointCount = 0;
       while (pointCount < labels.length) {
         var addedDebt = 0;
         var newDebtCount = 0;
-        while (newDebtCount < this.debts.length) {
+        while (newDebtCount < debtProjectionPoints.length) {
           if (debtProjectionPoints[newDebtCount].length > pointCount) {
             addedDebt = addedDebt + debtProjectionPoints[newDebtCount][pointCount];
           }
@@ -429,26 +428,39 @@ export class ResultsComponent implements OnInit {
     while (pointCount < labels.length - 1) {
       var debtCount = 0;
       var monthlyDebtPayment = 0;
-      while (debtCount < this.debts.length) {
+      if (this.debtProjection.data['datasets'].length > 1) { //total debts is included, so we must exclude it
+        while (debtCount < this.debtProjection.data['datasets'].length - 1) {
+          //console.log("debtCount: "+debtCount);
+          var thisMonth = this.debtProjection.data['datasets'][debtCount].data[pointCount];
+          var nextMonth = this.debtProjection.data['datasets'][debtCount].data[pointCount + 1];
+          if (thisMonth && nextMonth) {
+            monthlyDebtPayment = monthlyDebtPayment + (thisMonth - nextMonth);
+          }
+          debtCount = debtCount + 1;
+        }
+      } else if (this.debtProjection.data['datasets'].length === 1) { //only one debt is present, so only have to do the process once
         var thisMonth = this.debtProjection.data['datasets'][debtCount].data[pointCount];
         var nextMonth = this.debtProjection.data['datasets'][debtCount].data[pointCount + 1];
         if (thisMonth && nextMonth) {
-          monthlyDebtPayment = monthlyDebtPayment + (nextMonth - thisMonth);
+          monthlyDebtPayment = monthlyDebtPayment + (thisMonth - nextMonth);
         }
-        debtCount = debtCount + 1;
       }
       monthlyDebtPayments.push(monthlyDebtPayment);
       pointCount = pointCount + 1;
     }
     //the last point in the graph has no next point, so we have to calculate its debt payment differently
     var debtCount = 0;
+    var includedDebtCount = 0;
     var monthlyDebtPayment = 0;
     while (debtCount < this.debts.length) {
-      var owedAmount = this.debtProjection.data['datasets'][debtCount].data[pointCount];
-      if (owedAmount > this.debts[debtCount].monthlyPayment) {
-        monthlyDebtPayment = monthlyDebtPayment + this.debts[debtCount].monthlyPayment;
-      } else {
-        monthlyDebtPayment = monthlyDebtPayment + owedAmount;
+      if (this.debts[debtCount].opportunity==="all") {
+        var owedAmount = this.debtProjection.data['datasets'][includedDebtCount].data[pointCount];
+        if (owedAmount && owedAmount > this.debts[debtCount].monthlyPayment) {
+          monthlyDebtPayment = monthlyDebtPayment + this.debts[debtCount].monthlyPayment;
+        } else if (owedAmount) {
+          monthlyDebtPayment = monthlyDebtPayment + owedAmount;
+        }
+        includedDebtCount = includedDebtCount + 1;
       }
       debtCount = debtCount + 1;
     }
@@ -458,47 +470,67 @@ export class ResultsComponent implements OnInit {
     var oppCount = 0;
     while (oppCount < this.opportunities.length) {
       var points = [];
-      var currentPrincipal = this.opportunities[oppCount].principal;
-      var pointCount = 0;
-      if (this.opportunities[oppCount].annualCompounds <= 0) { //simple interest
-        var currentInterest = 0;
-        var sum = currentInterest + currentPrincipal;
-        var rateMultiplier = (this.opportunities[oppCount].rate / 1200);
-        while (pointCount < labels.length) {
-          if (sum < 0) {
-            points.push(0);
-          } else if (sum < this.opportunities[oppCount].monthlyPayment) {
-            points.push(sum);
-          } else {
-            points.push(this.opportunities[oppCount].monthlyPayment);
+      debtCount = 0;
+      while (debtCount < this.debts.length) {
+        if (this.debts[debtCount].opportunity === this.opportunityIDs[oppCount]) {
+          var pointsForThisDebt = [];
+          //this debt applies to this opportunity
+          var currentPrincipal = this.debts[debtCount].principal;
+          var pointCount = 0;
+          if (this.debts[debtCount].annualCompounds <= 0) { //simple interest
+            var currentInterest = 0;
+            var sum = currentInterest + currentPrincipal;
+            var rateMultiplier = (this.debts[debtCount].rate / 1200);
+            while (pointCount < labels.length) {
+              if (sum < 0) {
+                pointsForThisDebt.push(0);
+              } else if (sum < this.debts[debtCount].monthlyPayment) {
+                pointsForThisDebt.push(sum);
+              } else {
+                pointsForThisDebt.push(this.debts[debtCount].monthlyPayment);
+              }
+              currentInterest = currentInterest + (currentPrincipal * rateMultiplier);
+              if (currentInterest < this.debts[debtCount].monthlyPayment) {
+                currentPrincipal = currentPrincipal - (this.debts[debtCount].monthlyPayment - currentInterest);
+                currentInterest = 0;
+              } else {
+                currentInterest = currentInterest - this.debts[debtCount].monthlyPayment;
+              }
+              sum = currentPrincipal + currentInterest;
+              pointCount = pointCount + 1;
+            }
+          } else { //compound interest
+            var rateMultiplier = 1 + ((this.debts[debtCount].rate / 100) / this.debts[debtCount].annualCompounds);
+            rateMultiplier = Math.pow(rateMultiplier,(this.debts[debtCount].annualCompounds / 12));
+            while (pointCount < labels.length) {
+              if (currentPrincipal < 0) {
+                pointsForThisDebt.push(0);
+              } else if (currentPrincipal < this.debts[debtCount].monthlyPayment) {
+                pointsForThisDebt.push(currentPrincipal);
+              } else {
+                pointsForThisDebt.push(this.debts[debtCount].monthlyPayment);
+              }
+              currentPrincipal = currentPrincipal * rateMultiplier;
+              currentPrincipal = currentPrincipal - this.debts[debtCount].monthlyPayment;
+              pointCount = pointCount + 1;
+            }
           }
-          currentInterest = currentInterest + (currentPrincipal * rateMultiplier);
-          if (currentInterest < this.opportunities[oppCount].monthlyPayment) {
-            currentPrincipal = currentPrincipal - (this.opportunities[oppCount].monthlyPayment - currentInterest);
-            currentInterest = 0;
-          } else {
-            currentInterest = currentInterest - this.opportunities[oppCount].monthlyPayment;
-          }
-          sum = currentPrincipal + currentInterest;
-          pointCount = pointCount + 1;
+          points.push(pointsForThisDebt);
         }
-      } else { //compound interest
-        var rateMultiplier = 1 + ((this.opportunities[oppCount].rate / 100) / this.opportunities[oppCount].annualCompounds);
-        rateMultiplier = Math.pow(rateMultiplier,(this.opportunities[oppCount].annualCompounds / 12));
-        while (pointCount < labels.length) {
-          if (currentPrincipal < 0) {
-            points.push(0);
-          } else if (currentPrincipal < this.opportunities[oppCount].monthlyPayment) {
-            points.push(currentPrincipal);
-          } else {
-            points.push(this.opportunities[oppCount].monthlyPayment);
-          }
-          currentPrincipal = currentPrincipal * rateMultiplier;
-          currentPrincipal = currentPrincipal - this.opportunities[oppCount].monthlyPayment;
-          pointCount = pointCount + 1;
-        }
+        debtCount = debtCount + 1;
       }
-      monthlyOppPayments.push(points);
+      //TODO condense points into one array
+      var combinedPoints = [];
+      for (var i = 0; i < labels.length; ++i) {
+        var totalOppDebt = 0;
+        for (var j = 0; j < points.length; ++j) {
+          if (points[j][i] > 0) {
+            totalOppDebt = totalOppDebt + points[j][i];
+          }
+        }
+        combinedPoints.push(totalOppDebt);
+      }
+      monthlyOppPayments.push(combinedPoints);
       oppCount = oppCount + 1;
     }
     //how much would groceries, rent, and spending cost in each opportunity
@@ -528,6 +560,9 @@ export class ResultsComponent implements OnInit {
       oppProjectionPoints.push(savingsByMonth);
       oppCount = oppCount + 1;
     }
+    console.log(monthlyOppPayments);
+    console.log(monthlyDebtPayments);
+    console.log(oppProjectionPoints);
     this.netIncome = new Chart('canvas1', {
       animationEnabled: true,
       type: 'line',

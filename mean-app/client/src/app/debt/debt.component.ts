@@ -3,6 +3,7 @@ import {MatTableDataSource} from '@angular/material';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { ProfileService, Debt } from '../profile.service';
+import { OpportunityService, ShortOpportunity } from '../opportunity.service';
 import { Router } from '@angular/router';
 import { SnackbaralertService } from '../snackbaralert.service';
 
@@ -20,27 +21,30 @@ export class DebtComponent implements OnInit {
     principal: 0,
     rate: 0,
     annualCompounds: 0,
-    monthlyPayment: 0
+    monthlyPayment: 0,
+    opportunity: ''
   };
   debts: Debt[];
+  opportunities: ShortOpportunity[];
   dataSource = new MatTableDataSource(this.debts);
+  oppList = [];
   displayedColumns: string[] = ['name', 'principal', 'rate', 'monthlypayment', 'edit', 'delete'];
 
   constructor(private builder: FormBuilder, private router: Router,
     private auth: AuthenticationService, private profService: ProfileService,
-    private alerts: SnackbaralertService) {
+    private alerts: SnackbaralertService, private oppService: OpportunityService) {
     this.profileFormDebt = this.builder.group({
       name: ['', Validators.required],
       principal: [0, Validators.required],
-      rate: [0, Validators.required],
-      annualCompounds: [0, Validators.required],
-      monthlyPayment: [0, Validators.required]
+      rate: [0],
+      annualCompounds: [0],
+      monthlyPayment: [0],
+      opportunity: ['', Validators.required]
     });
   }
 
   public isValid() {
-    if (this.profileFormDebt.value.name && this.profileFormDebt.value.principal && this.profileFormDebt.value.rate
-    && this.profileFormDebt.value.annualCompounds && this.profileFormDebt.value.monthlyPayment) {
+    if (this.profileFormDebt.value.name && this.profileFormDebt.value.principal && this.profileFormDebt.value.opportunity) {
       return true;
     }
     return false;
@@ -61,6 +65,7 @@ export class DebtComponent implements OnInit {
       this.formdataDebt.monthlyPayment = 0;
     }
     this.formdataDebt.username = this.username;
+    this.formdataDebt.opportunity = this.profileFormDebt.value.opportunity;
     this.profService.createDebt(this.formdataDebt).subscribe(() => {
       this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
         this.debts = data['debts'];
@@ -100,9 +105,24 @@ export class DebtComponent implements OnInit {
       window.localStorage.setItem('profile-snackbar', "true");
       this.router.navigateByUrl('/personal');
     } else {
-      this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
-        this.debts = data['debts'];
-        this.dataSource.data = this.debts;
+      this.oppService.getShortOpps(this.username).subscribe((data: ShortOpportunity[]) => {
+        this.opportunities = data['opportunities'];
+        var selectAll = {
+          oppId:"all",
+          oppName:"Select All"
+        }
+        this.oppList.push(selectAll);
+        for (var i = 0; i < this.opportunities.length; ++i) {
+          var opp = {
+            oppId:this.opportunities[i]._id,
+            oppName:this.opportunities[i].name
+          }
+          this.oppList.push(opp);
+        }
+        this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
+          this.debts = data['debts'];
+          this.dataSource.data = this.debts;
+        });
       });
     }
   }

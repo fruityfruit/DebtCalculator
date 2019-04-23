@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 export interface ResultSet {
   oppName: String;
@@ -15,7 +15,7 @@ export interface ResultSetOpp {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ResultService {
   constructor(private http: HttpClient) { }

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 export interface Opportunity {
   username: String;
@@ -12,14 +12,15 @@ export interface Opportunity {
   income: number;
   bonus: number;
   move: String;
-  principal: number;
-  rate: number;
-  annualCompounds: number;
-  monthlyPayment: number;
+}
+
+export interface ShortOpportunity {
+  _id: String;
+  name: String;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 
 export class OpportunityService {
@@ -35,17 +36,17 @@ export class OpportunityService {
       region: form.region,
       income: form.income,
       bonus: form.bonus,
-      move: form.move,
-      principal: form.principal,
-      rate: form.rate,
-      annualCompounds: form.annualCompounds,
-      monthlyPayment: form.monthlyPayment
+      move: form.move
     };
     return this.http.post(`/api/opportunity`, obj);
   }
 
   public getOpportunities(username: String) {
     return this.http.get(`/api/opportunity/${username}`);
+  }
+
+  public getShortOpps(username: String) {
+    return this.http.get(`/api/opportunity/short/${username}`);
   }
 
   public editOpportunity(id: String) {
@@ -61,11 +62,7 @@ export class OpportunityService {
       region: form.region,
       income: form.income,
       bonus: form.bonus,
-      move: form.move,
-      principal: form.principal,
-      rate: form.rate,
-      annualCompounds: form.annualCompounds,
-      monthlyPayment: form.monthlyPayment
+      move: form.move
     };
     return this.http.post(`/api/opportunity/edit/${id}`, obj);
   }

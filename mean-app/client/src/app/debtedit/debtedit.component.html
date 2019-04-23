@@ -40,6 +40,14 @@
             </mat-form-field>
           </div>
         </div>
+        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+          <mat-form-field appearance="standard" hintLabel="Associated Opportunity">
+            <mat-select class="form-control" formControlName="opportunity" placeholder="Select an option"
+            #opportunity [(ngModel)] = "debt.opportunity">
+              <mat-option *ngFor="let opp of oppList" [value]="opp.oppId">{{opp.oppName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <div class="form-group row">
           <div class="col">
             <button type="submit" mat-raised-button [disabled]="!profileForm.valid">Update</button>

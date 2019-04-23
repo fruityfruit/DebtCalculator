@@ -1,51 +1,53 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 const router = express.Router();
 
 // Controllers
-var ctrlAuth = require('../controllers/authentication'); //authentication
-var ctrlOpp = require('../controllers/opportunity'); //opportunity page
-var ctrlProfile = require('../controllers/profile'); //profile page
-var ctrlResult = require('../controllers/result'); //results page
+var ctrlAuth = require("../controllers/authentication"); //authentication
+var ctrlOpp = require("../controllers/opportunity"); //opportunity page
+var ctrlProfile = require("../controllers/profile"); //profile and debt pages
+var ctrlResult = require("../controllers/result"); //results page
 
-router.post('/register', ctrlAuth.register);
+router.post("/register", ctrlAuth.register);
 
-router.post('/signin', ctrlAuth.signin);
+router.post("/signin", ctrlAuth.signin);
 
-router.post('/username', ctrlAuth.updateUsername);
+router.post("/username", ctrlAuth.updateUsername);
 
-router.post('/password', ctrlAuth.updatePassword);
+router.post("/password", ctrlAuth.updatePassword);
 
-router.post('/delete', ctrlAuth.deleteUser);
+router.post("/delete", ctrlAuth.deleteUser);
 
-router.post('/opportunity', ctrlOpp.createOpp);
+router.post("/opportunity", ctrlOpp.createOpp);
 
-router.get('/opportunity/:username', ctrlOpp.getOpps);
+router.get("/opportunity/:username", ctrlOpp.getOpps);
 
-router.get('/opportunity/edit/:id', ctrlOpp.editOpp);
+router.get("/opportunity/short/:username", ctrlOpp.getShortOpps);
 
-router.post('/opportunity/edit/:id', ctrlOpp.updateOpp);
+router.get("/opportunity/edit/:id", ctrlOpp.editOpp);
 
-router.get('/opportunity/delete/:username/:id', ctrlOpp.deleteOpp);
+router.post("/opportunity/edit/:id", ctrlOpp.updateOpp);
 
-router.post('/personal', ctrlProfile.updateProfile);
+router.get("/opportunity/delete/:username/:id", ctrlOpp.deleteOpp);
 
-router.get('/personal/:username', ctrlProfile.getProfile);
+router.post("/personal", ctrlProfile.updateProfile);
 
-router.post('/debt', ctrlProfile.createDebt);
+router.get("/personal/:username", ctrlProfile.getProfile);
 
-router.get('/debt/:username', ctrlProfile.getDebts);
+router.post("/debt", ctrlProfile.createDebt);
 
-router.get('/debt/edit/:id', ctrlProfile.editDebt);
+router.get("/debt/:username", ctrlProfile.getDebts);
 
-router.post('/debt/edit/:id', ctrlProfile.updateDebt);
+router.get("/debt/edit/:id", ctrlProfile.editDebt);
 
-router.get('/debt/delete/:username/:id', ctrlProfile.deleteDebt);
+router.post("/debt/edit/:id", ctrlProfile.updateDebt);
 
-router.get('/zillow/:id', ctrlResult.getZillow);
+router.get("/debt/delete/:username/:id", ctrlProfile.deleteDebt);
 
-router.get('/charts/:username', ctrlResult.getCharts);
+router.get("/zillow/:id", ctrlResult.getZillow);
 
-router.post('/bls', ctrlResult.getBLS);
+router.get("/charts/:username", ctrlResult.getCharts);
+
+router.post("/bls", ctrlResult.getBLS);
 
 module.exports = router;

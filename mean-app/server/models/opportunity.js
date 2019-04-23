@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 var opportunitySchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -10,18 +10,14 @@ var opportunitySchema = new mongoose.Schema({
   income: Number,
   bonus: Number,
   move: String,
-  principal: Number,
-  rate: Number,
-  annualCompounds: Number,
-  monthlyPayment: Number,
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User"
   }
 },
 {
-    collection: 'opportunities'
+    collection: "opportunities"
 });
 
-// create the mongoose model Opportunity for the rest of the app to see
-mongoose.model('Opportunity', opportunitySchema);
+//export the mongoose model Opportunity for the rest of the app to see
+mongoose.model("Opportunity", opportunitySchema);

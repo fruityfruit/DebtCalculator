@@ -1,14 +1,16 @@
-var mongoose = require('mongoose');
-var User = mongoose.model('User'); //User schema from ../models/user.js
-var Debt = mongoose.model('Debt'); //Debt schema from ../models/debt.js
+var mongoose = require("mongoose");
+var User = mongoose.model("User"); //User schema from ../models/user.js
+var Debt = mongoose.model("Debt"); //Debt schema from ../models/debt.js
 
-//update the profile of an existing user
+/*
+  This function updates the profile of an existing user.
+*/
 module.exports.updateProfile = function(req, res) {
-  User.findOne({username: req.body.username}, function(err, user) { //finds the user
+  User.findOne({ username: req.body.username }, function(err, user) { //finds the user
     if (err) {
       res.status(400).send(err);
     } else if (!user) {
-      res.status(400).send("unable to find the user");
+      res.status(400).send("Unable to find the user");
     } else {
       user.state = req.body.state;
       user.region = req.body.region;
@@ -18,102 +20,113 @@ module.exports.updateProfile = function(req, res) {
       user.savings = req.body.savings;
       user.save() //save user's profile to database
         .then(user => {
-          res.status(200).json('user updated successfully');
+          res.status(200).json("User updated successfully");
         })
         .catch(err => {
-          res.status(400).send("unable to save to database");
+          res.status(400).send("Unable to save to database");
         });
     }
   });
 };
 
-//gets the profile data associated with the user
+/*
+  This function gets the profile data associated with the user.
+*/
 module.exports.getProfile = function(req, res) {
-  User.findOne({username: req.params.username}, function(err, user) { //finds the user
+  User.findOne({ username: req.params.username }, function(err, user) { //finds the user
     if (err) {
       res.status(400).send(err);
     } else if (!user) {
-      res.status(400).send("unable to find the user");
-    } else {
+      res.status(400).send("Unable to find the user");
+    } else { //return the entire user schema
       res.status(200).json(user);
     }
   });
 };
 
-//adds a debt to the user's profile
+/*
+  This function adds a debt to the user's profile.
+*/
 module.exports.createDebt = function(req, res) {
-  var debt = new Debt();
+  var debt = new Debt(); //create a new instance of the debt schema
   debt._id = new mongoose.Types.ObjectId();
   debt.name = req.body.name;
   debt.principal = req.body.principal;
   debt.rate = req.body.rate;
   debt.annualCompounds = req.body.annualCompounds;
   debt.monthlyPayment = req.body.monthlyPayment;
-  //adds the debt to the user
-  User.findOneAndUpdate({username: req.body.username}, {$push: {debts: debt._id}}, function(err, user) {
+  debt.opportunity = req.body.opportunity;
+  //adds the debt to the user in the database
+  User.findOneAndUpdate({ username: req.body.username }, { $push: { debts: debt._id } }, function(err, user) {
     if (err) {
       res.status(400).send(err);
     } else if (!user) {
-      res.status(400).send("unable to find the user");
+      res.status(400).send("Unable to find the user");
     } else {
       debt.user = user._id;
-      //save opportunity to database
-      debt.save()
+      debt.save() //saves the debt to database
         .then(debt => {
-          res.status(200).json('debt added successfully');
+          res.status(200).json("Debt added successfully");
         })
         .catch(err => {
-          res.status(400).send("unable to save debt to database");
+          res.status(400).send("Unable to save debt to database");
         });
     }
   });
 };
 
-//returns all of the debts associated with a user profile
+/*
+  This function returns all of the debts associated with a user's profile.
+*/
 module.exports.getDebts = function(req, res) {
   User.
-    findOne({username: req.params.username}). //finds the user in question
-    populate('debts'). //populates user's debts
+    findOne({ username: req.params.username }). //finds the user
+    populate("debts"). //populates the user's debts
     exec(function(err, user) {
       if (err) {
         res.status(400).send(err);
       } else if (!user) {
-        res.status(400).send("unable to find the user");
-      } else {
-        res.status(200).json({'debts': user.debts});
+        res.status(400).send("Unable to find the user");
+      } else { //return the user's debts
+        res.status(200).json({"debts": user.debts});
       }
     });
 };
 
-//gets one debt for editting purposes
+/*
+  This function gets one specific debt for editing purposes.
+*/
 module.exports.editDebt = function(req, res) {
   Debt.findById(req.params.id, function(err, debt) { //finds the debt
     if (err) {
       res.status(400).send(err);
     } else if (!debt) {
-      res.status(400).send("unable to find the debt");
-    } else {
+      res.status(400).send("Unable to find the debt");
+    } else { //returns the debt
       res.status(200).json(debt);
     }
   });
 };
 
-//saves a previously created debt
+/*
+  This function updates a previously created debt.
+*/
 module.exports.updateDebt = function(req, res) {
   Debt.findById(req.params.id, function(err, debt) { //finds the debt
     if (err) {
       res.status(400).send(err);
     } else if (!debt) {
-      res.status(400).send("unable to find the debt");
+      res.status(400).send("Unable to find the debt");
     } else {
       debt.name = req.body.name;
       debt.principal = req.body.principal;
       debt.rate = req.body.rate;
       debt.annualCompounds = req.body.annualCompounds;
       debt.monthlyPayment = req.body.monthlyPayment;
-      debt.save()
+      debt.opportunity = req.body.opportunity;
+      debt.save() //saves the debt to the database
         .then(debt => {
-          res.status(200).json('Update complete');
+          res.status(200).json("Update complete");
         })
         .catch(err => {
           res.status(400).send("Unable to update the database");
@@ -122,23 +135,25 @@ module.exports.updateDebt = function(req, res) {
   });
 };
 
-//deletes a debt and the entry for it in its corresponding user
+/*
+This function deletes both a debt instance and the reference to that debt in the user that owns it.
+The reference is deleted first, then the unattached debt is removed.
+*/
 module.exports.deleteDebt = function(req, res) {
-  //finds the user that owns the debt and removes the debt from that user
-  User.findOneAndUpdate({username: req.params.username}, {$pull: {debts: req.params.id}}, function(err, user) {
+  //finds the user that owns the debt and removes the debt from them
+  User.findOneAndUpdate({ username: req.params.username }, { $pull: { debts: req.params.id } }, function(err, user) {
     if (err) {
       res.status(400).send(err);
     } else if (!user) {
-      res.status(400).send("unable to find the user");
+      res.status(400).send("Unable to find the user");
     } else {
-      //deletes the debt itself from the database
-      Debt.findByIdAndRemove({_id: req.params.id}, function(err, debt) {
+      Debt.findByIdAndRemove({ _id: req.params.id }, function(err, debt) { //deletes the debt itself from the database
         if (err) {
           res.status(400).send(err);
         } else if (!debt) {
-          res.status(400).send("unable to find the debt");
+          res.status(400).send("Unable to find the debt");
         } else {
-          res.status(200).json('Successfully deleted');
+          res.status(200).json("Successfully deleted");
         }
       });
     }

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ProfileService, Debt } from '../profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
+import { OpportunityService, ShortOpportunity } from '../opportunity.service';
+import { SnackbaralertService } from '../snackbaralert.service';
 
 @Component({
   selector: 'app-debtedit',
@@ -10,6 +12,7 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./debtedit.component.css']
 })
 export class DebteditComponent implements OnInit {
+  username: String;
   debt: any = {};
   profileForm: FormGroup;
   formdata: Debt = {
@@ -18,19 +21,22 @@ export class DebteditComponent implements OnInit {
     principal: 0,
     rate: 0,
     annualCompounds: 0,
-    monthlyPayment: 0
+    monthlyPayment: 0,
+    opportunity: ''
   }
+  oppList = [];
 
   constructor(private activatedRouter: ActivatedRoute,
     private router: Router, private auth: AuthenticationService,
-    private profService: ProfileService,
-    private builder: FormBuilder) {
+    private profService: ProfileService, private builder: FormBuilder,
+    private oppService: OpportunityService, private alerts: SnackbaralertService) {
       this.profileForm = this.builder.group({
         name: ['', Validators.required],
-        principal: ['', Validators.required],
-        rate: ['', Validators.required],
-        annualCompounds: ['', Validators.required],
-        monthlyPayment: ['', Validators.required]
+        principal: [0, Validators.required],
+        rate: [0, Validators.required],
+        annualCompounds: [0, Validators.required],
+        monthlyPayment: [0, Validators.required],
+        opportunity: ['', Validators.required]
       });
   }
 
@@ -50,16 +56,37 @@ export class DebteditComponent implements OnInit {
     this.formdata.rate = this.profileForm.value.rate;
     this.formdata.annualCompounds = this.profileForm.value.annualCompounds;
     this.formdata.monthlyPayment = this.profileForm.value.monthlyPayment;
+    this.formdata.opportunity = this.profileForm.value.opportunity;
     this.updateDebt();
   }
 
   ngOnInit() {
     this.auth.callUpdateColor("other");
-    this.activatedRouter.params.subscribe(params => {
-      this.profService.editDebt(params['id']).subscribe(res => {
-        this.debt = res;
+    this.username = this.auth.getUsername();
+    if (this.username === null) {
+      this.alerts.open('Please fill out the Profile page before accessing this page.');
+      window.localStorage.setItem('profile-snackbar', "true");
+      this.router.navigateByUrl('/personal');
+    } else {
+      this.oppService.getShortOpps(this.username).subscribe((data: ShortOpportunity[]) => {
+        var selectAll = {
+          oppId:"all",
+          oppName:"Select All"
+        }
+        this.oppList.push(selectAll);
+        for (var i = 0; i < data['opportunities'].length; ++i) {
+          var opp = {
+            oppId:data['opportunities'][i]._id,
+            oppName:data['opportunities'][i].name
+          }
+          this.oppList.push(opp);
+        }
+        this.activatedRouter.params.subscribe(params => {
+          this.profService.editDebt(params['id']).subscribe(res => {
+            this.debt = res;
+          });
+        });
       });
-    });
+    }
   }
-
 }

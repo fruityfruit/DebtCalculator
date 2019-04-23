@@ -1,83 +1,83 @@
-import 'hammerjs'; //needed for deployment
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppComponent } from './app.component';
-import { OpportunityComponent } from './opportunity/opportunity.component';
-import { PersonalComponent } from './personal/personal.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ResultsComponent } from './results/results.component';
-import { InfoComponent } from './info/info.component';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { SigninComponent } from './signin/signin.component';
-import { OppeditComponent } from './oppedit/oppedit.component';
-import { AuthenticationService } from './authentication.service';
-import { OpportunityService } from './opportunity.service';
-import { ResultService } from './result.service';
-import { ProfileService } from './profile.service';
-import { AccountComponent } from './account/account.component';
+import "hammerjs"; //needed for deployment
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule }    from "@angular/common/http";
+import { ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { AppComponent } from "./app.component";
+import { OpportunityComponent } from "./opportunity/opportunity.component";
+import { PersonalComponent } from "./personal/personal.component";
+import { NavbarComponent } from "./navbar/navbar.component";
+import { ResultsComponent } from "./results/results.component";
+import { InfoComponent } from "./info/info.component";
+import { HomeComponent } from "./home/home.component";
+import { RegisterComponent } from "./register/register.component";
+import { SigninComponent } from "./signin/signin.component";
+import { OppeditComponent } from "./oppedit/oppedit.component";
+import { AuthenticationService } from "./authentication.service";
+import { OpportunityService } from "./opportunity.service";
+import { ResultService } from "./result.service";
+import { ProfileService } from "./profile.service";
+import { AccountComponent } from "./account/account.component";
 import {MatSidenavModule, MatTableModule, MatFormFieldModule, MatInputModule,
         MatSelectModule, MatIconModule, MatButtonModule,
-        MatSnackBarModule, MatCardModule, MatTooltipModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { DebteditComponent } from './debtedit/debtedit.component';
-import { DebtComponent } from './debt/debt.component';
+        MatSnackBarModule, MatCardModule, MatTooltipModule} from "@angular/material";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { DebteditComponent } from "./debtedit/debtedit.component";
+import { DebtComponent } from "./debt/debt.component";
 
 // Define the routes
 const ROUTES = [
   {
-    path: '',
+    path: "",
     component: HomeComponent
   },
   {
-    path: 'register',
+    path: "register",
     component: RegisterComponent
   },
   {
-    path: 'signin',
+    path: "signin",
     component: SigninComponent
   },
   {
-    path: 'info',
+    path: "info",
     component: InfoComponent
   },
   {
-    path: 'opportunity',
+    path: "opportunity",
     component: OpportunityComponent
   },
   {
-    path: 'edit/:id',
+    path: "edit/:id",
     component: OppeditComponent
   },
   {
-    path: 'debt',
+    path: "debt",
     component: DebtComponent
   },
   {
-    path: 'debtedit/:id',
+    path: "debtedit/:id",
     component: DebteditComponent
   },
   {
-    path: 'personal',
+    path: "personal",
     component: PersonalComponent
   },
   {
-    path: 'results',
+    path: "results",
     component: ResultsComponent
   },
   {
-    path: 'account',
+    path: "account",
     component: AccountComponent
   },
   {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
+    path: "**",
+    redirectTo: "",
+    pathMatch: "full"
   }
 ];
 
