@@ -56,7 +56,7 @@ Now you can go to http://localhost:4200/ to see it in action!
 
 ## Testing our project
 
-So far, we are using the following testing frameworks:
+We are using the following testing frameworks:
 
 ### Behavioral testing with Cypress
 
@@ -75,11 +75,16 @@ Then
 ```
 npm test
 ```
+
 ### Frontend unit testing with Karma and Jasmine
 
 To run our frontend tests, navigate to the "mean-app/client" directory of our project in a terminal window and type:
 ```
-ng test
+npm install
+```
+Then
+```
+npm test
 ```
 
 ## Deploying our project
@@ -123,10 +128,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-### Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ### Further help
 
