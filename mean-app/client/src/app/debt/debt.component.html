@@ -17,7 +17,8 @@
           </div>
           <div class="col-md-6" style="padding-right: 0px">
             <mat-form-field appearance="standard" hintLabel="Yearly Rate (APR)">
-              <input matInput type="number" class="form-control" size="56" formControlName="rate" placeholder="Interest rate of debt source" onkeydown="return (event.key !== 'e' && event.key !== '-')">
+              <input matInput matTooltip="For example, if your loan has an APR of 10 percent, you pay $10 per $100 you borrow annually."
+              type="number" class="form-control" size="56" formControlName="rate" placeholder="Interest rate of debt source" onkeydown="return (event.key !== 'e' && event.key !== '-')">
               <span matSuffix>&nbsp;%</span>
             </mat-form-field>
           </div>
@@ -25,7 +26,8 @@
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <div class="col-md-6" style="padding-left: 0px">
             <mat-form-field appearance="standard" hintLabel="Compound Frequency (Enter 0 for Simple Interest)">
-              <input matInput type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Times per year that interest is compounded" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
+              <input matInput matTooltip="For example, enter 12 if the interest is compounded monthly."
+              type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Times per year that interest is compounded" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
             </mat-form-field>
           </div>
           <div class="col-md-6" style="padding-right: 0px">

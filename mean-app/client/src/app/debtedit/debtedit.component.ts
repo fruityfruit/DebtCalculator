@@ -33,11 +33,18 @@ export class DebteditComponent implements OnInit {
       this.profileForm = this.builder.group({
         name: ["", Validators.required],
         principal: [0, Validators.required],
-        rate: [0, Validators.required],
-        annualCompounds: [0, Validators.required],
-        monthlyPayment: [0, Validators.required],
+        rate: [0],
+        annualCompounds: [0],
+        monthlyPayment: [0],
         opportunity: ["", Validators.required]
       });
+  }
+
+  public isValid() {
+    if (this.profileForm.value.name && this.profileForm.value.principal && this.profileForm.value.opportunity) {
+      return true;
+    }
+    return false;
   }
 
   private updateDebt() {
@@ -71,7 +78,7 @@ export class DebteditComponent implements OnInit {
       this.oppService.getShortOpps(this.username).subscribe((data: ShortOpportunity[]) => {
         var selectAll = {
           oppId:"all",
-          oppName:"Select All"
+          oppName:"All Opportunities"
         }
         this.oppList.push(selectAll);
         for (var i = 0; i < data["opportunities"].length; ++i) {
@@ -84,6 +91,16 @@ export class DebteditComponent implements OnInit {
         this.activatedRouter.params.subscribe(params => {
           this.profService.editDebt(params["id"]).subscribe(res => {
             this.debt = res;
+            var opportunityExists = false;
+            for (var i = 0; i < this.oppList.length; ++i) {
+              if (this.oppList[i].oppId === this.debt.opportunity) {
+                opportunityExists = true;
+                break;
+              }
+            }
+            if (!opportunityExists) {
+              this.debt.opportunity = "";
+            }
           });
         });
       });

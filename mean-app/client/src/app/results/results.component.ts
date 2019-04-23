@@ -560,9 +560,6 @@ export class ResultsComponent implements OnInit {
       oppProjectionPoints.push(savingsByMonth);
       oppCount = oppCount + 1;
     }
-    console.log(monthlyOppPayments);
-    console.log(monthlyDebtPayments);
-    console.log(oppProjectionPoints);
     this.netIncome = new Chart("canvas1", {
       animationEnabled: true,
       type: "line",

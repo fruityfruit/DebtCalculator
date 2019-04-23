@@ -319,7 +319,7 @@ export class PersonalComponent implements OnInit {
         this.username = this.auth.getUsername();
         this.formdata.username = this.username;
         this.profService.updateProfile(this.formdata).subscribe(() => {
-          this.router.navigate(["debt"]);
+          this.router.navigate(["opportunity"]);
         }, (err) => {
           console.log(err);
         });
@@ -330,7 +330,7 @@ export class PersonalComponent implements OnInit {
     else {
       this.formdata.username = this.username;
       this.profService.updateProfile(this.formdata).subscribe(() => {
-        this.router.navigate(["debt"]);
+        this.router.navigate(["opportunity"]);
       }, (err) => {
         console.log(err);
       });

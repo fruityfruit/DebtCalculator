@@ -21,10 +21,10 @@ import { OpportunityService } from "./opportunity.service";
 import { ResultService } from "./result.service";
 import { ProfileService } from "./profile.service";
 import { AccountComponent } from "./account/account.component";
-import {MatSidenavModule, MatTableModule, MatFormFieldModule, MatInputModule,
-        MatSelectModule, MatIconModule, MatButtonModule,
-        MatSnackBarModule, MatCardModule, MatTooltipModule} from "@angular/material";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { MatSidenavModule, MatTableModule, MatFormFieldModule, MatInputModule,
+         MatSelectModule, MatIconModule, MatButtonModule,
+         MatSnackBarModule, MatCardModule, MatTooltipModule } from "@angular/material";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DebteditComponent } from "./debtedit/debtedit.component";
 import { DebtComponent } from "./debt/debt.component";
 

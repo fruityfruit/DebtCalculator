@@ -4,7 +4,7 @@ import { OpportunityService, Opportunity } from "../opportunity.service";
 import { AuthenticationService } from "../authentication.service";
 import { SnackbaralertService } from "../snackbaralert.service";
 import { Router } from "@angular/router";
-import {MatTableDataSource} from "@angular/material";
+import { MatTableDataSource } from "@angular/material";
 
 @Component({
   selector: "app-opportunity",

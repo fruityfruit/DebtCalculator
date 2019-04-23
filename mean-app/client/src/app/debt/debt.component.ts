@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {MatTableDataSource} from "@angular/material";
+import { MatTableDataSource } from "@angular/material";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthenticationService } from "../authentication.service";
 import { ProfileService, Debt } from "../profile.service";
@@ -109,7 +109,7 @@ export class DebtComponent implements OnInit {
         this.opportunities = data["opportunities"];
         var selectAll = {
           oppId:"all",
-          oppName:"Select All"
+          oppName:"All Opportunities"
         }
         this.oppList.push(selectAll);
         for (var i = 0; i < this.opportunities.length; ++i) {
