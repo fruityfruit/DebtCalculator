@@ -2,25 +2,25 @@
   <div *ngIf="!this.auth.isLoggedIn()">
     <a href="#" class="brand six-width" routerLink="/" routerLinkActive="active" (click)="closeDropdown()">Debt Calculator</a>
     <a class="link special six-width" style="padding: 0px"></a>
-    <a id="link1" href="#" class="link six-width" routerLink="/personal" routerLinkActive="active" (click)="closeDropdown()">Profile</a>
-    <a id="link2" href="#" class="link six-width" routerLink="/opportunity" routerLinkActive="active" (click)="closeDropdown()">Opportunities</a>
-    <a id="link3" href="#" class="link six-width" routerLink="/debt" routerLinkActive="active" (click)="closeDropdown()">Debts</a>
-    <a id="link4" href="#" class="link six-width" routerLink="/results" routerLinkActive="active" (click)="closeDropdown()">Results</a>
-    <a id="link5" href="#" class="link six-width" routerLink="/info" routerLinkActive="active" (click)="closeDropdown()">How It Works</a>
+    <a id="profile" href="#" class="link six-width" routerLink="/personal" routerLinkActive="active" (click)="closeDropdown()">Profile</a>
+    <a id="opportunities" href="#" class="link six-width" routerLink="/opportunity" routerLinkActive="active" (click)="closeDropdown()">Opportunities</a>
+    <a id="debts" href="#" class="link six-width" routerLink="/debt" routerLinkActive="active" (click)="closeDropdown()">Debts</a>
+    <a id="results" href="#" class="link six-width" routerLink="/results" routerLinkActive="active" (click)="closeDropdown()">Results</a>
+    <a id="info" href="#" class="link six-width" routerLink="/info" routerLinkActive="active" (click)="closeDropdown()">How It Works</a>
     <a style="padding: 0px; height: 0px" class="six-width"></a>
     <a class="link six-width" href="#" routerLink="/signin" routerLinkActive="active" (click)="closeDropdown()">Sign In</a>
   </div>
   <div *ngIf="this.auth.isLoggedIn()">
     <a href="#" class="brand seven-width" routerLink="/" routerLinkActive="active" (click)="closeDropdown()">Debt Calculator</a>
     <a class="link special seven-width" style="padding: 0px"></a>
-    <a id="link1" href="#" class="link seven-width" routerLink="/personal" routerLinkActive="active" (click)="closeDropdown()">Profile</a>
-    <a id="link2" href="#" class="link seven-width" routerLink="/opportunity" routerLinkActive="active" (click)="closeDropdown()">Opportunities</a>
-    <a id="link3" href="#" class="link seven-width" routerLink="/debt" routerLinkActive="active" (click)="closeDropdown()">Debts</a>
-    <a id="link4" href="#" class="link seven-width" routerLink="/results" routerLinkActive="active" (click)="closeDropdown()">Results</a>
-    <a id="link5" href="#" class="link seven-width" routerLink="/info" routerLinkActive="active" (click)="closeDropdown()">How It Works</a>
-    <a id="link6" href="#" class="link seven-width" routerLink="/account" routerLinkActive="active" (click)="closeDropdown()">Account</a>
+    <a id="profile" href="#" class="link seven-width" routerLink="/personal" routerLinkActive="active" (click)="closeDropdown()">Profile</a>
+    <a id="opportunities" href="#" class="link seven-width" routerLink="/opportunity" routerLinkActive="active" (click)="closeDropdown()">Opportunities</a>
+    <a id="debts" href="#" class="link seven-width" routerLink="/debt" routerLinkActive="active" (click)="closeDropdown()">Debts</a>
+    <a id="results" href="#" class="link seven-width" routerLink="/results" routerLinkActive="active" (click)="closeDropdown()">Results</a>
+    <a id="info" href="#" class="link seven-width" routerLink="/info" routerLinkActive="active" (click)="closeDropdown()">How It Works</a>
+    <a id="account" href="#" class="link seven-width" routerLink="/account" routerLinkActive="active" (click)="closeDropdown()">Account</a>
     <a style="padding: 0px; height: 0px" class="seven-width"></a>
     <a class="link seven-width" href="#" (click)="signout()">Sign Out</a>
   </div>
-  <a href="javascript:void(0);" style="font-size:26px;" class="icon seven-width" (click)="responsive()">&#9776;</a>
+  <a href="javascript:void(0);" style="font-size:26px;" class="icon seven-width" (click)="toggleDropdown()">&#9776;</a>
 </div>

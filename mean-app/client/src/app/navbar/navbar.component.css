@@ -71,23 +71,22 @@
 }
 
 @media screen and (max-width: 1162px) {
-  .topnav.responsive {
+  .topnav.dropdown {
     position: relative;
     height: auto;
   }
-  .topnav.responsive .icon {
+  .topnav.dropdown .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .topnav.responsive .link {
+  .topnav.dropdown .link {
     width: 100% !important;
     float: none;
     display: block;
     text-align: left;
   }
-  .topnav.responsive .special {
+  .topnav.dropdown .special {
     height: 49px
   }
-
 }
