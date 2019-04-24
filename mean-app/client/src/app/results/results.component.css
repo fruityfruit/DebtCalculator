@@ -1,6 +1,14 @@
+.example-container {
+  margin: 0px 50px 20px 50px;
+}
+
+body {
+  background-color: white !important;
+}
+
 div.cen {
   max-width: 1200px;
-  overflow:hidden;
+  overflow: hidden;
   margin: auto;
 }
 
@@ -12,6 +20,27 @@ mat-form-field {
   width: 100%;
 }
 
+.container-fluid {
+  overflow-y: hidden;
+}
+
+table {
+  width: 100%;
+}
+
+::ng-deep th.mat-header-cell {
+  width: 200px;
+  min-width: 140px;
+}
+
+.caption-style {
+  text-align: center;
+  caption-side: top;
+  font-size: .8rem;
+  font-weight: bold;
+  color: #666666;
+}
+
 .mat-raised-button {
   color: white;
   background-color: #78C2AC;
@@ -20,4 +49,20 @@ mat-form-field {
 .mat-raised-button:disabled {
   color: rgba(0,0,0,.26);
   background-color: rgba(0,0,0,.12);
+}
+
+.some-left-margin {
+  margin-left: 10px;
+}
+
+.more-left-margin {
+  margin-left: 15px;
+}
+
+.twitter-width {
+  width: calc((100% - 452px)/4);
+}
+
+.twitter-min-width {
+  min-width: 10px;
 }

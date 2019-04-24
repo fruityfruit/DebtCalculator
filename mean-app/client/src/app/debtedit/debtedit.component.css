@@ -1,11 +1,5 @@
-form.ex1 {
-}
-
 .example-container {
-  margin-left: 225px;
-}
-
-.example-container > * {
+  margin: 0px 50px
 }
 
 body {
@@ -14,7 +8,7 @@ body {
 
 div.cen {
   width: 960px;
-  overflow:hidden;
+  overflow: hidden;
   margin: auto;
   padding-bottom: 50px;
 }
@@ -31,17 +25,30 @@ table {
   width: 100%;
 }
 
- ::ng-deep th.mat-header-cell{
-     width: 200px;
-     min-width: 140px;
- }
+::ng-deep th.mat-header-cell{
+  width: 200px;
+  min-width: 140px;
+}
 
- .mat-raised-button {
-   color: white;
-   background-color: #78C2AC;
- }
+.mat-raised-button {
+  color: white;
+  background-color: #78C2AC;
+}
 
- .mat-raised-button:disabled {
-   color: rgba(0,0,0,.26);
-   background-color: rgba(0,0,0,.12);
- }
+.mat-raised-button:disabled {
+  color: rgba(0,0,0,.26);
+  background-color: rgba(0,0,0,.12);
+}
+
+.row-padding {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.no-left-padding {
+  padding-left: 0px;
+}
+
+.no-right-padding {
+  padding-right: 0px;
+}

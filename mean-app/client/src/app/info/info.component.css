@@ -1,9 +1,14 @@
 div.cen {
   max-width: 1200px;
-  overflow:hidden;
+  overflow: hidden;
   margin: auto;
 }
 
 .mat-card {
   color: #5a5a5a;
+}
+
+.image-style {
+  max-width: 960px;
+  width: 100%;
 }

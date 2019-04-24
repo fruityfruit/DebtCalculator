@@ -1,22 +1,22 @@
 <div class="mdc-typography mdc-typography--body1">
   <div class="cen container-fluid mat-elevation-z2">
-    <div class="example-container" style="margin: 0px 50px">
+    <div class="example-container">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px; margin-bottom: 20px">Debt Sources</h1>
-      <form class="ex1" [formGroup]="debtForm" (ngSubmit)="onSubmitDebt()">
-        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+      <form [formGroup]="debtForm" (ngSubmit)="onSubmitDebt()">
+        <div class="form-group row row-padding">
           <mat-form-field appearance="standard" hintLabel="Debt Name">
             <input matInput type="text" class="form-control" formControlName="name" placeholder="Name this debt">
           </mat-form-field>
         </div>
-        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
-          <div class="col-md-6" style="padding-left: 0px">
+        <div class="form-group row row-padding">
+          <div class="col-md-6 no-left-padding">
             <mat-form-field appearance="standard" hintLabel="Principal Amount">
               <input matInput matTooltip="This is the amount of money that you borrowed that you have not yet paid back. For example, if you had borrowed $1000 and had already paid back $200 of the loan amount, you would enter $800 here."
               type="number" class="form-control" size="56" formControlName="principal" placeholder="Initial debt amount" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
               <span matPrefix>$&nbsp;</span>
             </mat-form-field>
           </div>
-          <div class="col-md-6" style="padding-right: 0px">
+          <div class="col-md-6 no-right-padding">
             <mat-form-field appearance="standard" hintLabel="Yearly Rate (APR)">
               <input matInput matTooltip="This is a variable listed in the terms of your loan. For example, if your loan has an APR of 10 percent, you pay $10 per $100 you borrow annually."
               type="number" class="form-control" size="56" formControlName="rate" placeholder="Interest rate of debt source" onkeydown="return (event.key !== 'e' && event.key !== '-')">
@@ -24,14 +24,14 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
-          <div class="col-md-6" style="padding-left: 0px">
+        <div class="form-group row row-padding">
+          <div class="col-md-6 no-left-padding">
             <mat-form-field appearance="standard" hintLabel="Compound Frequency (Enter 0 for Simple Interest)">
               <input matInput matTooltip="This is also a variable listed in the terms of your loan. For example, if the interest on your loan is compounded monthly, you would enter 12 here."
               type="number" class="form-control" size="56" formControlName="annualCompounds" placeholder="Times per year that interest is compounded" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
             </mat-form-field>
           </div>
-          <div class="col-md-6" style="padding-right: 0px">
+          <div class="col-md-6 no-right-padding">
             <mat-form-field appearance="standard" hintLabel="Monthly Payment">
               <input matInput matTooltip="This is payment that you make each month towards repaying this loan. If this number varies from month to month, just enter your average payment."
               type="number" class="form-control" size="56" formControlName="monthlyPayment" placeholder="Payment made each month" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
@@ -39,7 +39,7 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+        <div class="form-group row row-padding">
           <mat-form-field appearance="standard" hintLabel="Associated Opportunity">
             <mat-select matTooltip='If this debt source is associated with a specific opportunity, such as a student loan or mortgage payment, please select that opportunity here. If this debt source would be present across all opportunities, such as a car payment or credit card debt, please select "All Opportunities" here.'
             class="form-control" formControlName="opportunity" placeholder="Select an option">
@@ -47,7 +47,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+        <div class="form-group row row-padding">
           <button type="submit" style="top: calc(50% - 18px); left: calc(100% - 90px)"
           [disabled]="!isValid()" mat-raised-button>Add Debt</button>
         </div>
@@ -58,19 +58,19 @@
           <mat-cell *matCellDef="let debt"> {{debt.name}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="principal">
-          <mat-header-cell style="margin-left: 10px" *matHeaderCellDef> Principal </mat-header-cell>
-          <mat-cell style="margin-left: 10px" *matCellDef="let debt"> {{this.auth.formatMoney(debt.principal, false)}} </mat-cell>
+          <mat-header-cell class="some-left-margin" *matHeaderCellDef> Principal </mat-header-cell>
+          <mat-cell class="some-left-margin" *matCellDef="let debt"> {{this.auth.formatMoney(debt.principal, false)}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="rate">
-          <mat-header-cell style="margin-left: 10px" *matHeaderCellDef> Rate </mat-header-cell>
-          <mat-cell style="margin-left: 10px" *matCellDef="let debt"> {{debt.rate}}% </mat-cell>
+          <mat-header-cell class="some-left-margin" *matHeaderCellDef> Rate </mat-header-cell>
+          <mat-cell class="some-left-margin" *matCellDef="let debt"> {{debt.rate}}% </mat-cell>
         </ng-container>
         <ng-container matColumnDef="monthlypayment">
           <mat-header-cell *matHeaderCellDef> Monthly Payment </mat-header-cell>
           <mat-cell *matCellDef="let debt"> {{this.auth.formatMoney(debt.monthlyPayment, false)}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="edit">
-          <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-header-cell class="some-left-margin" *matHeaderCellDef> Edit </mat-header-cell>
           <mat-cell *matCellDef="let debt"><a [routerLink]="['/debtedit',debt._id]">
           <button mat-icon-button><mat-icon>create</mat-icon></button></a></mat-cell>
         </ng-container>

@@ -338,14 +338,14 @@ export class OpportunityComponent implements OnInit {
         this.opportunities = data["opportunities"];
         this.dataSource.data = this.opportunities;
         this.oppForm.reset();
-        Object.keys(this.oppForm.controls).forEach(key => { //workaround
+        Object.keys(this.oppForm.controls).forEach(key => { //workaround to prevent erroneous red error warnings
           this.oppForm.controls[key].setErrors(null);
         });
       });
     }, (err) => {
       console.log(err);
       this.oppForm.reset();
-      Object.keys(this.oppForm.controls).forEach(key => { //workaround
+      Object.keys(this.oppForm.controls).forEach(key => { //workaround to prevent erroneous red error warnings
         this.oppForm.controls[key].setErrors(null);
       });
     });
@@ -372,7 +372,7 @@ export class OpportunityComponent implements OnInit {
   ngOnInit() {
     this.auth.callUpdateColor("opportunities");
     this.oppForm.reset();
-    Object.keys(this.oppForm.controls).forEach(key => { //workaround
+    Object.keys(this.oppForm.controls).forEach(key => { //workaround to prevent erroneous red error warnings
       this.oppForm.controls[key].setErrors(null);
     });
     this.username = this.auth.getUsername();

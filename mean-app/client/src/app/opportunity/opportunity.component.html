@@ -1,9 +1,9 @@
 <div class="mdc-typography mdc-typography--body1">
   <div class="cen container-fluid mat-elevation-z2">
-    <div class="example-container" style="margin: 0px 50px">
+    <div class="example-container">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px; margin-bottom: 20px">Opportunities</h1>
       <form class="ex1" [formGroup]="oppForm" (ngSubmit)="onSubmit()">
-        <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
+        <div class="form-group row row-padding">
           <mat-form-field appearance="standard" hintLabel="Opportunity Name">
             <input matInput type="text" class="form-control" formControlName="name" placeholder="Name this opportunity">
           </mat-form-field>
@@ -73,19 +73,19 @@
           <mat-cell *matCellDef="let opportunity"> {{opportunity.name}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="city">
-          <mat-header-cell style="margin-left: 10px" *matHeaderCellDef> City </mat-header-cell>
-          <mat-cell style="margin-left: 10px" *matCellDef="let opportunity"> {{opportunity.city}} </mat-cell>
+          <mat-header-cell class="some-left-margin" *matHeaderCellDef> City </mat-header-cell>
+          <mat-cell class="some-left-margin" *matCellDef="let opportunity"> {{opportunity.city}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="state">
-          <mat-header-cell style="margin-left: 10px" *matHeaderCellDef> State </mat-header-cell>
-          <mat-cell style="margin-left: 10px" *matCellDef="let opportunity"> {{opportunity.state}} </mat-cell>
+          <mat-header-cell class="some-left-margin" *matHeaderCellDef> State </mat-header-cell>
+          <mat-cell class="some-left-margin" *matCellDef="let opportunity"> {{opportunity.state}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="income">
-          <mat-header-cell *matHeaderCellDef> Income </mat-header-cell>
+          <mat-header-cell class="some-left-margin" *matHeaderCellDef> Income </mat-header-cell>
           <mat-cell *matCellDef="let opportunity"> {{this.auth.formatMoney(opportunity.income, false)}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="edit">
-          <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-header-cell class="some-left-margin" *matHeaderCellDef> Edit </mat-header-cell>
           <mat-cell *matCellDef="let opportunity"><a [routerLink]="['/edit',opportunity._id]">
           <button mat-icon-button><mat-icon>create</mat-icon></button></a></mat-cell>
         </ng-container>

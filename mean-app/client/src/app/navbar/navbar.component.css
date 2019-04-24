@@ -44,6 +44,22 @@
   max-width: 190px !important;
 }
 
+.six-width {
+  width: calc((100% - 190px)/6);
+}
+
+.seven-width {
+  width: calc((100% - 190px)/7);
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.no-height {
+  height: 0px;
+}
+
 @media screen and (max-width: 1162px) {
   .topnav a:not(:first-child) {
     display: none;
