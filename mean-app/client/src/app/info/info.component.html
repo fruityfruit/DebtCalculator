@@ -2,6 +2,9 @@
   <div class="cen container-fluid mat-elevation-z2">
     <div class="example-container" style="margin: 0px 50px 20px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px">How It Works</h1>
+      <div>
+        <iframe width="560" height="315" style="margin-left: calc(50% - 280px);" src="https://www.youtube.com/embed/SSx44zOY1XA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
       <mat-card class="mat-elevation-z2">
         <mat-card-header>
           <mat-card-title>Profile Page</mat-card-title>
@@ -10,17 +13,37 @@
           <p class=".text-dark">
             In this first page, the user inputs their financial information that is generally constant. This information can include rent, region, monthly payments, etc. This page is to help us determine your current living situation and what your best future opportunity will be. <br> <br>
           </p>
+          <div class="text-center">
+            <img style="max-width: 960px; width: 100%" src="assets/profpage.jpg" alt="Debt Calculator Profile Page"/> <!--Root is from client/src in dev, but maybe from client in prod  -->
+          </div>
         </mat-card-content>
       </mat-card>
       <br>
       <mat-card class="mat-elevation-z2">
         <mat-card-header>
-          <mat-card-title>Opportunity Comparison Page</mat-card-title>
+          <mat-card-title>Opportunities Page</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p class=".text-dark">
             Then, in this page, you give details about any potential future opportunities such as their type, location, and income. You can list these opportunities in any order and we will be able to rank them using the information you gave us in the Profile Page by comparing financial pros and cons of each one. <br> <br>
           </p>
+          <div class="text-center">
+            <img style="max-width: 960px; width: 100%" src="assets/opppage.jpg" alt="Debt Calculator Opportunities Page"/> <!--Root is from client/src in dev, but maybe from client in prod  -->
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <mat-card class="mat-elevation-z2">
+        <mat-card-header>
+          <mat-card-title>Debts Page</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class=".text-dark">
+            In this page, the user inputs their debts. <br> <br>
+          </p>
+          <div class="text-center">
+            <img style="max-width: 960px; width: 100%" src="assets/debtpage.jpg" alt="Debt Calculator Debts Page"/> <!--Root is from client/src in dev, but maybe from client in prod  -->
+          </div>
         </mat-card-content>
       </mat-card>
       <br>
@@ -32,30 +55,47 @@
           <p class=".text-dark">
             This will be the final page seen when using the debt calculator, right after the Opportunities Comparison Page. This page has two main features. First, it will show the user a "Rank of Opportunities" suggesting certain job or school opportunities, listing their expenses and finally ranking them in order of most to least economical using the data from the "Personal Info Page". Second, it will show specific "Graphs of Data" detailing how much debt they will be in during the oncoming months.
           </p>
+          <div class="text-center">
+            <img style="max-width: 960px; width: 100%" src="assets/resultspage.jpg" alt="Debt Calculator Results Page"/> <!--Root is from client/src in dev, but maybe from client in prod  -->
+          </div>
         </mat-card-content>
       </mat-card>
       <br>
       <mat-card class="mat-elevation-z2">
-           <mat-card-header>
-             <mat-card-title>Definitions</mat-card-title>
-           </mat-card-header>
-           <mat-card-content>
-             <p class=".text-dark">
-               Purchasing Power: In short, it is the financial ability to buy products and services.
-                                 Purchasing power is the value of a currency expressed in terms of the amount of goods or services that one unit of money can buy.
-                                 Purchasing power is important because, all else being equal, inflation decreases the amount of goods or services you would be able to purchase.
-               <br><br>
-               Compound Interest: The addition of interest to the principal sum of a loan or deposit, or in other words, interest on interest.
-                                  It is the result of reinvesting interest, rather than paying it out, so that interest in the next period is then earned on the principal sum plus previously accumulated interest.
-                                  Compound interest is standard in finance and economics.
-                                  Compound Interest = P (1+(r/n))^nt
-               <br><br>
-               Simple Interest: A = P(1 + rt) where P is the Principal amount of money to be invested at an Interest Rate R% per period for t Number of Time Periods. Where r is in decimal form; r=R/100; r and t are in the same units of time.
-                                Compound interest may be contrasted with simple interest, where interest is not added to the principal, so there is no compounding.
-                                The simple annual interest rate is the interest amount per period, multiplied by the number of periods per year.
-             </p>
-           </mat-card-content>
-         </mat-card>
+        <mat-card-header>
+          <mat-card-title>Definitions</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class=".text-dark">
+            Purchasing Power: In short, it is the financial ability to buy products and services.
+            Purchasing power is the value of a currency expressed in terms of the amount of goods or services that one unit of money can buy.
+            Purchasing power is important because, all else being equal, inflation decreases the amount of goods or services you would be able to purchase.
+            <br><br>
+            Compound Interest: The addition of interest to the principal sum of a loan or deposit, or in other words, interest on interest.
+            It is the result of reinvesting interest, rather than paying it out, so that interest in the next period is then earned on the principal sum plus previously accumulated interest.
+            Compound interest is standard in finance and economics.
+            Compound Interest = P (1+(r/n))^nt
+            <br><br>
+            Simple Interest: A = P(1 + rt) where P is the Principal amount of money to be invested at an Interest Rate R% per period for t Number of Time Periods. Where r is in decimal form; r=R/100; r and t are in the same units of time.
+            Compound interest may be contrasted with simple interest, where interest is not added to the principal, so there is no compounding.
+            The simple annual interest rate is the interest amount per period, multiplied by the number of periods per year.
+          </p>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <mat-card class="mat-elevation-z2">
+        <mat-card-header>
+          <mat-card-title>About Us</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class=".text-dark">
+            The five builders of this app are <a href="https://www.linkedin.com/in/don-landrum-416a9512b/">Don Landrum</a>, <a href="https://www.linkedin.com/in/caleb-parks-b9581615b/">Caleb Parks</a>, <a href="https://www.linkedin.com/in/tahir-warid/">Tahir Warid</a>, <a href="https://www.linkedin.com/in/micah-crumpton-b39736185/">Micah Crumpton</a>, and <a href="https://www.linkedin.com/in/francisco-cuellar-5b80a7164/">Frankie Cuellar</a>.
+            We built this app as our Senior Design Project for our undergraduate degrees from the University of South Carolina. You can learn more about us by following the links to our LinkedIn profiles.
+            <br><br>
+            You can also view the GitHub repository for our app <a href="https://github.com/SCCapstone/DebtCalculator">here</a>.
+          </p>
+        </mat-card-content>
+      </mat-card>
       <br>
     </div>
   </div>
