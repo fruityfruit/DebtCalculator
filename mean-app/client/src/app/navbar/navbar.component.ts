@@ -9,11 +9,9 @@ import { SnackbaralertService } from "../snackbaralert.service";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
-  username: string;
-  loggedInText: string;
-  routerLinkText: string;
+
   constructor(public auth: AuthenticationService, private router: Router,
-  private alerts: SnackbaralertService) {
+              private alerts: SnackbaralertService) {
     //listens for the auth service to tell it to update the navbar
     this.auth.invokeEvent.subscribe(value => {
       this.updateColor(value);

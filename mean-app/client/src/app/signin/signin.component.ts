@@ -10,7 +10,7 @@ import { SnackbaralertService } from "../snackbaralert.service";
   styleUrls: ["./signin.component.css"]
 })
 export class SigninComponent implements OnInit {
-  profileForm: FormGroup;
+  loginForm: FormGroup;
   credentials: TokenPayload = {
     username: "",
     password: ""
@@ -18,15 +18,15 @@ export class SigninComponent implements OnInit {
 
   constructor(private auth: AuthenticationService, private router: Router,
   private alerts: SnackbaralertService, private builder: FormBuilder) {
-    this.profileForm = this.builder.group({
+    this.loginForm = this.builder.group({
       username: ["", Validators.required],
       password: ["", Validators.required]
     });
   }
 
   public signin() {
-    this.credentials.username = this.profileForm.value.username;
-    this.credentials.password = this.profileForm.value.password;
+    this.credentials.username = this.loginForm.value.username;
+    this.credentials.password = this.loginForm.value.password;
     this.auth.signin(this.credentials).subscribe(() => {
       this.alerts.open("Signed In!");
       this.router.navigateByUrl("/");

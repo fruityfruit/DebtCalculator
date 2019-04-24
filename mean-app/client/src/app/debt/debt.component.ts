@@ -14,8 +14,8 @@ import { SnackbaralertService } from "../snackbaralert.service";
 })
 export class DebtComponent implements OnInit {
   username: String;
-  profileFormDebt: FormGroup;
-  formdataDebt: Debt = {
+  debtForm: FormGroup;
+  formdata: Debt = {
     username: "",
     name: "",
     principal: 0,
@@ -33,7 +33,7 @@ export class DebtComponent implements OnInit {
   constructor(private builder: FormBuilder, private router: Router,
     private auth: AuthenticationService, private profService: ProfileService,
     private alerts: SnackbaralertService, private oppService: OpportunityService) {
-    this.profileFormDebt = this.builder.group({
+    this.debtForm = this.builder.group({
       name: ["", Validators.required],
       principal: [0, Validators.required],
       rate: [0],
@@ -44,43 +44,43 @@ export class DebtComponent implements OnInit {
   }
 
   public isValid() {
-    if (this.profileFormDebt.value.name && this.profileFormDebt.value.principal && this.profileFormDebt.value.opportunity) {
+    if (this.debtForm.value.name && this.debtForm.value.principal && this.debtForm.value.opportunity) {
       return true;
     }
     return false;
   }
 
   public onSubmitDebt() {
-    this.formdataDebt.name = this.profileFormDebt.value.name;
-    this.formdataDebt.principal = this.profileFormDebt.value.principal;
-    this.formdataDebt.rate = this.profileFormDebt.value.rate;
-    this.formdataDebt.annualCompounds = this.profileFormDebt.value.annualCompounds;
-    this.formdataDebt.monthlyPayment = this.profileFormDebt.value.monthlyPayment;
-    this.formdataDebt.username = this.username;
-    this.formdataDebt.opportunity = this.profileFormDebt.value.opportunity;
-    if (!this.formdataDebt.rate) {
-      this.formdataDebt.rate = 0;
+    this.formdata.name = this.debtForm.value.name;
+    this.formdata.principal = this.debtForm.value.principal;
+    this.formdata.rate = this.debtForm.value.rate;
+    this.formdata.annualCompounds = this.debtForm.value.annualCompounds;
+    this.formdata.monthlyPayment = this.debtForm.value.monthlyPayment;
+    this.formdata.username = this.username;
+    this.formdata.opportunity = this.debtForm.value.opportunity;
+    if (!this.formdata.rate) {
+      this.formdata.rate = 0;
     }
-    if (!this.formdataDebt.annualCompounds) {
-      this.formdataDebt.annualCompounds = 0;
+    if (!this.formdata.annualCompounds) {
+      this.formdata.annualCompounds = 0;
     }
-    if (!this.formdataDebt.monthlyPayment) {
-      this.formdataDebt.monthlyPayment = 0;
+    if (!this.formdata.monthlyPayment) {
+      this.formdata.monthlyPayment = 0;
     }
-    this.profService.createDebt(this.formdataDebt).subscribe(() => {
+    this.profService.createDebt(this.formdata).subscribe(() => {
       this.profService.getDebts(this.username).subscribe((data: Debt[]) => {
         this.debts = data["debts"];
         this.dataSource.data = this.debts;
-        this.profileFormDebt.reset();
-        Object.keys(this.profileFormDebt.controls).forEach(key => { //workaround
-          this.profileFormDebt.controls[key].setErrors(null);
+        this.debtForm.reset();
+        Object.keys(this.debtForm.controls).forEach(key => { //workaround
+          this.debtForm.controls[key].setErrors(null);
         });
       });
     }, (err) => {
       console.log(err);
-      this.profileFormDebt.reset();
-      Object.keys(this.profileFormDebt.controls).forEach(key => { //workaround
-        this.profileFormDebt.controls[key].setErrors(null);
+      this.debtForm.reset();
+      Object.keys(this.debtForm.controls).forEach(key => { //workaround
+        this.debtForm.controls[key].setErrors(null);
       });
     });
   }
@@ -96,9 +96,9 @@ export class DebtComponent implements OnInit {
 
   ngOnInit() {
     this.auth.callUpdateColor("debts");
-    this.profileFormDebt.reset();
-    Object.keys(this.profileFormDebt.controls).forEach(key => { //workaround
-      this.profileFormDebt.controls[key].setErrors(null);
+    this.debtForm.reset();
+    Object.keys(this.debtForm.controls).forEach(key => { //workaround
+      this.debtForm.controls[key].setErrors(null);
     });
     this.username = this.auth.getUsername();
     if (this.username === null) {

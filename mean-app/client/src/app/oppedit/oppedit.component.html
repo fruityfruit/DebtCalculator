@@ -2,7 +2,7 @@
   <div class="cen container-fluid mat-elevation-z2">
     <div class="example-container" style="margin: 0px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px; margin-bottom: 20px">Edit Opportunity</h1>
-      <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <form class="ex1" [formGroup]="oppForm" (ngSubmit)="onSubmit()">
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <mat-form-field appearance="standard" hintLabel="Opportunity Name">
             <input matInput type="text" class="form-control" formControlName="name" placeholder="Name this opportunity"
@@ -73,7 +73,7 @@
         </div>
         <div class="form-group row">
           <div class="col">
-            <button type="submit" mat-raised-button [disabled]="!profileForm.valid">Update</button>
+            <button type="submit" mat-raised-button [disabled]="!oppForm.valid">Update</button>
           </div>
         </div>
       </form>

@@ -10,7 +10,7 @@ import { SnackbaralertService } from "../snackbaralert.service";
   styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
-  profileForm: FormGroup;
+  registerForm: FormGroup;
   credentials: TokenPayload = {
     username: "",
     password: ""
@@ -18,15 +18,15 @@ export class RegisterComponent implements OnInit {
 
   constructor(private auth: AuthenticationService, private router: Router,
   private alerts: SnackbaralertService, private builder: FormBuilder) {
-    this.profileForm = this.builder.group({
+    this.registerForm = this.builder.group({
       username: ["", Validators.required],
       password: ["", Validators.required]
     });
   }
 
   public register() {
-    this.credentials.username = this.profileForm.value.username;
-    this.credentials.password = this.profileForm.value.password;
+    this.credentials.username = this.registerForm.value.username;
+    this.credentials.password = this.registerForm.value.password;
     if (this.credentials.username === "" || this.credentials.username.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
       this.alerts.open("Sorry, that username has already been taken. Please try another!");
     } else {

@@ -14,7 +14,7 @@ import { MatTableDataSource } from "@angular/material";
 export class OpportunityComponent implements OnInit {
   username: String;
   opportunities: Opportunity[];
-  profileForm: FormGroup;
+  oppForm: FormGroup;
   formdata: Opportunity = {
     username: "",
     type: "",
@@ -297,7 +297,7 @@ export class OpportunityComponent implements OnInit {
   constructor(private builder: FormBuilder, private oppService: OpportunityService,
     private auth: AuthenticationService, private router: Router,
     private alerts: SnackbaralertService) {
-    this.profileForm = this.builder.group({
+    this.oppForm = this.builder.group({
       type: ["", Validators.required],
       name: ["", Validators.required],
       city: ["", Validators.required],
@@ -310,22 +310,22 @@ export class OpportunityComponent implements OnInit {
   }
 
   public isValid() {
-    if (this.profileForm.value.type && this.profileForm.value.name && this.profileForm.value.city && this.profileForm.value.state &&
-      this.profileForm.value.region && this.profileForm.value.move) { //income is not required
+    if (this.oppForm.value.type && this.oppForm.value.name && this.oppForm.value.city && this.oppForm.value.state &&
+      this.oppForm.value.region && this.oppForm.value.move) { //income is not required
       return true;
     }
     return false;
   }
 
   public onSubmit() {
-    this.formdata.type = this.profileForm.value.type;
-    this.formdata.name = this.profileForm.value.name;
-    this.formdata.city = this.profileForm.value.city;
-    this.formdata.state = this.profileForm.value.state;
-    this.formdata.region = this.profileForm.value.region;
-    this.formdata.income = this.profileForm.value.income;
-    this.formdata.bonus = this.profileForm.value.bonus;
-    this.formdata.move = this.profileForm.value.move;
+    this.formdata.type = this.oppForm.value.type;
+    this.formdata.name = this.oppForm.value.name;
+    this.formdata.city = this.oppForm.value.city;
+    this.formdata.state = this.oppForm.value.state;
+    this.formdata.region = this.oppForm.value.region;
+    this.formdata.income = this.oppForm.value.income;
+    this.formdata.bonus = this.oppForm.value.bonus;
+    this.formdata.move = this.oppForm.value.move;
     this.formdata.username = this.username;
     if (!this.formdata.income) {
       this.formdata.income = 0;
@@ -337,16 +337,16 @@ export class OpportunityComponent implements OnInit {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data["opportunities"];
         this.dataSource.data = this.opportunities;
-        this.profileForm.reset();
-        Object.keys(this.profileForm.controls).forEach(key => { //workaround
-          this.profileForm.controls[key].setErrors(null);
+        this.oppForm.reset();
+        Object.keys(this.oppForm.controls).forEach(key => { //workaround
+          this.oppForm.controls[key].setErrors(null);
         });
       });
     }, (err) => {
       console.log(err);
-      this.profileForm.reset();
-      Object.keys(this.profileForm.controls).forEach(key => { //workaround
-        this.profileForm.controls[key].setErrors(null);
+      this.oppForm.reset();
+      Object.keys(this.oppForm.controls).forEach(key => { //workaround
+        this.oppForm.controls[key].setErrors(null);
       });
     });
   }
@@ -371,9 +371,9 @@ export class OpportunityComponent implements OnInit {
 
   ngOnInit() {
     this.auth.callUpdateColor("opportunities");
-    this.profileForm.reset();
-    Object.keys(this.profileForm.controls).forEach(key => { //workaround
-      this.profileForm.controls[key].setErrors(null);
+    this.oppForm.reset();
+    Object.keys(this.oppForm.controls).forEach(key => { //workaround
+      this.oppForm.controls[key].setErrors(null);
     });
     this.username = this.auth.getUsername();
     if (this.username === null) {

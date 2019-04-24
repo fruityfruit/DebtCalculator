@@ -39,18 +39,18 @@ export class ResultsComponent implements OnInit {
   homeBLS: number = 0;
   newUsername: string;
   newPassword: string;
-  profileForm: FormGroup;
+  registerForm: FormGroup;
   chartForm: FormGroup;
   dataSource = new MatTableDataSource(this.zillowResults);
   rankingSource = new MatTableDataSource(this.rankings);
   displayedColumns: string[] = ["name", "city", "estimate"];
-  displayedColumnsOpp: string[] = ["name", "city", "income","savings1","savings2"];
-  colors=["darkgreen","aqua","indigo","maroon","skyblue","magenta","pink","gold","salmon","mediumseagreen"];
+  displayedColumnsOpp: string[] = ["name", "city", "income", "savings1", "savings2"];
+  colors = ["darkgreen", "aqua", "indigo", "maroon", "skyblue", "magenta", "pink", "gold", "salmon", "mediumseagreen"];
 
   constructor(public auth: AuthenticationService, private resultService: ResultService,
     private oppService: OpportunityService, private profService: ProfileService,
     private builder: FormBuilder, private router: Router, private alerts: SnackbaralertService) {
-    this.profileForm = this.builder.group({
+    this.registerForm = this.builder.group({
       username: ["", Validators.required],
       password: ["", Validators.required]
     });
@@ -753,8 +753,8 @@ export class ResultsComponent implements OnInit {
   }
 
   public register() {
-    this.newUsername = this.profileForm.value.username;
-    this.newPassword = this.profileForm.value.password;
+    this.newUsername = this.registerForm.value.username;
+    this.newPassword = this.registerForm.value.password;
     if (this.newUsername === "" || this.newUsername.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
       this.alerts.open("Sorry, that username has already been taken. Please try another!");
     } else {

@@ -10,9 +10,9 @@ import { SnackbaralertService } from "../snackbaralert.service";
   styleUrls: ["./account.component.css"]
 })
 export class AccountComponent implements OnInit {
-  profileFormUser: FormGroup;
-  profileFormPassword: FormGroup;
-  profileFormDelete: FormGroup;
+  userForm: FormGroup;
+  passwordForm: FormGroup;
+  deleteForm: FormGroup;
   updateUsername: UsernamePayload = {
     oldUsername: "",
     newUsername: "",
@@ -30,25 +30,25 @@ export class AccountComponent implements OnInit {
 
   constructor(private auth: AuthenticationService, private router: Router,
   private alerts: SnackbaralertService, private builder: FormBuilder) {
-    this.profileFormUser = this.builder.group({
+    this.userForm = this.builder.group({
       newUsername: ["", Validators.required],
       password: ["", Validators.required]
     });
-    this.profileFormPassword = this.builder.group({
+    this.passwordForm = this.builder.group({
       oldPassword: ["", Validators.required],
       newPassword: ["", Validators.required],
       repeatNewPassword: ["", Validators.required]
     });
-    this.profileFormDelete = this.builder.group({
+    this.deleteForm = this.builder.group({
       password: ["", Validators.required]
     });
   }
 
   public isValid(object: string) {
-    if (object === "user" && this.profileFormUser.value.newUsername && this.profileFormUser.value.password) {
+    if (object === "user" && this.userForm.value.newUsername && this.userForm.value.password) {
       return true;
     }
-    else if (object === "password" && this.profileFormPassword.value.oldPassword && this.profileFormPassword.value.newPassword && this.profileFormPassword.value.repeatNewPassword) {
+    else if (object === "password" && this.passwordForm.value.oldPassword && this.passwordForm.value.newPassword && this.passwordForm.value.repeatNewPassword) {
       return true;
     }
     return false;
@@ -57,14 +57,14 @@ export class AccountComponent implements OnInit {
   //calls the changeUsername function in the auth service
   public onUsername() {
     this.updateUsername.oldUsername = this.auth.getUsername();
-    this.updateUsername.newUsername = this.profileFormUser.value.newUsername;
-    this.updateUsername.password = this.profileFormUser.value.password;
+    this.updateUsername.newUsername = this.userForm.value.newUsername;
+    this.updateUsername.password = this.userForm.value.password;
     this.auth.changeUsername(this.updateUsername).subscribe(() => {
       this.updateUsername.oldUsername = this.updateUsername.newUsername;
       this.alerts.open("Username successfully updated");
-      this.profileFormUser.reset();
-      Object.keys(this.profileFormUser.controls).forEach(key => { //workaround
-        this.profileFormUser.controls[key].setErrors(null);
+      this.userForm.reset();
+      Object.keys(this.userForm.controls).forEach(key => { //workaround
+        this.userForm.controls[key].setErrors(null);
       });
     }, (err) => {
       if (err.error && err.error.code && err.error.code === 11000) { //Mongo error code that means duplicate key constraint violation
@@ -81,14 +81,14 @@ export class AccountComponent implements OnInit {
   //calls the changePassword function in the auth service
   public onPassword() {
     this.updatePassword.username = this.auth.getUsername();
-    if (this.profileFormPassword.value.newPassword === this.profileFormPassword.value.repeatNewPassword) { //if the two supposedly identical passwords match
-      this.updatePassword.oldPassword = this.profileFormPassword.value.oldPassword;
-      this.updatePassword.newPassword = this.profileFormPassword.value.newPassword;
+    if (this.passwordForm.value.newPassword === this.passwordForm.value.repeatNewPassword) { //if the two supposedly identical passwords match
+      this.updatePassword.oldPassword = this.passwordForm.value.oldPassword;
+      this.updatePassword.newPassword = this.passwordForm.value.newPassword;
       this.auth.changePassword(this.updatePassword).subscribe(() => {
         this.alerts.open("Password successfully updated!");
-        this.profileFormPassword.reset();
-        Object.keys(this.profileFormPassword.controls).forEach(key => { //workaround
-          this.profileFormPassword.controls[key].setErrors(null);
+        this.passwordForm.reset();
+        Object.keys(this.passwordForm.controls).forEach(key => { //workaround
+          this.passwordForm.controls[key].setErrors(null);
         });
       }, (err) => {
         if (err.error && err.error.message) { //alerts the error
@@ -105,7 +105,7 @@ export class AccountComponent implements OnInit {
   //calls the deleteProfile function in the auth service
   public onDelete() {
     this.deleteAccount.username = this.auth.getUsername();
-    this.deleteAccount.password = this.profileFormDelete.value.password;
+    this.deleteAccount.password = this.deleteForm.value.password;
     this.auth.deleteProfile(this.deleteAccount).subscribe(() => {
       this.alerts.open("This account has been deleted.");
       this.auth.signout();

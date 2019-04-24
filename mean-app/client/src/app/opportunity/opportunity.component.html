@@ -2,7 +2,7 @@
   <div class="cen container-fluid mat-elevation-z2">
     <div class="example-container" style="margin: 0px 50px">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px; margin-bottom: 20px">Opportunities</h1>
-      <form class="ex1" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <form class="ex1" [formGroup]="oppForm" (ngSubmit)="onSubmit()">
         <div class="form-group row" style="padding-left: 15px; padding-right: 15px">
           <mat-form-field appearance="standard" hintLabel="Opportunity Name">
             <input matInput type="text" class="form-control" formControlName="name" placeholder="Name this opportunity">
@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-4">
             <mat-form-field appearance="standard" hintLabel="State">
-              <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(this.profileForm.value.state)">
+              <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(this.oppForm.value.state)">
                 <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
               </mat-select>
             </mat-form-field>

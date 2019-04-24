@@ -12,7 +12,7 @@ import { AuthenticationService } from "../authentication.service";
 
 export class OppeditComponent implements OnInit {
   opportunity: any = {};
-  profileForm: FormGroup;
+  oppForm: FormGroup;
   formdata: Opportunity = {
     username: "",
     type: "",
@@ -294,7 +294,7 @@ export class OppeditComponent implements OnInit {
     private router: Router, private auth: AuthenticationService,
     private oppService: OpportunityService,
     private builder: FormBuilder) {
-      this.profileForm = this.builder.group({
+      this.oppForm = this.builder.group({
         type: ["", Validators.required],
         name: ["", Validators.required],
         city: ["", Validators.required],
@@ -317,14 +317,14 @@ export class OppeditComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.formdata.type = this.profileForm.value.type;
-    this.formdata.name = this.profileForm.value.name;
-    this.formdata.city = this.profileForm.value.city;
-    this.formdata.state = this.profileForm.value.state;
-    this.formdata.region = this.profileForm.value.region;
-    this.formdata.income = this.profileForm.value.income;
-    this.formdata.bonus = this.profileForm.value.bonus;
-    this.formdata.move = this.profileForm.value.move;
+    this.formdata.type = this.oppForm.value.type;
+    this.formdata.name = this.oppForm.value.name;
+    this.formdata.city = this.oppForm.value.city;
+    this.formdata.state = this.oppForm.value.state;
+    this.formdata.region = this.oppForm.value.region;
+    this.formdata.income = this.oppForm.value.income;
+    this.formdata.bonus = this.oppForm.value.bonus;
+    this.formdata.move = this.oppForm.value.move;
     if (!this.formdata.income) {
       this.formdata.income = 0;
     }

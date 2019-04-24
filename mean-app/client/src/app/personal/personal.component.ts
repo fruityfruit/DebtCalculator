@@ -13,7 +13,7 @@ import { ViewChild } from "@angular/core";
 })
 export class PersonalComponent implements OnInit {
   username: String;
-  currProfile: any = {};
+  profile: any = {};
   profileForm: FormGroup;
   formdata: Profile = {
     username: "",
@@ -351,8 +351,8 @@ export class PersonalComponent implements OnInit {
     this.username = this.auth.getUsername();
     if (this.username !== null) {
       this.profService.getProfile(this.username).subscribe(res => {
-        this.currProfile = res;
-        this.stateChangeAction(this.currProfile.state);
+        this.profile = res;
+        this.stateChangeAction(this.profile.state);
       });
     }
     if (!this.auth.isLoggedIn()) {

@@ -14,7 +14,7 @@ import { SnackbaralertService } from "../snackbaralert.service";
 export class DebteditComponent implements OnInit {
   username: String;
   debt: any = {};
-  profileForm: FormGroup;
+  debtForm: FormGroup;
   formdata: Debt = {
     username: "",
     name: "",
@@ -30,7 +30,7 @@ export class DebteditComponent implements OnInit {
     private router: Router, private auth: AuthenticationService,
     private profService: ProfileService, private builder: FormBuilder,
     private oppService: OpportunityService, private alerts: SnackbaralertService) {
-      this.profileForm = this.builder.group({
+      this.debtForm = this.builder.group({
         name: ["", Validators.required],
         principal: [0, Validators.required],
         rate: [0],
@@ -41,7 +41,7 @@ export class DebteditComponent implements OnInit {
   }
 
   public isValid() {
-    if (this.profileForm.value.name && this.profileForm.value.principal && this.profileForm.value.opportunity) {
+    if (this.debtForm.value.name && this.debtForm.value.principal && this.debtForm.value.opportunity) {
       return true;
     }
     return false;
@@ -58,12 +58,12 @@ export class DebteditComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.formdata.name = this.profileForm.value.name;
-    this.formdata.principal = this.profileForm.value.principal;
-    this.formdata.rate = this.profileForm.value.rate;
-    this.formdata.annualCompounds = this.profileForm.value.annualCompounds;
-    this.formdata.monthlyPayment = this.profileForm.value.monthlyPayment;
-    this.formdata.opportunity = this.profileForm.value.opportunity;
+    this.formdata.name = this.debtForm.value.name;
+    this.formdata.principal = this.debtForm.value.principal;
+    this.formdata.rate = this.debtForm.value.rate;
+    this.formdata.annualCompounds = this.debtForm.value.annualCompounds;
+    this.formdata.monthlyPayment = this.debtForm.value.monthlyPayment;
+    this.formdata.opportunity = this.debtForm.value.opportunity;
     if (!this.formdata.rate) {
       this.formdata.rate = 0;
     }

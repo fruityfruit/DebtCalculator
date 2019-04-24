@@ -8,7 +8,7 @@
           <mat-card-subtitle>Your current username is: {{updateUsername.oldUsername}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <form class="ex1" [formGroup]="profileFormUser" (ngSubmit)="onUsername()">
+          <form class="ex1" [formGroup]="userForm" (ngSubmit)="onUsername()">
             <div class="form-group row">
               <div class="col-md-6">
                 <mat-form-field appearance="standard" hintLabel="New Username">
@@ -31,7 +31,7 @@
           <mat-card-title>Change Your Password</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form class="ex1" [formGroup]="profileFormPassword" (ngSubmit)="onPassword()">
+          <form class="ex1" [formGroup]="passwordForm" (ngSubmit)="onPassword()">
             <div class="form-group row">
               <div class="col-md-4">
                 <mat-form-field appearance="standard" hintLabel="Old Password">
@@ -59,7 +59,7 @@
           <mat-card-title>Delete Your Account</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form class="ex1" [formGroup]="profileFormDelete" (ngSubmit)="onDelete()">
+          <form class="ex1" [formGroup]="deleteForm" (ngSubmit)="onDelete()">
             <div class="form-group row">
                <div class="col-md-12">
                 <mat-form-field appearance="standard" hintLabel="Password">
@@ -67,7 +67,7 @@
                 </mat-form-field>
               </div>
             </div>
-            <button type="submit" [disabled]="!profileFormDelete.valid" mat-raised-button>Delete</button>
+            <button type="submit" [disabled]="!deleteForm.valid" mat-raised-button>Delete</button>
           </form>
         </mat-card-content>
       </mat-card>
