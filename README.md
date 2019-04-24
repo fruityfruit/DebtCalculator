@@ -56,7 +56,7 @@ Now you can go to http://localhost:4200/ to see it in action!
 
 ## Testing our project
 
-So far, we are using the following testing frameworks:
+We are using the following testing frameworks:
 
 ### Behavioral testing with Cypress
 
@@ -75,11 +75,16 @@ Then
 ```
 npm test
 ```
+
 ### Frontend unit testing with Karma and Jasmine
 
 To run our frontend tests, navigate to the "mean-app/client" directory of our project in a terminal window and type:
 ```
-ng test
+npm install
+```
+Then
+```
+npm test
 ```
 
 ## Deploying our project
@@ -105,32 +110,6 @@ export NODE_ENV='production'
 gcloud app deploy
 ```
 When our app is live, it can be seen in production at https://debt-calculator-csce-490.appspot.com/.
-
-## Developing with Angular
-
-### Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-### Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-### Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-### Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-### Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-### Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Style Guide
 
