@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../authentication.service";
 import { Router } from "@angular/router";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-navbar",
@@ -11,7 +11,7 @@ import { SnackbaralertService } from "../snackbaralert.service";
 export class NavbarComponent implements OnInit {
 
   constructor(public auth: AuthenticationService, private router: Router,
-              private alerts: SnackbaralertService) {
+              private alerts: SnackbarService) {
     this.auth.invokeEvent.subscribe(value => { //listens for the auth service to tell it to update the navbar
       this.updateColor(value);
     });

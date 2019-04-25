@@ -4,7 +4,7 @@ import { ProfileService, Debt } from "../profile.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "../authentication.service";
 import { OpportunityService, ShortOpportunity } from "../opportunity.service";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-debtedit",
@@ -29,7 +29,7 @@ export class DebteditComponent implements OnInit {
   constructor(private activatedRouter: ActivatedRoute,
               private router: Router, private auth: AuthenticationService,
               private profService: ProfileService, private builder: FormBuilder,
-              private oppService: OpportunityService, private alerts: SnackbaralertService) {
+              private oppService: OpportunityService, private alerts: SnackbarService) {
       this.debtForm = this.builder.group({
         name: ["", Validators.required],
         principal: [0, Validators.required],
@@ -91,7 +91,7 @@ export class DebteditComponent implements OnInit {
 
   /*
     On Init, this page first ensures that the user is logged in.
-    Then, this page calls getShortOpps in the oppService to get a list of the user's opportunities.
+    Then, this page calls getShortOpportunities in the oppService to get a list of the user's opportunities.
     It then populates the opportunity dropdown with these opportunity names.
     Lastly, it calls editDebt in the profService to get the specific debt that the user has asked to edit.
     If this debt's opportunity no longer exists, it resets this debt's opportunity to "".
@@ -102,9 +102,9 @@ export class DebteditComponent implements OnInit {
     if (this.username === null) {
       this.alerts.open("Please fill out the Profile page before accessing this page.");
       window.localStorage.setItem("profile-snackbar", "true");
-      this.router.navigateByUrl("/personal");
+      this.router.navigateByUrl("/profile");
     } else {
-      this.oppService.getShortOpps(this.username).subscribe((data: ShortOpportunity[]) => { //get the opportunities
+      this.oppService.getShortOpportunities(this.username).subscribe((data: ShortOpportunity[]) => { //get the opportunities
         var selectAll = { //this is the option that the user should select if the debt applies to all opportunities
           oppId:"all",
           oppName:"All Opportunities"

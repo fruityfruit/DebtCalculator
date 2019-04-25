@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import * as Rx from "rxjs";
 import { Router } from "@angular/router";
-import { SnackbaralertService } from "./snackbaralert.service";
+import { SnackbarService } from "./snackbar.service";
 
 export interface PasswordPayload {
   username: String;
@@ -32,61 +32,85 @@ interface TokenResponse {
 })
 export class AuthenticationService {
   private token: String;
-  private username: String;
+  private username: String = "";
   public invokeEvent: Rx.Subject<any> = new Rx.Subject(); //used to update the navbar
 
-  constructor(private http: HttpClient, private router: Router, private alerts: SnackbaralertService) {
-    this.username = "";
-  }
+  constructor(private http: HttpClient, private router: Router, private alerts: SnackbarService) {}
 
+  /*
+    This function saves a token and the time at which it was saved to the user's browser's cookies.
+  */
   private saveToken(token: string) {
-    var d = new Date();
-    localStorage.setItem("debt-calc-token", (d.getTime()+":"+token));
+    var date = new Date();
+    localStorage.setItem("debt-calc-token", (date.getTime()+":"+token));
     this.token = token;
   }
 
+  /*
+    This function saves a user's username to the user's browser's cookies.
+  */
   private saveUsername(username: string) {
     localStorage.setItem("debt-calc-username", username);
     this.username = username;
   }
 
-  // this method makes and handles the post requests required to login and logout a user
-  private post(type: "signin"|"register"|"username"|"password", user) {
-    var base = this.http.post(`/api/${type}`, user);
-    const request = base.pipe(
-      map((data: TokenResponse) => {
+  /*
+    This function makes and handles the API post requests required for a user to login and logout.
+  */
+  private post(type: "signin"|"register"|"username"|"password", user) { //can only handle signin, register, username, and password post requests
+    var apiResponse = this.http.post(`/api/${type}`, user); //makes the API call
+    const pipedResponse = apiResponse.pipe(
+      map((data: TokenResponse) => { //expects a TokenResponse to have been returned
         if (data.token) {
-          this.saveToken(data.token);
+          this.saveToken(data.token); //saves the token
         }
         if (data.username) {
-          this.saveUsername(data.username);
+          this.saveUsername(data.username); //saves the username
         }
         return data;
       })
     );
-    return request;
+    return pipedResponse;
   }
 
+  /*
+    This function calls the post function above to register a new user.
+  */
   public register(user: TokenPayload) {
     return this.post("register", user);
   }
 
+  /*
+    This function calls the post function above to sign a user in.
+  */
   public signin(user: TokenPayload) {
     return this.post("signin", user);
   }
 
+  /*
+    This function calls the post function above to change a user's username.
+  */
   public changeUsername(user: UsernamePayload) {
     return this.post("username", user);
   }
 
+  /*
+    This function calls the post function above to change a user's password.
+  */
   public changePassword(user: PasswordPayload) {
     return this.post("password", user);
   }
 
+  /*
+    This function makes an API call to the app's backend delete a user's account.
+  */
   public deleteProfile(user: TokenPayload) {
     return this.http.post(`/api/delete`, user);
   }
 
+  /*
+    This function signs a user out by clearing the cookies corresponding to their signed-in token and username.
+  */
   public signout() {
     this.token = "";
     this.username = "";
@@ -94,6 +118,9 @@ export class AuthenticationService {
     window.localStorage.removeItem("debt-calc-username");
   }
 
+  /*
+    This function returns the user's username, if applicable, or returns null if the user has not created a profile.
+  */
   public getUsername() {
     if (window.localStorage.getItem("debt-calc-username")) {
       return window.localStorage.getItem("debt-calc-username");
@@ -102,13 +129,19 @@ export class AuthenticationService {
     }
   }
 
+  /*
+    This function determines whether a user is logged in.
+    If the user has a login token that is less than 6 hours old, it returns true.
+    If the user has a login token that is expired, it alerts them that they have been logged out due to inactivity, navigates to the landing page, and returns false.
+    If the user has no token, it returns false.
+  */
   public isLoggedIn() {
     if (window.localStorage.getItem("debt-calc-token")) {
       var oldTime = window.localStorage.getItem("debt-calc-token");
       oldTime = oldTime.substring(0, oldTime.indexOf(":"));
-      var d = new Date();
-      var newTime = d.getTime();
-      if (newTime - Number(oldTime) > 21600000) { //six hours
+      var date = new Date();
+      var newTime = date.getTime();
+      if (newTime - Number(oldTime) > 21600000) { //the login token is at least six hours old
         this.signout();
         this.alerts.open("You have been logged out due to inactivity.");
         this.router.navigateByUrl("/home");
@@ -121,24 +154,30 @@ export class AuthenticationService {
     }
   }
 
-  // this method calls the "updateColor" method in the navbar component
+  /*
+    This function calls the updateColor method in the navbar component.
+  */
   public callUpdateColor(text: string) {
     this.invokeEvent.next(text);
   }
 
+  /*
+    This function takes a number and a number of desired decimal places.
+    It returns a string version of that number with commas, dollar signs, and decimals in the appropriate places.
+  */
   public formatMoney(money: number, decimal: boolean) {
-    var returnValue = "";
+    var formattedString = "";
     if (money < 0) {
       money = money * -1;
-      returnValue = "-";
+      formattedString = "-";
     }
-    var rounded = String(money.toFixed(2));
+    var roundedMoney = String(money.toFixed(2));
     var leadDigits = 0;
-    if (rounded.substr(0,rounded.indexOf(".")).length > 3) leadDigits = (rounded.length % 3);
-    returnValue = returnValue + "$" + (leadDigits ? rounded.substr(0, leadDigits) + "," : "") + rounded.substr(leadDigits).replace(/(\d{3})(?=\d)/g, "$1" + ",");
+    if (roundedMoney.substr(0,roundedMoney.indexOf(".")).length > 3) leadDigits = (roundedMoney.length % 3);
+    formattedString = formattedString + "$" + (leadDigits ? roundedMoney.substr(0, leadDigits) + "," : "") + roundedMoney.substr(leadDigits).replace(/(\d{3})(?=\d)/g, "$1" + ",");
     if (!decimal) {
-      returnValue = returnValue.substring(0,returnValue.length-3);
+      formattedString = formattedString.substring(0,formattedString.length-3);
     }
-    return returnValue;
+    return formattedString;
   }
 }

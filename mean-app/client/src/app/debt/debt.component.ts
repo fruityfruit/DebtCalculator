@@ -5,7 +5,7 @@ import { AuthenticationService } from "../authentication.service";
 import { ProfileService, Debt } from "../profile.service";
 import { OpportunityService, ShortOpportunity } from "../opportunity.service";
 import { Router } from "@angular/router";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-debt",
@@ -32,7 +32,7 @@ export class DebtComponent implements OnInit {
 
   constructor(private builder: FormBuilder, private router: Router,
               private auth: AuthenticationService, private profService: ProfileService,
-              private alerts: SnackbaralertService, private oppService: OpportunityService) {
+              private alerts: SnackbarService, private oppService: OpportunityService) {
     this.debtForm = this.builder.group({
       name: ["", Validators.required],
       principal: [0, Validators.required],
@@ -111,7 +111,7 @@ export class DebtComponent implements OnInit {
 
   /*
     On Init, this page first ensures that the user is logged in.
-    Then, this page calls getShortOpps in the oppService to get a list of the user's opportunities.
+    Then, this page calls getShortOpportunities in the oppService to get a list of the user's opportunities.
     It then populates the opportunity dropdown with these opportunity names.
     Lastly, it calls getDebts in the profService to get all of the user's debts and display them in the debt table.
   */
@@ -125,9 +125,9 @@ export class DebtComponent implements OnInit {
     if (this.username === null) {
       this.alerts.open("Please fill out the Profile page before accessing this page.");
       window.localStorage.setItem("profile-snackbar", "true");
-      this.router.navigateByUrl("/personal");
+      this.router.navigateByUrl("/profile");
     } else {
-      this.oppService.getShortOpps(this.username).subscribe((data: ShortOpportunity[]) => { //get the opportunities
+      this.oppService.getShortOpportunities(this.username).subscribe((data: ShortOpportunity[]) => { //get the opportunities
         this.opportunities = data["opportunities"];
         var selectAll = { //this is the option that the user should select if the debt applies to all opportunities
           oppId:"all",

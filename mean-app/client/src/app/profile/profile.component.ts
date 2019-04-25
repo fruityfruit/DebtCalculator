@@ -2,16 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthenticationService, TokenPayload } from "../authentication.service";
 import { ProfileService, Profile } from "../profile.service";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 import { Router } from "@angular/router";
-import { ViewChild } from "@angular/core";
 
 @Component({
-  selector: "app-personal",
-  templateUrl: "./personal.component.html",
-  styleUrls: ["./personal.component.css"]
+  selector: "app-profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.css"]
 })
-export class PersonalComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   username: String;
   profile: any = {};
   profileForm: FormGroup;
@@ -295,7 +294,7 @@ export class PersonalComponent implements OnInit {
   ];
 
   constructor(private builder: FormBuilder, private router: Router, private auth: AuthenticationService,
-              private profService: ProfileService, private alerts: SnackbaralertService) {
+              private profService: ProfileService, private alerts: SnackbarService) {
     this.profileForm = this.builder.group({
       state: ["", Validators.required],
       region: ["", Validators.required],
@@ -306,6 +305,13 @@ export class PersonalComponent implements OnInit {
     });
   }
 
+  /*
+    This function creates the user's profile.
+    If the user is not already logged in, it first registers the user, giving them a temporary username that can be changed later.
+    Regardless of this action, the function then calls the updateProfile function in the profile service.
+    If the call is successful, it navigates the app to the opportunity page.
+    If the call is unsuccessful, it tells the user why.
+  */
   public onSubmit() {
     this.formdata.groceries = this.profileForm.value.groceries;
     this.formdata.rent = this.profileForm.value.rent;
@@ -313,11 +319,11 @@ export class PersonalComponent implements OnInit {
     this.formdata.savings = this.profileForm.value.savings;
     this.formdata.state = this.profileForm.value.state;
     this.formdata.region = this.profileForm.value.region;
-    if (this.username === null) {
-      this.auth.register(this.credentials).subscribe(() => {
+    if (this.username === null) { //the user is not logged in
+      this.auth.register(this.credentials).subscribe(() => { //register the user with a temporary username
         this.username = this.auth.getUsername();
         this.formdata.username = this.username;
-        this.profService.updateProfile(this.formdata).subscribe(() => {
+        this.profService.updateProfile(this.formdata).subscribe(() => { //update the user's profile
           this.router.navigate(["opportunity"]);
         }, (err) => {
           console.log(err);
@@ -326,9 +332,9 @@ export class PersonalComponent implements OnInit {
         console.log(err);
       });
     }
-    else {
+    else { //the user is logged in
       this.formdata.username = this.username;
-      this.profService.updateProfile(this.formdata).subscribe(() => {
+      this.profService.updateProfile(this.formdata).subscribe(() => { //update the user's profile
         this.router.navigate(["opportunity"]);
       }, (err) => {
         console.log(err);
@@ -348,26 +354,31 @@ export class PersonalComponent implements OnInit {
     }
   }
 
+  /*
+    On Init, this page first checks whether the user is logged in.
+    If the user is logged in, it populates the page with the user's current profile data.
+    If the user is not logged in, it warns the user that their data will not be saved if they do log into an account later.
+  */
   ngOnInit() {
     this.auth.callUpdateColor("profile");
     this.username = this.auth.getUsername();
-    if (this.username !== null) {
-      this.profService.getProfile(this.username).subscribe(res => {
+    if (this.username !== null) { //the user is logged in
+      this.profService.getProfile(this.username).subscribe(res => { //gets the current profile
         this.profile = res;
         this.changeRegionList(this.profile.state);
       });
     }
-    if (!this.auth.isLoggedIn()) {
-      if (window.localStorage.getItem("profile-snackbar")) {
+    if (!this.auth.isLoggedIn()) { //the user is not logged in
+      if (window.localStorage.getItem("profile-snackbar")) { //another snackbar is already open
         window.localStorage.removeItem("profile-snackbar");
         var duplicateAlerts = this.alerts;
-        setTimeout(function() {
+        setTimeout(function() { //wait for that other snackbar close
           window.localStorage.setItem("persistent-snackbar", "true");
-          duplicateAlerts.openLoginWarning();
+          duplicateAlerts.openLoginWarning(); //open a snackbar warning the user about not being logged in
         }, 5000);
-      } else {
+      } else { //no other snackbar is open, so we can alert immediately
         window.localStorage.setItem("persistent-snackbar", "true");
-        this.alerts.openLoginWarning();
+        this.alerts.openLoginWarning(); //open a snackbar warning the user about not being logged in
       }
     }
   }

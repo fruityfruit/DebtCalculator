@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../authentication.service";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-info",
@@ -9,7 +9,7 @@ import { SnackbaralertService } from "../snackbaralert.service";
 })
 export class InfoComponent implements OnInit {
 
-  constructor(private auth: AuthenticationService, private alerts: SnackbaralertService) { }
+  constructor(private auth: AuthenticationService, private alerts: SnackbarService) { }
 
   /*
     On Init, this page first recolors the navbar to un-highlight any other pages that may have been previously highlit and highlight this page.

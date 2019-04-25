@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../authentication.service";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-home",
@@ -9,8 +9,8 @@ import { SnackbaralertService } from "../snackbaralert.service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public auth: AuthenticationService, private alerts: SnackbaralertService) { }
-
+  constructor(public auth: AuthenticationService, private alerts: SnackbarService) { }
+  
   /*
     On Init, this page first recolors the navbar to un-highlight any other pages that may have been previously highlit.
     It then removes the "persistent-snackbar" boolean from the user's cookies and clears the alert, if applicable.

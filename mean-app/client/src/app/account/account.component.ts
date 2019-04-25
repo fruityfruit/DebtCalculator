@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthenticationService, UsernamePayload, PasswordPayload, TokenPayload } from "../authentication.service";
 import { Router } from "@angular/router";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-account",
@@ -29,7 +29,7 @@ export class AccountComponent implements OnInit {
   };
 
   constructor(private auth: AuthenticationService, private router: Router,
-              private alerts: SnackbaralertService, private builder: FormBuilder) {
+              private alerts: SnackbarService, private builder: FormBuilder) {
     this.userForm = this.builder.group({
       newUsername: ["", Validators.required],
       password: ["", Validators.required]

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthenticationService, TokenPayload } from "../authentication.service";
 import { Router } from "@angular/router";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-signin",
@@ -17,13 +17,18 @@ export class SigninComponent implements OnInit {
   }
 
   constructor(private auth: AuthenticationService, private router: Router,
-              private alerts: SnackbaralertService, private builder: FormBuilder) {
+              private alerts: SnackbarService, private builder: FormBuilder) {
     this.loginForm = this.builder.group({
       username: ["", Validators.required],
       password: ["", Validators.required]
     });
   }
 
+  /*
+    This function signs a user into their account. It calls the signin function in the auth service to do this.
+    If the call is successful, it alerts the user and navigates the app to the landing page.
+    If the call is unsuccessful, it tells the user why.
+  */
   public signin() {
     this.credentials.username = this.loginForm.value.username;
     this.credentials.password = this.loginForm.value.password;

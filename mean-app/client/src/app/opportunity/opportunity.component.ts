@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { OpportunityService, Opportunity } from "../opportunity.service";
 import { AuthenticationService } from "../authentication.service";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 
@@ -296,7 +296,7 @@ export class OpportunityComponent implements OnInit {
 
   constructor(private builder: FormBuilder, private oppService: OpportunityService,
               private auth: AuthenticationService, private router: Router,
-              private alerts: SnackbaralertService) {
+              private alerts: SnackbarService) {
     this.oppForm = this.builder.group({
       type: ["", Validators.required],
       name: ["", Validators.required],
@@ -323,7 +323,7 @@ export class OpportunityComponent implements OnInit {
 
   /*
     This function creates a new opportunity. It first sets empty, optional values to 0.
-    Then it calls the addOpportunity function in the opportunity service.
+    Then it calls the createOpportunity function in the opportunity service.
     If the call is successful, it resets the form and updates the contents of the chart.
     If the call is unsuccessful, it tells the user why and resets the form.
   */
@@ -343,7 +343,7 @@ export class OpportunityComponent implements OnInit {
     if (!this.formdata.bonus) {
       this.formdata.bonus = 0;
     }
-    this.oppService.addOpportunity(this.formdata).subscribe(() => {
+    this.oppService.createOpportunity(this.formdata).subscribe(() => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
         this.opportunities = data["opportunities"];
         this.dataSource.data = this.opportunities;
@@ -401,7 +401,7 @@ export class OpportunityComponent implements OnInit {
     if (this.username === null) {
       this.alerts.open("Please fill out the Profile page before accessing this page.");
       window.localStorage.setItem("profile-snackbar", "true");
-      this.router.navigateByUrl("/personal");
+      this.router.navigateByUrl("/profile");
     } else {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => { //update the opportunity table
         this.opportunities = data["opportunities"];

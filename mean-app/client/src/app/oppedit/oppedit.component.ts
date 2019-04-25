@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms"
 import { OpportunityService, Opportunity } from "../opportunity.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "../authentication.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-oppedit",
@@ -292,7 +293,7 @@ export class OppeditComponent implements OnInit {
 
   constructor(private activatedRouter: ActivatedRoute, private router: Router,
               private auth: AuthenticationService, private oppService: OpportunityService,
-              private builder: FormBuilder) {
+              private builder: FormBuilder, private alerts: SnackbarService) {
       this.oppForm = this.builder.group({
         type: ["", Validators.required],
         name: ["", Validators.required],
@@ -355,16 +356,24 @@ export class OppeditComponent implements OnInit {
   }
 
   /*
-    On Init, this page calls editOpportunity in the opportunity service to get the specific opportunity that the user has asked to edit.
-    It then calls changeRegionList to populate the region dropdown data.
+    On Init, this page first ensures that the user is logged in.
+    Then it calls editOpportunity in the opportunity service to get the specific opportunity that the user has asked to edit.
+    It finally calls changeRegionList to populate the region dropdown data.
   */
   ngOnInit() {
     this.auth.callUpdateColor("other");
-    this.activatedRouter.params.subscribe(params => {
-      this.oppService.editOpportunity(params["id"]).subscribe(res => {
-        this.opportunity = res;
-        this.changeRegionList(this.opportunity.state);
+    var username = this.auth.getUsername();
+    if (username === null) {
+      this.alerts.open("Please fill out the Profile page before accessing this page.");
+      window.localStorage.setItem("profile-snackbar", "true");
+      this.router.navigateByUrl("/profile");
+    } else {
+      this.activatedRouter.params.subscribe(params => {
+        this.oppService.editOpportunity(params["id"]).subscribe(res => {
+          this.opportunity = res;
+          this.changeRegionList(this.opportunity.state);
+        });
       });
-    });
+    }
   }
 }

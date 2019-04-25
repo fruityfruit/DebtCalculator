@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthenticationService, TokenPayload } from "../authentication.service";
 import { Router } from "@angular/router";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-register",
@@ -17,17 +17,23 @@ export class RegisterComponent implements OnInit {
   }
 
   constructor(private auth: AuthenticationService, private router: Router,
-              private alerts: SnackbaralertService, private builder: FormBuilder) {
+              private alerts: SnackbarService, private builder: FormBuilder) {
     this.registerForm = this.builder.group({
       username: ["", Validators.required],
       password: ["", Validators.required]
     });
   }
 
+  /*
+    This function registers a user for a new account. It first checks whether the user has entered a known invalid username.
+    It calls the register function in the auth service to actually register the user.
+    If the call is successful, it alerts the user and navigates the app to the landing page.
+    If the call is unsuccessful, it tells the user why.
+  */
   public register() {
     this.credentials.username = this.registerForm.value.username;
     this.credentials.password = this.registerForm.value.password;
-    if (this.credentials.username === "" || this.credentials.username.search(/dlcptwfcmc/i) > -1) { //the username uses our dummy sequence for temporary usernames
+    if (this.credentials.username === "" || this.credentials.username.search(/dlcptwfcmc/i) > -1) { //the username uses our sequence for temporary usernames
       this.alerts.open("Sorry, that username has already been taken. Please try another!");
     } else {
       this.auth.register(this.credentials).subscribe(() => {

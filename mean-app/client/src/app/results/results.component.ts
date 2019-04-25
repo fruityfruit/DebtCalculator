@@ -4,11 +4,11 @@ import { Chart } from "chart.js";
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService, PasswordPayload, UsernamePayload} from "../authentication.service";
 import { OpportunityService, Opportunity } from "../opportunity.service";
-import { ResultService, ResultSet, ResultSetOpp } from "../result.service";
+import { ResultService, ZillowSet, SavingsSet } from "../result.service";
 import { ProfileService, Profile, Debt } from "../profile.service";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
-import { SnackbaralertService } from "../snackbaralert.service";
+import { SnackbarService } from "../snackbar.service";
 
 @Component({
   selector: "app-results",
@@ -18,8 +18,8 @@ import { SnackbaralertService } from "../snackbaralert.service";
 
 export class ResultsComponent implements OnInit {
   username: string = "";
-  zillowResults: ResultSet[] = [];
-  rankings: ResultSetOpp[]=[];
+  zillowResults: ZillowSet[] = [];
+  rankings: SavingsSet[]=[];
   blsChart = [] as Chart;
   debtProjection = [] as Chart;
   netIncome = [] as Chart;
@@ -49,7 +49,7 @@ export class ResultsComponent implements OnInit {
 
   constructor(public auth: AuthenticationService, private resultService: ResultService,
               private oppService: OpportunityService, private profService: ProfileService,
-              private builder: FormBuilder, private router: Router, private alerts: SnackbaralertService) {
+              private builder: FormBuilder, private router: Router, private alerts: SnackbarService) {
     this.registerForm = this.builder.group({
       username: ["", Validators.required],
       password: ["", Validators.required]
@@ -71,7 +71,7 @@ export class ResultsComponent implements OnInit {
       if (!(this.profile.username && this.profile.state && this.profile.region && (this.profile.groceries >= 0) && (this.profile.rent >= 0) && (this.profile.spending >= 0) && (this.profile.savings >= 0))) {
         this.alerts.open("Please fill out the Profile page before accessing this page.");
         window.localStorage.setItem("profile-snackbar", "true");
-        this.router.navigateByUrl("/personal");
+        this.router.navigateByUrl("/profile");
       } else {
         this.resultService.getChartsData(this.username).subscribe((data: any) => { //returns the debts and opportunities for each user
           var tempUsername = this.username;
@@ -701,7 +701,7 @@ export class ResultsComponent implements OnInit {
       var yearOne = this.netIncome.data["datasets"][sortedOpps[i]].data[12];
       var yearThree = this.netIncome.data["datasets"][sortedOpps[i]].data[36];
       var income = this.opportunities[sortedOpps[i]].income;
-      var oppResult: ResultSetOpp = {
+      var oppResult: SavingsSet = {
         oppName: this.opportunities[sortedOpps[i]].name,
         city: this.opportunities[sortedOpps[i]].city,
         income: this.auth.formatMoney(income, true),
@@ -728,7 +728,7 @@ export class ResultsComponent implements OnInit {
   private getOpportunityZillow(oppName: string, city: string, id: string) {
     this.resultService.getZillowData(id).subscribe((data) => {
       if (data["average"] > 0) {
-        var result: ResultSet = {
+        var result: ZillowSet = {
           oppName: oppName,
           city: city,
           zillowData: this.auth.formatMoney(data["average"], true)
@@ -737,7 +737,7 @@ export class ResultsComponent implements OnInit {
       }
       this.dataSource.data = this.zillowResults;
     }, (err) => {
-      var result: ResultSet = {
+      var result: ZillowSet = {
         oppName: oppName,
         city: city,
         zillowData: "Zillow does not have estimate data for this city."
@@ -792,7 +792,7 @@ export class ResultsComponent implements OnInit {
     if (this.username === null) {
       this.alerts.open("Please fill out the Profile page before accessing this page.");
       window.localStorage.setItem("profile-snackbar", "true");
-      this.router.navigateByUrl("/personal");
+      this.router.navigateByUrl("/profile");
     } else {
       this.getData(true);
     }

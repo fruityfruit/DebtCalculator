@@ -30,9 +30,9 @@ router.post("/opportunity/edit/:id", ctrlOpp.updateOpp);
 
 router.get("/opportunity/delete/:username/:id", ctrlOpp.deleteOpp);
 
-router.post("/personal", ctrlProfile.updateProfile);
+router.post("/profile", ctrlProfile.updateProfile);
 
-router.get("/personal/:username", ctrlProfile.getProfile);
+router.get("/profile/:username", ctrlProfile.getProfile);
 
 router.post("/debt", ctrlProfile.createDebt);
 
