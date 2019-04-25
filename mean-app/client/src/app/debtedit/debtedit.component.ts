@@ -27,9 +27,9 @@ export class DebteditComponent implements OnInit {
   oppList = [];
 
   constructor(private activatedRouter: ActivatedRoute,
-    private router: Router, private auth: AuthenticationService,
-    private profService: ProfileService, private builder: FormBuilder,
-    private oppService: OpportunityService, private alerts: SnackbaralertService) {
+              private router: Router, private auth: AuthenticationService,
+              private profService: ProfileService, private builder: FormBuilder,
+              private oppService: OpportunityService, private alerts: SnackbaralertService) {
       this.debtForm = this.builder.group({
         name: ["", Validators.required],
         principal: [0, Validators.required],

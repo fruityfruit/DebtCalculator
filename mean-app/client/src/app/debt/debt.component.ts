@@ -31,8 +31,8 @@ export class DebtComponent implements OnInit {
   displayedColumns: string[] = ["name", "principal", "rate", "monthlypayment", "edit", "delete"];
 
   constructor(private builder: FormBuilder, private router: Router,
-    private auth: AuthenticationService, private profService: ProfileService,
-    private alerts: SnackbaralertService, private oppService: OpportunityService) {
+              private auth: AuthenticationService, private profService: ProfileService,
+              private alerts: SnackbaralertService, private oppService: OpportunityService) {
     this.debtForm = this.builder.group({
       name: ["", Validators.required],
       principal: [0, Validators.required],
@@ -57,10 +57,10 @@ export class DebtComponent implements OnInit {
   /*
     This function creates a new debt. It first sets empty, optional values to 0.
     Then it calls the createDebt function in the profile service.
-    If the call is successful, it resets the form, updates the contents of the chart, and alerts the user of the success.
+    If the call is successful, it resets the form and updates the contents of the chart.
     If the call is unsuccessful, it tells the user why and resets the form.
   */
-  public onSubmitDebt() {
+  public onSubmit() {
     this.formdata.name = this.debtForm.value.name;
     this.formdata.principal = this.debtForm.value.principal;
     this.formdata.rate = this.debtForm.value.rate;

@@ -17,7 +17,7 @@ export class SigninComponent implements OnInit {
   }
 
   constructor(private auth: AuthenticationService, private router: Router,
-  private alerts: SnackbaralertService, private builder: FormBuilder) {
+              private alerts: SnackbaralertService, private builder: FormBuilder) {
     this.loginForm = this.builder.group({
       username: ["", Validators.required],
       password: ["", Validators.required]

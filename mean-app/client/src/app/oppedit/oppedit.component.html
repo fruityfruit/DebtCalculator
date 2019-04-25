@@ -18,7 +18,7 @@
           </div>
           <div class="col-md-4">
             <mat-form-field appearance="standard" hintLabel="State">
-              <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(state._value)"
+              <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="changeRegionList(state._value)"
               #state [(ngModel)] = "opportunity.state">
                 <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
               </mat-select>

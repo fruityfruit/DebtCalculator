@@ -2,7 +2,7 @@
   <div class="cen container-fluid mat-elevation-z2">
     <div class="example-container">
       <h1 class="mdc-typography--headline1" style="text-align: center; margin-top: 10px; margin-bottom: 20px">Debt Sources</h1>
-      <form [formGroup]="debtForm" (ngSubmit)="onSubmitDebt()">
+      <form [formGroup]="debtForm" (ngSubmit)="onSubmit()">
         <div class="form-group row row-padding">
           <mat-form-field appearance="standard" hintLabel="Debt Name">
             <input matInput type="text" class="form-control" formControlName="name" placeholder="Name this debt">

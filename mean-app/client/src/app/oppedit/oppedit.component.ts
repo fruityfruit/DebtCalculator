@@ -290,10 +290,9 @@ export class OppeditComponent implements OnInit {
     },
   ];
 
-  constructor(private activatedRouter: ActivatedRoute,
-    private router: Router, private auth: AuthenticationService,
-    private oppService: OpportunityService,
-    private builder: FormBuilder) {
+  constructor(private activatedRouter: ActivatedRoute, private router: Router,
+              private auth: AuthenticationService, private oppService: OpportunityService,
+              private builder: FormBuilder) {
       this.oppForm = this.builder.group({
         type: ["", Validators.required],
         name: ["", Validators.required],
@@ -306,6 +305,11 @@ export class OppeditComponent implements OnInit {
       });
     }
 
+  /*
+    This function updates the opportunity we are editing. It first calls the updateOpportunity function in the opportunity service.
+    If the call is successful, it navigates back to the opportunities page.
+    If the call is unsuccessful, it tells the user why.
+  */
   private updateOpportunity() {
     this.activatedRouter.params.subscribe(params => {
       this.oppService.updateOpportunity(this.formdata, params["id"]).subscribe(() => {
@@ -316,6 +320,10 @@ export class OppeditComponent implements OnInit {
     });
   }
 
+  /*
+    This function is called when the user clicks the Update button. It first sets empty, optional values to 0.
+    Then it calls the updateOpportunity function above.
+  */
   public onSubmit() {
     this.formdata.type = this.oppForm.value.type;
     this.formdata.name = this.oppForm.value.name;
@@ -334,7 +342,10 @@ export class OppeditComponent implements OnInit {
     this.updateOpportunity();
   }
 
-  public stateChangeAction(stateCode) {
+  /*
+    This function populates the region dropdown, which is dependent upon the state dropdown.
+  */
+  public changeRegionList(stateCode) {
     let dropDownData = this.stateList.find((data: any) => data.stateCode === stateCode);
     if (dropDownData) {
       this.regionList = dropDownData.regionList;
@@ -343,12 +354,16 @@ export class OppeditComponent implements OnInit {
     }
   }
 
+  /*
+    On Init, this page calls editOpportunity in the opportunity service to get the specific opportunity that the user has asked to edit.
+    It then calls changeRegionList to populate the region dropdown data.
+  */
   ngOnInit() {
     this.auth.callUpdateColor("other");
     this.activatedRouter.params.subscribe(params => {
       this.oppService.editOpportunity(params["id"]).subscribe(res => {
         this.opportunity = res;
-        this.stateChangeAction(this.opportunity.state);
+        this.changeRegionList(this.opportunity.state);
       });
     });
   }

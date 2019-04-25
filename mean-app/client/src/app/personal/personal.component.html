@@ -40,7 +40,7 @@
         <div class="form-group row">
           <div class="col-md-6">
             <mat-form-field appearance="standard" hintLabel="State Of Your Current Residence">
-              <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="stateChangeAction(state._value)"
+              <mat-select class="form-control" formControlName="state" placeholder="Select an option" (selectionChange)="changeRegionList(state._value)"
               #state [(ngModel)] = "profile.state">
                 <mat-option *ngFor="let state of stateList" [value]="state.stateCode">{{state.stateName}}</mat-option>
               </mat-select>

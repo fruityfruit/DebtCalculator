@@ -295,8 +295,8 @@ export class OpportunityComponent implements OnInit {
   ];
 
   constructor(private builder: FormBuilder, private oppService: OpportunityService,
-    private auth: AuthenticationService, private router: Router,
-    private alerts: SnackbaralertService) {
+              private auth: AuthenticationService, private router: Router,
+              private alerts: SnackbaralertService) {
     this.oppForm = this.builder.group({
       type: ["", Validators.required],
       name: ["", Validators.required],
@@ -309,14 +309,24 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
+  /*
+    This function implements custom form validation.
+    It requires that every field except for income and bonus be filled in.
+  */
   public isValid() {
     if (this.oppForm.value.type && this.oppForm.value.name && this.oppForm.value.city && this.oppForm.value.state &&
-      this.oppForm.value.region && this.oppForm.value.move) { //income is not required
+      this.oppForm.value.region && this.oppForm.value.move) {
       return true;
     }
     return false;
   }
 
+  /*
+    This function creates a new opportunity. It first sets empty, optional values to 0.
+    Then it calls the addOpportunity function in the opportunity service.
+    If the call is successful, it resets the form and updates the contents of the chart.
+    If the call is unsuccessful, it tells the user why and resets the form.
+  */
   public onSubmit() {
     this.formdata.type = this.oppForm.value.type;
     this.formdata.name = this.oppForm.value.name;
@@ -351,6 +361,11 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
+  /*
+    This function deletes an opportunity. It first calls the deleteOpportunity function in the opportunity service.
+    If the call is successful, it then calls the getOpportunities function in the opportunity service to get all of the user's opportunities.
+    It then updates the opportunity table.
+  */
   public deleteOpportunity(id: String) {
     this.oppService.deleteOpportunity(this.username, id).subscribe(res => {
       this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
@@ -360,7 +375,10 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
-  public stateChangeAction(stateCode) {
+  /*
+    This function populates the region dropdown, which is dependent upon the state dropdown.
+  */
+  public changeRegionList(stateCode) {
     let dropDownData = this.stateList.find((data: any) => data.stateCode === stateCode);
     if (dropDownData) {
       this.regionList = dropDownData.regionList;
@@ -369,6 +387,10 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
+  /*
+    On Init, this page first ensures that the user is logged in.
+    Then, it calls getOpportunities in the opportunity service to get all of the user's opportunities and display them in the opportunity table.
+  */
   ngOnInit() {
     this.auth.callUpdateColor("opportunities");
     this.oppForm.reset();
@@ -381,7 +403,7 @@ export class OpportunityComponent implements OnInit {
       window.localStorage.setItem("profile-snackbar", "true");
       this.router.navigateByUrl("/personal");
     } else {
-      this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => {
+      this.oppService.getOpportunities(this.username).subscribe((data: Opportunity[]) => { //update the opportunity table
         this.opportunities = data["opportunities"];
         this.dataSource.data = this.opportunities;
       });

@@ -294,9 +294,8 @@ export class PersonalComponent implements OnInit {
     },
   ];
 
-  constructor(private builder: FormBuilder, private router: Router,
-    private auth: AuthenticationService, private profService: ProfileService,
-    private alerts: SnackbaralertService) {
+  constructor(private builder: FormBuilder, private router: Router, private auth: AuthenticationService,
+              private profService: ProfileService, private alerts: SnackbaralertService) {
     this.profileForm = this.builder.group({
       state: ["", Validators.required],
       region: ["", Validators.required],
@@ -337,7 +336,10 @@ export class PersonalComponent implements OnInit {
     }
   }
 
-  public stateChangeAction(stateCode) {
+  /*
+    This function populates the region dropdown, which is dependent upon the state dropdown.
+  */
+  public changeRegionList(stateCode) {
     let dropDownData = this.stateList.find((data: any) => data.stateCode === stateCode);
     if (dropDownData) {
       this.regionList = dropDownData.regionList;
@@ -352,7 +354,7 @@ export class PersonalComponent implements OnInit {
     if (this.username !== null) {
       this.profService.getProfile(this.username).subscribe(res => {
         this.profile = res;
-        this.stateChangeAction(this.profile.state);
+        this.changeRegionList(this.profile.state);
       });
     }
     if (!this.auth.isLoggedIn()) {

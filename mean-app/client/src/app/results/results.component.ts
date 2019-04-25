@@ -48,8 +48,8 @@ export class ResultsComponent implements OnInit {
   colors = ["darkgreen", "aqua", "indigo", "maroon", "skyblue", "magenta", "pink", "gold", "salmon", "mediumseagreen"];
 
   constructor(public auth: AuthenticationService, private resultService: ResultService,
-    private oppService: OpportunityService, private profService: ProfileService,
-    private builder: FormBuilder, private router: Router, private alerts: SnackbaralertService) {
+              private oppService: OpportunityService, private profService: ProfileService,
+              private builder: FormBuilder, private router: Router, private alerts: SnackbaralertService) {
     this.registerForm = this.builder.group({
       username: ["", Validators.required],
       password: ["", Validators.required]
