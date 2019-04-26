@@ -162,7 +162,7 @@ export class AuthenticationService {
   }
 
   /*
-    This function takes a number and a number of desired decimal places.
+    This function takes a number and whether or not decimal places are desired.
     It returns a string version of that number with commas, dollar signs, and decimals in the appropriate places.
   */
   public formatMoney(money: number, decimal: boolean) {

@@ -30,21 +30,21 @@
       <div *ngIf="debts.length || opportunities.length">
         <form class="ex1" [formGroup]="chartForm" (ngSubmit)="updateCharts()" style="margin: 0px 5px">
           <mat-form-field appearance="standard" hintLabel="Number of Months" style="max-width: calc(100% - 141px)">
-            <input matInput type="number" class="form-control" formControlName="numMonths" placeholder="Over how many months would you like to view the charts?" onkeypress="return(this.value.length < 3)" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
+            <input matInput type="number" class="form-control" formControlName="numberOfMonths" placeholder="Over how many months would you like to view the charts?" onkeypress="return(this.value.length < 3)" onkeydown="return (event.key !== 'e' && event.key !== '-' && event.key !== '.')">
           </mat-form-field>
-          <button type="submit" [disabled]="!chartForm.value.numMonths" mat-raised-button class="more-left-margin">Update Charts!</button>
+          <button type="submit" [disabled]="!chartForm.value.numberOfMonths" mat-raised-button class="more-left-margin">Update Charts!</button>
         </form>
       </div>
       <div *ngIf="debtProjection">
-        <canvas id="canvas0">{{ debtProjection }}</canvas>
+        <canvas id="debtCanvas">{{ debtProjection }}</canvas>
       </div>
-      <div *ngIf="netIncome">
-        <canvas id="canvas1">{{ netIncome }}</canvas>
+      <div *ngIf="savingsProjection">
+        <canvas id="savingsCanvas">{{ savingsProjection }}</canvas>
       </div>
       <div *ngIf="blsChart">
-        <canvas id="canvas2">{{ blsChart }}</canvas>
+        <canvas id="blsCanvas">{{ blsChart }}</canvas>
       </div>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="zillowResults && zillowResults.length">
+      <table mat-table [dataSource]="zillowSource" class="mat-elevation-z2" *ngIf="zillowResults && zillowResults.length">
         <caption class="caption-style">Zillow Home Ownership Data</caption>
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Opportunity Name </mat-header-cell>
