@@ -846,6 +846,7 @@ export class ResultsComponent implements OnInit {
       this.router.navigateByUrl("/profile");
     } else {
       this.getData(true);
+      // @ts-ignore
       twttr.widgets.load();
     }
   }
