@@ -89,7 +89,7 @@ npm test
 
 ### Automatic testing with Travis
 
-Our frontend and backend unit tests are run automatically on each commit by Travis.
+Our backend unit tests are run automatically on each commit by Travis. The frontend unit tests and behavioral tests require browser interaction, so they are not compatible with Travis' automated testing procedure.
 
 ## Deploying our project
 

@@ -4,10 +4,5 @@ node_js:
 install:
     - cd mean-app/
     - npm install
-    - cd client/
-    - npm install
-    - cd ..
 script:
-    - npm test
-    - cd client/
     - npm test

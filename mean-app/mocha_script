@@ -2,5 +2,3 @@
 
 export NODE_ENV='testing'
 mocha & sleep 5
-kill -0 $! && kill $!
-mongo testDebtDB --eval "db.dropDatabase()" > /dev/null 2>&1
