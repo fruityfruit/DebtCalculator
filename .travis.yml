@@ -1,9 +1,13 @@
 language: node_js
 node_js:
-  - "7"
+  - "node"
 install:
     - cd mean-app/
     - npm install
+    - cd client/
+    - npm install
+    - cd ..
 script:
     - npm test
-    - ./cypress_script.sh
+    - cd client/
+    - npm test
