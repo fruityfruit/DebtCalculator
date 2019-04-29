@@ -2,7 +2,7 @@ describe('Application Test',function(){
   it('Visit DebtCalculator',function(){
     cy.visit('http://localhost:4200/')
     cy.contains('Get Started').click()
-    cy.url().should('include','/personal')
+    cy.url().should('include','/profile')
     cy.get('.form-control').first().type('1000')
 
     cy.get('input').eq(1).type('500')  //  cy.get('.form-control').first().type('2000')

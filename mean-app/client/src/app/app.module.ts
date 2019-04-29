@@ -28,6 +28,7 @@ import { SnackbarService } from "./snackbar.service";
 import { AccountComponent } from "./account/account.component";
 import { DebteditComponent } from "./debtedit/debtedit.component";
 import { DebtComponent } from "./debt/debt.component";
+import { RouterTestingModule } from '@angular/router/testing';
 
 // Define the app's URL routes
 const ROUTES = [
@@ -101,6 +102,7 @@ const ROUTES = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    RouterTestingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
