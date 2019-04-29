@@ -64,6 +64,7 @@ To run our behavioral tests, navigate to the "mean-app" directory of our project
 ```
 ./cypress_script.sh
 ```
+These tests are located in the "mean-app/cypress/integration" directory.
 
 ### Backend unit testing with Mocha
 
@@ -75,6 +76,7 @@ Then
 ```
 npm test
 ```
+These tests are located in the "mean-app/test" directory.
 
 ### Frontend unit testing with Karma and Jasmine
 
@@ -86,6 +88,7 @@ Then
 ```
 npm test
 ```
+These tests are located in the "mean-app/client/src/app/*.service.spec.ts" files.
 
 ### Automatic testing with Travis
 
