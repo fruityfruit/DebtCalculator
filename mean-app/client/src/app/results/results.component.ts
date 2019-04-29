@@ -772,6 +772,13 @@ export class ResultsComponent implements OnInit {
           zillowData: this.auth.formatMoney(data["average"], true)
         };
         this.zillowResults.push(result);
+      } else {
+        var result: ZillowSet = { //display the fact that there is no Zillow data
+          oppName: oppName,
+          city: city,
+          zillowData: "Zillow does not have estimate data for this city."
+        };
+        this.zillowResults.push(result);
       }
       this.zillowSource.data = this.zillowResults; //update the table
     }, (err) => {
