@@ -1,11 +1,10 @@
-describe('Application Test',function(){
-  it('Visit DebtCalculator',function(){
+describe('Application Test', function() {
+  it('Visit DebtCalculator', function() {
     cy.visit('http://localhost:4200/')
     cy.contains('Get Started').click()
-    cy.url().should('include','/profile')
+    cy.url().should('include', '/profile')
     cy.get('.form-control').first().type('1000')
-
-    cy.get('input').eq(1).type('500')  //  cy.get('.form-control').first().type('2000')
+    cy.get('input').eq(1).type('500')
     cy.get('input').eq(2).type('200')
     cy.get('input').eq(3).type('4000')
     cy.get('.mat-select').first().click({ force: true })
