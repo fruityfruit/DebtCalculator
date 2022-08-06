@@ -13,7 +13,7 @@
     "hammerjs": "^2.0.8",
     "jsonwebtoken": "^5.0.4",
     "mocha": "^5.2.0",
-    "mongoose": "^5.4.19",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "node-zillow": "^2.0.0",
     "should": "^13.2.3",
