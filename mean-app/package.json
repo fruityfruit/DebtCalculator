@@ -8,8 +8,8 @@
   "private": true,
   "dependencies": {
     "bls2": "^1.0.2",
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
     "hammerjs": "^2.0.8",
     "jsonwebtoken": "^5.0.4",
     "mocha": "^5.2.0",
